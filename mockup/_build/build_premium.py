@@ -1052,8 +1052,9 @@ def lp_page():
 {shd("04","Next steps","お取引開始までの流れ","From first meeting<br><em>to first order</em>", kj="お取引の流れ", cls="shd--c")}
 {flow(b.PARTNER_STEPS())}</div></section>'''
 
-    days = t(["1日目","2日目","3日目"], ["Day 1","Day 2","Day 3"])
-    slots = ''.join(f'<p class="slotday">{d} {tbd("日付","Date TBC")}</p><div class="slots">' + ''.join(f'<button type="button" data-day="{d}"{" disabled class=off" if (i + j) % 7 == 3 else ""}>{tm}</button>' for j, tm in enumerate(b.SLOT_TIMES())) + '</div>' for i, d in enumerate(days))
+    # Preferred day and time are free input (feedback 2026-10): few meetings, and a slot grid would
+    # need staff to keep booked slots up to date. Staff confirm each meeting by reply.
+    days = t(["会期1日目","会期2日目","会期3日目","会期外・オンラインを希望"], ["Day 1","Day 2","Day 3","After the show / online"])
     req, opt = f'<em class="req">{t("必須","Required")}</em>', f'<em class="opt">{t("任意","Optional")}</em>'
     req_en = req if EN() else opt   # EN_ONLY: WhatsApp/WeChat and market qualify overseas leads (as on the contact page)
     sel = t("選択してください", "Please select")
@@ -1062,11 +1063,15 @@ def lp_page():
         return f'<label class="fld{" fld--full" if full else ""}"><span>{label}{mark}</span>{inner}</label>'
     booking = f'''<section class="sec sec--t blush" id="booking"><div class="wrap book__g">
 <div class="rv">{shd("05","Book a meeting","商談のご予約・お問い合わせ","Book a meeting<br><em>or send an enquiry</em>", kj="商談のご予約",
-     lead=t("会期中の商談は30分単位でご予約いただけます。日時を選ばずにお問い合わせだけ送ることもできます。","Meetings during the show run in 30-minute slots. You can also send an enquiry without picking a time."))}
+     lead=t("ご希望の日時をお知らせください。展示会担当者より日時を確定してご連絡します。お問い合わせだけでも承ります。","Tell us when suits you and our show team will confirm the time. You can also just send an enquiry."))}
 <form class="pform pform--main">
-<p class="pform__h">{t("ご希望の日時（任意）","Preferred time (optional)")}</p>{slots}
-<p class="legend"><span><i></i>{t("予約可","Available")}</span><span><i class="on"></i>{t("選択中","Selected")}</span><span><i class="off"></i>{t("予約済","Booked")}</span></p>
-<p class="slotout">{t("選択中の日時：","Selected: ")}<b data-slot-out>{t("未選択","none")}</b></p>
+<p class="pform__h">{t("ご希望の日時","Preferred day and time")}</p>
+<div class="fgrid fgrid--when">
+{fld(t("ご希望の日","Preferred day"), f'<select><option>{sel}</option>{"".join(f"<option>{d}</option>" for d in days)}</select>', opt)}
+{fld(t("ご希望の時間帯","Preferred time"), f'<input type="text" placeholder="{t("例）14:00頃、午後、いつでも可","e.g. around 14:00, afternoon, any time")}">', opt)}
+</div>
+<p class="note">{t("会期：2026年11月","Show dates: November 2026")} {tbd("日程確定待ち","TBC")}　{t("担当者より日時を確定してご連絡します。","Our show team will confirm the time by reply.")}</p>
+<p class="pform__h lp-who">{t("お客様情報","Your details")}</p>
 <div class="fgrid">
 {fld(t("会社名","Company"), '<input type="text" autocomplete="organization">', req)}
 {fld(t("国・地域","Country / region"), '<input type="text" autocomplete="country-name">', req)}

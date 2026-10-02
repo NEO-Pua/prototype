@@ -196,14 +196,16 @@ jump-to-section links, left/centred section headings) are theme partials in
 
 ### 5.7 Meeting booking (Exhibition page)
 
-The mockup's slot picker (3 days × 12 slots, booked slots struck through) needs
-real state in production. Two options:
+**Premium v1.2 (chosen, feedback 2026-10):** no slot picker. Meetings at a show are
+few, and a slot grid would need staff to keep booked slots up to date. The form asks
+for a **preferred day** (select: 会期1日目 / 2日目 / 3日目 / 会期外・オンライン — the day
+labels can show the real dates from the Exhibition Options) and a **preferred time**
+(free text, e.g. 「14:00頃」「午後」). The request arrives by email like any enquiry and
+staff confirm the time by reply. Nothing to maintain, no booking plugin.
 
-- **Simple (recommended for the first show):** slot list and “booked” slots
-  are an ACF repeater staff update by hand; the form emails the request and
-  staff confirm by email. Low risk, no double-booking logic.
-- **Full:** a booking plugin with availability. Only worth it if they exhibit
-  often.
+v1 / v1.1 mockups still show the earlier slot picker (3 days × 12 slots). If a slot
+system is ever wanted, the two options were: an ACF repeater of booked slots updated
+by hand, or a booking plugin with availability.
 
 ---
 
@@ -318,7 +320,8 @@ files (or merge them). Things the theme must keep producing:
   show contact, WhatsApp, WeChat, QR images, PDF downloads; products from `product`
   posts flagged `show_at_exhibition`; trade terms and export documents from their
   Options pages.
-- The form is the exhibition booking form (§5.7) with the time slot optional; product
+- The form is the exhibition booking form (§5.7): preferred day (select) and preferred
+  time (free text), both optional, then the visitor's details; product
   checkboxes use the same `data-items` keys as the contact form.
 - Generate the booth QR code once from the final URL (any QR tool, high error
   correction, SVG for print). The in-page QR (qrcode.js) is a convenience for sharing.

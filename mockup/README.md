@@ -129,7 +129,8 @@ booth. v1.2 = v1.1 plus that page; gated by `V12()` (v1 and v1.1 output unchange
 - **Content:** show facts (dates, venue, booth, languages — 要確認), the three
   products with *Discuss this product* (ticks it in the form below), 「日本製」4つの強み,
   cooperation models and trade terms at a glance, export documents, next steps, one
-  booking-and-enquiry form (time slot optional), show contacts and downloads, and a
+  booking-and-enquiry form (preferred day and time as free input, confirmed by staff
+  by reply; no slot grid to maintain), show contacts and downloads, and a
   share block: the page address, copy link and a QR code drawn in the browser from
   the page's own address (qrcode.js from cdnjs), so it works wherever the mockup is
   hosted. The QR printed for the booth must be generated from the final public URL.

@@ -52,6 +52,10 @@ html[lang="en"] .lp-hero__h em{font-style:italic}
 .lp-biz__h{margin-top:40px}
 .lp-biz__g .tags{margin-top:16px}
 
+/* ---- booking form: preferred day and time are free input (no slot grid) */
+.fgrid--when{margin-top:24px}
+.lp-who{margin-top:44px}
+
 /* ---- share */
 .lp-share__g{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(32px,6vw,88px);align-items:center;max-width:980px;margin-inline:auto}
 .lp-qr{padding:18px;background:var(--white);border:1px solid var(--line)}
