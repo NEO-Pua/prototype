@@ -150,7 +150,7 @@ def intro_js(pg):
             "{document.documentElement.classList.add('intro');sessionStorage.setItem('hj-intro','1')}}catch(e){}</script>")
 
 def v12_css(pg):
-    return f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v12.css">' if V12() and pg in ("home", "exhibition") else ''
+    return f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v12.css">' if V12() else ''
 
 def v11_css():
     return f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v11.css">' if V11() else ''
@@ -189,12 +189,12 @@ def header(fn):
 </header>
 <div class="menu" id="menu" aria-hidden="true"><div class="menu__in">
 <ul class="menu__l">{mlist}</ul>
-<div class="menu__side">{seal(cls="seal--m")}
-<p class="menu__co">{t("花印粧業研究所株式会社","Hanajirushi Institute of Cosmetics, Inc.")}</p>
-<p>{ADDR(True)}</p>
+<div class="menu__side">{"" if V12() else seal(cls="seal--m")}
+{"" if V12() else f'<p class="menu__co">{t("花印粧業研究所株式会社","Hanajirushi Institute of Cosmetics, Inc.")}</p>'}
+{"" if V12() else f'<p>{ADDR(True)}</p>'}
 <p class="menu__tel"><a href="tel:+81362642154">{TEL()}</a><small>{HOURS()}</small></p>
 <a class="menu__exh" href="{lp_href() if V12() else "exhibition.html"}"><small>Exhibition</small><b>Cosmoprof Asia 2026</b><span>{t("2026年11月・香港 — 商談予約受付中","Hong Kong, November 2026 — book a meeting")}</span></a>
-{lng}</div>
+{"" if V12() else lng}</div>
 </div></div>
 <main id="main">'''
 

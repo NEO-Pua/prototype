@@ -1,6 +1,7 @@
 /* ======================================================================
-   花印 HANAJIRUSHI — premium v1.2 home: the first view is a slider.
-   Loaded after premium.css and premium-v11.css, on the v1.2 home page only.
+   花印 HANAJIRUSHI — premium v1.2 (loaded after premium.css and premium-v11.css on every
+   v1.2 site page). Home: the first view is a slider. All pages: phone menu and photo grading
+   (at the end of this file).
    Slide 1 is the brand/business hero (with the v1.1 opening on first visit); the next
    slides carry news: exhibition, new product, patent. Slides cross-fade; the labelled
    tabs show progress, and the progress line itself drives autoplay (premium-v12.js
@@ -128,4 +129,46 @@ html[lang="en"] .exl__d span{font-family:var(--caps);font-size:12px;letter-spaci
   .js .hs__s :is(.hs__k,.hero__lead,.hero__ctas,.seal){opacity:1!important;transform:none!important}
   .js .hs__s .win::before{--ring:360deg!important}
   .hs__vis .seal--l{transform:rotate(-3deg)!important}
+}
+
+/* ======================================================================
+   All v1.2 pages
+   ====================================================================== */
+
+/* ---- the flower photographs graded down to the palette (they were the most saturated
+        thing on the site, so the first view read sweeter than the rest) */
+.hero__bg img{filter:saturate(.62) sepia(.1) brightness(1.03)}
+.pg-brand .phero__img img{filter:saturate(.45) sepia(.12) brightness(1.04) contrast(.95)}
+
+/* ---- phone menu */
+/* the header stays solid while the drawer is open, so the list scrolls under a clean bar */
+html.menu-open .hd{background:rgba(247,242,236,.97);box-shadow:0 1px 0 var(--line)}
+/* the language switch stays in the header on phones (overseas visitors look for it first) */
+@media (max-width:760px){
+  .hd__r>.lng{display:flex}
+  .hd__r{gap:14px}
+}
+/* links fade up in turn when the drawer opens */
+.menu .menu__l>li,.menu .menu__side>*{opacity:0;transform:translateY(14px);transition:opacity .5s var(--ease-o),transform .6s var(--ease-o)}
+.menu.open .menu__l>li,.menu.open .menu__side>*{opacity:1;transform:none}
+.menu.open .menu__l>li:nth-child(2){transition-delay:.04s}
+.menu.open .menu__l>li:nth-child(3){transition-delay:.08s}
+.menu.open .menu__l>li:nth-child(4){transition-delay:.12s}
+.menu.open .menu__l>li:nth-child(5){transition-delay:.16s}
+.menu.open .menu__l>li:nth-child(6){transition-delay:.2s}
+.menu.open .menu__side>*{transition-delay:.26s}
+@media (prefers-reduced-motion:reduce){
+  .menu .menu__l>li,.menu .menu__side>*{opacity:1;transform:none}
+}
+
+/* ---- the smallest phones (320 px): the home figures and the brand philosophy block
+        could not shrink below their content */
+.name p{min-width:0}
+@media (max-width:360px){
+  .nums__l{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .nums b.num{font-size:42px}
+  html[lang="en"] .nums b.word{font-size:29px}
+  .nums b.word{font-size:22px}
+  /* brand philosophy (JA): the vertical slogan column left almost no room beside it */
+  .phil__g,html[lang="ja"] .phil__g{grid-template-columns:1fr}
 }
