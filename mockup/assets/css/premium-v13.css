@@ -3,8 +3,9 @@
    Cosmoprof Asia buyer page). Reviewer feedback 2026-10 (意見まとめ.xlsx):
    - Brighter overall: white paper instead of kinari, no washi grain, V1's light grey
      #F6F5F3 for bands; the plum bands become light, the footer becomes light.
-   - The red is V1's crimson #A51D34 (seal, accents, buttons); the contact band at the foot
-     of every page is crimson, as in V1.
+   - The red is V1's crimson #A51D34 (seal, accents, buttons). The contact band is crimson
+     on the home page (as in V1) and a light rose tint elsewhere; labels are warm grey
+     (see "Crimson balance" at the end). Flower photos are lifted and desaturated.
    - New parts: home photo slider (.hero13), product cards (.pcard), products list filter,
      product page (.pdx, .pdf, .pdu, .pdd), brand story placeholders, short partnership.
    Text colours pass WCAG AA (crimson on white 7.4:1, on #F6F5F3 6.8:1).
@@ -78,8 +79,11 @@ html.menu-open .hd{background:rgba(255,255,255,.98)}
 .ft__co{align-content:start}
 @media (max-width:1024px){.ft__nav{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
-/* ---- photographs at their natural brightness again (v1.2 had graded them down) */
-.hero__bg img,.pg-brand .phero__img img,.phil__img .arch img,.split__img .arch img,.sq img{filter:none}
+/* ---- photographs: brighter and softer than the originals. The flower shots were the most
+        saturated thing on the page and their rose-pink fought V1's blue-red crimson, so they
+        are lifted and desaturated (no warm sepia: the palette is white now) */
+.hero__bg img,.hs13__bg img,.pg-brand .phero__img img,.phil__img .arch img{filter:saturate(.58) brightness(1.07) contrast(.93)}
+.split__img .arch img,.sq img{filter:none}
 .msg__img img,.office figure img{filter:saturate(.92)}
 .pg-company .phero__img img{filter:grayscale(1) brightness(1.08) contrast(.9)}
 
@@ -93,7 +97,8 @@ html.menu-open .hd{background:rgba(255,255,255,.98)}
   background:linear-gradient(90deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.8) 36%,rgba(255,255,255,.15) 70%,rgba(255,255,255,0) 100%)}
 .hs13__bg--plain{background:linear-gradient(115deg,#fff 0%,#f6f5f3 52%,#f4ecec 100%)}
 .hs13__bg--plain::after{display:none}
-.hs13--exh .hs13__bg img{filter:grayscale(1) brightness(1.1) contrast(.88)}
+.hs13--exh .hs13__bg img{filter:grayscale(1) brightness(1.32) contrast(.62)}   /* a pale wash, not a grey street */
+.hs13--exh .hs13__bg::after{background:linear-gradient(90deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.86) 42%,rgba(255,255,255,.62) 100%)}
 .hs13--patent .hs13__bg::after{background:linear-gradient(90deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.86) 44%,rgba(255,255,255,.5) 100%)}
 .js .hero13 .hs__s.is-on .hs13__bg img{animation:kb13 11s var(--ease) both}
 @keyframes kb13{from{transform:scale(1.08)}to{transform:scale(1)}}
@@ -159,6 +164,7 @@ a:hover .ppan img{transform:scale(1.04)}
 .pcard>a,.pcard>div{display:block}
 .pcard__new{display:inline-block;padding:1px 9px;background:var(--beni-d);color:#fff;font-size:11px;font-weight:500;letter-spacing:.12em;line-height:1.6}
 .pcard__new--soon{background:var(--ink-2)}
+.pcard__no .pcard__new{color:#fff}   /* the number line's grey span colour was overriding the tag text */
 .pcard__no{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;margin-top:20px;font-family:var(--didone);font-style:italic;font-size:14px;color:var(--beni-d)}
 .pcard__no span{font-family:var(--caps);font-style:normal;font-size:10.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
 .pcard__n{margin-top:8px;font-family:var(--mincho);font-weight:500;font-size:17px;line-height:1.7;letter-spacing:.06em;transition:color .3s}
@@ -306,3 +312,26 @@ html[lang="en"] .story13 h3{font-family:var(--didone);font-weight:400;font-size:
   .seal--xl{width:88px;height:88px;font-size:30px}
   .gp13__ch{grid-template-columns:1fr}
 }
+
+/* ======================================================================
+   Crimson balance (review of v1.3): crimson is kept for what it means (buttons, the seal,
+   headline accents, current states, section numbers); labels and quiet headings go to
+   warm grey, and the full crimson contact band stays on the home page only.
+   ====================================================================== */
+.eb{color:var(--ink-3)}
+.eb i{color:var(--beni-d)}
+.eb span::before,.shd--c .eb span::after,.stores .eb span::after{background:var(--beni-d)}
+.dark .eb{color:var(--ink-3)}
+.ft__nav h3{color:var(--ink-2)}
+
+/* contact band: light (rose-tinted) on every page except the home page */
+body:not(.pg-home) .cta{background:#fbf4f5;color:var(--ink);border-top:1px solid #f1e3e6;
+  --ink:#272628;--ink-2:#5a575a;--ink-3:#6b686b;--beni-d:#a51d34;--line-d:rgba(39,38,40,.13)}
+body:not(.pg-home) .cta .h2 em{color:var(--beni-d)}
+body:not(.pg-home) .cta .seal{background:#a51d34;color:#fff;box-shadow:inset 0 0 0 2px #a51d34,inset 0 0 0 3px rgba(255,255,255,.6)}
+body:not(.pg-home) .cta .btn{border-color:var(--ink)}
+body:not(.pg-home) .cta .btn::before{background:var(--ink)}
+body:not(.pg-home) .cta .btn:hover{color:#fff}
+body:not(.pg-home) .cta .btn--fill{background:#a51d34;border-color:#a51d34;color:#fff}
+body:not(.pg-home) .cta .btn--fill::before{background:#7c1426}
+body:not(.pg-home) .cta .btn--fill:hover{color:#fff}
