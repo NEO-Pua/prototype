@@ -237,6 +237,38 @@ live in one place only.
 - Claims marked 要確認 in the mockup (made in Japan, QC in Japan, sales results, counts)
   must be confirmed by the client before launch: legal exposure under 景品表示法.
 
+## 6c. Premium (the chosen design, 2026-10)
+
+The client team chose the premium direction (`premium/`, generator
+`_build/build_premium.py`). Content model and pages are the same as above,
+with these differences:
+
+- **No home carousel.** The top page has one fixed hero instead of `kv_slide`
+  posts: label, headline, lead, two buttons and the featured product image as
+  Options fields (per language). Skip the `kv_slide` CPT unless the client asks
+  for rotating slides later. The exhibition note in the hero reads the
+  Exhibition Options (show-announcement toggle).
+- **v2.2 content is included** (§6b): 「日本製」4つの強み, 選ばれる理由, global
+  figures and the topic buttons. In premium each 強み item also has a single
+  kanji (研・造・質・績), so the repeater gets a `kanji` field (1 character).
+- **Contact band** (above the footer on every page except Contact) shows the four
+  topic buttons; it is a theme partial, labels from the language files.
+- **Lower-page title band** has two variants: with a photo (`phero()` with an
+  image: Brand, Company, R&D, Collaboration, Global, Partners) and plain
+  (Exhibition, News, Contact). Each takes a short decorative kanji (e.g. 研究,
+  協業) as a page field.
+- Assets: enqueue `assets/css/premium.css` and `assets/js/premium.js` instead of
+  `style.css` / `main.js`. `premium.js` holds the topic pre-select, slot picker
+  and news filter.
+
+| Premium mockup (`_build/build_premium.py`) | WordPress |
+|---|---|
+| `h_hero()` | Hero Options + `template-parts/hero.php` |
+| `h_japan4()`, `h_why()`, `gstats()` | Options repeaters (§6b) |
+| `contact_band()`, `cta_btn()`, `topic_href()` | `template-parts/contact-band.php`, helper `hj_topic_url()` |
+| `phero()` | `template-parts/page-header.php` (photo / plain variants) |
+| `p_rd()` … `p_contact()` | the page templates in §5 |
+
 ## 7. Language rules (enforced in templates)
 
 From the content brief. Do not rely on staff to remember these.

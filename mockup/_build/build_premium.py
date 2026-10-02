@@ -183,11 +183,11 @@ def phero(label, ja, en, sub, img, kanji, anchors, pos="center"):
     pic = f'<div class="phero__img"><img src="{IMG}{img}" alt="" style="object-position:{pos}"></div>' if img else ''
     navs = f'<nav class="anc" aria-label="{t("ページ内リンク","On this page")}"><div class="wrap">{anc}</div></nav>' if anchors else ''
     return f'''<section class="phero{"" if img else " phero--plain"}">
-<div class="phero__txt"><div class="phero__t rv">{eb(label)}<h1>{title}</h1>{f'<p class="kj">{ja}</p>' if EN() else ''}<p class="phero__sub">{sub}</p></div>
+<div class="phero__txt"><div class="phero__t rv">{eb(label)}<h1>{title}</h1>{f'<p class="kj">{ja.replace("<br>", "")}</p>' if EN() else ''}<p class="phero__sub">{sub}</p></div>
 <p class="phero__kj" aria-hidden="true">{kanji}</p></div>
 {pic}
 </section>
-<nav class="crumb" aria-label="breadcrumb"><div class="wrap"><a href="index.html">{t("ホーム","Home")}</a><span>{title}</span></div></nav>
+<nav class="crumb" aria-label="breadcrumb"><div class="wrap"><a href="index.html">{t("ホーム","Home")}</a><span>{title.replace("<br>", "")}</span></div></nav>
 {navs}'''
 
 def store_section():
@@ -482,7 +482,7 @@ def p_company():
 # ============================================================ R&D
 def p_rd():
     A = b.A
-    hd = phero("R&amp;D / Quality", "研究開発・品質", "R&amp;D &amp; Quality",
+    hd = phero("R&amp;D / Quality", "研究開発・<br>品質管理", "R&amp;D &amp; Quality",
                t("銀座の自社研究室から、確かな処方を。","Reliable formulas, from our own laboratory in Ginza."),
                "h_campany_lab.jpg", "研究",
                [A("lab","自社研究室","Laboratory"),A("process","開発から出荷まで","Process"),A("quality","品質管理体制","Quality"),A("docs","輸出書類","Export documents"),A("regist","各国登録の支援","Registration")])
@@ -522,7 +522,7 @@ def p_rd():
 # ============================================================ COLLABORATION
 def p_collaboration():
     A = b.A
-    hd = phero("Collaboration", "IPコラボレーション", "Licensed IP Collaborations",
+    hd = phero("Collaboration", "IP<br>コラボレーション", "Licensed IP Collaborations",
                t("日本の人気IPとの正規ライセンス商品。","Officially licensed products with leading Japanese IP."),
                "h_hanajirushi_top-1.jpg", "協創",
                [A("about","コラボレーションについて","About"),A("works","コラボレーション実績","Portfolio"),A("value","パートナー様へのメリット","Value for partners")])
@@ -577,7 +577,7 @@ def p_global():
 # ============================================================ PARTNERS
 def p_partners():
     A = b.A
-    hd = phero("For Partners", "海外代理店・パートナー募集", "Partnership Programme",
+    hd = phero("For Partners", "海外代理店・<br>パートナー募集", "Partnership Programme",
                t("市場と規模に合わせた協業モデルをご用意しています。","Cooperation models to fit your market and scale."),
                "h_brand_top_p.jpg", "協業",
                [A("why","選ばれる理由","Why us"),A("models","協業モデル","Models"),A("terms","取引条件","Trade terms"),A("support","輸出書類・登録支援","Export support"),A("flow","お取引の流れ","How to start"),A("faq","よくあるご質問","FAQ")], pos="30% center")

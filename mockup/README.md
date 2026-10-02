@@ -7,7 +7,7 @@ Purpose: lock down the design before production build.
 ## How to view
 
 Open `index.html` (review hub listing every page in both languages), or go
-straight to `ja/index.html` / `en/index.html`. The 日本語 / English switch in the
+straight to `premium/ja/index.html` / `premium/en/index.html` (the chosen design). The 日本語 / English switch in the
 header jumps to the same page in the other language.
 
 Pages work from the file system, but Google Fonts and the embedded map need an
@@ -25,17 +25,34 @@ Tip: `ja/index.html#kv=3` (or `en/…`) opens the top carousel on slide 3 with a
 
 | Version | Folder | Look |
 |---|---|---|
+| **Premium** (chosen, 2026-10) | `premium/ja/`, `premium/en/` | All 10 pages. Premium look (see below) with the v2.2 business content: business-first hero, 「日本製」4つの強み, ビジネスパートナーに選ばれる理由, figures in Global & Partners, topic-based contact buttons. |
 | **v2.2** (soft + business) | `v2.2/ja/`, `v2.2/en/` | v2.1 look plus buyer-conversion content (internal feedback 2026-10): new first view (who we are / how to do business, trust strip), 「日本製」4つの強み, ビジネスパートナーに選ばれる理由, numbers in Global & Partners, and topic-based contact buttons (`contact.html?topic=partner|product|oem|business&item=pN` pre-selects the form). Unconfirmed claims (manufacturing site, QC, sales results, deal and partner counts) are marked 要確認. |
 | **v2.1** (soft) | `v2.1/ja/`, `v2.1/en/` | Softer, calmer, more refined: dusty rose `#A24A63`, Shippori Mincho headings at medium weight, Zen Kaku Gothic New body, Cormorant Garamond for Latin display words, tints and thin rules instead of solid rose blocks. Built from internal feedback (2026-10) asking for something closer to the current official site / V1 demo. |
 | **v2** (current) | `ja/`, `en/` | Rose `#C8235F`, bold Noto Sans JP / Montserrat, solid rose accents. |
-| **Direction B** (premium, stretch) | `premium/ja/`, `premium/en/` | A separate premium proposal, 3 key pages only (Top, Brand & Products, Company). See below. |
 
-### Direction B — premium stretch proposal
+### Premium — the chosen direction
 
-A totally different direction for the client to choose from, alongside v2.x.
-Same copy, data and EN-only rules (it imports them from `build.py`); only the
-markup and skin differ: `_build/build_premium.py`, `assets/css/premium.css`,
-`assets/js/premium.js`. `python _build/build.py` builds it too.
+Started as "Direction B", a 3-page stretch proposal; the client team chose it
+in 2026-10 and it is now built out to all 10 pages in both languages.
+Same copy, data and EN-only rules as v2.x (it imports them from `build.py`,
+whose shared copy functions such as `JAPAN4()`, `WHY()`, `MODES()`, `TERMS()`,
+`FAQ()` are defined once); only the markup and skin differ:
+`_build/build_premium.py`, `assets/css/premium.css`, `assets/js/premium.js`.
+`python _build/build.py` builds it too.
+
+Business content (internal feedback 2026-10):
+
+- **Hero:** 「世界へ届ける、日本品質のスキンケア製品。」 / "Japanese-quality
+  skincare, delivered to the world." with 「日本で開発・製造。」 and a 製造地 要確認 chip.
+- **Home order:** hero → figures → 「日本製」4つの強み (plum band, kanji in gold
+  rings: 研・造・質・績) → collection → 選ばれる理由 → IP collaborations →
+  partnership (with figures) → news & exhibition → company → stores.
+- **Topic buttons:** `contact.html?topic=partner|product|oem|business`, plus
+  `&item=p1…p4` from product pages. The contact form pre-selects the enquiry
+  type and product (`premium.js`). The same set of four sits in the contact
+  band on every page.
+- Unconfirmed claims (manufacturing site, QC, sales data, deal and partner
+  counts) stay marked 要確認 (景品表示法).
 
 Premium here comes from craft rather than empty space:
 
@@ -53,9 +70,6 @@ Premium here comes from craft rather than empty space:
   They are small (440px product shots), so a real shoot is the biggest
   remaining upgrade for this direction.
 
-Links to the other 7 pages show a short notice that they are outside the
-3-page proposal, instead of a 404. The menu, language switch and responsive
-layout work as they would in the full build.
 
 v2 and v2.1 have identical pages and content; v2.1 only adds `assets/css/soft.css`
 (type and colour overrides, loaded after `style.css`) and a different font set.
@@ -95,9 +109,9 @@ mockup/
 │   ├── js/main.js        carousel, news tabs, slot picker, sp menu, page top
 │   └── img/              photos & product shots pulled from hanajirushi.co.jp
 │                         + world_map_brand.png (existing map recoloured)
-├── premium/              Direction B (3 pages × JA/EN), premium.css + premium.js
+├── premium/              chosen design (10 pages × JA/EN), premium.css + premium.js
 └── _build/build.py       generator for all pages + review hub
-    _build/build_premium.py  Direction B generator (reuses build.py data)
+    _build/build_premium.py  premium generator (reuses build.py copy & data)
 ```
 
 Pages: Top · Brand/Products · Company · R&D & Quality · Collaboration ·
@@ -130,4 +144,4 @@ factory & certifications, patent numbers, INCI lists, shelf life, JAN codes,
 case packs, retail prices, representative's name and message, history dates,
 China operating company, contact names/WhatsApp/WeChat, and the Cleansing Oil
 product details/image. News headlines are sample copy. Forms are disabled
-(alert on submit).
+(v2.x: alert on submit; premium: a short notice).
