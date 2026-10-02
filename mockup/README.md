@@ -25,7 +25,7 @@ Tip: `ja/index.html#kv=3` (or `en/…`) opens the top carousel on slide 3 with a
 
 | Version | Folder | Look |
 |---|---|---|
-| **Premium v1.2** | `premium-1.2/ja/`, `premium-1.2/en/`, `premium-1.2/cosmoprof-asia/` | Premium v1.1 plus a standalone Cosmoprof Asia buyer page for the booth QR code (see *Premium v1.2* below). |
+| **Premium v1.2** | `premium-1.2/ja/`, `premium-1.2/en/`, `premium-1.2/cosmoprof-asia/` | Premium v1.1 plus a standalone Cosmoprof Asia buyer page for the booth QR code, and a home slider for news (see *Premium v1.2* below). |
 | **Premium v1.1** | `premium-1.1/ja/`, `premium-1.1/en/` | Premium v1 plus the fixes and motion from the 2026-10 review (see *Premium v1.1* below). |
 | **Premium v1** (chosen, 2026-10) | `premium/ja/`, `premium/en/` | 9 pages (海外展開 is a section of 代理店募集) and a short 5-item menu. Premium look (see below) with the v2.2 business content: business-first hero, 「日本製」4つの強み, ビジネスパートナーに選ばれる理由, figures, topic-based contact buttons. |
 | **v2.2** (soft + business) | `v2.2/ja/`, `v2.2/en/` | v2.1 look plus buyer-conversion content (internal feedback 2026-10): new first view (who we are / how to do business, trust strip), 「日本製」4つの強み, ビジネスパートナーに選ばれる理由, numbers in Global & Partners, and topic-based contact buttons (`contact.html?topic=partner|product|oem|business&item=pN` pre-selects the form). Unconfirmed claims (manufacturing site, QC, sales results, deal and partner counts) are marked 要確認. |
@@ -137,6 +137,21 @@ booth. v1.2 = v1.1 plus that page; gated by `V12()` (v1 and v1.1 output unchange
   show cards open the buyer page; the 展示会情報 page keeps its outline and products
   and hands booking to the buyer page, so there is one form, not two.
 - Files: `assets/css/premium-lp.css`, `assets/js/premium-lp.js` (plus the v1 and v1.1 files).
+
+**Home slider (v1.2, feedback 2026-10: keep the home slides for 展会・产品发布・专利获得):**
+
+- The first view is a slider. Slide 1 is the brand/business hero, unchanged (with the
+  first-visit opening); then 展示会 (Cosmoprof Asia → the buyer page), 新製品 (Cleansing
+  Oil, launch date 要確認) and 特許 (Deep Cleansing Lotion, patent number 要確認).
+  Announcement slides use a product 円窓 or a plum 円窓 holding a kanji (出展, 新), as
+  there are no photos for them yet.
+- Slides cross-fade; on entry the window opens, the ring is drawn and the lines rise.
+  Labelled tabs with a progress line, 01 / 04 count, previous / pause / next, arrow
+  keys, swipe on phones; on phones the bars sit under the header so the rotation is
+  visible at once. Slide 1 stays 8 s, the others 7 s; nothing moves on by itself under
+  reduced motion. The small exhibition note under the v1.1 hero is replaced by the
+  exhibition slide.
+- Files: `assets/css/premium-v12.css`, `assets/js/premium-v12.js` (home page only).
 
 
 v2 and v2.1 have identical pages and content; v2.1 only adds `assets/css/soft.css`

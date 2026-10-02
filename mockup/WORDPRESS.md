@@ -74,34 +74,44 @@ migration is mechanical.
 
 ### 4.1 Home slides — `kv_slide`
 
-The mockup's `slide()` function in `_build/build.py` **is** the template. Each
-argument becomes a field. Staff never touch layout; the theme decides the
-desktop layout (text left, image right) and the phone layout (tall card,
-text on top).
+The home page's first view is a slider (premium v1.2). **Slide 1** is the fixed
+brand/business hero, edited on an Options page and always first. **Announcement slides**
+(exhibitions, product launches, patents, campaigns) are `kv_slide` posts. Staff fill in
+fields only; there is no HTML and no layout to touch, and the theme does the motion,
+vertical text, colours and phone layout. In the mockup, `SLIDES()` in
+`_build/build_premium.py` holds the same fields and `kv_slide()` prints them the way
+`template-parts/kv-slide.php` will.
 
-| Field | Type | Example (JA) | Notes |
+| Field | Type | Example (JA / EN) | Rules |
 |---|---|---|---|
-| `label` | Text (short) | ロングセラー | Rose pill at top. Keep ≤ 12 characters. |
-| `headline_1` | Text | 花印 | First headline line (dark). |
-| `headline_2` | Text | ハトムギ化粧水 | Second line, shown in rose. Replaces the `<em>` in the mockup. |
-| `headline_event` | Text, optional | Cosmoprof Asia 2026 | Optional Latin line above the headline (event slides). Set in Montserrat. |
-| `description` | Textarea, ≤ 60 chars JA | 北海道産ハトムギ種子エキス高配合… | Hidden on phones if too long; enforce a character limit. |
-| `tags` | Repeater (text) | 500mL / 無香料 / 無着色 | Max 4. Desktop only. |
-| `media_type` | Select | `photo` / `trio` / `grid` | photo = 1 image fading in from the right; trio = 3 product shots; grid = 4 square images (2×2 on phones). |
-| `images` | Gallery | | 1, 3 or 4 images depending on `media_type`; validate the count. |
-| `stamp` | Text, optional | 日本製 | Round sticker top-right. Two short lines max. EN: kanji + small English (`出展` / `EXHIBITING`). |
-| `button_label` | Text | 詳しく見る | Default “詳しく見る / Learn more” if empty. |
-| `link` | Link (ACF) | /brand/#p3 | Whole slide is clickable. |
-| `theme` | Select | `light` / `rose` | Use `rose` sparingly (events only), as in the mockup. |
-| `start_date` / `end_date` | Date, optional | | Auto-show/hide campaign slides. |
-| Order | Post `menu_order` | | Drag-and-drop order (e.g. *Simple Custom Post Order*). |
+| `label` | Select (+ "Other" text) | 展示会 / Exhibition · 新製品 · 特許 · お知らせ · キャンペーン | Shown as the pill on the slide and as the tab name under the slider. |
+| `line1` | Text | 特許技術を採用した、 / A cleansing lotion | Headline line 1. **Max 14 JA / 32 EN** (half-width characters count half; the admin shows a counter). |
+| `line2` | Text | クレンジングローション。 / with patented technology. | Headline line 2, printed in the accent colour (JA: pink; EN: pink italic). Same limit. |
+| `text` | Text (one line) | うるおい残してしっかり落ちる… | **Max 60 JA / 130 EN.** No line breaks. |
+| `button_label` | Text | 製品を見る / View the product | Short; ≤ 12 JA / 24 EN. |
+| `link` | Link (page picker or URL) | /brand/#p1, /cosmoprof-asia/ | Internal pages are picked, not typed. |
+| `visual` | Radio | `product` / `kanji` / `photo` | Decides which of the next fields are shown. |
+| `product` | Post object → `product` | Deep Cleansing Lotion | *visual = product*: its packshot is used automatically, inside the 円窓. |
+| `kanji` + `caption` | Text (1–2 characters) + text | 出展 + Hong Kong 2026 | *visual = kanji*: the characters in a plum 円窓, set vertically, with a small Latin caption. |
+| `photo` | Image (square crop) | | *visual = photo*: WordPress crops it square; at least 900 px. For photos that are not product shots. |
+| `seal` | Text, optional (1–2 characters) | 特許 | A stamped 落款 on the visual. |
+| `start_date` / `end_date` | Date, optional | 2026-09-15 / 2026-11-30 | The slide appears and disappears by itself (e.g. the exhibition slide after the show). |
+| Order | `menu_order` | | Drag-and-drop order (e.g. *Simple Custom Post Order*). |
 
-Rules:
+Theme rules (staff never see these):
 
-- Show 3–6 slides. Warn in the admin if more than 6 are published.
-- Images: upload at least 1600 px wide; the theme generates sizes with `srcset`.
-- `#kv=N` review link and autoplay/pause/swipe all come from `main.js`, so no
-  per-slide settings are needed.
+- Headlines are printed as two lines, each in a masked span for the line reveal; long
+  lines wrap inside their span, which is why the fields have limits.
+- In Japanese headlines, runs of Latin letters (e.g. *Cosmoprof Asia 2026*) are set in
+  Bodoni automatically and kept together with the following character.
+- Polylang: each slide exists in JA and EN as linked translations; show a warning when
+  one language is missing.
+- Warn in the admin when more than 5 slides are live; visitors rarely see beyond the third.
+- Timing (slide 1: 8 s, others: 7 s), pause, swipe and reduced-motion behaviour come from
+  `premium-v12.js` and need no settings.
+- The mockup's dashed 要確認 / TBC chips are not a field; they disappear in production.
+
+v1 / v1.1 (no slider) and the earlier v2 banner carousel are superseded by this.
 
 ### 4.2 Products — `product`
 
@@ -253,7 +263,9 @@ with these differences:
 - **No 海外展開 page.** Its content (figures, regions, China results) is two sections
   of the 代理店募集 page (`#network`, `#china`); skip `page-global.php` and add a
   redirect from `/global/` to `/partners/#network` if the old URL was ever shared.
-- **No home carousel.** The top page has one fixed hero instead of `kv_slide`
+- **Home slider (v1.2).** Slide 1 is the fixed brand/business hero (Options page);
+  announcement slides are `kv_slide` posts with fixed fields and character limits — see §4.1.
+- **No home carousel (v1, v1.1).** The top page has one fixed hero instead of `kv_slide`
   posts: label, headline, lead, two buttons and the featured product image as
   Options fields (per language). Skip the `kv_slide` CPT unless the client asks
   for rotating slides later. The exhibition note in the hero reads the
@@ -402,7 +414,7 @@ Carried over from the mockup (`要確認 / TBC` chips):
 
 | Mockup (`_build/build.py`) | WordPress |
 |---|---|
-| `slide(...)` calls in `kv()` | `kv_slide` posts; `template-parts/kv-slide.php` |
+| `SLIDES()` + `kv_slide()` in `build_premium.py` (v1.2) | `kv_slide` posts; `template-parts/kv-slide.php` |
 | `PRODUCTS()` | `product` posts |
 | `IPS()` | `collab` posts |
 | `NEWS()` | Posts with categories `exh/prod/biz/info` |

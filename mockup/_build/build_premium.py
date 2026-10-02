@@ -27,7 +27,7 @@ a once-per-visit opening on the home first view, headings revealed line by line,
 opened with wipes (円窓: an expanding circle, its gold ring drawn), count-up figures and
 cross-page fades. Every v1.1 difference is gated by V11(); v1 output does not change.
 """
-import os, sys
+import html, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build as b
 from build import t, EN, tbd, tbdw, TEL, FAX, HOURS, ADDR, I
@@ -136,7 +136,7 @@ def head(title, desc, pg):
 <script>document.documentElement.classList.add('js')</script>{intro_js(pg)}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?{FONTS}&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{ASSETS}css/premium.css">{v11_css()}
+<link rel="stylesheet" href="{ASSETS}css/premium.css">{v11_css()}{v12_css(pg)}
 </head>
 <body class="pg-{pg}">
 <a class="skip" href="#main">{t("本文へスキップ","Skip to content")}</a>'''
@@ -148,6 +148,9 @@ def intro_js(pg):
         return ""
     return ("\n<script>try{if(!sessionStorage.getItem('hj-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)"
             "{document.documentElement.classList.add('intro');sessionStorage.setItem('hj-intro','1')}}catch(e){}</script>")
+
+def v12_css(pg):
+    return f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v12.css">' if V12() and pg == "home" else ''
 
 def v11_css():
     return f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v11.css">' if V11() else ''
@@ -230,7 +233,7 @@ def footer(fn):
 </div></footer>
 <button class="totop" type="button" aria-label="{t("ページトップへ","Back to top")}">{I["up"]}</button>
 <div class="toast" role="status" aria-live="polite"></div>
-<script src="{ASSETS}js/premium.js"></script>{f'\n<script src="{ASSETS}js/premium-v11.js"></script>' if V11() else ''}
+<script src="{ASSETS}js/premium.js"></script>{f'\n<script src="{ASSETS}js/premium-v11.js"></script>' if V11() else ''}{f'\n<script src="{ASSETS}js/premium-v12.js"></script>' if V12() and fn == "index.html" else ''}
 </body></html>'''
 
 def page(fn, pg, title, desc, body):
@@ -328,15 +331,113 @@ def h_hero():
 <p class="hero__lead">{b.FV_LEAD1()}{made}<br>{nobr(b.FV_LEAD2())}</p>
 <div class="hero__ctas">{ctas}</div></div>
 </div>'''
+    vis = f'''<div class="hero__vis{rv()}">{win(p["img"], p["name"], "win--xl")}{seal(cls="seal--l")}
+<p class="hero__cap"><span>No.03</span>{p["name"]}　500mL</p>
+<p class="hero__jp" aria-hidden="true">ひとりに、ひとつの、キレイを咲かせる。</p></div>'''
+    if V12():
+        return hero_slides(txt, vis)
     return f'''<section class="hero">
 <div class="hero__bg" aria-hidden="true"><img src="{IMG}h_hanajirushi_top-1.jpg" alt=""></div>
 <div class="wrap hero__in">
 {txt}
-<div class="hero__vis{rv()}">{win(p["img"], p["name"], "win--xl")}{seal(cls="seal--l")}
-<p class="hero__cap"><span>No.03</span>{p["name"]}　500mL</p>
-<p class="hero__jp" aria-hidden="true">ひとりに、ひとつの、キレイを咲かせる。</p></div>
+{vis}
 </div>
 <a class="hero__note" href="{lp_href() if V12() else "#exhibition"}"><span class="hero__note-k">{t("出展","Exhibiting")}</span><b>Cosmoprof Asia 2026</b><span>{t("2026年11月・香港 — 商談予約受付中","Hong Kong, November 2026 — book a meeting")}</span>{ARR}</a>
+<p class="hero__scroll" aria-hidden="true">Scroll</p>
+</section>'''
+
+# ------------------------------------------------------------ home slider (v1.2)
+# The announcement slides as data, field for field the kv_slide post type in WORDPRESS.md
+# §4.1, so the WordPress build is a one-to-one copy. No HTML in any field: the theme does the
+# layout (line reveal, accent colour, Latin in Bodoni, 円窓). Order = menu order.
+MOCK_TODAY = "2026-10-02"   # the mockup's "today" for start / end dates
+
+def SLIDES():
+    return [
+        dict(label=t("展示会", "Exhibition"),
+             line1=t("Cosmoprof Asia 2026に", "Meet us at"), line2=t("出展します。", "Cosmoprof Asia 2026"),
+             text=t("2026年11月、香港コンベンション＆エキシビションセンター。ブースでの商談のご予約を受け付けています。",
+                    "November 2026, Hong Kong Convention & Exhibition Centre. Meetings at our booth can be booked now."),
+             button=t("展示会専用ページへ", "Open the event page"), link=lp_href(),
+             visual="kanji", kanji="出展", caption="Hong Kong 2026", seal="",
+             start="2026-09-15", end="2026-11-30",
+             tbc=t("日程確定待ち", "Dates TBC")),
+        dict(label=t("新製品", "New product"),
+             line1=t("中国市場の看板アイテムを、", "Our signature item in China —"), line2=t("日本でも。", "coming to Japan."),
+             text=t("花印クレンジングオイルの、日本公式サイトでのご紹介を準備しています。",
+                    "We are preparing to introduce HANAJIRUSHI Cleansing Oil in Japan."),
+             button=t("詳しく見る", "Details"), link="brand.html#p4",
+             visual="kanji", kanji="新", caption="Coming soon", seal="",
+             start="2026-09-01", end="",
+             tbc=t("発売時期 要確認", "Launch date TBC")),
+        dict(label=t("特許", "Patent"),
+             line1=t("特許技術を採用した、", "A cleansing lotion"), line2=t("クレンジングローション。", "with patented technology."),
+             text=t("うるおい残してしっかり落ちる、拭き取りタイプのクレンジングウォーター。",
+                    "Wipe-off cleansing water that removes makeup thoroughly while keeping skin moist."),
+             button=t("製品を見る", "View the product"), link="brand.html#p1",
+             visual="product", product="p1", seal="特許",
+             start="", end="",
+             tbc=t("特許番号 要確認", "Patent no. TBC")),
+    ]
+
+# Character limits the admin enforces (full-width = 1, half-width = 0.5)
+LIMITS = {"ja": dict(line=14, text=60), "en": dict(line=32, text=130)}
+
+def _width(x):
+    return sum(.5 if ord(c) < 0x2E80 else 1 for c in x)
+
+def kv_slide(sl, i, n):
+    """One announcement slide from its fields: what template-parts/kv-slide.php will print."""
+    lim = LIMITS[b.L]
+    for f in ("line1", "line2"):
+        assert _width(sl[f]) <= lim["line"], f"slide {i + 2}: {f} is over {lim['line']}: {sl[f]}"
+    assert _width(sl["text"]) <= lim["text"], f"slide {i + 2}: text is over {lim['text']}"
+    esc = lambda x: html.escape(x, quote=False)
+    def latin(x):  # Japanese headlines: Latin words in Bodoni, kept together with the next character
+        x = esc(x)
+        return x if EN() else re.sub(r"([A-Za-z0-9][A-Za-z0-9 .\-]*[A-Za-z0-9])(\S?)",
+                                     r'<span class="nw"><span class="lat">\1</span>\2</span>', x)
+    head = lines(f"{latin(sl['line1'])}<br><em>{latin(sl['line2'])}</em>")
+    if sl["visual"] == "product":
+        pr = {x["id"]: x for x in b.PRODUCTS()}[sl["product"]]
+        vis = win(pr["img"], pr["name"], "win--xl")
+    elif sl["visual"] == "photo":
+        vis = win(sl["photo"], "", "win--xl")
+    else:  # kanji: 1-2 characters in a plum 円窓, with a small caption
+        vis = (f'<figure class="win win--xl win--kj"><div class="win__c"><span class="win__kj">{esc(sl["kanji"])}</span>'
+               f'<small>{esc(sl["caption"])}</small></div></figure>')
+    if sl["seal"]:
+        vis += seal(esc(sl["seal"]), "seal--l seal--txt")
+    chip = tbd(sl["tbc"], sl["tbc"]) if sl.get("tbc") else ""   # mockup only: facts awaiting confirmation
+    return f'''
+<div class="hs__s" role="group" aria-roledescription="slide" aria-label="{i + 2} / {n}" aria-hidden="true">
+<div class="wrap hero__in"><div class="hs__txt"><p class="hs__k">{esc(sl["label"])}</p><h2 class="hs__h">{head}</h2>
+<p class="hero__lead">{esc(sl["text"])}{chip}</p><div class="hero__ctas">{btn(sl["link"], sl["button"], sl["button"], "btn--fill")}</div></div>
+<div class="hs__vis">{vis}</div></div></div>'''
+
+def live(sl):
+    return (not sl["start"] or sl["start"] <= MOCK_TODAY) and (not sl["end"] or MOCK_TODAY <= sl["end"])
+
+def hero_slides(txt, vis):
+    """v1.2 home: important news rotates in the first view (feedback 2026-10: 展会・产品发布・
+    专利获得). Slide 1 is the brand/business hero, unchanged (an Options page in WordPress);
+    the announcement slides come from SLIDES()."""
+    slides = [x for x in SLIDES() if live(x)]
+    labels = [t("花印について", "HANAJIRUSHI")] + [x["label"] for x in slides]
+    n = len(labels)
+    first = (f'<div class="hs__s is-on" role="group" aria-roledescription="slide" aria-label="1 / {n}">'
+             f'<div class="wrap hero__in">\n{txt}\n{vis}\n</div></div>')
+    rest = "".join(kv_slide(x, i, n) for i, x in enumerate(slides))
+    tabs = "".join(f'<li><button type="button" data-go="{i}"{" aria-current=true" if i == 0 else ""}><span>{html.escape(lab, quote=False)}</span><i></i></button></li>'
+                   for i, lab in enumerate(labels))
+    return f'''<section class="hero hero--slides" data-first aria-roledescription="carousel" aria-label="{t("注目のお知らせ","Highlights")}">
+<div class="hero__bg" aria-hidden="true"><img src="{IMG}h_hanajirushi_top-1.jpg" alt=""></div>
+<div class="hs"><div class="hs__track">{first}{rest}</div></div>
+<div class="hs__ui"><p class="hs__n"><b>01</b><span>/ {n:02d}</span></p>
+<ol class="hs__tabs">{tabs}</ol>
+<div class="hs__btns"><button type="button" class="hs__prev" aria-label="{t("前のスライド","Previous slide")}">{ARR}</button>
+<button type="button" class="hs__play" aria-label="{t("一時停止","Pause")}" data-pause="{t("一時停止","Pause")}" data-play="{t("再生","Play")}"><i></i></button>
+<button type="button" class="hs__next" aria-label="{t("次のスライド","Next slide")}">{ARR}</button></div></div>
 <p class="hero__scroll" aria-hidden="true">Scroll</p>
 </section>'''
 
