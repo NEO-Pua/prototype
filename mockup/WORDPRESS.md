@@ -186,7 +186,7 @@ hard-coded, so staff can reword it.
 | IPコラボ | `page-collaboration.php` | collabs | about text, merits ×4 |
 | 海外展開 | `page-global.php` | stats, regions, China results (Options) | intro |
 | 代理店募集 | `page-partners.php` | models, trade terms, export docs, registration, flow, FAQ | intro, reasons |
-| 展示会情報 | `page-exhibition.php` | current exhibition (Options), products (`show_at_exhibition`), booking form | outline text |
+| 展示会情報 | `page-exhibition.php` | v1.2: list of `exhibition` posts (name, dates, venue, booth, status, link to its buyer page), upcoming first, past below; v1/v1.1: current exhibition (Options), products, booking form | intro |
 | お知らせ | `home.php` / `archive.php` / `single.php` | posts | — |
 | お問い合わせ | `page-contact.php` | contact channels (Options), form | — |
 
@@ -326,7 +326,11 @@ files (or merge them). Things the theme must keep producing:
 - Generate the booth QR code once from the final URL (any QR tool, high error
   correction, SVG for print). The in-page QR (qrcode.js) is a convenience for sharing.
 - When the show is over, unpublish the page or redirect it to the 展示会情報 page,
-  and remove the *Cosmoprof Asia* header item.
+  and remove the *Cosmoprof Asia* header item. On 展示会情報 the show then moves from
+  "upcoming" to "past" by its end date, so the list keeps itself up to date.
+- Exhibitions are an `exhibition` post type (name, year/month, dates, venue, booth, on-show
+  text, languages, status label, link to the buyer page). A new show is a new post plus,
+  if wanted, a new buyer page from the same template.
 
 ## 7. Language rules (enforced in templates)
 

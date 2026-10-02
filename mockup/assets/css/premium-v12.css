@@ -76,6 +76,36 @@ html[lang="en"] .hs__tabs button{font-family:var(--caps);font-size:11px;letter-s
 .hero--slides.is-paused .hs__play i{width:0;height:0;border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent currentColor;margin-left:3px}
 .intro .hs__ui{animation:fade-up .9s var(--ease-o) 2s both}
 
+/* ---- home news without the show card (the slider carries the show) */
+.news__g--wide{grid-template-columns:1fr}
+
+/* ---- 展示会情報: a list of exhibitions */
+.exl__l{margin-top:clamp(40px,4vw,56px);border-top:1px solid var(--line-d)}
+.exl{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:clamp(24px,4vw,56px);align-items:start;padding:clamp(28px,3vw,40px) 0;border-bottom:1px solid var(--line-d)}
+.exl__d{display:grid;justify-items:start;gap:4px}
+.exl__d b{font-family:var(--didone);font-weight:400;font-size:40px;line-height:1}
+.exl__d span{font-family:var(--mincho);font-size:16px;letter-spacing:.12em;color:var(--ink-2)}
+html[lang="en"] .exl__d span{font-family:var(--caps);font-size:12px;letter-spacing:.24em;text-transform:uppercase}
+.exl__d .tbd{margin-top:6px}
+.exl__st{display:inline-block;padding:3px 10px;background:var(--beni-d);color:#fff;font-size:11px;font-weight:500;letter-spacing:.14em;line-height:1.6}
+.exl h3{margin-top:12px;font-family:var(--didone);font-weight:400;font-size:clamp(26px,2.6vw,34px);line-height:1.15}
+.exl__v{margin-top:8px;font-size:13.5px;color:var(--ink-2)}
+.exl .dl{margin-top:20px;max-width:620px}
+.exl .dl div{grid-template-columns:96px 1fr;padding:12px 0}
+.exl__a{display:grid;justify-items:start;gap:14px;padding-top:6px}
+.exl__none{margin-top:32px;padding:28px 0;border-block:1px solid var(--line-d);color:var(--ink-2)}
+
+@media (max-width:1024px){
+  .exl{grid-template-columns:110px minmax(0,1fr)}
+  .exl__a{grid-column:2;display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px}
+}
+@media (max-width:760px){
+  .exl{grid-template-columns:1fr;gap:16px}
+  .exl__d{grid-auto-flow:column;justify-content:start;align-items:baseline;gap:10px}
+  .exl__d b{font-size:30px}
+  .exl__a{grid-column:auto}
+}
+
 @media (max-width:1024px){
   /* phones and tablets: slides start at the top, and the progress bars sit just under the
      header (story style), so it is clear at a glance that the first view changes */

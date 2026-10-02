@@ -150,7 +150,7 @@ def intro_js(pg):
             "{document.documentElement.classList.add('intro');sessionStorage.setItem('hj-intro','1')}}catch(e){}</script>")
 
 def v12_css(pg):
-    return f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v12.css">' if V12() and pg == "home" else ''
+    return f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v12.css">' if V12() and pg in ("home", "exhibition") else ''
 
 def v11_css():
     return f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v11.css">' if V11() else ''
@@ -265,7 +265,7 @@ def store_section():
     """JA: domestic store logos. EN_ONLY: no consumer store links — a distributor line instead."""
     if EN():
         return f'''<section class="stores" id="stores"><div class="wrap stores__en rv">
-<p class="eb"><span>Where to buy</span></p><h2>Looking for HANAJIRUSHI in your country?</h2>
+<p class="eb"><span>Where to buy</span></p><h2>Looking for {"Hanajirushi" if V12() else "HANAJIRUSHI"} in your country?</h2>
 <p>We are building our distributor network. Contact us to find a local partner — or to become one.</p>
 {lnk("partners.html","","Find / become a distributor")}</div></section>'''
     s = [("rakuten.svg","楽天市場 公式ショップ"),("amazon.png","Amazon 公式ストア"),("yahoo.svg","Yahoo!ショッピング"),("qoo10.png","Qoo10 公式ショップ")]
@@ -532,12 +532,12 @@ def h_partners():
 
 def h_news():
     rows = ''.join(f'<li><a href="news.html"><time>{d}</time><span class="cat">{cl}</span><span class="tt">{x}{"<span class=new>New</span>" if new else ""}</span></a></li>' for d, c, cl, cls, x, new in b.NEWS()[:5])
-    return f'''<section class="sec news" id="exhibition"><div class="wrap news__g">
+    return f'''<section class="sec news" id="exhibition"><div class="wrap news__g{" news__g--wide" if V12() else ""}">
 <div class="rv">{shd("06","News","お知らせ","News", kj="お知らせ")}
 <ul class="nl">{rows}</ul>
 <p class="note">{t("※ 記事タイトルはモックアップ用の仮テキストです。","Headlines are placeholder copy for design review.")}</p>
 {lnk("news.html","お知らせ一覧","All news")}</div>
-{exh_card(compact=True)}
+{"" if V12() else exh_card(compact=True)}
 </div></section>'''
 
 def exh_card(compact=False):
@@ -818,7 +818,43 @@ def p_partners():
                 hd + why + global_sections() + models + terms + support + flow_ + faq)
 
 # ============================================================ EXHIBITION
+def EXHIBITIONS():
+    """Upcoming shows, in date order; each has its own buyer page (WordPress: an `exhibition`
+    post with a page link). Past shows are not listed until the client confirms them."""
+    return [dict(year="2026", month=t("11月", "Nov"), name="Cosmoprof Asia 2026",
+                 venue=t("香港コンベンション＆エキシビションセンター（香港・湾仔）", "Hong Kong Convention &amp; Exhibition Centre, Wan Chai"),
+                 status=t("商談予約受付中", "Booking meetings now"), page=lp_href())]
+
+def exh_list():
+    A = b.A
+    hd = phero("Exhibition", "展示会情報", "Exhibitions",
+               t("出展予定の展示会と、これまでの出展。","Where to meet us: upcoming and past exhibitions."),
+               None, "出展", [A("upcoming","開催予定","Upcoming"),A("past","過去の出展","Past exhibitions")])
+    rows = ''
+    for e in EXHIBITIONS():
+        rows += f'''<article class="exl rv">
+<p class="exl__d"><b>{e["year"]}</b><span>{e["month"]}</span>{tbd("日程確定待ち","Dates TBC")}</p>
+<div class="exl__b"><p class="exl__st">{e["status"]}</p><h3>{e["name"]}</h3><p class="exl__v">{e["venue"]}</p>
+<dl class="dl"><div><dt>{t("ブース","Booth")}</dt><dd>{tbd("確定待ち","TBC")}</dd></div>
+<div><dt>{t("出展内容","On show")}</dt><dd>{b.EXH_ONSHOW()}</dd></div>
+<div><dt>{t("対応言語","Languages")}</dt><dd>{t("日本語・英語・中国語 ","Japanese, English, Chinese ")}{tbd()}</dd></div></dl></div>
+<div class="exl__a">{btn(e["page"],"展示会専用ページへ","Open the event page","btn--fill")}{lnk(e["page"].split("#")[0] + "#booking","商談を予約する","Book a meeting")}</div>
+</article>'''
+    up = f'''<section class="sec sec--t" id="upcoming"><div class="wrap">
+{shd("01","Upcoming","開催予定の展示会","Upcoming exhibitions", kj="開催予定",
+     lead=t("会期中の商談は、各展示会の専用ページからご予約いただけます。","Meetings during a show are booked on that show's own page."))}
+<div class="exl__l">{rows}</div></div></section>'''
+    past = f'''<section class="sec sec--t blush" id="past"><div class="wrap">
+{shd("02","Past exhibitions","過去の出展","Past exhibitions", kj="出展実績")}
+<p class="exl__none rv">{t("過去の出展実績は、確認のうえ掲載します。","Past exhibitions will be listed once confirmed.")} {tbd()}</p></div></section>'''
+    return page("exhibition.html", "exhibition", t("展示会情報","Exhibitions"),
+                t("花印の展示会情報。出展予定の展示会と専用の商談ページ、過去の出展実績。",
+                  "HANAJIRUSHI exhibitions: upcoming shows with their own meeting pages, and past exhibitions."),
+                hd + up + past)
+
 def p_exhibition():
+    if V12():
+        return exh_list()
     A = b.A
     hd = phero("Exhibition", "展示会情報", "Exhibitions",
                t("展示会への出展情報と、商談のご予約。","Where to meet us — and how to book a meeting."),

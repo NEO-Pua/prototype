@@ -135,8 +135,10 @@ booth. v1.2 = v1.1 plus that page; gated by `V12()` (v1 and v1.1 output unchange
   the page's own address (qrcode.js from cdnjs), so it works wherever the mockup is
   hosted. The QR printed for the booth must be generated from the final public URL.
 - **Site links (v1.2):** the header's *Cosmoprof Asia* item, the home hero note and the
-  show cards open the buyer page; the 展示会情報 page keeps its outline and products
-  and hands booking to the buyer page, so there is one form, not two.
+  show cards open the buyer page. 展示会情報 is a list of exhibitions: each upcoming
+  show links to its own buyer page (one form, not two), and past exhibitions are listed
+  once confirmed (要確認 for now). The home news section has no separate show card;
+  the slider carries the show.
 - Files: `assets/css/premium-lp.css`, `assets/js/premium-lp.js` (plus the v1 and v1.1 files).
 
 **Home slider (v1.2, feedback 2026-10: keep the home slides for 展会・产品发布・专利获得):**
