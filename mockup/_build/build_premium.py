@@ -647,14 +647,26 @@ def pimg(p, cls=""):
     ext = "" if p["img"] else ' data-src="rakuten"'
     return f'<figure class="ppan {cls}"{ext}><img src="{src}" alt="{p["name"]}" loading="lazy"></figure>'
 
+_PC_WORDS = ("クレンジング", "ジューシー", "ハトムギ", "豊潤", "ブースター", "モイスチュア", "フェイス", "薬用",
+             "リンクル", "スーパー", "トーンアップ", "UV", "クレー")
+
+def pcname(name):
+    """v1.3 card names: 花印 on its own small line; the rest may wrap only between words."""
+    if not name.startswith("花印"):
+        return name
+    rest = name[2:].strip()
+    for w in _PC_WORDS:
+        rest = rest.replace(w, w + "<wbr>")
+    return f'<small class="pcard__b">花印</small>{rest.removesuffix("<wbr>")}'
+
 def pcard(p, i):
     """One product card (products list, home, 'more products')."""
     cats = dict(cat.CATS())
     ser = cat.SERIES().get(p["series"]) if p["series"] else None
     flag = (f'<span class="pcard__new">{t("新商品","New")}</span>' if p["new"] else
             f'<span class="pcard__new pcard__new--soon">{t("近日公開","Coming soon")}</span>' if p["soon"] else '')
-    body = (f'{pimg(p)}<p class="pcard__no">No.{i:02d}<span>{cats[p["cat"]]}{" · " + ser if ser else ""}</span>{flag}</p>'
-            f'<h3 class="pcard__n">{pname(p["name"])}</h3><p class="pcard__d">{p["short"]}</p>')
+    body = (f'{pimg(p)}<p class="pcard__no">No.{i:02d}<span>{cats[p["cat"]]}{"<i> · " + ser + "</i>" if ser else ""}</span>{flag}</p>'
+            f'<h3 class="pcard__n">{pcname(p["name"])}</h3><p class="pcard__d">{p["short"]}</p>')
     if p["soon"]:
         return f'<li class="pcard pcard--soon rv" data-cat="{p["cat"]}" id="{p["slug"]}"><div>{body}</div></li>'
     return f'<li class="pcard rv" data-cat="{p["cat"]}"><a href="{cat.page_of(p)}">{body}<span class="pcard__go" aria-hidden="true">{ARR}</span></a></li>'
@@ -783,7 +795,7 @@ def brand_phil():
 <div class="phil__s rv">{eb("Philosophy","01")}{slogan}</div>
 <div class="phil__txt rv"><p class="phil__lead">{p1}</p><p>{p2}</p>
 <div class="name">{seal(cls="seal--l")}<p><b>{t("花印 — 肌に咲く、花の印。","Hana-jirushi — “flower seal”.")}</b>{t("ひとりひとりの肌に咲く花の印という想いを、名前に込めています。","The mark of a flower blooming on each person's skin.")}</p></div></div>
-<div class="phil__img rv"><div class="arch"><img src="{IMG}h_hanajirushi_top-1.jpg" alt="" loading="lazy"></div></div>
+<div class="phil__img rv"><div class="arch"><img src="{IMG}{"h_brand_top_p.jpg" if V13() else "h_hanajirushi_top-1.jpg"}" alt="" loading="lazy"{' style="object-position:0% center"' if V13() else ""}></div></div>
 </div>
 <div class="wrap"><ul class="rings rv">{"".join(f"<li><span>{a}</span><small>{s}</small></li>" for a, s in b.FREE_FROM())}</ul></div>
 </section>'''
@@ -840,11 +852,12 @@ def p_products13():
 <ul class="pgrid pgrid--all">{cards}</ul>
 <p class="note">{note}</p>{trade}
 <ul class="free rv">{free}</ul>
+<p class="plist13__ip rv">{t("人気IPとの正規ライセンス商品は","Officially licensed collaborations with popular characters: ")}{lnk("collaboration.html","IPコラボレーション商品へ","See IP collaborations")}</p>
 </div></section>'''
     return page("products.html", "products", t("製品","Products"),
                 t("花印の製品一覧。クレンジング、化粧水・美容液、クリーム・ジェル、マスク・パック、UV化粧下地、メンズ。日本製のスキンケア。",
                   "HANAJIRUSHI products: cleansing, lotions and serums, creams and gels, masks, UV primer and men's care. Made in Japan."),
-                hd + body + brand_collab("01") + store_section())
+                hd + body + store_section())
 
 def p_product13(p):
     """v1.3: one page per product, in the order of the V1 demo's product page (reviewer 2026-10):

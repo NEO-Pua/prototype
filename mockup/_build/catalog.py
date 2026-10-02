@@ -35,13 +35,16 @@ def CATS():
 def SERIES():
     return {"hatomugi": t("ハトムギシリーズ", "Hatomugi series"), "amino": t("アミノ酸保湿シリーズ", "Amino acid series")}
 
-_WIPE = (t("キャップをはずし、コットンにたっぷり含ませ、ゆっくりふき取ってください。アイメイクを落とす際は目に入らないように注意し、しばらくなじませてからやさしくふき取ってください。しっかりメイクの時は新しいコットンに替えて、汚れがつかなくなるまで繰り返しお使いください。",
+def _WIPE():   # functions, not constants: t() must run per language
+    return (t("キャップをはずし、コットンにたっぷり含ませ、ゆっくりふき取ってください。アイメイクを落とす際は目に入らないように注意し、しばらくなじませてからやさしくふき取ってください。しっかりメイクの時は新しいコットンに替えて、汚れがつかなくなるまで繰り返しお使いください。",
            "Soak a cotton pad and wipe gently. For eye make-up, hold the pad in place for a moment first and keep the lotion out of your eyes. For heavier make-up, repeat with a fresh pad until it comes away clean."))
 
-_MASK_USE = t("パックとして：お手入れの最後にたっぷり塗ってください。口元や目元などには重ね塗りがおすすめです。オールインワンジェルとして：洗顔後に適量を手に取り、お顔に塗ってください。化粧下地としてもお使いいただけます。",
+def _MASK_USE():
+    return t("パックとして：お手入れの最後にたっぷり塗ってください。口元や目元などには重ね塗りがおすすめです。オールインワンジェルとして：洗顔後に適量を手に取り、お顔に塗ってください。化粧下地としてもお使いいただけます。",
               "As a pack: apply generously as the last step of your routine, layering on areas such as the eyes and mouth. As an all-in-one gel: after cleansing, smooth a little over the face. It also works as a make-up base.")
 
-_HATO_FREE = t(["合成香料フリー", "合成着色剤フリー", "鉱物油フリー", "シリコンフリー", "弱酸性"],
+def _HATO_FREE():
+    return t(["合成香料フリー", "合成着色剤フリー", "鉱物油フリー", "シリコンフリー", "弱酸性"],
                ["No synthetic fragrance", "No synthetic colour", "Mineral-oil free", "Silicone free", "Weakly acidic"])
 
 def PRODUCTS13():
@@ -59,7 +62,7 @@ def PRODUCTS13():
                   (t("4つの保湿成分", "Four moisturisers"), t("ヒアルロン酸Na・加水分解コラーゲン・アロエベラ葉エキス・ベタイン。", "Hyaluronic acid, hydrolysed collagen, aloe vera leaf extract and betaine."), None),
                   (t("ダブル洗顔不要", "No double cleanse"), t("拭き取った後の洗顔は不要。まつエクの方も安心してお使いいただけます。", "No need to wash your face afterwards — and safe with eyelash extensions."), None)],
           free=t(["無香料", "無着色", "オイルフリー", "アルコールフリー"], ["Fragrance-free", "Colorant-free", "Oil-free", "Alcohol-free"]),
-          usage=_WIPE,
+          usage=_WIPE(),
           inci="水、DPG、PEG-7(カプリル／カプリン酸)グリセリズ、PEG-8(カプリル酸／カプリン酸)グリセリズ、フェノキシエタノール、ラウリルベタイン、メチルパラベン、クエン酸Na、クエン酸、ヒアルロン酸Na、ベタイン、BG、加水分解コラーゲン、アロエベラ葉エキス"),
 
      dict(slug="juicy-cleansing-lotion", legacy=None, rk="10000090peach-2", cat="cleansing", series=None, new=False, soon=False,
@@ -75,7 +78,7 @@ def PRODUCTS13():
                   (t("ダブル洗顔不要", "No double cleanse"), t("拭き取った後の洗顔は不要。まつエクの方もお使いいただけます。", "No need to wash afterwards, and safe with eyelash extensions."), None),
                   (t("やさしい処方", "Gentle formula"), t("無着色・オイルフリー・アルコールフリー。", "Colorant-free, oil-free and alcohol-free."), None)],
           free=t(["無着色", "オイルフリー", "アルコールフリー"], ["Colorant-free", "Oil-free", "Alcohol-free"]),
-          usage=_WIPE,
+          usage=_WIPE(),
           inci="水、DPG、PEG-7（カプリル/カプリン酸）グリセリズ、PEG-8（カプリル酸/カプリン酸）グリセリズ、ラウリルベタイン、フェノキシエタノール、メチルパラベン、クエン酸Na、香料、クエン酸、BG、モモ果汁、モモ種子エキス、モモ葉エキス"),
 
      dict(slug="hatomugi-skin-conditioner", legacy="p3", rk="10001008-set", cat="lotion", series="hatomugi", new=False, soon=False,
@@ -90,7 +93,7 @@ def PRODUCTS13():
           points=[(t("北海道産ハトムギ", "Hokkaido coix seed"), t("保湿成分のハトムギ種子エキスを高配合。乾燥から肌を守り、肌荒れを防ぎます。", "A high level of coix seed extract protects against dryness and prevents rough skin."), None),
                   (t("3つの植物エキス", "Three plant extracts"), t("ヨモギ葉・ヒキオコシ葉/茎・ユズ果実のエキスが、うるおいと透明感のある肌へ。", "Mugwort leaf, isodon and yuzu fruit extracts for moist, clear-looking skin."), None),
                   (t("使い方いろいろ", "Many ways to use it"), t("ブースター、コットンパック、全身ローション、日焼け後のほてりのケアにも。", "As a booster, a cotton pack, a body lotion, or to cool skin after the sun."), None)],
-          free=_HATO_FREE,
+          free=_HATO_FREE(),
           usage=t("適量を手に取り、顔・体全体になじませてください。", "Smooth a little over the face and body."),
           inci="水、DPG、グリセリン、メチルパラベン、エタノール、（スチレン/アクリレーツ）コポリマー、クエン酸Na、クエン酸、BG、ヨモギ葉エキス、ヒキオコシ葉/茎エキス、ハトムギ種子エキス、ユズ果実エキス"),
 
@@ -106,7 +109,7 @@ def PRODUCTS13():
           points=[(t("ハトムギ種子エキス高配合", "Rich in coix seed"), t("天然保湿因子を補い、角質層の水分量を高めて、みずみずしい肌を保ちます。", "Supports skin's natural moisturising factors for lasting hydration."), None),
                   (t("3種類の発酵エキス", "Three fermented extracts"), t("ハトムギ種子発酵液・コメ発酵液・乳酸桿菌/豆乳発酵液で、肌のバランスを整えます。", "Fermented coix seed, rice and soy milk extracts help keep skin balanced."), None),
                   (t("9種類のボタニカル", "Nine botanicals"), t("ヨモギ葉・ユズ果実・ユキノシタ・ツボクサ葉エキス、バクチオールなどを配合。", "Including mugwort, yuzu, saxifrage, centella and bakuchiol."), None)],
-          free=_HATO_FREE,
+          free=_HATO_FREE(),
           usage=t("化粧水などでお肌を整えた後、適量を手にとり、お肌全体になじませてください。", "After your lotion, smooth a little over the whole face."),
           inci="水、DPG、グリセリン、グリセレス-26、ペンチレングリコール、イヌリン、PEG-60水添ヒマシ油、BG、フェノキシエタノール、(アクリレーツ/アクリル酸アルキル（C10-30）)クロスポリマー、水酸化K、オキシベンゾン-4、シロキクラゲ多糖体、ハトムギ種子エキス、ツボクサ葉エキス、バクチオール、コメ発酵液、異性化糖、クエン酸、乳酸桿菌/豆乳発酵液、ロドデンドロンフェルギネウムエキス、ユキノシタエキス、ヨモギ葉エキス、サッカロミセス/ハトムギ種子発酵液、ユズ果実エキス、クエン酸Na"),
 
@@ -122,7 +125,7 @@ def PRODUCTS13():
           points=[(t("ハトムギ種子エキス高配合", "Rich in coix seed"), t("角層の水分量を高め、肌をみずみずしく健やかに保ちます。", "Keeps the skin's surface layer hydrated and healthy-looking."), None),
                   (t("3つの発酵エキス", "Three fermented extracts"), t("ハトムギ種子発酵液・コメ発酵液・豆乳発酵液を独自に配合。", "Fermented coix seed, rice and soy milk extracts."), None),
                   (t("植物由来スクワラン", "Plant-derived squalane"), t("うるおいを閉じ込め、乾燥から肌を守ります。", "Seals moisture in and protects against dryness."), None)],
-          free=_HATO_FREE,
+          free=_HATO_FREE(),
           usage=t("化粧水の後に適量を手に取り、顔・体全体になじませてください。入浴後や日焼け後のボディケアにも。", "After your lotion, smooth a little over the face and body. Also good after a bath or a day in the sun."),
           inci="水、スクワラン、グリセリン、BG、ジグリセリン、ステアリン酸ポリグリセリル-10、カルボマー、ステアリン酸グリセリル、ペンチレングリコール、メチルパラベン、フェノキシエタノール、水酸化K、オキシベンゾン-4、ハトムギ種子エキス、ツボクサ葉エキス、コメ発酵液、異性化糖、乳酸桿菌/豆乳発酵液、ユキノシタエキス、ヨモギ葉エキス、サッカロミセス/ハトムギ種子発酵液、ユズ果実エキス、クエン酸Na、クエン酸"),
 
@@ -187,7 +190,7 @@ def PRODUCTS13():
                   (t("アミノ酸とコラーゲン", "Amino acids &amp; collagen"), t("アミノ酸、加水分解コラーゲン、ヒアルロン酸Naを配合。", "With amino acids, hydrolysed collagen and hyaluronic acid."), None),
                   (t("2通りの使い方", "Two ways to use it"), t("夜のパックにも、朝のオールインワンジェルにも。", "A night pack or a morning all-in-one gel."), None)],
           free=[],
-          usage=_MASK_USE,
+          usage=_MASK_USE(),
           inci="水、ジメチコン、BG、エタノール、シクロペンタシロキサン、（ジメチコン、（PEG-10/15））クロスポリマー、加水分解コラーゲン、ヒアルロン酸Na、カミツレ花エキス、ベタイン、PCA-Na、セリン、グリシン、グルタミン酸、アラニン、リシン、アルギニン、トレオニン、プロリン、フラーレン、ソルビトール、ペンチレングリコール、塩化Na、クエン酸、クエン酸Na、トコフェロール、PVP、フェノキシエタノール、メチルパラベン、プロピルパラベン"),
 
      dict(slug="super-moisture-gel", legacy=None, rk="10000002", cat="mask", series="amino", new=False, soon=False,
@@ -203,7 +206,7 @@ def PRODUCTS13():
                   (t("3つの使い方", "Three ways to use it"), t("パック、オールインワンジェル、化粧下地として。", "As a pack, an all-in-one gel or a make-up base."), None),
                   (t("たっぷり200g", "A generous 200g"), t("顔全体にたっぷり塗れる大容量。", "Enough to apply generously every day."), None)],
           free=[],
-          usage=_MASK_USE,
+          usage=_MASK_USE(),
           inci="水、ジメチコン、BG、シクロペンタシロキサン、DPG、グリセリン、（ジメチコン/（PEG-10/15））クロスポリマー、（ジメチコン/ビニルジメチコン）クロスポリマー、プルラン、マルチトール、ヒノキ水、ローズマリー葉水、オレンジフラワー水、PCA-Na、アスコルビルグルコシド、アルギニン、アスパラギン酸、PCA、グリシン、アラニン、ヒアルロン酸Na、セリン、バリン、イソロイシン、トレオニン、プロリン、ヒスチジン、フェニルアラニン、ポリクオタニウム-51、水溶性コラーゲン、グリチルリチン酸2K、セラミド3、コレステロール、セラミド6Ⅱ、フィトスフィンゴシン、セラミド1、塩化Na、海水、温泉水、乳酸Na、カルボマー、キサンタンガム、ラウロイル乳酸Na、クエン酸Na、クエン酸、トコフェロール、ペンテト酸5Na、フェノキシエタノール、メチルパラベン、エチルパラベン、プロピルパラベン"),
 
      dict(slug="clay-pack", legacy=None, rk="10000105", cat="mask", series=None, new=False, soon=False,
