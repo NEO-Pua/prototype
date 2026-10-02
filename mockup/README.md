@@ -190,6 +190,9 @@ output does not change. Files: `assets/css/premium-v13.css` (loaded last),
   選ばれる理由 is no longer on the home page (it stays on パートナーシップ).
 - **Partnership figures** no longer show trade-deal or partner counts (countries, regions
   and founding year only).
+- **Home slider height:** about three quarters of the screen on desktop (620–720px, close to
+  V1's 650/760px) and on phones (smaller visual, kanji circle and type, tighter spacing);
+  tablets held sideways keep text and visual side by side.
 - **To confirm:** every Rakuten listing names a third-party 製造販売元 (manufacturer), while
   the site copy says HANAJIRUSHI does its own manufacturing — check before publishing. The
   manufacturer row on each product page is 要確認. Ingredient lists were copied from Rakuten

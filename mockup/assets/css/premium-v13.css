@@ -335,3 +335,59 @@ body:not(.pg-home) .cta .btn:hover{color:#fff}
 body:not(.pg-home) .cta .btn--fill{background:#a51d34;border-color:#a51d34;color:#fff}
 body:not(.pg-home) .cta .btn--fill::before{background:#7c1426}
 body:not(.pg-home) .cta .btn--fill:hover{color:#fff}
+
+/* ======================================================================
+   Home slider height (review of v1.3): about three-quarters of the screen on desktop (V1:
+   650-760 px) and a real reduction on phones, where every slide took the height of the
+   tallest one and the slider was taller than the screen.
+   ====================================================================== */
+@media (min-width:1025px){
+  .hero13 .hs__s{min-height:clamp(620px,76svh,720px);padding:104px 0 112px}
+  .hero13 .win--xl{width:clamp(240px,min(30vw,46svh),400px)}
+  .hs13__panels{max-width:500px}
+  /* the brand slide's large headline follows the screen height too (short laptop screens) */
+  .hs13--brand .hs__h{font-size:clamp(32px,min(4.2vw,6svh),60px)}
+  html[lang="en"] .hs13--brand .hs__h{font-size:clamp(44px,min(5.6vw,8svh),84px)}
+}
+/* tablets: smaller visuals as well */
+@media (min-width:761px) and (max-width:1024px){
+  .hero13 .hs__s{padding:128px 0 48px}
+  .hero13 .win--xl{width:clamp(200px,30vw,250px)}
+  .hs13__panels{max-width:420px}
+}
+@media (max-width:760px){
+  .hero13 .hs__s{padding:112px 0 28px}
+  .hs13__in{gap:22px}
+  .hero13 .win--xl{width:clamp(150px,44vw,190px)}
+  .hs13__vis .seal--l{width:52px;height:52px;font-size:17px;right:2%;bottom:2%}
+  /* the kanji circle (出展, 新) scales with the smaller window and never wraps into columns */
+  .hero13 .win--kj .win__c{gap:10px}
+  .hero13 .win__kj{font-size:clamp(38px,12vw,50px);white-space:nowrap}
+  .hero13 .win--kj small{font-size:12px}
+  .hs13__panels{max-width:270px;gap:10px}
+  .hs13__panels small{display:none}
+  .hs13__panels li:nth-child(2){margin-top:-14px}
+  .hs13__panels p{margin-top:8px;font-size:11.5px;line-height:1.5}
+  html[lang="en"] .hs13__panels p{font-size:12.5px}
+  .hero13 .hs__h{font-size:24px;line-height:1.55}
+  html[lang="en"] .hero13 .hs__h{font-size:31px;line-height:1.08}
+  .hs13--brand .hs__h{font-size:26px}
+  html[lang="en"] .hs13--brand .hs__h{font-size:36px}
+  .hero13 .hero__lead{margin-top:14px;font-size:13px;line-height:1.85}
+  html[lang="en"] .hero13 .hero__lead{font-size:14px;line-height:1.7}
+  .hero13 .hero__ctas{margin-top:22px}
+}
+/* tablets held sideways: side by side like desktop, not stacked */
+@media (min-width:761px) and (max-width:1024px) and (orientation:landscape){
+  .hero13 .hs__s{align-items:center;padding:120px 0 64px}
+  .hs13__in{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}
+  .hs13__vis{order:0;max-width:none}
+}
+/* short phones (iPhone SE class): smaller visuals still */
+@media (max-width:760px) and (max-height:700px){
+  .hero13 .win--xl{width:clamp(130px,38vw,150px)}
+  .hs13__panels{max-width:228px}
+  .hs13__in{gap:16px}
+  html[lang="en"] .hero13 .hs__h{font-size:27px}
+}
+@media (max-width:760px){.win__kj{white-space:nowrap}}
