@@ -20,7 +20,7 @@
 .nw{white-space:nowrap}
 
 /* English hero: three balanced lines ("Japanese-quality / skincare, delivered / to the world.") */
-html[lang="en"] .hero__in{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+@media (min-width:1025px){html[lang="en"] .hero__in{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}}
 html[lang="en"] .hero__h{font-size:clamp(40px,4.4vw,66px)}
 
 /* collection: only products with a photo; the rest get one quiet line */

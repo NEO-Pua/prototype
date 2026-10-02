@@ -59,6 +59,8 @@ def lines(html):
     turn. An <em> that runs across a break is closed and reopened. v1: unchanged."""
     if not V11():
         return html
+    # Bodoni italic capitals space "HANAJIRUSHI" unevenly (it reads "HAN AJIRUSHI"); title case in italic headings
+    html = html.replace("<em>HANAJIRUSHI", "<em>Hanajirushi")
     out, carry = [], False
     for i, seg in enumerate(html.split("<br>")):
         if carry:

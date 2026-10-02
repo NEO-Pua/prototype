@@ -453,7 +453,7 @@ html[lang="en"] .phero h1{font-family:var(--didone);font-weight:400;font-size:cl
 .anc{border-bottom:1px solid var(--line)}
 .anc .wrap{display:flex;gap:8px 30px;padding:18px 0;overflow-x:auto;scrollbar-width:none}
 .anc .wrap::-webkit-scrollbar{display:none}
-.anc a{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;letter-spacing:.12em;white-space:nowrap;transition:color .3s}
+.anc a{flex:none;display:inline-flex;align-items:center;gap:10px;font-size:12.5px;letter-spacing:.12em;white-space:nowrap;transition:color .3s}
 .anc a::before{content:"";width:5px;height:5px;transform:rotate(45deg);border:1px solid var(--gold)}
 .anc a:hover{color:var(--beni-d)}
 .anc a.anc__pg{margin-left:auto;color:var(--beni-d)}
