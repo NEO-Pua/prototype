@@ -139,6 +139,7 @@ html[lang="en"] .exl__d span{font-family:var(--caps);font-size:12px;letter-spaci
         thing on the site, so the first view read sweeter than the rest) */
 .hero__bg img{filter:saturate(.62) sepia(.1) brightness(1.03)}
 .pg-brand .phero__img img{filter:saturate(.45) sepia(.12) brightness(1.04) contrast(.95)}
+.phil__img .arch img{filter:saturate(.5) sepia(.12) brightness(1.03)}
 
 /* ---- phone menu */
 /* the header stays solid while the drawer is open, so the list scrolls under a clean bar */
@@ -161,14 +162,21 @@ html.menu-open .hd{background:rgba(247,242,236,.97);box-shadow:0 1px 0 var(--lin
   .menu .menu__l>li,.menu .menu__side>*{opacity:1;transform:none}
 }
 
-/* ---- the smallest phones (320 px): the home figures and the brand philosophy block
-        could not shrink below their content */
+/* ---- the smallest phones (320 px): the home figures could not shrink below their content */
 .name p{min-width:0}
 @media (max-width:360px){
   .nums__l{grid-template-columns:repeat(2,minmax(0,1fr))}
   .nums b.num{font-size:42px}
   html[lang="en"] .nums b.word{font-size:29px}
   .nums b.word{font-size:22px}
-  /* brand philosophy (JA): the vertical slogan column left almost no room beside it */
-  .phil__g,html[lang="ja"] .phil__g{grid-template-columns:1fr}
+}
+
+/* ---- phones: the Japanese vertical headings (brand philosophy, company message) sit above
+        the text instead of beside it; side by side, the text column shrank to 100-170 px */
+@media (max-width:760px){
+  html[lang="ja"] .phil__g,html[lang="ja"] .msg__g{grid-template-columns:1fr;row-gap:36px}
+  html[lang="ja"] .phil__tate,html[lang="ja"] .msg__tate{margin-top:24px}
+  html[lang="ja"] .msg__sig{white-space:normal}
+  /* the free-from circles: the small Latin label ran into the ring */
+  .rings small{font-size:8.5px;letter-spacing:.08em;padding-inline:8px}
 }
