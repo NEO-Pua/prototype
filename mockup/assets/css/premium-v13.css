@@ -143,7 +143,8 @@ html[lang="en"] .hs13__panels p{font-family:var(--didone);font-size:15px;letter-
 .nums--4 .nums__l{grid-template-columns:repeat(4,1fr)}
 .nums--4 .nums__l li{border-top:0;border-left:1px solid var(--line)}
 .nums--4 .nums__l li:first-child{border-left:0}
-@media (max-width:760px){
+.nums--4 b{white-space:nowrap}   /* 2015年 and 自社研究室 stay on one line */
+@media (max-width:1024px){
   .nums--4 .nums__l{grid-template-columns:repeat(2,1fr)}
   .nums--4 .nums__l li:nth-child(odd){border-left:0}
   .nums--4 .nums__l li:nth-child(n+3){border-top:1px solid var(--line)}
@@ -391,3 +392,9 @@ body:not(.pg-home) .cta .btn--fill:hover{color:#fff}
   html[lang="en"] .hero13 .hs__h{font-size:27px}
 }
 @media (max-width:760px){.win__kj{white-space:nowrap}}
+/* Brand slide on phones and upright tablets: it has no visual, so its text sits at the foot
+   (where the text is on the other slides) and the flower photo fills the top. */
+@media (max-width:760px),(max-width:1024px) and (orientation:portrait){
+  .hero13 .hs13--brand{align-items:end}
+  .hs13--brand .hs13__bg::after{background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.1) 28%,rgba(255,255,255,.82) 56%,rgba(255,255,255,.96) 100%)}
+}
