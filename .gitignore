@@ -4,3 +4,10 @@ Desktop.ini
 ~$*
 __pycache__/
 *.pyc
+
+# Non-code files: briefs and office documents, review screenshots
+*.docx
+*.xlsx
+*.pptx
+*.pdf
+mockup/_screenshots/
