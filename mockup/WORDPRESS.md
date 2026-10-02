@@ -332,6 +332,37 @@ files (or merge them). Things the theme must keep producing:
   text, languages, status label, link to the buyer page). A new show is a new post plus,
   if wanted, a new buyer page from the same template.
 
+### Premium v1.3: separate Brand and Products, one page per product
+
+Reviewer feedback 2026-10 (意見まとめ.xlsx). If v1.3 is the version built:
+
+- **Menu** (Appearance → Menus): TOP／ブランド／製品／会社情報／お知らせ／パートナーシップ,
+  then the *Cosmoprof Asia* item and the お問い合わせ button. IP コラボ stays a child of
+  ブランド, 研究開発・品質 a child of 会社情報.
+- **Products become real pages.** `product` is a public post type with an archive
+  (`archive-product.php` → 製品一覧, `/products/`) and a single template
+  (`single-product.php` → `/products/<slug>/`). The home page, the archive and the
+  "その他の製品" block on each product page all query `product` posts, so a new product
+  is one new post — nothing else to edit (the client has 10+ products and more coming).
+- **Product fields added for v1.3** (on top of §4.2): `series` (taxonomy:
+  ハトムギシリーズ / アミノ酸保湿シリーズ), `is_new` (true/false → 新商品 tag),
+  `kind` (化粧品 / 医薬部外品), `features` (repeater, 3 rows: title + text), `free_from`
+  (repeater), `usage` (textarea), `cautions` (textarea), `rakuten_url` (URL, **JA only** —
+  the 楽天市場で購入する button; never output on English pages, §7), `gallery` (images).
+  `product_cat` terms: クレンジング / 化粧水・美容液 / クリーム・ジェル / マスク・パック /
+  UV・化粧下地 / メンズ.
+- **Archive filter**: category buttons with counts; `?cat=<term slug>` opens the list
+  filtered (links from the home chips and the product breadcrumb use it).
+- **Contact form**: the product checkboxes are the `product_cat` terms (+ IP コラボ, OEM);
+  `?item=<product slug>` ticks the product's category.
+- **Home first view**: `kv_slide` gains `visual = background` — a full-width photo behind
+  the text (the client supplies brand / new-product images). Slide 1 (brand) is an
+  Options-page slide. Products on the home page: `show_on_home`, in menu order.
+- **Initial data**: the mockup's `_build/catalog.py` holds 13 products taken from the
+  Rakuten store (names, sizes, descriptions, ingredients, usage) — import it as the first
+  `product` posts. Photos: replace the Rakuten images (some carry shop banners) with
+  clean packshots before launch.
+
 ## 7. Language rules (enforced in templates)
 
 From the content brief. Do not rely on staff to remember these.

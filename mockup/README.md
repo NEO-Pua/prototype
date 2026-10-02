@@ -25,6 +25,7 @@ Tip: `ja/index.html#kv=3` (or `en/…`) opens the top carousel on slide 3 with a
 
 | Version | Folder | Look |
 |---|---|---|
+| **Premium v1.3** | `premium-1.3/ja/`, `premium-1.3/en/`, `premium-1.3/cosmoprof-asia/` | Premium v1.2 with the reviewer's changes (意見まとめ.xlsx, 2026-10): brighter (white, V1 crimson), new menu order, separate Brand and Products pages, a products list plus one page per product from the Rakuten store, a large-image home slider, a short partnership section (see *Premium v1.3* below). |
 | **Premium v1.2** | `premium-1.2/ja/`, `premium-1.2/en/`, `premium-1.2/cosmoprof-asia/` | Premium v1.1 plus a standalone Cosmoprof Asia buyer page for the booth QR code, and a home slider for news (see *Premium v1.2* below). |
 | **Premium v1.1** | `premium-1.1/ja/`, `premium-1.1/en/` | Premium v1 plus the fixes and motion from the 2026-10 review (see *Premium v1.1* below). |
 | **Premium v1** (chosen, 2026-10) | `premium/ja/`, `premium/en/` | 9 pages (海外展開 is a section of 代理店募集) and a short 5-item menu. Premium look (see below) with the v2.2 business content: business-first hero, 「日本製」4つの強み, ビジネスパートナーに選ばれる理由, figures, topic-based contact buttons. |
@@ -156,6 +157,44 @@ booth. v1.2 = v1.1 plus that page; gated by `V12()` (v1 and v1.1 output unchange
   exhibition slide.
 - Files: `assets/css/premium-v12.css` (every v1.2 site page), `assets/js/premium-v12.js` (home page only).
 
+### Premium v1.3 — reviewer feedback (意見まとめ.xlsx)
+
+v1.2 plus the reviewer's changes; gated by `V13()` in `_build/build_premium.py`, so v1–v1.2
+output does not change. Files: `assets/css/premium-v13.css` (loaded last),
+`assets/js/premium-v13.js` (products filter), `_build/catalog.py` (product data).
+
+- **Brighter, closer to V1:** white paper (no washi grain), V1's light grey `#F6F5F3` for
+  bands, V1's crimson `#A51D34` for the seal, accents and filled buttons. The former plum
+  bands are light; the contact band at the foot of every page is crimson (as in V1); the
+  footer is light. Photos are no longer graded down.
+- **Menu:** TOP／ブランド／製品／会社情報／お知らせ／パートナーシップ／Cosmoprof Asia／お問い合わせ.
+  IPコラボ sits under ブランド, 研究開発・品質 under 会社情報.
+- **Brand** (`brand.html`) is brand only: philosophy, a ブランドストーリー section holding three
+  places for the client's text (due 5 Oct 2026, marked 要確認), research, IP collaborations.
+- **Products** (`products.html`): every product as a card, filtered by category (with
+  counts; `?cat=` opens it filtered). **One page per product**
+  (`product-<slug>.html`), in the order of V1's product page: photo and buttons, features,
+  how to use, research, details (accordion: product information, full ingredients,
+  cautions, export documents), more products. JA has 楽天市場で購入する (the item's
+  Rakuten page); EN has trade enquiry buttons only (EN_ONLY rule).
+- **Product data** comes from the official Rakuten store (13 products + the Cleansing Oil,
+  coming soon), condensed: no rankings or sale wording, no absorption claims; the
+  quasi-drug eye cream keeps to its approved claims. Adding a product = one entry in
+  `catalog.PRODUCTS13()`. Photos: our own packshots where we have them, otherwise the
+  Rakuten image is **linked** (not copied; some show shop banners) — a note on the
+  products page says they are temporary.
+- **Home:** a slider of large images (brand, Cosmoprof Asia, Hatomugi series, patent) —
+  existing site photos stand in until the client sends brand / new-product images; figures
+  strip; news; featured products with category chips; brand; 日本製の強み; collaborations;
+  a short partnership section (no trade-deal or partner counts, as asked); company.
+  選ばれる理由 is no longer on the home page (it stays on パートナーシップ).
+- **Partnership figures** no longer show trade-deal or partner counts (countries, regions
+  and founding year only).
+- **To confirm:** every Rakuten listing names a third-party 製造販売元 (manufacturer), while
+  the site copy says HANAJIRUSHI does its own manufacturing — check before publishing. The
+  manufacturer row on each product page is 要確認. Ingredient lists were copied from Rakuten
+  with obvious typos corrected; check them against the packs.
+
 **Also in v1.2 (all pages):** the two flower photographs (home background, brand header)
 are graded down to the palette; the phone menu keeps a solid header while open (the list
 used to scroll under the logo), JA / EN sits in the phone header, the drawer keeps only
@@ -204,6 +243,7 @@ mockup/
 ├── premium/              chosen design (9 pages × JA/EN), premium.css + premium.js
 └── _build/build.py       generator for all pages + review hub
     _build/build_premium.py  premium generator (reuses build.py copy & data)
+    _build/catalog.py        v1.3 product catalogue (from the Rakuten store)
 ```
 
 Pages: Top · Brand/Products · Company · R&D & Quality · Collaboration ·
