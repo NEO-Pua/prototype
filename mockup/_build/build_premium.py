@@ -4,7 +4,8 @@
 
 Run:  python build_premium.py      (build.py also runs it)
 Writes ../premium/ja/ and ../premium/en/: 9 pages each (海外展開 is a section of 代理店募集),
-and the same pages as premium v1.1 in ../premium-1.1/ (see V11 below).
+the same pages as premium v1.1 in ../premium-1.1/ (see V11 below), and premium v1.2 in
+../premium-1.2/: v1.1 plus a standalone Cosmoprof Asia buyer page (cosmoprof-asia/).
 
 Copy and data come from build.py (t(), PRODUCTS(), NEWS(), MODES(), TERMS(), FAQ(),
 JAPAN4(), WHY() ...), so every direction says exactly the same thing and follows the
@@ -33,11 +34,16 @@ from build import t, EN, tbd, tbdw, TEL, FAX, HOURS, ADDR, I
 
 OUT = os.path.join(b.ROOT, "premium")
 OUT11 = os.path.join(b.ROOT, "premium-1.1")
-_V11 = False
+OUT12 = os.path.join(b.ROOT, "premium-1.2")
+_VER = 1.0
 
 def V11():
-    """True while building premium v1.1 (set by build())."""
-    return _V11
+    """True while building premium v1.1 or later (set by build())."""
+    return _VER >= 1.1
+
+def V12():
+    """True while building premium v1.2: v1.1 plus the standalone Cosmoprof Asia buyer page."""
+    return _VER >= 1.2
 ASSETS = "../../assets/"
 IMG = ASSETS + "img/"
 FONTS = ("family=Zen+Old+Mincho:wght@400;500;600&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500"
@@ -162,7 +168,7 @@ PARENT = {"collaboration.html": "brand.html", "rd.html": "company.html"}
 def header(fn):
     cur = lambda h: " aria-current=page" if h == fn else (" aria-current=true" if h == PARENT.get(fn) else "")
     nav = ''.join(f'<li><a href="{h}"{cur(h)}>{j}</a></li>' for h, j, e, kids in NAV())
-    nav += f'<li class="hd__ev"><a href="exhibition.html"{cur("exhibition.html")}>Cosmoprof Asia</a></li>'
+    nav += f'<li class="hd__ev"><a href="{lp_href() if V12() else "exhibition.html"}"{cur("exhibition.html")}>Cosmoprof Asia</a></li>'
     pages = [("index.html", t("トップ","Top"), t("Top","トップ"), [])] + NAV() + [("contact.html", t("お問い合わせ","Contact"), t("Contact","お問い合わせ"), [])]
     def sub(kids):
         return ('<ul class="menu__sub">' + ''.join(f'<li><a href="{h}"{" aria-current=page" if h == fn else ""}>{x}</a></li>' for h, x in kids) + '</ul>') if kids else ''
@@ -184,7 +190,7 @@ def header(fn):
 <p class="menu__co">{t("花印粧業研究所株式会社","Hanajirushi Institute of Cosmetics, Inc.")}</p>
 <p>{ADDR(True)}</p>
 <p class="menu__tel"><a href="tel:+81362642154">{TEL()}</a><small>{HOURS()}</small></p>
-<a class="menu__exh" href="exhibition.html"><small>Exhibition</small><b>Cosmoprof Asia 2026</b><span>{t("2026年11月・香港 — 商談予約受付中","Hong Kong, November 2026 — book a meeting")}</span></a>
+<a class="menu__exh" href="{lp_href() if V12() else "exhibition.html"}"><small>Exhibition</small><b>Cosmoprof Asia 2026</b><span>{t("2026年11月・香港 — 商談予約受付中","Hong Kong, November 2026 — book a meeting")}</span></a>
 {lng}</div>
 </div></div>
 <main id="main">'''
@@ -330,7 +336,7 @@ def h_hero():
 <p class="hero__cap"><span>No.03</span>{p["name"]}　500mL</p>
 <p class="hero__jp" aria-hidden="true">ひとりに、ひとつの、キレイを咲かせる。</p></div>
 </div>
-<a class="hero__note" href="#exhibition"><span class="hero__note-k">{t("出展","Exhibiting")}</span><b>Cosmoprof Asia 2026</b><span>{t("2026年11月・香港 — 商談予約受付中","Hong Kong, November 2026 — book a meeting")}</span>{ARR}</a>
+<a class="hero__note" href="{lp_href() if V12() else "#exhibition"}"><span class="hero__note-k">{t("出展","Exhibiting")}</span><b>Cosmoprof Asia 2026</b><span>{t("2026年11月・香港 — 商談予約受付中","Hong Kong, November 2026 — book a meeting")}</span>{ARR}</a>
 <p class="hero__scroll" aria-hidden="true">Scroll</p>
 </section>'''
 
@@ -439,7 +445,7 @@ def exh_card(compact=False):
 <dl><div><dt>{t("会期","Dates")}</dt><dd>{t("2026年11月","November 2026")} {tbdw("日程確定待ち","TBC")}</dd></div>
 <div><dt>{t("会場","Venue")}</dt><dd>{t("香港コンベンション＆エキシビションセンター","Hong Kong Convention &amp; Exhibition Centre")}</dd></div>
 <div><dt>{t("ブース","Booth")}</dt><dd>{tbdw("確定待ち","TBC")}</dd></div></dl>
-{btn("exhibition.html#booking" if compact else "#booking","商談を予約する","Book a meeting","btn--light")}</aside>'''
+{btn(lp_href("#booking") if V12() else ("exhibition.html#booking" if compact else "#booking"),"商談を予約する","Book a meeting","btn--light")}</aside>'''
 
 def h_company():
     if V11():
@@ -737,7 +743,7 @@ def p_exhibition():
     days = t(["1日目","2日目","3日目"], ["Day 1","Day 2","Day 3"])
     slots = ''.join(f'<p class="slotday">{d} {tbd("日付","Date TBC")}</p><div class="slots">' + ''.join(f'<button type="button" data-day="{d}"{" disabled class=off" if (i + j) % 7 == 3 else ""}>{tm}</button>' for j, tm in enumerate(b.SLOT_TIMES())) + '</div>' for i, d in enumerate(days))
     req, opt = f'<em class="req">{t("必須","Required")}</em>', f'<em class="opt">{t("任意","Optional")}</em>'
-    booking = f'''<section class="sec" id="booking"><div class="wrap book__g">
+    booking = lp_block() if V12() else f'''<section class="sec" id="booking"><div class="wrap book__g">
 <div class="rv">{shd("03","Book a meeting","商談のご予約","Book a meeting", kj="商談のご予約",
      lead=t("30分単位でご予約いただけます。ご希望の日時を選択し、必要事項をご記入ください。","30-minute slots. Pick a time, fill in your details and we will confirm by email."))}
 <form class="pform">
@@ -849,15 +855,211 @@ def p_contact():
                   "Contact Hanajirushi Institute of Cosmetics: distributor applications, trade, product and OEM/ODM enquiries. Email, WhatsApp, WeChat."),
                 hd + body)
 
+# ============================================================ COSMOPROF ASIA BUYER PAGE (v1.2)
+# A standalone, phone-first page for visitors who scan the QR code at the booth:
+# premium-1.2/cosmoprof-asia/index.html (English, the address the QR code opens) and ja.html.
+# Its own slim header and footer, no site menu; links back to the full site.
+LP_DIR = "cosmoprof-asia"
+
+def lp_href(anchor=""):
+    """Site pages (premium-1.2/<lang>/) → the buyer page in the visitor's language."""
+    return f'../{LP_DIR}/{"index.html" if EN() else "ja.html"}{anchor}'
+
+def lp_site(fn):
+    """Buyer page → a page of the main site in the same language."""
+    return f'../{b.L}/{fn}'
+
+def lp_block():
+    """v1.2 exhibition page: booking now happens on the buyer page, so one form only."""
+    return f'''<section class="sec dark lp-hand" id="booking"><div class="wrap lp-hand__g">
+<div class="rv">{shd("03","Book a meeting","商談のご予約","Book a meeting", kj="商談のご予約",
+     lead=t("会期中の商談のご予約・お問い合わせは、展示会専用ページで承ります。会場では QR コードからもご覧いただけます。",
+            "Meeting bookings and enquiries for the show are handled on our dedicated event page. At the booth, scan the QR code to open it."))}</div>
+<div class="ctas rv">{btn(lp_href("#booking"),"展示会専用ページを開く","Open the event page","btn--light")}</div>
+</div></section>'''
+
+def lp_page():
+    p_all = b.PRODUCTS()
+    hato = p_all[2]
+    other = "ja.html" if EN() else "index.html"
+    # ?lang=ja / ?lang=en (links in the V1 style) open the matching file
+    want = "ja" if EN() else "en"
+    redirect = f"<script>if(/[?&]lang={want}\\b/.test(location.search))location.replace('{other}'+location.hash)</script>"
+    title = t("Cosmoprof Asia 2026 商談ページ｜花印 HANAJIRUSHI", "Cosmoprof Asia 2026 — Buyer page | HANAJIRUSHI")
+    desc = t("Cosmoprof Asia 2026（香港）に出展する花印の商談ページ。出展製品、取引条件、商談のご予約、展示会担当者の連絡先。",
+             "HANAJIRUSHI at Cosmoprof Asia 2026, Hong Kong: products, trade terms at a glance, meeting booking and show contacts.")
+    on_ja, on_en = ("on", "") if not EN() else ("", "on")
+    lng = f'<span class="lng" role="group" aria-label="Language"><a href="ja.html" class="{on_ja}" lang="ja">JA</a><a href="index.html" class="{on_en}" lang="en">EN</a></span>'
+    anchors = [("products", t("出展製品","Products")), ("strengths", t("日本製の強み","Strengths")),
+               ("business", t("お取引","Business")), ("booking", t("商談予約","Book a meeting")), ("contact", t("展示会担当","Show contacts"))]
+    anc = ''.join(f'<a href="#{i}">{x}</a>' for i, x in anchors)
+
+    facts = [(t("会期","Dates"), t("2026年11月","November 2026") + " " + tbd("日程確定待ち","TBC")),
+             (t("会場","Venue"), t("香港コンベンション＆エキシビションセンター","Hong Kong Convention &amp; Exhibition Centre")),
+             (t("ブース","Booth"), tbd("確定待ち","TBC")),
+             (t("対応言語","Languages"), t("日本語・英語・中国語 ","Japanese, English, Chinese ") + tbd())]
+    hero = f'''<section class="lp-hero"><div class="wrap lp-hero__g">
+<div class="lp-hero__txt rv">{eb("Cosmoprof Asia 2026 · Hong Kong")}
+<h1 class="lp-hero__h">{lines(t('<span class="nw"><span class="lat">Cosmoprof Asia 2026</span>で、</span><br>お会いしましょう。',"Meet us at<br><em>Cosmoprof Asia 2026</em>"))}</h1>
+<p class="lp-hero__lead">{t("東京・銀座の日本製スキンケアメーカー、花印です。","HANAJIRUSHI — Japanese skincare, developed in our own laboratory in Ginza, Tokyo. ")}{b.EXH_INTRO()}</p>
+<dl class="dl">{"".join(f"<div><dt>{a}</dt><dd>{v}</dd></div>" for a, v in facts)}</dl>
+<div class="ctas">{btn("#booking","商談を予約する","Book a meeting","btn--fill")}{lnk("#products","出展製品を見る","See the products")}</div></div>
+<div class="lp-hero__vis rv">{win(hato["img"], hato["name"], "win--l")}{seal(cls="seal--l")}</div>
+</div></section>'''
+
+    rs = b.REASONS()
+    nums = ''.join(f'<li class="rv"><small>{rs[i][0]}</small><b class="{"num" if rs[i][1][:1].isdigit() else "word"}">{rs[i][1]}</b><p>{rs[i][3]}</p></li>' for i in (0, 2, 1, 4))
+    trust = f'<section class="nums lp-nums"><div class="wrap"><ul class="nums__l">{nums}</ul></div></section>'
+
+    cards = ''
+    for i, p in enumerate(p_all):
+        if not p["img"]:
+            continue
+        cards += f'''<li class="rv">{win(p["img"], p["name"])}
+<p class="col__no">No.{i+1:02d}<span>{p["cat"]}</span></p><h3>{pname(p["name"])}</h3><p class="col__d">{p["short"]}</p>
+<p class="lp-prod__a"><a class="lnk lnk--s" href="#booking" data-pick="{p["id"]}"><span>{t("この製品を相談する","Discuss this product")}</span>{ARR}</a>
+<a class="lnk lnk--s" href="{lp_site("brand.html#" + p["id"])}"><span>{t("製品の詳細","Product details")}</span>{ARR}</a></p></li>'''
+    soon = ''.join(f'<p class="col__soon rv"><i>No.{i+1:02d}</i>{p["name"]} — {p["short"]}</p>' for i, p in enumerate(p_all) if not p["img"])
+    products = f'''<section class="sec col lp-prod" id="products"><div class="wrap">
+{shd("01","On display","出展製品","On display", kj="出展製品", cls="shd--c",
+     lead=t("無香料・無着色・オイルフリー・アルコールフリー。ブースでお試しいただけます。","Fragrance-free, colorant-free, oil-free, alcohol-free. Try them at our booth."))}
+<ul class="col__l col__l--3">{cards}</ul>{soon}</div></section>'''
+
+    kan = ["研", "造", "質", "績"]
+    j4 = ''.join(f'<li class="rv"><span class="j4__k" aria-hidden="true">{kan[i]}</span><p class="j4__n">{i+1:02d}</p><h3>{h}</h3><p>{d}</p>{note}</li>'
+                 for i, (ic, h, d, note) in enumerate(b.JAPAN4()))
+    strengths = f'''<section class="sec sec--t dark j4" id="strengths"><div class="wrap">
+{shd("02","Made in Japan","「日本製」4つの強み","Made in Japan —<br><em>four strengths</em>", kj="日本製の強み", cls="shd--c")}
+<ol class="j4__l">{j4}</ol>
+<div class="ctr">{lnk(lp_site("rd.html"),"研究開発・品質管理","R&amp;D and quality")}</div></div></section>'''
+
+    terms = b.TERMS()
+    rows = ''.join(f'<div><dt>{terms[i][0]}</dt><dd>{terms[i][1]}</dd></div>' for i in (0, 1, 2, 3, 6))
+    docs = ''.join(f'<li>{a}</li>' for a, d in b.EXPORT_DOCS())
+    business = f'''<section class="sec sec--t blush" id="business"><div class="wrap lp-biz__g">
+<div class="rv">{shd("03","Working together","市場に合わせた<br>お取引","A model that<br><em>fits your market</em>", kj="お取引について")}
+<ul class="models">{b.MODELS_MINI()}</ul>
+{lnk(lp_site("partners.html"),"代理店募集の詳細","Partnership programme")}</div>
+<div class="rv"><p class="pform__h">{t("主な取引条件","Trade terms at a glance")}</p>
+<dl class="dl">{rows}</dl>
+<p class="pform__h lp-biz__h">{t("ご用意できる輸出書類","Export documents we prepare")}</p>
+<ul class="tags tags--ink">{docs}</ul>
+<p class="note">{t("※ 数値・対応範囲は確認のうえ掲載します。","Figures and scope to be confirmed before publishing.")}</p></div>
+</div></section>'''
+
+    steps = f'''<section class="sec sec--t" id="steps"><div class="wrap">
+{shd("04","Next steps","お取引開始までの流れ","From first meeting<br><em>to first order</em>", kj="お取引の流れ", cls="shd--c")}
+{flow(b.PARTNER_STEPS())}</div></section>'''
+
+    days = t(["1日目","2日目","3日目"], ["Day 1","Day 2","Day 3"])
+    slots = ''.join(f'<p class="slotday">{d} {tbd("日付","Date TBC")}</p><div class="slots">' + ''.join(f'<button type="button" data-day="{d}"{" disabled class=off" if (i + j) % 7 == 3 else ""}>{tm}</button>' for j, tm in enumerate(b.SLOT_TIMES())) + '</div>' for i, d in enumerate(days))
+    req, opt = f'<em class="req">{t("必須","Required")}</em>', f'<em class="opt">{t("任意","Optional")}</em>'
+    req_en = req if EN() else opt   # EN_ONLY: WhatsApp/WeChat and market qualify overseas leads (as on the contact page)
+    sel = t("選択してください", "Please select")
+    plines = ''.join(f'<label><input type="checkbox" data-items="{b.ITEM_MAP[i]}">{x}</label>' for i, x in enumerate(b.PRODUCT_LINES()))
+    def fld(label, inner, mark, full=False):
+        return f'<label class="fld{" fld--full" if full else ""}"><span>{label}{mark}</span>{inner}</label>'
+    booking = f'''<section class="sec sec--t blush" id="booking"><div class="wrap book__g">
+<div class="rv">{shd("05","Book a meeting","商談のご予約・お問い合わせ","Book a meeting<br><em>or send an enquiry</em>", kj="商談のご予約",
+     lead=t("会期中の商談は30分単位でご予約いただけます。日時を選ばずにお問い合わせだけ送ることもできます。","Meetings during the show run in 30-minute slots. You can also send an enquiry without picking a time."))}
+<form class="pform pform--main">
+<p class="pform__h">{t("ご希望の日時（任意）","Preferred time (optional)")}</p>{slots}
+<p class="legend"><span><i></i>{t("予約可","Available")}</span><span><i class="on"></i>{t("選択中","Selected")}</span><span><i class="off"></i>{t("予約済","Booked")}</span></p>
+<p class="slotout">{t("選択中の日時：","Selected: ")}<b data-slot-out>{t("未選択","none")}</b></p>
+<div class="fgrid">
+{fld(t("会社名","Company"), '<input type="text" autocomplete="organization">', req)}
+{fld(t("国・地域","Country / region"), '<input type="text" autocomplete="country-name">', req)}
+{fld(t("お名前","Name"), '<input type="text" autocomplete="name">', req)}
+{fld(t("メールアドレス","Business email"), '<input type="email" autocomplete="email">', req)}
+{fld("WhatsApp / WeChat", '<input type="text">', req_en)}
+{fld(t("事業形態","Business type"), f'<select><option>{sel}</option>{"".join(f"<option>{x}</option>" for x in b.BIZ_TYPES())}</select>', req)}
+<fieldset class="fld fld--full"><legend>{t("ご関心の製品","Products of interest")}{opt}</legend><div class="opts">{plines}</div></fieldset>
+{fld(t("ご相談内容","Message"), '<textarea rows="4"></textarea>', opt, full=True)}
+</div>
+<label class="agree"><input type="checkbox">{t("個人情報の取り扱いに同意する","I agree to the handling of my personal information")}</label>
+<div class="pform__sub"><button class="btn btn--fill" type="submit"><span>{t("予約・お問い合わせを送信","Send my request")}</span>{ARR}</button></div>
+<p class="note ctr-t">{t("内容を確認のうえ、展示会担当者よりご連絡します。","Our show team will get back to you.")}</p>
+</form></div>
+<aside class="book__side rv" id="contact"><p class="pform__h">{t("展示会担当者","Your contact at the show")}</p>
+<dl class="dl">
+<div><dt>{t("担当者","Contact")}</dt><dd>{tbd("氏名","Name TBC")}</dd></div>
+<div><dt>WhatsApp</dt><dd>{tbd("番号","Number TBC")}</dd></div>
+<div><dt>WeChat</dt><dd>{tbd("ID","ID TBC")}</dd></div>
+<div><dt>{t("メール","Email")}</dt><dd>export@hanajirushi.co.jp {tbd()}</dd></div>
+<div><dt>{t("東京本社","Tokyo office")}</dt><dd><a href="tel:+81362642154">{TEL()}</a></dd></div></dl>
+<div class="qrs"><figure><span>QR</span><figcaption>WeChat</figcaption></figure><figure><span>QR</span><figcaption>WhatsApp</figcaption></figure></div>
+<p class="pform__h">{t("資料ダウンロード","Downloads")}</p>
+<ul class="dlist"><li><a href="#">{t("会社案内","Company profile")}<small>PDF</small></a></li><li><a href="#">{t("製品カタログ","Product catalogue")}<small>PDF</small></a></li></ul></aside>
+</div></section>'''
+
+    share = f'''<section class="sec sec--t lp-share" id="share"><div class="wrap lp-share__g">
+<figure class="lp-qr rv"><div id="lp-qr" aria-label="{t("このページのQRコード","QR code for this page")}"><span>QR</span></div></figure>
+<div class="rv">{shd("06","Share","このページを共有","Share<br><em>this page</em>", kj="ページを共有",
+     lead=t("同僚の方への共有や、後で見返すときにご利用ください。QRコードを読み取ると英語版が開きます（右上で日本語に切り替えられます）。",
+            "Pass it to a colleague, or keep it for after the show. The QR code opens the English page; switch to Japanese at the top."))}
+<p class="lp-url" data-share-url></p>
+<div class="ctas"><button class="btn" type="button" data-copy><span>{t("リンクをコピー","Copy link")}</span>{ARR}</button>
+<button class="lnk" type="button" data-qr-dl><span>{t("QRコードを保存（PNG）","Save QR code (PNG)")}</span>{ARR}</button></div>
+<p class="note">{t("※ 会場で配布するQRコードは、公開URLの確定後に本番用を発行します。","The QR code printed for the booth will be issued once the public address is final.")}</p></div>
+</div></section>'''
+
+    foot = f'''<footer class="ft lp-ft"><div class="wrap">
+<div class="lp-ft__g"><div class="ft__co"><a class="ft__logo" href="{lp_site("index.html")}"><img src="{IMG}logo.svg" alt="花印 HANAJIRUSHI" width="150" height="40"></a>{seal(cls="seal--s")}
+<p class="ft__name">{t("花印粧業研究所株式会社","Hanajirushi Institute of Cosmetics, Inc.")}</p>
+<p>{ADDR(True)}</p><p class="ft__tel">TEL {TEL()}</p></div>
+<ul class="lp-ft__l"><li><a href="{lp_site("index.html")}">{t("公式サイト トップ","Main website")}</a></li><li><a href="{lp_site("brand.html")}">{t("ブランド・製品","Brand &amp; products")}</a></li>
+<li><a href="{lp_site("partners.html")}">{t("代理店募集","Partnership programme")}</a></li><li><a href="{lp_site("company.html")}">{t("会社概要","Company profile")}</a></li></ul></div>
+<div class="ft__btm"><p>© 2026 Hanajirushi Institute of Cosmetics, Inc.</p><div><a href="#">{t("プライバシーポリシー","Privacy policy")}</a><a href="{other}">{t("English","日本語")}</a></div></div>
+</div></footer>
+<div class="lp-bar"><a class="btn btn--fill" href="#booking"><span>{t("商談を予約する","Book a meeting")}</span>{ARR}</a><a class="btn" href="#contact"><span>{t("担当者に連絡","Contact us")}</span></a></div>
+<button class="totop" type="button" aria-label="{t("ページトップへ","Back to top")}">{I["up"]}</button>
+<div class="toast" role="status" aria-live="polite"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="{ASSETS}js/premium.js"></script>
+<script src="{ASSETS}js/premium-v11.js"></script>
+<script src="{ASSETS}js/premium-lp.js"></script>
+</body></html>'''
+
+    return f'''<!DOCTYPE html>
+<html lang="{b.L}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{title}</title>
+<meta name="description" content="{desc}">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
+{redirect}
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?{FONTS}&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{ASSETS}css/premium.css">
+<link rel="stylesheet" href="{ASSETS}css/premium-v11.css">
+<link rel="stylesheet" href="{ASSETS}css/premium-lp.css">
+</head>
+<body class="pg-lp">
+<a class="skip" href="#main">{t("本文へスキップ","Skip to content")}</a>
+<header class="lp-hd" data-hd><div class="lp-hd__in">
+<a class="hd__logo" href="{lp_site("index.html")}"><img src="{IMG}logo.svg" alt="花印 HANAJIRUSHI" width="132" height="35"></a>
+<p class="lp-hd__ev"><b>Cosmoprof Asia 2026</b><span>{t("香港・2026年11月","Hong Kong · November 2026")}</span></p>
+<div class="hd__r">{lng}<a class="hd__cta" href="#booking">{t("商談を予約","Book a meeting")}</a></div>
+</div></header>
+<main id="main">
+{hero}
+<nav class="anc" aria-label="{t("ページ内リンク","On this page")}"><div class="wrap">{anc}</div></nav>
+{trust}{products}{strengths}{business}{steps}{booking}{share}
+</main>
+{foot}'''
+
 PAGES = {"index.html": p_home, "brand.html": p_brand, "company.html": p_company, "rd.html": p_rd,
          "collaboration.html": p_collaboration, "partners.html": p_partners,
          "exhibition.html": p_exhibition, "news.html": p_news, "contact.html": p_contact}
 
 def build():
-    global _V11
+    global _VER
     b.IMG = IMG  # build.py helpers that print image paths resolve from premium/<lang>/
-    for out, v11 in ((OUT, False), (OUT11, True)):
-        _V11 = v11
+    for out, ver in ((OUT, 1.0), (OUT11, 1.1), (OUT12, 1.2)):
+        _VER = ver
         for lang in ("ja", "en"):
             b.L = lang
             d = os.path.join(out, lang); os.makedirs(d, exist_ok=True)
@@ -868,7 +1070,17 @@ def build():
                 with open(os.path.join(d, fn), "w", encoding="utf-8") as f:
                     f.write(html)
                 print(f"{os.path.basename(out)} {lang}/{fn:20} {len(html):>7} bytes")
-    _V11 = False
+            if V12():
+                # the buyer page: index.html (English, the QR address) and ja.html
+                d = os.path.join(out, LP_DIR); os.makedirs(d, exist_ok=True)
+                html = lp_page()
+                if lang == "ja":
+                    html = b.add_wbr(html)
+                fn = "ja.html" if lang == "ja" else "index.html"
+                with open(os.path.join(d, fn), "w", encoding="utf-8") as f:
+                    f.write(html)
+                print(f"{os.path.basename(out)} {LP_DIR}/{fn:14} {len(html):>7} bytes")
+    _VER = 1.0
 
 if __name__ == "__main__":
     build()

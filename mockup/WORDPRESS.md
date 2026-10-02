@@ -296,6 +296,23 @@ files (or merge them). Things the theme must keep producing:
   `.win`, `.arch` and figure classes.
 - **Page fades** come from one CSS rule (`@view-transition`), so no plugin.
 
+### Premium v1.2: Cosmoprof Asia buyer page
+
+- A WordPress Page with its own template (`page-cosmoprof-asia.php`) and a slim
+  header/footer partial; no global menu. Keep a short, stable slug such as
+  `/cosmoprof-asia/` (English) and `/ja/cosmoprof-asia/` — the QR code printed for the
+  booth points at the English address and must not change after printing.
+- Content comes from the Exhibition Options (§6): dates, venue, booth, languages,
+  show contact, WhatsApp, WeChat, QR images, PDF downloads; products from `product`
+  posts flagged `show_at_exhibition`; trade terms and export documents from their
+  Options pages.
+- The form is the exhibition booking form (§5.7) with the time slot optional; product
+  checkboxes use the same `data-items` keys as the contact form.
+- Generate the booth QR code once from the final URL (any QR tool, high error
+  correction, SVG for print). The in-page QR (qrcode.js) is a convenience for sharing.
+- When the show is over, unpublish the page or redirect it to the 展示会情報 page,
+  and remove the *Cosmoprof Asia* header item.
+
 ## 7. Language rules (enforced in templates)
 
 From the content brief. Do not rely on staff to remember these.

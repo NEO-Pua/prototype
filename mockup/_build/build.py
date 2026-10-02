@@ -1307,9 +1307,11 @@ def hub():
              [("brand.html","ブランド・製品","Brand &amp; Products"),("company.html","会社概要","Company"),("rd.html","研究開発・品質","R&amp;D &amp; Quality"),
               ("collaboration.html","IPコラボレーション","Collaboration"),("global.html","海外展開","Global"),("partners.html","代理店募集","For Partners"),
               ("exhibition.html","展示会情報","Exhibition"),("news.html","お知らせ","News"),("contact.html","お問い合わせ","Contact")]]
-    def col(prefix, lang, label, tag, only=None):
+    def col(prefix, lang, label, tag, only=None, extra=""):
         return f'<div class="hub__col"><h2>{label}<b>{tag}</b></h2><ul>' + ''.join(
-            f'<li><a href="{prefix}{lang}/{f}">{en}<span>{ja}</span></a></li>' for f, en, ja in names if not only or f in only) + '</ul></div>'
+            f'<li><a href="{prefix}{lang}/{f}">{en}<span>{ja}</span></a></li>' for f, en, ja in names if not only or f in only) + extra + '</ul></div>'
+    def lp(lang):  # premium v1.2: the standalone Cosmoprof Asia buyer page
+        return f'<li><a href="premium-1.2/cosmoprof-asia/{"ja.html" if lang == "ja" else "index.html"}">Cosmoprof Asia buyer page<span>展示会専用ページ（QR用）</span></a></li>'
     prem = tuple(f for f, _, _ in names if f != "global.html")  # premium: 海外展開 is part of 代理店募集
     return f'''<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>花印 HANAJIRUSHI — Website Design Mockup</title>
@@ -1318,6 +1320,8 @@ def hub():
 <link rel="stylesheet" href="assets/css/style.css"></head><body class="hubpage">
 <div class="hub"><div class="hub__in">
 <div class="hub__hd"><img class="hub__logo" src="assets/img/logo.svg" alt="花印 HANAJIRUSHI"><div><h1>Website <span>Mockup</span></h1><p>花印 公式サイト デザインモックアップ ／ 日本語版・英語版</p></div></div>
+<h2 class="hub__ver">Premium v1.2 <span>v1.1＋展示会専用ページ（Cosmoprof Asia・QRコードから開く商談ページ）</span></h2>
+<div class="hub__g">{col("premium-1.2/","ja","日本語版 Japanese","JA · Premium v1.2",prem,lp("ja"))}{col("premium-1.2/","en","英語版 English","EN · Premium v1.2",prem,lp("en"))}</div>
 <h2 class="hub__ver">Premium v1.1 <span>v1＋レイアウト修正・写真の重複整理・モーション（初回オープニング、見出し・画像の演出、数字のカウントアップ、ページ遷移）</span></h2>
 <div class="hub__g">{col("premium-1.1/","ja","日本語版 Japanese","JA · Premium v1.1",prem)}{col("premium-1.1/","en","英語版 English","EN · Premium v1.1",prem)}</div>
 <h2 class="hub__ver">Premium v1 <span>採用案 — 生成り×葡萄色・円窓・明朝縦組み＋商談獲得型の構成（全9ページ）</span></h2>

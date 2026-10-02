@@ -1,0 +1,111 @@
+/* ======================================================================
+   花印 HANAJIRUSHI — premium v1.2: Cosmoprof Asia buyer page (premium-1.2/cosmoprof-asia/).
+   Loaded after premium.css and premium-v11.css. Phone first: most visitors arrive by
+   scanning the QR code at the booth, on a phone and on show Wi-Fi.
+   - slim sticky header (logo, show name, language, booking button); no site menu
+   - booking bar fixed to the bottom of the screen on phones
+   - no large background photograph; the product 円窓 carries the first view
+   ====================================================================== */
+
+/* ---- header */
+.lp-hd{position:sticky;top:0;z-index:50;background:rgba(247,242,236,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.lp-hd__in{display:flex;align-items:center;gap:clamp(14px,2.4vw,28px);height:72px;width:min(var(--maxw),calc(100% - var(--gut)*2));margin-inline:auto}
+.lp-hd__ev{display:grid;margin-right:auto;padding-left:clamp(14px,2.4vw,28px);border-left:1px solid var(--line-d);line-height:1.35}
+.lp-hd__ev b{font-family:var(--didone);font-style:italic;font-weight:400;font-size:16px;letter-spacing:0;color:var(--beni-d)}
+.lp-hd__ev span{font-size:11px;letter-spacing:.12em;color:var(--ink-3)}
+.lp-hd .hd__r{margin-left:0}
+html{scroll-padding-top:88px}
+
+/* ---- first view */
+.lp-hero{padding:clamp(40px,6vw,96px) 0 clamp(48px,6vw,96px);background:linear-gradient(180deg,var(--blush) 0,var(--paper) 88%)}
+.lp-hero__g{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,5vw,80px);align-items:center}
+.lp-hero__h{margin-top:22px;font-family:var(--mincho);font-weight:500;font-size:clamp(27px,3.4vw,44px);line-height:1.6;letter-spacing:.12em;font-feature-settings:"palt"}
+.lp-hero__h em{font-style:normal;color:var(--beni-d)}
+.lp-hero__h .lat{font-family:var(--didone);font-weight:400;font-size:1.05em;letter-spacing:0;color:var(--beni-d)}
+html[lang="en"] .lp-hero__h{font-family:var(--didone);font-weight:400;font-size:clamp(38px,5vw,68px);line-height:1.06;letter-spacing:-.01em}
+html[lang="en"] .lp-hero__h em{font-style:italic}
+.lp-hero__lead{margin-top:20px;max-width:36em;color:var(--ink-2)}
+.lp-hero .dl{margin-top:28px;max-width:560px}
+.lp-hero .dl div{grid-template-columns:96px 1fr;padding:12px 0}
+.lp-hero .ctas{margin-top:32px}
+.lp-hero__vis{position:relative;display:grid;justify-items:center}
+.lp-hero__vis .win--l{width:min(380px,82%)}
+.lp-hero__vis .seal--l{position:absolute;right:8%;bottom:2%}
+
+/* ---- figures: four in a row */
+.lp-nums .nums__l{grid-template-columns:repeat(4,1fr)}
+.lp-nums .nums__l li{border-left:1px solid var(--line);border-top:0}
+.lp-nums .nums__l li:first-child{border-left:0}
+
+/* ---- products: two quiet links per card */
+.lp-prod .col__l li{text-align:center}
+.lp-prod .col__l .win{width:84%;margin:0 auto 38px}
+.lp-prod__a{display:grid;justify-items:center;gap:2px;margin-top:14px}
+.lp-prod__a .lnk--s{margin-top:0;gap:10px}
+.lp-prod__a .arr{width:24px}
+
+/* ---- business */
+.lp-biz__g{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(32px,6vw,96px);align-items:start}
+.lp-biz__g .models{margin-bottom:28px}
+.lp-biz__g .dl{margin-top:12px}
+.lp-biz__g .dl div{grid-template-columns:150px 1fr}
+.lp-biz__h{margin-top:40px}
+.lp-biz__g .tags{margin-top:16px}
+
+/* ---- share */
+.lp-share__g{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(32px,6vw,88px);align-items:center;max-width:980px;margin-inline:auto}
+.lp-qr{padding:18px;background:var(--white);border:1px solid var(--line)}
+#lp-qr{display:grid;place-items:center;width:176px;height:176px;color:var(--ink-3);font-family:var(--caps);font-size:12px;letter-spacing:.2em}
+#lp-qr.on>span{display:none}
+#lp-qr img,#lp-qr canvas{display:block;width:176px;height:176px}
+.lp-url{margin-top:24px;padding:12px 16px;background:var(--white);border:1px solid var(--line);font-family:var(--caps);font-size:13px;letter-spacing:.02em;color:var(--ink-2);word-break:break-all}
+.lp-url:empty{display:none}
+.lp-share .ctas{margin-top:24px}
+
+/* ---- exhibition page (v1.2): booking handed over to the buyer page */
+.lp-hand__g{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,5vw,80px);align-items:end}
+
+/* ---- footer */
+.lp-ft__g{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:start}
+.lp-ft__l{display:grid;gap:4px}
+.lp-ft__l a{display:block;padding:5px 0;font-size:13px;color:var(--on-plum-2);transition:color .3s}
+.lp-ft__l a:hover{color:var(--on-plum)}
+
+/* ---- booking bar (phones) */
+.lp-bar{display:none}
+
+@media (max-width:1024px){
+  .lp-hero__g,.lp-biz__g,.lp-hand__g{grid-template-columns:1fr}
+  .lp-hero__vis{order:-1}
+  .lp-hero__vis .win--l{width:min(300px,70vw)}
+}
+@media (max-width:760px){
+  .lp-hd__in{height:60px}
+  .lp-hd .hd__r>.lng{display:flex}
+  .lp-hd__ev b{font-size:14px}
+  .lp-hd__ev span{font-size:10px;letter-spacing:.06em}
+  html{scroll-padding-top:72px}
+  .lp-hero .dl div{grid-template-columns:80px 1fr}
+  .lp-nums .nums__l{grid-template-columns:repeat(2,1fr)}
+  .lp-nums .nums__l li:nth-child(odd){border-left:0}
+  .lp-nums .nums__l li:nth-child(n+3){border-top:1px solid var(--line)}
+  .lp-biz__g .dl div{grid-template-columns:110px 1fr}
+  /* products as compact rows: window left, text right */
+  .lp-prod .col__l{grid-template-columns:1fr;row-gap:0;margin-top:40px}
+  .lp-prod .col__l li,.lp-prod .col__l li:nth-child(even){display:grid;grid-template-columns:112px minmax(0,1fr);column-gap:20px;align-items:center;margin:0;padding:22px 0;border-top:1px solid var(--line);text-align:left}
+  .lp-prod .col__l li:last-child{border-bottom:1px solid var(--line)}
+  .lp-prod .col__l.col__l--3 li:last-child{grid-column:auto;width:auto;margin-inline:0}
+  .lp-prod .col__l li>.win{grid-row:1/span 4;width:100%;margin:0}
+  .lp-prod .col__l .col__no{justify-content:flex-start}
+  .lp-prod .col__l h3{margin-top:4px}
+  .lp-prod .col__l .col__d{display:block;margin-top:4px;font-size:12.5px;line-height:1.8}
+  .lp-prod__a{justify-items:start;margin-top:8px}
+  .lp-share__g{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .lp-share .shd .eb{justify-content:center}
+  .lp-share .ctas{justify-content:center}
+  .lp-ft__g{grid-template-columns:1fr}
+  .lp-bar{position:fixed;left:0;right:0;bottom:0;z-index:45;display:grid;grid-template-columns:1.4fr 1fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(247,242,236,.96);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+  .lp-bar .btn{min-height:48px;padding:0 16px;justify-content:center;gap:12px;font-size:13px}
+  body.pg-lp{padding-bottom:76px}
+  .pg-lp .totop{bottom:88px}
+}

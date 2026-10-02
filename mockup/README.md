@@ -25,6 +25,7 @@ Tip: `ja/index.html#kv=3` (or `en/…`) opens the top carousel on slide 3 with a
 
 | Version | Folder | Look |
 |---|---|---|
+| **Premium v1.2** | `premium-1.2/ja/`, `premium-1.2/en/`, `premium-1.2/cosmoprof-asia/` | Premium v1.1 plus a standalone Cosmoprof Asia buyer page for the booth QR code (see *Premium v1.2* below). |
 | **Premium v1.1** | `premium-1.1/ja/`, `premium-1.1/en/` | Premium v1 plus the fixes and motion from the 2026-10 review (see *Premium v1.1* below). |
 | **Premium v1** (chosen, 2026-10) | `premium/ja/`, `premium/en/` | 9 pages (海外展開 is a section of 代理店募集) and a short 5-item menu. Premium look (see below) with the v2.2 business content: business-first hero, 「日本製」4つの強み, ビジネスパートナーに選ばれる理由, figures, topic-based contact buttons. |
 | **v2.2** (soft + business) | `v2.2/ja/`, `v2.2/en/` | v2.1 look plus buyer-conversion content (internal feedback 2026-10): new first view (who we are / how to do business, trust strip), 「日本製」4つの強み, ビジネスパートナーに選ばれる理由, numbers in Global & Partners, and topic-based contact buttons (`contact.html?topic=partner|product|oem|business&item=pN` pre-selects the form). Unconfirmed claims (manufacturing site, QC, sales results, deal and partner counts) are marked 要確認. |
@@ -114,6 +115,28 @@ Motion (restrained; all of it off under `prefers-reduced-motion`):
 4. **Figures** (12ヵ国, 2015年) count up once.
 5. **Page changes** cross-fade with the View Transitions API (Chrome, Edge,
    Safari; other browsers load pages as before).
+
+### Premium v1.2 — Cosmoprof Asia buyer page
+
+Coworker feedback (2026-10): the show page should be a standalone page, like the
+V1 demo's `cosmoprof-asia/`, because visitors open it by scanning a QR code at the
+booth. v1.2 = v1.1 plus that page; gated by `V12()` (v1 and v1.1 output unchanged).
+
+- **Address:** `premium-1.2/cosmoprof-asia/` — `index.html` is English (the address
+  the QR code opens), `ja.html` is Japanese; `?lang=ja` / `?lang=en` also work, as in V1.
+- **Phone first:** slim sticky header (logo, show name, JA/EN, booking button), no
+  site menu, a booking bar fixed to the bottom on phones, no large background photo.
+- **Content:** show facts (dates, venue, booth, languages — 要確認), the three
+  products with *Discuss this product* (ticks it in the form below), 「日本製」4つの強み,
+  cooperation models and trade terms at a glance, export documents, next steps, one
+  booking-and-enquiry form (time slot optional), show contacts and downloads, and a
+  share block: the page address, copy link and a QR code drawn in the browser from
+  the page's own address (qrcode.js from cdnjs), so it works wherever the mockup is
+  hosted. The QR printed for the booth must be generated from the final public URL.
+- **Site links (v1.2):** the header's *Cosmoprof Asia* item, the home hero note and the
+  show cards open the buyer page; the 展示会情報 page keeps its outline and products
+  and hands booking to the buyer page, so there is one form, not two.
+- Files: `assets/css/premium-lp.css`, `assets/js/premium-lp.js` (plus the v1 and v1.1 files).
 
 
 v2 and v2.1 have identical pages and content; v2.1 only adds `assets/css/soft.css`
