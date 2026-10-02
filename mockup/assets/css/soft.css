@@ -1,0 +1,210 @@
+/* ======================================================================
+   花印 HANAJIRUSHI — v2.1 "soft" skin
+   Loaded after style.css on the v2.1 pages only. Changes type and colour,
+   never layout. Direction (internal review, 2026-10): softer, calmer and
+   more refined, closer to the current official site / V1 demo, pink kept.
+   - Accent: dusty rose #A24A63 (saturation .54 vs .82); passes WCAG AA as
+     text on blush/tint and under white button text.
+   - Type: Shippori Mincho headings at medium weight, Zen Kaku Gothic New
+     body, Cormorant Garamond for Latin display words. No 800/900 weights.
+   - Fewer solid rose surfaces: tints, outlines and thin rules instead.
+   ====================================================================== */
+
+:root{
+  --rose:#a24a63;
+  --rose-d:#84334d;
+  --rose-l:#f5e9eb;
+  --rose-ll:#fbf6f5;
+  --gold:#a88a5c;
+  --gold-l:#f6efe4;
+  --ink:#3a3436;
+  --ink-2:#5c5457;
+  --ink-3:#6f6668;
+  --line:#e9e2e0;
+  --gray:#f7f3f1;
+  --sans:'Zen Kaku Gothic New','Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;
+  --mincho:'Shippori Mincho','Noto Serif JP','Yu Mincho',serif;
+  --serif-en:'Cormorant Garamond','Shippori Mincho',serif;
+  --en:'Jost','Zen Kaku Gothic New',sans-serif;
+}
+body{font-size:14.5px;line-height:1.95;letter-spacing:.05em;color:var(--ink)}
+html[lang="en"] body{letter-spacing:.015em}
+
+/* ---------- headings: Mincho, medium weight, airy tracking ---------- */
+.phd h1,.st h2,.sth h2,.hd3,.catch,.txt .catch,.lead,.pdt h3,.cmt__b h3,.pts li h4,.flow2 h4,.ibox h4,
+.box__h h3,.cband h2,.pc-card__n,.bnrs b,.pick__b h3 small,.ipd .b h4,.hd4,.find h3,.spnav__grid b,
+.recruit p.lead,.ctop h4,.wtb h3,.sl__h,.exh h2 small,.stores-h{font-family:var(--mincho);font-weight:500}
+html[lang="en"] :is(.phd h1,.st h2,.sth h2,.hd3,.catch,.lead,.pdt h3,.cmt__b h3,.pts li h4,.flow2 h4,.box__h h3,.cband h2,.pc-card__n,.ipd .b h4,.wtb h3,.sl__h,.recruit p.lead){font-family:var(--serif-en);font-weight:600;letter-spacing:.01em}
+.phd h1{font-size:30px;letter-spacing:.14em}
+html[lang="en"] .phd h1{font-size:38px;letter-spacing:.01em}
+.st h2{font-size:15px;letter-spacing:.2em;color:var(--ink-2)}
+html[lang="en"] .st h2{font-size:22px;letter-spacing:.02em;color:var(--ink)}
+.sth h2{font-size:21px;letter-spacing:.14em}
+.hd3{font-size:20px;letter-spacing:.12em}
+.catch,.txt .catch{font-weight:500;letter-spacing:.12em}
+.pdt h3{font-size:25px;letter-spacing:.08em}
+.cmt__b h3,.pc-card__n{letter-spacing:.06em}
+.cmt__b h3 em{background:none;color:var(--rose)}
+
+/* ---------- Latin display words: Cormorant instead of bold Montserrat ---------- */
+.st .en,.phd .en,.sth h2 small,.hd3 small,.box__h .en,.pick__h .en,.cmt__n,.flow2 .s,.pts li .n,
+.nlist .d,.tel b,.cband .t b,.ftr__co .tl,.spnav__tel b,.ctop .big,.stat b,.gmap .big b,.exh h2,
+.sl__h .en,.badge__m .c b,.slots button,.pager a,.pager span{font-family:var(--serif-en)}
+.st .en{font-size:38px;font-weight:500;letter-spacing:.14em;color:var(--rose)}
+.st--l .en{font-size:40px}
+.phd .en{font-size:15px;font-weight:600;letter-spacing:.28em}
+.sth h2 small,.hd3 small{font-size:13px;font-weight:600;letter-spacing:.2em}
+.nlist .d{font-size:15px;font-weight:600}
+.tel b{font-size:25px;font-weight:600}
+.cband .t b{font-size:36px;font-weight:600}
+.spnav__tel b{font-size:26px;font-weight:600}
+.ctop .big{font-size:32px;font-weight:600}
+.stat b,.gmap .big b{font-weight:600}
+.exh h2{font-weight:600;font-size:46px;letter-spacing:.01em}
+.pts li .n,.cmt__n{font-weight:600;letter-spacing:.14em}
+.pts li .n b{font-size:32px}
+.slots button{font-size:16px;font-weight:600}
+
+/* ---------- no 800/900 anywhere ---------- */
+.pick__b h3,.badge__m .c b,.gmap .big b,.recruit .stamp2,.phd h1,.freec li,.pdt h3,.stat b,.exh h2,.exh h2 small,
+.exh .stamp3,.sl__h,.sl__h .en,.sl__stamp,.hub__hd h1{font-weight:500}
+.pick__b h3,.hub__hd h1{font-family:var(--serif-en);font-weight:600}
+b,strong,.sth h2,.gnav a b,.bnrs b,.pc-card__n{font-weight:500}
+
+/* ---------- header & navigation: thin rules instead of heavy bars ---------- */
+.gnav{border-bottom:1px solid var(--line)}
+.gnav a b{font-family:var(--mincho);font-weight:500;letter-spacing:.12em}
+html[lang="en"] .gnav a b{font-family:var(--serif-en);font-weight:600;font-size:15px}
+.gnav a small{letter-spacing:.2em}
+.gnav a:hover,.gnav a.on{background:transparent;color:var(--rose)}
+.gnav a.on{box-shadow:inset 0 -2px 0 var(--rose)}
+@media(max-width:1000px){.hdr{border-bottom:1px solid var(--line)}}
+.topbar{background:var(--rose-ll)}
+.srch button{background:var(--ink-2)}
+.hbtn{font-weight:500;border-radius:2px}
+.hbtn--o{border-width:1px}
+.burger{border-radius:2px}
+
+/* ---------- buttons: calmer, squarer, lighter ---------- */
+.btn{font-weight:500;letter-spacing:.14em;border-radius:2px}
+.btn--o{border-width:1px}
+.pc-card__btns a{border-radius:2px;font-weight:500}
+.ptabs a{border-radius:2px;font-weight:500;border-color:var(--line);color:var(--ink-2)}
+.ptabs a.on,.ptabs a:hover{background:var(--rose-l);border-color:var(--rose-l);color:var(--rose-d)}
+.tabs button{border-radius:2px;font-weight:500}
+.tabs button.on{background:var(--ink-2);border-color:var(--ink-2)}
+.more{font-weight:500;letter-spacing:.1em}
+
+/* ---------- labels & tags: tints instead of solid fills ---------- */
+.lbl{background:var(--rose-l);color:var(--rose-d);font-weight:500;border-radius:1px}
+.lbl--o{background:#fff;color:var(--rose);border:1px solid var(--rose)}
+.lbl--gold{background:var(--gold-l);color:#6b5326}
+.lbl--ink{background:var(--ink-2);color:#fff}
+.lbl--gray{background:var(--gray);color:var(--ink-3);border:1px solid var(--line)}
+.tg span,.chk span,.cmt .chk span{background:var(--rose-ll);color:var(--rose-d);font-weight:500}
+.pdt__c{background:transparent;color:var(--rose);border:1px solid var(--rose);font-weight:500}
+
+/* ---------- section bands & dividers ---------- */
+.sec--rose{background:var(--rose-ll)}
+.sth{border-bottom:1px solid var(--ink-3)}
+.hd3{border-left-width:2px}
+.otbl,.ftbl{border-top-width:1px}
+.anc a{border-bottom-width:1px;font-weight:500;border-radius:2px}
+.pts li{border-top-width:2px;border-radius:2px}
+.st--l::after{height:2px}
+.ctop li{border-top-width:2px}
+
+/* ---------- boxes that were solid rose / ink ---------- */
+.pick{border-width:1px;border-color:var(--rose-l)}
+.pick__h{background:var(--rose-l);color:var(--rose-d)}
+.box__h{background:var(--gray);color:var(--ink);border-bottom:1px solid var(--line)}
+.box__h--rose{background:var(--rose-l);color:var(--rose-d)}
+.dtbl thead th{background:var(--rose-l);color:var(--ink);border-color:var(--line);font-weight:500}
+.dtbl tbody th{background:var(--rose-ll);font-weight:500}
+.dtbl td.merge{background:var(--rose-ll)}
+.cmt__n{background:rgba(255,255,255,.92);color:var(--rose)}
+.flow2 .s{background:#fff;color:var(--rose);box-shadow:inset 0 0 0 1px var(--rose)}
+.freec li{border-width:1px;font-family:var(--mincho);font-weight:500;background:#fff}
+.stat{border-width:1px}
+.gmap .big{border-width:1px}
+.side h4{background:var(--gray);color:var(--ink);border:1px solid var(--line)}
+.dl span.f{background:var(--rose-l);color:var(--rose-d)}
+.fstep li.on{background:var(--rose-l);color:var(--rose-d)}
+.ftbl th .r{background:var(--rose-l);color:var(--rose-d)}
+.ftbl th .o{background:var(--gray);color:var(--ink-3)}
+.wtb{border-width:1px}
+
+/* ---------- reasons badges: champagne wreath, Mincho values ---------- */
+.badge__m svg.laurel{color:#c2a679}
+.badge__m .c{color:var(--ink-2)}
+.badge__m .c b{color:var(--rose);font-size:27px}
+.badge__m .c b.s{font-family:var(--mincho);font-size:17px}
+
+/* ---------- stamps: seal-like white discs with a fine rose ring ---------- */
+.sl__stamp,.recruit .stamp2,.exh .stamp3{background:#fff;color:var(--rose);font-family:var(--mincho);font-weight:600;box-shadow:inset 0 0 0 1px var(--rose),inset 0 0 0 4px #fff,inset 0 0 0 5px var(--rose-l),0 4px 14px rgba(58,52,54,.12)}
+.sl__stamp{box-shadow:inset 0 0 0 .12cqw var(--rose),inset 0 0 0 .5cqw #fff,inset 0 0 0 .62cqw var(--rose-l),0 .6cqw 1.6cqw rgba(58,52,54,.12)}
+
+/* ---------- home slider ---------- */
+.kv{background:var(--rose-ll)}
+.kv::before{background:linear-gradient(90deg,var(--rose-ll) 15%,rgba(251,246,245,0))}
+.kv::after{background:linear-gradient(270deg,var(--rose-ll) 15%,rgba(251,246,245,0))}
+.slide{border-radius:2px;box-shadow:0 10px 30px -18px rgba(58,52,54,.35)}
+.sl{background:linear-gradient(110deg,#fff 0%,#fdf9f8 55%,#f7eeec 100%)}
+.sl__pill{background:transparent;color:var(--rose);box-shadow:inset 0 0 0 .12cqw var(--rose);font-weight:500;letter-spacing:.16em}
+.sl__h{letter-spacing:.08em;line-height:1.45}
+.sl__h .en{font-weight:600;letter-spacing:.01em}
+.sl__s{font-weight:400}
+.sl__tags li{border-width:.1cqw;font-weight:500;border-color:var(--line);color:var(--ink-2)}
+.sl__go{border-radius:.3cqw;font-weight:500;letter-spacing:.14em}
+/* event slide & exhibition hero: deep muted rose instead of bright magenta */
+.sl--rose,.exh{background:linear-gradient(115deg,#7f2f48 0%,#94405a 55%,#a24a63 100%)}
+.sl--rose .sl__pill{background:transparent;color:#fff;box-shadow:inset 0 0 0 .12cqw rgba(255,255,255,.8)}
+.sl--rose .sl__go{color:var(--rose-d)}
+.sl--rose .sl__stamp{box-shadow:inset 0 0 0 .12cqw var(--rose),inset 0 0 0 .5cqw #fff,inset 0 0 0 .62cqw var(--rose-l),0 .6cqw 1.6cqw rgba(0,0,0,.2)}
+.kv__dots button{width:24px;height:2px;border-radius:0;background:#d9cfcd}
+.kv__dots button.on{background:var(--rose)}
+.kv__btn{background:#fff;color:var(--rose);box-shadow:0 2px 10px rgba(58,52,54,.15)}
+@media(max-width:600px){
+  .sl__stamp{box-shadow:inset 0 0 0 .25cqw var(--rose),inset 0 0 0 1cqw #fff,inset 0 0 0 1.2cqw var(--rose-l),0 1cqw 2cqw rgba(58,52,54,.12)}
+}
+
+/* ---------- contact band: blush instead of a solid rose block ---------- */
+.cband{background:var(--rose-ll);color:var(--ink);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cband h2 small{color:var(--ink-2);opacity:1}
+.cband .t{border-color:var(--line)}
+.cband .t small{color:var(--ink-2)}
+.cband .t b{color:var(--rose)}
+.cband .btn--w{background:var(--rose);color:#fff}
+.cband .btn--w:hover{background:var(--rose-d)}
+.cband .btn--ol{border:1px solid var(--rose);color:var(--rose);background:#fff}
+.cband .btn--ol:hover{background:var(--rose-l)}
+@media(max-width:1000px){.cband .t{border-color:var(--line)}}
+
+/* ---------- footer & fixed UI ---------- */
+.ftr__btm{background:#4a4245}
+.sidetab a{border-radius:2px 0 0 2px;font-weight:500;font-family:var(--mincho)}
+.sidetab a.ink{background:#4a4245}
+.totop{background:#4a4245}
+.spbar a:nth-child(2){background:#4a4245}
+.spnav{background:var(--rose-ll)}
+.spnav__grid a{border-radius:2px}
+.spnav__grid a.on{box-shadow:inset 2px 0 0 var(--rose)}
+.spnav__lang{border-radius:2px}
+.spnav__lang a{border-radius:2px;font-weight:500}
+.spnav__cta .btn{border-radius:2px}
+.hub__col{border-top-width:2px}
+
+/* ---------- pre-coloured map image: mute its magenta to the dusty rose ---------- */
+img[src*="world_map_brand"]{filter:saturate(.55) brightness(1.03)}
+
+/* ---------- phones: keep the Latin display words inside the screen ---------- */
+@media(max-width:768px){
+  .st .en,.st--l .en{font-size:30px;letter-spacing:.08em;overflow-wrap:normal}
+  .phd h1{font-size:25px;letter-spacing:.1em}
+  html[lang="en"] .phd h1{font-size:32px}
+  .cband .t b{font-size:30px}
+  .exh h2{font-size:34px}
+}
+
+/* Cormorant defaults to old-style figures ("12" reads as "I2"): use lining figures */
+body{font-variant-numeric:lining-nums}
