@@ -732,13 +732,13 @@ html[lang="en"] .trio h3{font-family:var(--didone);font-weight:400;font-size:24p
 .cells{display:grid;gap:clamp(14px,1.6vw,22px);margin-top:clamp(48px,5vw,72px)}
 .cells--3{grid-template-columns:repeat(3,1fr)}
 .cells--4{grid-template-columns:repeat(4,1fr)}
-.cells li{padding:clamp(26px,2.6vw,36px) clamp(22px,2.2vw,30px);background:var(--white);border:1px solid var(--line)}
+.cells>li{padding:clamp(26px,2.6vw,36px) clamp(22px,2.2vw,30px);background:var(--white);border:1px solid var(--line)}
 .cells small{display:block;font-family:var(--caps);font-size:10.5px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--beni-d)}
 .cells h3{margin-top:10px;font-family:var(--mincho);font-weight:500;font-size:18px;line-height:1.7;letter-spacing:.1em}
 html[lang="en"] .cells h3{font-family:var(--didone);font-weight:400;font-size:23px;line-height:1.25;letter-spacing:0}
 .cells p{margin-top:12px;font-size:13.5px;line-height:2;color:var(--ink-2)}
 .cells .tags{margin-top:16px}
-.cells--dark li{background:var(--plum-2);border-color:var(--line-w)}
+.cells--dark>li{background:var(--plum-2);border-color:var(--line-w)}
 .cells--dark small{color:var(--gold-l)}
 .cells--dark p{color:var(--on-plum-2)}
 .chan h3 a{font-family:var(--caps);font-weight:300;letter-spacing:.06em}

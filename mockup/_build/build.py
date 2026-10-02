@@ -1318,7 +1318,9 @@ def hub():
 <link rel="stylesheet" href="assets/css/style.css"></head><body class="hubpage">
 <div class="hub"><div class="hub__in">
 <div class="hub__hd"><img class="hub__logo" src="assets/img/logo.svg" alt="花印 HANAJIRUSHI"><div><h1>Website <span>Mockup</span></h1><p>花印 公式サイト デザインモックアップ ／ 日本語版・英語版</p></div></div>
-<h2 class="hub__ver">Premium <span>採用案 — 生成り×葡萄色・円窓・明朝縦組み＋商談獲得型の構成（全9ページ）</span></h2>
+<h2 class="hub__ver">Premium v1.1 <span>v1＋レイアウト修正・写真の重複整理・モーション（初回オープニング、見出し・画像の演出、数字のカウントアップ、ページ遷移）</span></h2>
+<div class="hub__g">{col("premium-1.1/","ja","日本語版 Japanese","JA · Premium v1.1",prem)}{col("premium-1.1/","en","英語版 English","EN · Premium v1.1",prem)}</div>
+<h2 class="hub__ver">Premium v1 <span>採用案 — 生成り×葡萄色・円窓・明朝縦組み＋商談獲得型の構成（全9ページ）</span></h2>
 <div class="hub__g">{col("premium/","ja","日本語版 Japanese","JA · Premium",prem)}{col("premium/","en","英語版 English","EN · Premium",prem)}</div>
 <h2 class="hub__ver">v2.2 <span>v2.1＋商談獲得型の構成（FV刷新・日本製4つの強み・選ばれる理由・相談CTA）</span></h2>
 <div class="hub__g">{col("v2.2/","ja","日本語版 Japanese","JA · v2.2")}{col("v2.2/","en","英語版 English","EN · v2.2")}</div>

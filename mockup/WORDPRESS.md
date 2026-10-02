@@ -279,6 +279,23 @@ with these differences:
 | `phero()` | `template-parts/page-header.php` (photo / plain variants) |
 | `p_rd()` … `p_contact()` | the page templates in §5 |
 
+### Premium v1.1 motion layer
+
+If v1.1 is chosen, enqueue `premium-v11.css` and `premium-v11.js` after the v1
+files (or merge them). Things the theme must keep producing:
+
+- **Heading lines:** every display heading is printed as one
+  `<span class="ln" style="--i:N"><span>…</span></span>` per line. Staff type
+  headings with line breaks (ACF textarea, *new lines → `<br>`*); a helper such as
+  `hj_lines( $text )` splits on `<br>` / new lines. Without it headings still
+  show, just without the line reveal.
+- **Opening sequence:** front page only. The small inline script that adds
+  `html.intro` (first view per browser tab, skipped for reduced motion) must sit
+  in `<head>` before the stylesheets.
+- **Images** need no extra markup: the reveal hooks onto the existing `.rv`,
+  `.win`, `.arch` and figure classes.
+- **Page fades** come from one CSS rule (`@view-transition`), so no plugin.
+
 ## 7. Language rules (enforced in templates)
 
 From the content brief. Do not rely on staff to remember these.

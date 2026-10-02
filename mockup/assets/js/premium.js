@@ -26,7 +26,7 @@
     btn.addEventListener('click',function(){setMenu(!menu.classList.contains('open'))});
     menu.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('open')){setMenu(false);btn.focus()}});
-    window.addEventListener('resize',function(){if(window.innerWidth>1260&&menu.classList.contains('open'))setMenu(false)});
+    window.addEventListener('resize',function(){if(window.innerWidth>1080&&menu.classList.contains('open'))setMenu(false)});
   }
 
   // ---------- reveal on scroll, staggered within a list ----------

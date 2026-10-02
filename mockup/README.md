@@ -25,7 +25,8 @@ Tip: `ja/index.html#kv=3` (or `en/…`) opens the top carousel on slide 3 with a
 
 | Version | Folder | Look |
 |---|---|---|
-| **Premium** (chosen, 2026-10) | `premium/ja/`, `premium/en/` | 9 pages (海外展開 is a section of 代理店募集) and a short 5-item menu. Premium look (see below) with the v2.2 business content: business-first hero, 「日本製」4つの強み, ビジネスパートナーに選ばれる理由, figures, topic-based contact buttons. |
+| **Premium v1.1** | `premium-1.1/ja/`, `premium-1.1/en/` | Premium v1 plus the fixes and motion from the 2026-10 review (see *Premium v1.1* below). |
+| **Premium v1** (chosen, 2026-10) | `premium/ja/`, `premium/en/` | 9 pages (海外展開 is a section of 代理店募集) and a short 5-item menu. Premium look (see below) with the v2.2 business content: business-first hero, 「日本製」4つの強み, ビジネスパートナーに選ばれる理由, figures, topic-based contact buttons. |
 | **v2.2** (soft + business) | `v2.2/ja/`, `v2.2/en/` | v2.1 look plus buyer-conversion content (internal feedback 2026-10): new first view (who we are / how to do business, trust strip), 「日本製」4つの強み, ビジネスパートナーに選ばれる理由, numbers in Global & Partners, and topic-based contact buttons (`contact.html?topic=partner|product|oem|business&item=pN` pre-selects the form). Unconfirmed claims (manufacturing site, QC, sales results, deal and partner counts) are marked 要確認. |
 | **v2.1** (soft) | `v2.1/ja/`, `v2.1/en/` | Softer, calmer, more refined: dusty rose `#A24A63`, Shippori Mincho headings at medium weight, Zen Kaku Gothic New body, Cormorant Garamond for Latin display words, tints and thin rules instead of solid rose blocks. Built from internal feedback (2026-10) asking for something closer to the current official site / V1 demo. |
 | **v2** (current) | `ja/`, `en/` | Rose `#C8235F`, bold Noto Sans JP / Montserrat, solid rose accents. |
@@ -76,6 +77,43 @@ Premium here comes from craft rather than empty space:
 - **Photos:** the existing site photos, colour-graded in CSS to sit together.
   They are small (440px product shots), so a real shoot is the biggest
   remaining upgrade for this direction.
+
+### Premium v1.1
+
+Same pages and copy as v1; every difference is gated by `V11()` in
+`_build/build_premium.py` (v1 output does not change), and v1.1 pages load
+`assets/css/premium-v11.css` + `assets/js/premium-v11.js` after the v1 files.
+
+Fixes from the review:
+
+- English hero headline in three balanced lines (was five).
+- No empty product slot: products without a photo get one line under the grid.
+- Home partnership: the map column stays in view while the text scrolls.
+- Home company: a plum band with the head office in an arch, instead of the
+  grey full-width street photo.
+- Each photo used once: R&D, collaboration and partners no longer reuse
+  other pages' header photos (R&D and collaboration use the plain header,
+  partners uses the world map); the lab photo sits in a 円窓 sized to its
+  resolution; the company page shows a portrait placeholder (代表者写真 要確認)
+  and the office gallery no longer repeats the lab and showroom.
+- Footer: 海外展開・販売実績 listed under お取引について.
+
+Motion (restrained; all of it off under `prefers-reduced-motion`):
+
+1. **Opening, home only, once per visit** (`html.intro`, set in `<head>` with
+   `sessionStorage`): the gold ring draws round, the 円窓 opens like an iris,
+   the vertical headline is brushed in column by column (English: lines rise),
+   the 花印 seal stamps in, then the text, header and exhibition note. ~2.5 s.
+   Repeat visits get a short fade.
+2. **Images:** 円窓 open as an expanding circle with the ring drawn in; arch
+   photos rise like a curtain; square photos and the map wipe in; list items
+   follow the existing stagger. Lower-page headers: the photo wipes in and the
+   large kanji is brushed in.
+3. **Headings** are revealed line by line (`.ln` spans; the generator splits
+   headings on `<br>`).
+4. **Figures** (12ヵ国, 2015年) count up once.
+5. **Page changes** cross-fade with the View Transitions API (Chrome, Edge,
+   Safari; other browsers load pages as before).
 
 
 v2 and v2.1 have identical pages and content; v2.1 only adds `assets/css/soft.css`
