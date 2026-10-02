@@ -435,10 +435,7 @@ def hero_slides(txt, vis):
 <div class="hs"><div class="hs__track">{first}{rest}</div></div>
 <div class="hs__ui"><p class="hs__n"><b>01</b><span>/ {n:02d}</span></p>
 <ol class="hs__tabs">{tabs}</ol>
-<div class="hs__btns"><button type="button" class="hs__prev" aria-label="{t("前のスライド","Previous slide")}">{ARR}</button>
-<button type="button" class="hs__play" aria-label="{t("一時停止","Pause")}" data-pause="{t("一時停止","Pause")}" data-play="{t("再生","Play")}"><i></i></button>
-<button type="button" class="hs__next" aria-label="{t("次のスライド","Next slide")}">{ARR}</button></div></div>
-<p class="hero__scroll" aria-hidden="true">Scroll</p>
+<div class="hs__btns"><button type="button" class="hs__play" aria-label="{t("一時停止","Pause")}" data-pause="{t("一時停止","Pause")}" data-play="{t("再生","Play")}"><i></i></button></div></div>
 </section>'''
 
 def rv():

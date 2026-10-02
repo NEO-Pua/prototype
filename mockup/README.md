@@ -149,9 +149,9 @@ booth. v1.2 = v1.1 plus that page; gated by `V12()` (v1 and v1.1 output unchange
   Announcement slides use a product 円窓 or a plum 円窓 holding a kanji (出展, 新), as
   there are no photos for them yet.
 - Slides cross-fade; on entry the window opens, the ring is drawn and the lines rise.
-  Labelled tabs with a progress line, 01 / 04 count, previous / pause / next, arrow
-  keys, swipe on phones; on phones the bars sit under the header so the rotation is
-  visible at once. Slide 1 stays 8 s, the others 7 s; nothing moves on by itself under
+  Desktop: one row of labelled tabs with a 2px progress line, plus a pause button (tabs
+  and arrow keys change slides; no arrows, count or scroll cue, so the strip has one
+  job). Phones: 01 / 04 count and bars under the header, pause, swipe. Slide 1 stays 8 s, the others 7 s; nothing moves on by itself under
   reduced motion. The small exhibition note under the v1.1 hero is replaced by the
   exhibition slide.
 - Files: `assets/css/premium-v12.css`, `assets/js/premium-v12.js` (home page only).

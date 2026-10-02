@@ -50,16 +50,17 @@ html[lang="ja"] .hs__vis{order:-1}
 .intro .hs__s:not(:first-child) :is(.win__c,.win__c img,.win::before,.seal--l){animation:none}
 
 /* ---- controls: count, labelled tabs with progress, previous / pause / next */
-.hs__ui{position:absolute;left:var(--gut);right:calc(var(--gut) + 56px);bottom:34px;z-index:3;display:flex;align-items:center;gap:clamp(16px,2.6vw,36px)}
-.hs__n{display:flex;align-items:baseline;gap:6px;font-family:var(--didone);font-size:14px;color:var(--ink-3);white-space:nowrap}
+.hs__ui{position:absolute;left:var(--gut);right:var(--gut);bottom:34px;z-index:3;display:flex;align-items:center;gap:clamp(16px,2.6vw,36px)}
+.hs__n{display:none;align-items:baseline;gap:6px;font-family:var(--didone);font-size:14px;color:var(--ink-3);white-space:nowrap}
 .hs__n b{font-weight:400;font-size:24px;line-height:1;color:var(--ink)}
-.hs__tabs{display:flex;flex:1;gap:clamp(12px,2vw,28px);max-width:780px}
+.hs__tabs{display:flex;flex:1;gap:clamp(14px,2.2vw,32px);max-width:860px}
 .hs__tabs li{flex:1;min-width:0}
-.hs__tabs button{display:grid;gap:10px;width:100%;padding:8px 0;text-align:left;font-size:12px;letter-spacing:.12em;line-height:1.4;color:var(--ink-3);transition:color .3s}
-html[lang="en"] .hs__tabs button{font-family:var(--caps);font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+.hs__tabs button{display:grid;gap:12px;width:100%;padding:8px 0;text-align:left;font-size:13px;letter-spacing:.12em;line-height:1.4;color:var(--ink-2);transition:color .3s}
+html[lang="en"] .hs__tabs button{font-family:var(--caps);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase}
+.hs__tabs button[aria-current]{font-weight:500}
 .hs__tabs button:hover,.hs__tabs button[aria-current]{color:var(--ink)}
 .hs__tabs span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.hs__tabs i{position:relative;display:block;height:1px;background:var(--line-d);overflow:hidden}
+.hs__tabs i{position:relative;display:block;height:2px;background:rgba(43,35,38,.16);overflow:hidden}
 .hs__tabs i::after{content:"";position:absolute;inset:0;background:var(--beni-d);transform:scaleX(0);transform-origin:left}
 .hs__tabs button[aria-current] i::after{animation:hs-fill 7s linear both}
 .hero--slides[data-first] .hs__tabs button[aria-current] i::after{animation-duration:8s}
@@ -69,9 +70,6 @@ html[lang="en"] .hs__tabs button{font-family:var(--caps);font-size:11px;letter-s
 .hs__btns{display:flex;gap:6px}
 .hs__btns button{display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--line-d);border-radius:50%;background:rgba(252,250,247,.75);color:var(--ink);transition:border-color .3s}
 .hs__btns button:hover{border-color:var(--beni-d)}
-.hs__btns .arr{width:18px}
-.hs__prev .arr{transform:rotate(180deg)}
-.hs__btns .hs__prev:hover .arr{transform:rotate(180deg) translateX(3px)}
 .hs__play i{width:9px;height:11px;border-left:2px solid currentColor;border-right:2px solid currentColor}
 .hero--slides.is-paused .hs__play i{width:0;height:0;border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent currentColor;margin-left:3px}
 .intro .hs__ui{animation:fade-up .9s var(--ease-o) 2s both}
@@ -116,8 +114,8 @@ html[lang="en"] .exl__d span{font-family:var(--caps);font-size:12px;letter-spaci
   .hs__tabs span{display:none}
   .hs__tabs button{padding:12px 0}
   .hs__tabs{max-width:none}
-  .hs__btns .hs__prev,.hs__btns .hs__next{display:none}  /* swipe instead */
   .hs__btns button{width:34px;height:34px}
+  .hs__n{display:flex}   /* phones and tablets: count + bars (no labels), swipe to change */
   .hs__n b{font-size:18px}
 }
 @media (max-width:760px){

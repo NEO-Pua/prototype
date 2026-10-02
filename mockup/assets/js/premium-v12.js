@@ -1,7 +1,7 @@
 /* 花印 HANAJIRUSHI — premium v1.2 home slider (first view).
    Autoplay is the CSS progress line on the current tab: when its animation ends, the next
    slide comes in. Pausing pauses the line; reduced motion removes the line's animation, so
-   the slider then only moves when asked. Tabs, previous / next, arrow keys and swipe. */
+   the slider then only moves when asked. Tabs, arrow keys (on the tabs) and swipe. */
 (function(){
   var hero=document.querySelector('.hero--slides');
   if(!hero)return;
@@ -28,8 +28,6 @@
   }
 
   tabs.forEach(function(b,i){b.addEventListener('click',function(){go(i)})});
-  hero.querySelector('.hs__prev').addEventListener('click',function(){go(cur-1)});
-  hero.querySelector('.hs__next').addEventListener('click',function(){go(cur+1)});
   hero.addEventListener('animationend',function(e){if(e.animationName==='hs-fill')go(cur+1)});
 
   function pause(p){
