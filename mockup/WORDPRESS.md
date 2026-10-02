@@ -243,6 +243,16 @@ The client team chose the premium direction (`premium/`, generator
 `_build/build_premium.py`). Content model and pages are the same as above,
 with these differences:
 
+- **Short menu (4 sections + the show + contact).** Build the header from a WordPress
+  menu with one level of children: ブランド・製品 (child: IPコラボ), 代理店募集,
+  企業情報 (children: 会社概要, 研究開発・品質), お知らせ. The desktop header shows the
+  top level only; the phone menu shows children as indented sub-links; a parent is
+  marked current on its child pages. The *Cosmoprof Asia* item is a menu entry staff
+  remove after the show. Breadcrumbs follow the page parent (set the WordPress page
+  parent to match).
+- **No 海外展開 page.** Its content (figures, regions, China results) is two sections
+  of the 代理店募集 page (`#network`, `#china`); skip `page-global.php` and add a
+  redirect from `/global/` to `/partners/#network` if the old URL was ever shared.
 - **No home carousel.** The top page has one fixed hero instead of `kv_slide`
   posts: label, headline, lead, two buttons and the featured product image as
   Options fields (per language). Skip the `kv_slide` CPT unless the client asks

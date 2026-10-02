@@ -177,6 +177,11 @@ html.menu-open .hd{background:transparent;box-shadow:none;backdrop-filter:none}
 html[lang="en"] .hd__nav a{font-family:var(--caps);font-size:12px;font-weight:400;letter-spacing:.14em;text-transform:uppercase}
 .hd__nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--beni);transform:scaleX(0);transform-origin:right;transition:transform .5s var(--ease)}
 .hd__nav a:hover::after,.hd__nav a[aria-current]::after{transform:scaleX(1);transform-origin:left}
+/* the show: one highlighted item, as in the V1 demo; remove after the event */
+.hd__nav ul{align-items:center}
+html .hd__nav li.hd__ev a{padding:5px 14px;border:1px solid var(--beni);font-family:var(--didone);font-style:italic;font-size:14px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--beni-d);transition:background .4s,color .4s,border-color .4s}
+.hd__nav .hd__ev a::after{display:none}
+.hd__nav .hd__ev a:hover,.hd__nav .hd__ev a[aria-current]{background:var(--beni-d);border-color:var(--beni-d);color:#fff}
 .hd__r{display:flex;align-items:center;gap:20px;position:relative;z-index:2}
 .lng{display:flex;align-items:center;font-family:var(--caps);font-size:11px;font-weight:500;letter-spacing:.2em}
 .lng a{padding:6px 7px;color:var(--ink-3);transition:color .3s}
@@ -208,6 +213,11 @@ html.menu-open .hd__menu .c{display:inline}
 html[lang="en"] .menu__l b{font-family:var(--didone);font-weight:400;font-size:clamp(20px,2.4vw,27px);letter-spacing:0}
 .menu__l small{font-family:var(--caps);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
 .menu__l a[aria-current] b{color:var(--beni-d)}
+.menu__l li:has(>.menu__sub)>a{border-bottom:0}
+.menu__sub{padding:0 0 12px 56px;border-bottom:1px solid var(--line)}
+.menu__l .menu__sub a{display:flex;align-items:center;gap:12px;padding:7px 0;border-bottom:0;font-size:13.5px;letter-spacing:.1em;color:var(--ink-2)}
+.menu__l .menu__sub a::before{content:"";width:5px;height:5px;transform:rotate(45deg);border:1px solid var(--gold)}
+.menu__l .menu__sub a[aria-current]{color:var(--beni-d)}
 .menu__side{display:flex;flex-direction:column;align-items:flex-start;gap:14px;font-size:13px;color:var(--ink-2)}
 .menu__co{font-family:var(--mincho);font-size:15px;letter-spacing:.12em;color:var(--ink);margin-top:10px}
 .menu__tel a{display:block;font-family:var(--caps);font-weight:300;font-size:26px;color:var(--ink);letter-spacing:.06em}
@@ -439,13 +449,16 @@ html[lang="en"] .phero h1{font-family:var(--didone);font-weight:400;font-size:cl
 .crumb{border-block:1px solid var(--line)}
 .crumb .wrap{display:flex;flex-wrap:wrap;gap:14px;padding:14px 0;font-size:11.5px;letter-spacing:.12em;color:var(--ink-3)}
 .crumb a:hover{color:var(--beni-d)}
-.crumb span::before{content:"/";margin-right:14px;opacity:.6}
+.crumb span::before,.crumb a+a::before{content:"/";margin-right:14px;opacity:.6}
 .anc{border-bottom:1px solid var(--line)}
 .anc .wrap{display:flex;gap:8px 30px;padding:18px 0;overflow-x:auto;scrollbar-width:none}
 .anc .wrap::-webkit-scrollbar{display:none}
 .anc a{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;letter-spacing:.12em;white-space:nowrap;transition:color .3s}
 .anc a::before{content:"";width:5px;height:5px;transform:rotate(45deg);border:1px solid var(--gold)}
 .anc a:hover{color:var(--beni-d)}
+.anc a.anc__pg{margin-left:auto;color:var(--beni-d)}
+.anc a.anc__pg::before{display:none}
+.anc a.anc__pg::after{content:"\2192";font-size:14px}
 
 /* ---------------------------------------------------------------- brand: philosophy */
 .phil__g{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,.8fr);gap:clamp(32px,5vw,88px);align-items:start}
@@ -537,7 +550,7 @@ html[lang="en"] .ptbl th{padding-top:24px;font-family:var(--caps);font-size:11px
 .acc__g .lnk{margin-top:28px}
 
 /* ---------------------------------------------------------------- responsive */
-@media (max-width:1260px){
+@media (max-width:1080px){
   .hd__nav{display:none}
   .hd__menu{display:flex}
   .hd__r{margin-left:auto}

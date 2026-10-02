@@ -25,7 +25,7 @@ Tip: `ja/index.html#kv=3` (or `en/…`) opens the top carousel on slide 3 with a
 
 | Version | Folder | Look |
 |---|---|---|
-| **Premium** (chosen, 2026-10) | `premium/ja/`, `premium/en/` | All 10 pages. Premium look (see below) with the v2.2 business content: business-first hero, 「日本製」4つの強み, ビジネスパートナーに選ばれる理由, figures in Global & Partners, topic-based contact buttons. |
+| **Premium** (chosen, 2026-10) | `premium/ja/`, `premium/en/` | 9 pages (海外展開 is a section of 代理店募集) and a short 5-item menu. Premium look (see below) with the v2.2 business content: business-first hero, 「日本製」4つの強み, ビジネスパートナーに選ばれる理由, figures, topic-based contact buttons. |
 | **v2.2** (soft + business) | `v2.2/ja/`, `v2.2/en/` | v2.1 look plus buyer-conversion content (internal feedback 2026-10): new first view (who we are / how to do business, trust strip), 「日本製」4つの強み, ビジネスパートナーに選ばれる理由, numbers in Global & Partners, and topic-based contact buttons (`contact.html?topic=partner|product|oem|business&item=pN` pre-selects the form). Unconfirmed claims (manufacturing site, QC, sales results, deal and partner counts) are marked 要確認. |
 | **v2.1** (soft) | `v2.1/ja/`, `v2.1/en/` | Softer, calmer, more refined: dusty rose `#A24A63`, Shippori Mincho headings at medium weight, Zen Kaku Gothic New body, Cormorant Garamond for Latin display words, tints and thin rules instead of solid rose blocks. Built from internal feedback (2026-10) asking for something closer to the current official site / V1 demo. |
 | **v2** (current) | `ja/`, `en/` | Rose `#C8235F`, bold Noto Sans JP / Montserrat, solid rose accents. |
@@ -33,7 +33,7 @@ Tip: `ja/index.html#kv=3` (or `en/…`) opens the top carousel on slide 3 with a
 ### Premium — the chosen direction
 
 Started as "Direction B", a 3-page stretch proposal; the client team chose it
-in 2026-10 and it is now built out to all 10 pages in both languages.
+in 2026-10 and it is now built out to 9 pages in both languages.
 Same copy, data and EN-only rules as v2.x (it imports them from `build.py`,
 whose shared copy functions such as `JAPAN4()`, `WHY()`, `MODES()`, `TERMS()`,
 `FAQ()` are defined once); only the markup and skin differ:
@@ -44,6 +44,13 @@ Business content (internal feedback 2026-10):
 
 - **Hero:** 「世界へ届ける、日本品質のスキンケア製品。」 / "Japanese-quality
   skincare, delivered to the world." with 「日本で開発・製造。」 and a 製造地 要確認 chip.
+- **Menu (feedback 「菜单不要太多」, matched to the V1 demo):** ブランド・製品 /
+  代理店募集 / 企業情報 / お知らせ, a highlighted *Cosmoprof Asia* link (remove
+  after the show) and the お問い合わせ button. Secondary pages sit under a parent:
+  IPコラボ under ブランド・製品, 研究開発・品質 under 企業情報. They are reached from
+  the parent page's section bar (→ link), the breadcrumb, indented sub-links in
+  the phone menu, and the footer. The former 海外展開 page is now the
+  `#network` and `#china` sections of 代理店募集.
 - **Home order:** hero → figures → 「日本製」4つの強み (plum band, kanji in gold
   rings: 研・造・質・績) → collection → 選ばれる理由 → IP collaborations →
   partnership (with figures) → news & exhibition → company → stores.
@@ -109,7 +116,7 @@ mockup/
 │   ├── js/main.js        carousel, news tabs, slot picker, sp menu, page top
 │   └── img/              photos & product shots pulled from hanajirushi.co.jp
 │                         + world_map_brand.png (existing map recoloured)
-├── premium/              chosen design (10 pages × JA/EN), premium.css + premium.js
+├── premium/              chosen design (9 pages × JA/EN), premium.css + premium.js
 └── _build/build.py       generator for all pages + review hub
     _build/build_premium.py  premium generator (reuses build.py copy & data)
 ```

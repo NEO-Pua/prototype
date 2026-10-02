@@ -3,7 +3,7 @@
 花印 HANAJIRUSHI — "Direction B" premium site (chosen direction, 2026-10).
 
 Run:  python build_premium.py      (build.py also runs it)
-Writes ../premium/ja/ and ../premium/en/: all 10 pages.
+Writes ../premium/ja/ and ../premium/en/: 9 pages each (海外展開 is a section of 代理店募集).
 
 Copy and data come from build.py (t(), PRODUCTS(), NEWS(), MODES(), TERMS(), FAQ(),
 JAPAN4(), WHY() ...), so every direction says exactly the same thing and follows the
@@ -105,10 +105,27 @@ def head(title, desc, pg):
 <body class="pg-{pg}">
 <a class="skip" href="#main">{t("本文へスキップ","Skip to content")}</a>'''
 
+# Global menu kept short (feedback 2026-10: 「菜单不要太多」): four sections plus the show and
+# the contact button. Secondary pages sit under a parent: reached from the parent page's
+# section bar, the breadcrumb, the phone menu's sub-links and the footer.
+def NAV():
+    return [("brand.html", t("ブランド・製品","Brand &amp; Products"), t("Brand","ブランド・製品"),
+             [("collaboration.html", t("IPコラボレーション","IP collaborations"))]),
+            ("partners.html", t("代理店募集","Partnership"), t("Partnership","代理店募集"), []),
+            ("company.html", t("企業情報","Company"), t("Company","企業情報"),
+             [("rd.html", t("研究開発・品質","R&amp;D &amp; quality"))]),
+            ("news.html", t("お知らせ","News"), t("News","お知らせ"), [])]
+
+PARENT = {"collaboration.html": "brand.html", "rd.html": "company.html"}
+
 def header(fn):
-    nav = ''.join(f'<li><a href="{h}"{" aria-current=page" if h == fn else ""}>{j}</a></li>' for h, j, e in b.GNAV())
-    pages = [("index.html", t("トップ","Top"), "Top")] + [(h, j, e if not EN() else j) for h, j, e in b.GNAV()] + [("contact.html", t("お問い合わせ","Contact"), t("Contact","お問い合わせ"))]
-    mlist = ''.join(f'<li><a href="{h}"{" aria-current=page" if h == fn else ""}><i>{i:02d}</i><b>{j}</b><small>{e}</small></a></li>' for i, (h, j, e) in enumerate(pages))
+    cur = lambda h: " aria-current=page" if h == fn else (" aria-current=true" if h == PARENT.get(fn) else "")
+    nav = ''.join(f'<li><a href="{h}"{cur(h)}>{j}</a></li>' for h, j, e, kids in NAV())
+    nav += f'<li class="hd__ev"><a href="exhibition.html"{cur("exhibition.html")}>Cosmoprof Asia</a></li>'
+    pages = [("index.html", t("トップ","Top"), t("Top","トップ"), [])] + NAV() + [("contact.html", t("お問い合わせ","Contact"), t("Contact","お問い合わせ"), [])]
+    def sub(kids):
+        return ('<ul class="menu__sub">' + ''.join(f'<li><a href="{h}"{" aria-current=page" if h == fn else ""}>{x}</a></li>' for h, x in kids) + '</ul>') if kids else ''
+    mlist = ''.join(f'<li><a href="{h}"{" aria-current=page" if h == fn else ""}><i>{i:02d}</i><b>{j}</b><small>{e}</small></a>{sub(kids)}</li>' for i, (h, j, e, kids) in enumerate(pages))
     ja_on, en_on = ("on", "") if not EN() else ("", "on")
     lng = f'<span class="lng" role="group" aria-label="Language"><a href="../ja/{fn}" class="{ja_on}" lang="ja">JA</a><a href="../en/{fn}" class="{en_on}" lang="en">EN</a></span>'
     return f'''<header class="hd" data-hd>
@@ -145,7 +162,7 @@ def contact_band():
 def footer(fn):
     cols = [
      (t("ブランド・製品","Brand &amp; products"), [("brand.html",t("ブランドについて","About the brand")),("brand.html#p1",t("クレンジングローション","Deep Cleansing Lotion")),("brand.html#p2",t("フェイスマスク","Super Moisture Face Mask")),("brand.html#p3",t("ハトムギ化粧水","Hatomugi Skin Conditioner")),("collaboration.html",t("IPコラボレーション","IP collaborations"))]),
-     (t("企業情報","Company"), [("company.html",t("会社概要","Company profile")),("company.html#history",t("沿革","History")),("rd.html",t("研究開発・品質管理","R&amp;D and quality")),("global.html",t("海外展開","Global network")),("news.html",t("お知らせ","News"))]),
+     (t("企業情報","Company"), [("company.html",t("会社概要","Company profile")),("company.html#history",t("沿革","History")),("rd.html",t("研究開発・品質管理","R&amp;D and quality")),("partners.html#network",t("海外展開・販売実績","Global network")),("news.html",t("お知らせ","News"))]),
      (t("お取引について","Business"), [("partners.html",t("海外代理店・パートナー募集","Partnership programme")),("partners.html#terms",t("取引条件・輸出書類","Trade terms &amp; export documents")),("exhibition.html",t("展示会情報","Exhibitions")),("contact.html",t("お問い合わせ","Contact"))]),
     ]
     cg = ''.join(f'<div><h3>{h}</h3><ul>' + ''.join(f'<li><a href="{u}">{x}</a></li>' for u, x in items) + '</ul></div>' for h, items in cols)
@@ -175,11 +192,13 @@ def page(fn, pg, title, desc, body):
         full = t(f"{title}｜花印 HANAJIRUSHI 公式サイト", f"{title} | HANAJIRUSHI — Japanese Skincare, Ginza Tokyo")
     return head(full, desc, pg) + header(fn) + body + footer(fn)
 
-def phero(label, ja, en, sub, img, kanji, anchors, pos="center"):
+def phero(label, ja, en, sub, img, kanji, anchors, pos="center", parent=None):
     """Lower-page hero: title on paper, full-height photograph (right), large vertical kanji.
     img=None gives the plain variant (paper only) for utility pages."""
     title = t(ja, en)
-    anc = ''.join(f'<a href="#{i}">{x}</a>' for i, x in anchors)
+    # an entry ending in .html links to a child page (last, with an arrow)
+    anc = ''.join(f'<a class="anc__pg" href="{i}">{x}</a>' if i.endswith(".html") else f'<a href="#{i}">{x}</a>' for i, x in anchors)
+    up = f'<a href="{parent[0]}">{parent[1]}</a>' if parent else ""
     pic = f'<div class="phero__img"><img src="{IMG}{img}" alt="" style="object-position:{pos}"></div>' if img else ''
     navs = f'<nav class="anc" aria-label="{t("ページ内リンク","On this page")}"><div class="wrap">{anc}</div></nav>' if anchors else ''
     return f'''<section class="phero{"" if img else " phero--plain"}">
@@ -187,7 +206,7 @@ def phero(label, ja, en, sub, img, kanji, anchors, pos="center"):
 <p class="phero__kj" aria-hidden="true">{kanji}</p></div>
 {pic}
 </section>
-<nav class="crumb" aria-label="breadcrumb"><div class="wrap"><a href="index.html">{t("ホーム","Home")}</a><span>{title.replace("<br>", "")}</span></div></nav>
+<nav class="crumb" aria-label="breadcrumb"><div class="wrap"><a href="index.html">{t("ホーム","Home")}</a>{up}<span>{title.replace("<br>", "")}</span></div></nav>
 {navs}'''
 
 def store_section():
@@ -382,7 +401,7 @@ def p_brand():
     hd = phero("Brand", "ブランド・製品", "Brand &amp; Products",
                t("人の肌を想い、ひとりの悩みを見つめる、日本製のスキンケア。","Gentle, honest skincare — formulated and made in Japan."),
                "h_brand_top_p.jpg", "花印",
-               [A("philosophy","ブランド理念","Philosophy"),A("lineup","製品ラインナップ","Line-up"),A("p1","クレンジング","Cleansing"),A("p2","フェイスマスク","Face Mask"),A("p3","ハトムギ化粧水","Hatomugi"),A("stores","国内でのご購入","Where to buy")])
+               [A("philosophy","ブランド理念","Philosophy"),A("lineup","製品ラインナップ","Line-up"),A("p1","クレンジング","Cleansing"),A("p2","フェイスマスク","Face Mask"),A("p3","ハトムギ化粧水","Hatomugi"),A("stores","国内でのご購入","Where to buy"),("collaboration.html",t("IPコラボレーション","IP collaborations"))])
     p1, p2 = b.BRAND_TEXT()
     # EN_ONLY: brand line is re-written for English, not translated; the Japanese slogan stays as a vertical accent.
     slogan = t('<h2 class="phil__tate">ひとりに、ひとつの、<br>キレイを咲かせる。</h2>',
@@ -436,7 +455,7 @@ def p_company():
     hd = phero("Company", "会社概要", "Company",
                t("東京・銀座から、日本のスキンケアを世界へ。","Japanese skincare, from Ginza, Tokyo to the world."),
                "h_campany_top_p.jpg", "銀座",
-               [A("message","代表挨拶","Message"),A("profile","会社概要","Profile"),A("business","事業内容","Business"),A("history","沿革","History"),A("office","オフィス紹介","Office"),A("access","アクセス","Access")], pos="30% center")
+               [A("message","代表挨拶","Message"),A("profile","会社概要","Profile"),A("business","事業内容","Business"),A("history","沿革","History"),A("office","オフィス紹介","Office"),A("access","アクセス","Access"),("rd.html",t("研究開発・品質","R&amp;D &amp; quality"))], pos="30% center")
     head_ = t('<h2 class="msg__tate">銀座から、<br>世界へ。</h2>', '<h2 class="msg__h">From Ginza,<br><em>to the world.</em></h2>')
     msg = f'''<section class="sec msg" id="message"><div class="wrap msg__g">
 <div class="msg__s rv">{eb("Message","01")}{head_}</div>
@@ -485,7 +504,8 @@ def p_rd():
     hd = phero("R&amp;D / Quality", "研究開発・<br>品質管理", "R&amp;D &amp; Quality",
                t("銀座の自社研究室から、確かな処方を。","Reliable formulas, from our own laboratory in Ginza."),
                "h_campany_lab.jpg", "研究",
-               [A("lab","自社研究室","Laboratory"),A("process","開発から出荷まで","Process"),A("quality","品質管理体制","Quality"),A("docs","輸出書類","Export documents"),A("regist","各国登録の支援","Registration")])
+               [A("lab","自社研究室","Laboratory"),A("process","開発から出荷まで","Process"),A("quality","品質管理体制","Quality"),A("docs","輸出書類","Export documents"),A("regist","各国登録の支援","Registration")],
+               parent=("company.html", t("企業情報","Company")))
     pts = [(b.RD_POINT1_T(), b.RD_POINT1_D()), (b.RD_POINT2_T(), b.RD_POINT2_D()), (b.RD_POINT3_T(), b.RD_POINT3_D())]
     kan = ["一", "二", "三"]
     trio = ''.join(f'<li class="rv"><p class="craft__n"><span>{kan[i]}</span></p><h3>{h}</h3><p>{d}</p></li>' for i, (h, d) in enumerate(pts))
@@ -525,7 +545,8 @@ def p_collaboration():
     hd = phero("Collaboration", "IP<br>コラボレーション", "Licensed IP Collaborations",
                t("日本の人気IPとの正規ライセンス商品。","Officially licensed products with leading Japanese IP."),
                "h_hanajirushi_top-1.jpg", "協創",
-               [A("about","コラボレーションについて","About"),A("works","コラボレーション実績","Portfolio"),A("value","パートナー様へのメリット","Value for partners")])
+               [A("about","コラボレーションについて","About"),A("works","コラボレーション実績","Portfolio"),A("value","パートナー様へのメリット","Value for partners")],
+               parent=("brand.html", t("ブランド・製品","Brand &amp; Products")))
     about = f'''<section class="sec split" id="about"><div class="wrap split__g split__g--r">
 <div class="split__txt rv">{shd("01","About","コラボレーションについて","About our collaborations", kj="コラボレーション")}
 <p class="pd__cp">{b.COLLAB_CATCH()}</p><p>{b.COLLAB_P1()}</p><p>{b.COLLAB_P2()}</p></div>
@@ -547,32 +568,22 @@ def p_collaboration():
                 hd + about + works + value)
 
 # ============================================================ GLOBAL
-def p_global():
-    A = b.A
-    hd = phero("Global", "海外展開", "Global Network",
-               t("日本ならではの上質で誠実なものづくりを、世界へ。","Japanese quality and honesty, trusted in 12 countries."),
-               "h_campany_top_p.jpg", "世界",
-               [A("network","販売ネットワーク","Network"),A("markets","主要市場","Key markets"),A("china","中国市場での実績","Proven in China")], pos="70% center")
-    net = f'''<section class="sec" id="network"><div class="wrap">
-{shd("01","Global network","世界12ヵ国で販売","Sold in<br><em>12 countries</em>", kj="販売ネットワーク", cls="shd--c",
+def global_sections():
+    """海外展開 (formerly global.html), merged into the partners page: network + markets, then China."""
+    regs = ''.join(f'<li class="rv"><small>{e}</small><h3>{a}</h3><p>{d}</p><ul class="tags tags--ink">{"".join(f"<li>{c}</li>" for c in cs)}</ul></li>' for a, e, d, cs in b.REGIONS())
+    net = f'''<section class="sec sec--t blush" id="network"><div class="wrap">
+{shd("02","Global network","世界12ヵ国で販売","Sold in<br><em>12 countries</em>", kj="海外展開", cls="shd--c",
      lead=t("日本ならではの上質で誠実なものづくりが認められ、国内はもとより世界12ヵ国で販売されています。","Recognised for the quality and honesty of Japanese manufacturing, HANAJIRUSHI is sold in Japan and 12 countries worldwide."))}
 <div class="gnet rv"><img src="{IMG}world_map_brand.png" alt="{t("販売地域の地図","Map of our markets")}" loading="lazy"></div>
 {gstats()}
-<p class="note ctr-t">{t("※ 販売国の一覧は確認のうえ掲載します","Country list to be confirmed")} {tbd("12ヵ国リスト","12-country list")}</p></div></section>'''
-    regs = ''.join(f'<li class="rv"><small>{e}</small><h3>{a}</h3><p>{d}</p><ul class="tags tags--ink">{"".join(f"<li>{c}</li>" for c in cs)}</ul></li>' for a, e, d, cs in b.REGIONS())
-    markets = f'''<section class="sec sec--t blush" id="markets"><div class="wrap">
-{shd("02","Markets","主要市場","Key markets", kj="主要市場")}
+<p class="note ctr-t">{t("※ 販売国の一覧は確認のうえ掲載します","Country list to be confirmed")} {tbd("12ヵ国リスト","12-country list")}</p>
 <ul class="cells cells--3">{regs}</ul></div></section>'''
     ch = [(b.CHINA1_T(), b.CHINA1_S(), b.CHINA1_B()), (b.CHINA2_T(), b.CHINA2_S(), b.CHINA2_B()), (b.CHINA3_T(), b.CHINA3_S(), b.CHINA3_B()), (b.CHINA4_T(), b.CHINA4_S(), b.CHINA4_B())]
-    china = f'''<section class="sec dark" id="china"><div class="wrap">
-{shd("03","Market proven","中国市場での実績","Proven in<br><em>China</em>", kj="中国市場での実績", cls="shd--c",
+    china = f'''<section class="sec sec--t" id="china"><div class="wrap">
+{shd("03","Market proven","中国市場での実績","Proven in<br><em>China</em>", kj="中国市場での実績",
      lead=t("アジア最大で、最も競争の激しい美容市場で、ECから実店舗まで複数のチャネルを築いてきました。","Asia's largest and most demanding beauty market — where we have built channels from e-commerce to physical retail."))}
-<ul class="cells cells--4 cells--dark">{"".join(f'<li class="rv"><small>{s}</small><h3>{h}</h3><p>{d}</p></li>' for h, s, d in ch)}</ul>
-<div class="ctr ctr--2">{cta_btn("partner","btn--light")}</div></div></section>'''
-    return page("global.html", "global", t("海外展開","Global Network"),
-                t("花印の海外展開。世界12ヵ国で販売。東アジア・東南アジア・北米の主要市場と、中国市場での実績。",
-                  "HANAJIRUSHI global network: sold in 12 countries across East Asia, Southeast Asia and North America, with a proven multi-channel presence in China."),
-                hd + net + markets + china)
+<ul class="cells cells--4">{"".join(f'<li class="rv"><small>{s}</small><h3>{h}</h3><p>{d}</p></li>' for h, s, d in ch)}</ul></div></section>'''
+    return net + china
 
 # ============================================================ PARTNERS
 def p_partners():
@@ -580,7 +591,7 @@ def p_partners():
     hd = phero("For Partners", "海外代理店・<br>パートナー募集", "Partnership Programme",
                t("市場と規模に合わせた協業モデルをご用意しています。","Cooperation models to fit your market and scale."),
                "h_brand_top_p.jpg", "協業",
-               [A("why","選ばれる理由","Why us"),A("models","協業モデル","Models"),A("terms","取引条件","Trade terms"),A("support","輸出書類・登録支援","Export support"),A("flow","お取引の流れ","How to start"),A("faq","よくあるご質問","FAQ")], pos="30% center")
+               [A("why","選ばれる理由","Why us"),A("network","海外展開・実績","Global network"),A("models","協業モデル","Models"),A("terms","取引条件","Trade terms"),A("support","輸出書類・登録支援","Export support"),A("flow","お取引の流れ","How to start"),A("faq","よくあるご質問","FAQ")], pos="30% center")
     reasons = [(b.PARTNER_REASON1_T(), b.PARTNER_REASON1_D()), (b.PARTNER_REASON2_T(), b.PARTNER_REASON2_D()), (b.PARTNER_REASON3_T(), b.PARTNER_REASON3_D())]
     why = f'''<section class="sec why" id="why"><div class="wrap why__g">
 <div class="why__h rv">{seal("募集中", "seal--txt seal--m")}{shd("01","Now recruiting","海外代理店・<br>パートナー募集中","Now recruiting<br><em>partners</em>", kj="代理店募集")}
@@ -590,29 +601,29 @@ def p_partners():
 </div></section>'''
     rows = ''.join(f'<tr><th>{a}<small>{e}</small></th><td>{c}</td><td>{d}</td></tr>' for a, e, c, d in b.MODES())
     models = f'''<section class="sec sec--t blush" id="models"><div class="wrap">
-{shd("02","Models","協業モデル","Cooperation models", kj="協業モデル")}
+{shd("04","Models","協業モデル","Cooperation models", kj="協業モデル")}
 <div class="sx rv"><table class="mtbl"><thead><tr><th>{t("協業モデル","Model")}</th><th>{t("対象","For")}</th><th>{t("ご提示する主な条件","What we define together")}</th></tr></thead><tbody>{rows}</tbody></table></div></div></section>'''
     terms = f'''<section class="sec sec--t" id="terms"><div class="wrap prof__g">
-<div>{shd("03","Trade terms","取引条件","Trade terms", kj="取引条件",
+<div>{shd("05","Trade terms","取引条件","Trade terms", kj="取引条件",
      lead=t("数値は確認のうえ掲載します。","Figures to be confirmed before publishing."))}</div>
 <table class="ptbl rv">{"".join(f"<tr><th>{a}</th><td>{v}</td></tr>" for a, v in b.TERMS())}</table></div></section>'''
     support = f'''<section class="sec dark" id="support"><div class="wrap docs__g">
-<div>{shd("04","Export support","輸出書類・<br>各国登録の支援","Export documents<br><em>&amp; registration</em>", kj="輸出書類・登録支援")}</div>
+<div>{shd("06","Export support","輸出書類・<br>各国登録の支援","Export documents<br><em>&amp; registration</em>", kj="輸出書類・登録支援")}</div>
 {docs_list()}</div>
 <div class="wrap"><div class="mtbl--dark rv">{reg_table()}</div></div></section>'''
     flow_ = f'''<section class="sec sec--t blush" id="flow"><div class="wrap">
-{shd("05","How to start","お取引開始までの流れ","How to<br><em>get started</em>", kj="お取引の流れ", cls="shd--c")}
+{shd("07","How to start","お取引開始までの流れ","How to<br><em>get started</em>", kj="お取引の流れ", cls="shd--c")}
 {flow(b.PARTNER_STEPS())}
 <div class="ctr ctr--2">{cta_btn("partner","btn--fill", label=("代理店申込フォームへ","Apply to become a partner"))}</div></div></section>'''
     qa = ''.join(f'<details class="faq__i"{" open" if i == 0 else ""}><summary><span class="faq__q">Q</span><span>{q}</span></summary><div class="faq__a"><span class="faq__q">A</span><p>{a}</p></div></details>' for i, (q, a) in enumerate(b.FAQ()))
     faq = f'''<section class="sec" id="faq"><div class="wrap prof__g">
-<div>{shd("06","FAQ","よくあるご質問","Frequently asked<br><em>questions</em>", kj="よくあるご質問")}
+<div>{shd("08","FAQ","よくあるご質問","Frequently asked<br><em>questions</em>", kj="よくあるご質問")}
 <div class="ctas">{cta_lnk("business")}</div></div>
 <div class="faq rv">{qa}</div></div></section>'''
     return page("partners.html", "partners", t("海外代理店・パートナー募集","Partnership Programme"),
-                t("花印の海外代理店・パートナー募集。協業モデル、取引条件、輸出書類、各国登録の技術支援、お取引開始までの流れ、よくあるご質問。",
-                  "Become a HANAJIRUSHI distributor: cooperation models, trade terms, export documentation, registration support, how to start and FAQ."),
-                hd + why + models + terms + support + flow_ + faq)
+                t("花印の海外代理店・パートナー募集。世界12ヵ国での販売実績、中国市場での実績、協業モデル、取引条件、輸出書類、各国登録の技術支援、お取引開始までの流れ、よくあるご質問。",
+                  "Become a HANAJIRUSHI distributor: sold in 12 countries, proven in China; cooperation models, trade terms, export documentation, registration support, how to start and FAQ."),
+                hd + why + global_sections() + models + terms + support + flow_ + faq)
 
 # ============================================================ EXHIBITION
 def p_exhibition():
@@ -754,7 +765,7 @@ def p_contact():
                 hd + body)
 
 PAGES = {"index.html": p_home, "brand.html": p_brand, "company.html": p_company, "rd.html": p_rd,
-         "collaboration.html": p_collaboration, "global.html": p_global, "partners.html": p_partners,
+         "collaboration.html": p_collaboration, "partners.html": p_partners,
          "exhibition.html": p_exhibition, "news.html": p_news, "contact.html": p_contact}
 
 def build():

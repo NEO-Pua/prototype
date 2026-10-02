@@ -1310,6 +1310,7 @@ def hub():
     def col(prefix, lang, label, tag, only=None):
         return f'<div class="hub__col"><h2>{label}<b>{tag}</b></h2><ul>' + ''.join(
             f'<li><a href="{prefix}{lang}/{f}">{en}<span>{ja}</span></a></li>' for f, en, ja in names if not only or f in only) + '</ul></div>'
+    prem = tuple(f for f, _, _ in names if f != "global.html")  # premium: 海外展開 is part of 代理店募集
     return f'''<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>花印 HANAJIRUSHI — Website Design Mockup</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1317,8 +1318,8 @@ def hub():
 <link rel="stylesheet" href="assets/css/style.css"></head><body class="hubpage">
 <div class="hub"><div class="hub__in">
 <div class="hub__hd"><img class="hub__logo" src="assets/img/logo.svg" alt="花印 HANAJIRUSHI"><div><h1>Website <span>Mockup</span></h1><p>花印 公式サイト デザインモックアップ ／ 日本語版・英語版</p></div></div>
-<h2 class="hub__ver">Premium <span>採用案 — 生成り×葡萄色・円窓・明朝縦組み＋商談獲得型の構成（全10ページ）</span></h2>
-<div class="hub__g">{col("premium/","ja","日本語版 Japanese","JA · Premium")}{col("premium/","en","英語版 English","EN · Premium")}</div>
+<h2 class="hub__ver">Premium <span>採用案 — 生成り×葡萄色・円窓・明朝縦組み＋商談獲得型の構成（全9ページ）</span></h2>
+<div class="hub__g">{col("premium/","ja","日本語版 Japanese","JA · Premium",prem)}{col("premium/","en","英語版 English","EN · Premium",prem)}</div>
 <h2 class="hub__ver">v2.2 <span>v2.1＋商談獲得型の構成（FV刷新・日本製4つの強み・選ばれる理由・相談CTA）</span></h2>
 <div class="hub__g">{col("v2.2/","ja","日本語版 Japanese","JA · v2.2")}{col("v2.2/","en","英語版 English","EN · v2.2")}</div>
 <h2 class="hub__ver">v2.1 <span>ソフト版 — やわらかく上品な配色・書体（社内レビュー用）</span></h2>
