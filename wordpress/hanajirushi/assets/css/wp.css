@@ -1,0 +1,45 @@
+/* 花印 HANAJIRUSHI — WordPress-only additions (not in the mockup): parts that only a live
+   site has. Loaded after the design's premium*.css; uses its colour and type variables. */
+
+/* news filter as links (pages and categories are real addresses on the live site) */
+.ftabs--links a{padding:7px 18px;border:1px solid var(--line-d);border-radius:999px;font-size:12.5px;letter-spacing:.1em;transition:background .3s,color .3s,border-color .3s}
+.ftabs--links a:hover{border-color:var(--beni-d)}
+.ftabs--links a.on{background:var(--beni-d);border-color:var(--beni-d);color:#fff}
+
+/* forms: errors, the confirm step, the spam trap */
+.ferr{display:block;margin-top:6px;font-size:12px;color:var(--beni-d)}
+.ferr--top{margin:0 0 24px;padding:12px 16px;border:1px solid var(--beni-d);background:#fff;font-size:13px}
+.fld:has(.ferr) input,.fld:has(.ferr) select,.fld:has(.ferr) textarea{border-color:var(--beni-d)}
+.cfm{margin-top:20px}
+.cfm dd{white-space:normal;overflow-wrap:anywhere}
+.cfm__b{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.pform--done p+p{margin-top:12px}
+.pform--done .pform__h{font-size:18px}
+.hj-trap{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* news article (the mockup has a news list only) */
+.art__w{max-width:820px}
+.art__m{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;font-family:var(--didone);font-size:15px;color:var(--ink-2)}
+.art__m .cat{font-family:var(--caps);font-size:11px;font-weight:500;letter-spacing:.2em;color:var(--beni-d)}
+.art__t{margin-top:16px;font-family:var(--mincho);font-weight:500;font-size:clamp(22px,2.6vw,30px);line-height:1.6;letter-spacing:.06em}
+html[lang="en"] .art__t{font-family:var(--didone);font-weight:400;font-size:clamp(28px,3.2vw,40px);line-height:1.2;letter-spacing:0}
+.art__h{padding-bottom:28px;border-bottom:1px solid var(--line-d)}
+.entry{margin-top:36px;font-size:15px;line-height:2.1}
+.entry>*+*{margin-top:1.2em}
+.entry h2,.entry h3{font-family:var(--mincho);font-weight:500;line-height:1.6;letter-spacing:.06em}
+.entry h2{font-size:21px;margin-top:2em}
+.entry h3{font-size:18px;margin-top:1.6em}
+.entry a{color:var(--beni-d);text-decoration:underline;text-underline-offset:3px}
+.entry img{max-width:100%;height:auto}
+.entry ul,.entry ol{padding-left:1.4em}
+.entry ul{list-style:disc}
+.entry ol{list-style:decimal}
+.entry--story{max-width:760px;margin-inline:auto}
+.art__nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:56px}
+.art__nav a{display:grid;gap:4px;padding:16px 20px;border:1px solid var(--line-d);font-size:13.5px;transition:border-color .3s}
+.art__nav a:hover{border-color:var(--beni-d)}
+.art__nav small{font-family:var(--caps);font-size:10.5px;letter-spacing:.2em;color:var(--ink-3)}
+.art .ctr{margin-top:48px}
+
+/* QR images uploaded in サイト設定 fill the mockup's QR boxes */
+.qrs figure img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain;background:#fff}

@@ -13,6 +13,17 @@ The promise made to the client (2026-10):
 Everything below exists to keep that promise. If a design change would force
 staff to edit HTML, it breaks the promise. Find another way.
 
+> **Being built (2026-10-05): `../wordpress/`** — a theme (`hanajirushi`) and a plugin
+> (`hanajirushi-core`), installed by upload in the WordPress admin; see
+> `../wordpress/README.md`. Decisions that replace parts of this plan:
+> - **No paid plugins** (developers' request). Fields use **Secure Custom Fields** (free,
+>   WordPress.org; includes repeaters and settings pages) instead of ACF Pro, defined in code.
+> - **No Polylang.** Japanese and English sit on one post (日本語 / English tabs), and the
+>   plugin serves English at `/en/…`. Polylang free would give the two languages different
+>   addresses and two posts to link per item. Read §2–§4's Polylang notes in that light.
+> - Post types and fields live in the **plugin**, not the theme.
+> - Latest WordPress and PHP (tested on WordPress 7.1.2, PHP 8.5).
+
 ---
 
 ## 1. Principles

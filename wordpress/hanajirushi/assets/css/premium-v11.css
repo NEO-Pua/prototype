@@ -1,0 +1,175 @@
+/* ======================================================================
+   花印 HANAJIRUSHI — premium v1.1 layer (loaded after premium.css on premium-1.1 pages).
+
+   1. Fixes from the 2026-10 review: balanced English hero headline, no empty product
+      slot, partnership map that stays in view, home company band without the grey
+      street photo, layouts for the pages that no longer repeat a photo.
+   2. Motion, restrained and Japanese in character:
+      - home first view: a once-per-visit opening (html.intro, set in <head>)
+      - headings revealed line by line (.ln, JS adds .in)
+      - images opened with wipes; 円窓 open as an expanding circle, gold ring drawn in
+      - lower-page headers: photo wipes in, the large kanji is brushed in
+      - smooth fades between pages (View Transitions; other browsers load as before)
+      Count-up figures are in premium-v11.js. Everything hidden for an animation is
+      gated by .js, and all of it is switched off under prefers-reduced-motion.
+   ====================================================================== */
+
+:root{--ease-o:cubic-bezier(.16,1,.3,1)}
+
+/* ================================================================ 1. fixes */
+.nw{white-space:nowrap}
+
+/* English hero: three balanced lines ("Japanese-quality / skincare, delivered / to the world.") */
+@media (min-width:1025px){html[lang="en"] .hero__in{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}}
+html[lang="en"] .hero__h{font-size:clamp(40px,4.4vw,66px)}
+
+/* collection: only products with a photo; the rest get one quiet line */
+.col__l--3{grid-template-columns:repeat(3,1fr);max-width:1040px;margin-inline:auto}
+.col__soon{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:4px 12px;margin-top:clamp(40px,4vw,56px);font-size:13px;line-height:1.9;color:var(--ink-2);text-align:center}
+.col__soon i{font-family:var(--didone);font-style:italic;font-size:15px;color:var(--beni-d)}
+.col__soon a{color:var(--beni-d);border-bottom:1px solid currentColor;white-space:nowrap}
+.col__soon a:hover{color:var(--ink)}
+
+/* home partnership: the map column stays in view while the text column scrolls */
+/* (sticky makes its own layer, so the map's multiply blend needs the band colour behind it) */
+@media (min-width:1025px){.gp__map{position:sticky;top:110px;background:var(--blush) var(--grain)}}
+
+/* home company: plum band, head office in an arch */
+.cosplit .split__g{grid-template-columns:minmax(0,4fr) minmax(0,6fr)}
+.cosplit .split__img{max-width:400px}
+.cosplit .arch{aspect-ratio:3/4}
+.cosplit .arch img{filter:sepia(.18) saturate(.7) contrast(.95) brightness(.97)}  /* warm grade for a phone snapshot */
+.dark .dl,.dark .dl div{border-color:var(--line-w)}
+.dark .dl dt{color:var(--gold-l)}
+.dark .lnk{border-color:var(--line-w)}
+.dark .lnk:hover{color:var(--pink-l)}
+
+/* company: portrait placeholder instead of a repeated photo */
+.msg__ph>div{display:grid;place-items:center;align-content:center;gap:14px;aspect-ratio:4/5;background:var(--paper-2) var(--grain);border:1px solid var(--line)}
+.msg__ph small{font-family:var(--caps);font-size:11px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-3)}
+html[lang="ja"] .msg__ph small{font-family:var(--mincho);font-size:13px;letter-spacing:.2em;text-transform:none}
+
+/* R&D: the lab photo once, in a 円窓 sized to its resolution */
+.split__img--win{display:grid;justify-items:center;padding:6%}
+.win--m{width:min(340px,100%)}
+
+/* collaboration: text-only introduction (every pack shot is in the portfolio below) */
+.about__g{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(32px,6vw,96px);align-items:end}
+.about__g .pd__cp{margin-top:36px}
+.about__txt p{color:var(--ink-2)}
+.about__txt p+p{margin-top:20px}
+
+/* partners: the world map is the header visual */
+.phero--map .phero__img{display:grid;place-items:center;padding:clamp(24px,4vw,64px);background:var(--paper) var(--grain)}
+.phero--map .phero__img img{position:relative;inset:auto;width:100%;height:auto;object-fit:contain;mix-blend-mode:multiply;filter:saturate(.55) brightness(1.03);animation:none}
+.phero--map .phero__img::after{display:none}
+
+@media (max-width:1024px){
+  .about__g{grid-template-columns:1fr}
+  .cosplit .split__g{grid-template-columns:1fr}
+  .cosplit .split__img{max-width:360px}
+}
+@media (max-width:760px){
+  html[lang="en"] .hero__h{font-size:clamp(32px,9vw,44px)}
+  .col__l--3{grid-template-columns:repeat(2,1fr)}
+  .col__l--3 li:last-child:nth-child(odd){grid-column:1/-1;width:50%;margin-inline:auto}
+}
+
+/* ================================================================ 2. motion */
+
+/* ---- headings: each line rises out of a mask; vertical headings are brushed in top to bottom */
+.ln{display:block}
+.js .ln{clip-path:inset(-.25em -.6em -.18em -.6em)}
+.js .ln>span{display:block;transform:translateY(125%);transition:transform 1.15s var(--ease-o);transition-delay:calc(var(--i,0) * .11s)}
+.js .ln.in>span{transform:none}
+.js :is(.hero__tate,.phil__tate,.msg__tate) .ln{clip-path:inset(-.3em -.4em 100% -.4em);transition:clip-path 1.4s var(--ease-o);transition-delay:calc(var(--i,0) * .24s)}
+.js :is(.hero__tate,.phil__tate,.msg__tate) .ln.in{clip-path:inset(-.3em -.4em -.3em -.4em)}
+.js :is(.hero__tate,.phil__tate,.msg__tate) .ln>span{transform:none;transition:none}
+
+/* ---- 円窓: the gold ring is drawn (a conic mask sweeps round the existing 1px ring),
+        the window opens as a circle, the photo settles */
+@property --ring{syntax:'<angle>';inherits:false;initial-value:360deg}
+.win::before{-webkit-mask:conic-gradient(#000 var(--ring),transparent 0);mask:conic-gradient(#000 var(--ring),transparent 0)}
+.js .rv .win::before{--ring:0deg;transition:--ring 1.9s var(--ease-o) var(--d,0s)}
+.js .rv.in .win::before{--ring:360deg}
+.js .rv .win__c{clip-path:circle(0% at 50% 50%);transition:clip-path 1.5s var(--ease-o) calc(var(--d,0s) + .2s)}
+.js .rv.in .win__c{clip-path:circle(51% at 50% 50%)}
+.js .rv .win__c img{scale:1.16;transition:scale 2.3s var(--ease-o) calc(var(--d,0s) + .2s),transform 1.8s var(--ease)}
+.js .rv.in .win__c img{scale:1}
+
+/* ---- arch photos rise like a curtain */
+.js .rv .arch{clip-path:inset(100% 0 0 0);transition:clip-path 1.6s var(--ease-o) var(--d,0s)}
+.js .rv.in .arch{clip-path:inset(0)}
+.js .rv .arch img{scale:1.16;transition:scale 2.4s var(--ease-o) var(--d,0s),transform 1.8s var(--ease)}
+.js .rv.in .arch img{scale:1}
+
+/* ---- square and landscape photos, the map: wipe left to right */
+.js :is(.collab__l,.ipcards) .rv figure,
+.js .office__l .rv img,
+.js .office__main.rv>img,
+.js .gp__map.rv>img{clip-path:inset(0 100% 0 0);transition:clip-path 1.5s var(--ease-o) var(--d,0s)}
+.js :is(.collab__l,.ipcards) .rv.in figure,
+.js .office__l .rv.in img,
+.js .office__main.rv.in>img,
+.js .gp__map.rv.in>img{clip-path:inset(0)}
+.js :is(.collab__l,.ipcards) .rv img{scale:1.12;transition:scale 2s var(--ease-o) var(--d,0s),transform 1.6s var(--ease)}
+.js :is(.collab__l,.ipcards) .rv.in img{scale:1}
+
+/* ---- lower-page header: the photo wipes in from the right, the big kanji is brushed in */
+.js .phero__img{animation:wipe-l 1.6s var(--ease-o) .1s both}
+.js .phero__kj{animation:brush-down 2s var(--ease-o) .35s both}
+.js .phero--plain .phero__kj{animation-name:brush-right}
+
+/* ---- home first view, repeat visits: a short entrance */
+.js .hero__txt,.js .hero__vis{animation:fade-up 1.1s var(--ease-o) .05s both}
+.js .hero__vis{animation-delay:.18s}
+
+/* ---- home first view, first visit (html.intro): the opening sequence, about 2.5 s */
+.intro .hero__txt,.intro .hero__vis{animation:none}
+.intro .hd{animation:fade .9s 1.9s both}
+.intro .hero__bg{animation:fade 1.4s .05s both}
+.intro .hero .win::before{animation:ring 1.9s var(--ease-o) .25s both}
+.intro .hero .win__c{animation:iris 1.6s var(--ease-o) .55s both}
+.intro .hero .win__c img{animation:settle 2.4s var(--ease-o) .55s both}
+.intro .hero__h .ln>span{animation:rise 1.2s var(--ease-o) both;animation-delay:calc(.8s + var(--i,0) * .16s);transition:none}
+.intro .hero__tate .ln{animation:brush 1.3s var(--ease-o) both;animation-delay:calc(.7s + var(--i,0) * .26s);transition:none}
+.intro .hero .seal--l{animation:stamp .7s cubic-bezier(.3,1.5,.5,1) 1.85s both}
+.intro .hero__txt>.eb{animation:fade-up .9s var(--ease-o) .5s both}
+.intro .hero__side .eb{animation:fade-up .9s var(--ease-o) 1.35s both}
+.intro .hero__lead{animation:fade-up .9s var(--ease-o) 1.5s both}
+.intro .hero__ctas{animation:fade-up .9s var(--ease-o) 1.65s both}
+.intro .hero__cap{animation:fade-up .9s var(--ease-o) 1.75s both}
+.intro .hero__jp{animation:brush-down 1.6s var(--ease-o) 1.2s both}
+.intro .hero__note{animation:slide-in 1s var(--ease-o) 2s both}
+.intro .hero__scroll{animation:fade .8s 2.3s both}
+
+@keyframes fade{from{opacity:0}}
+@keyframes fade-up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes slide-in{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+@keyframes rise{from{transform:translateY(125%)}to{transform:none}}
+@keyframes brush{from{clip-path:inset(-.3em -.4em 100% -.4em)}to{clip-path:inset(-.3em -.4em -.3em -.4em)}}
+/* Mincho glyphs overhang their box a little, so the brushed clip ends outside it */
+@keyframes brush-down{from{clip-path:inset(-.25em -.25em 100% -.25em)}to{clip-path:inset(-.25em)}}
+@keyframes brush-right{from{clip-path:inset(-.25em 100% -.25em -.25em)}to{clip-path:inset(-.25em)}}
+@keyframes wipe-l{from{clip-path:inset(0 0 0 100%)}to{clip-path:inset(0 0 0 0)}}
+@keyframes ring{from{--ring:0deg}to{--ring:360deg}}
+@keyframes iris{from{clip-path:circle(0% at 50% 50%)}to{clip-path:circle(51% at 50% 50%)}}
+@keyframes settle{from{scale:1.18}to{scale:1}}
+@keyframes stamp{0%{opacity:0;transform:scale(1.9) rotate(-16deg)}55%{opacity:1;transform:scale(.9) rotate(-1deg)}100%{opacity:1;transform:rotate(-3deg)}}
+
+/* ---- between pages: a short cross-fade; the header stays put */
+@view-transition{navigation:auto}
+.hd{view-transition-name:site-header}
+::view-transition-old(root){animation:.3s ease both vt-out}
+::view-transition-new(root){animation:.55s var(--ease-o) both vt-in}
+@keyframes vt-out{to{opacity:0}}
+@keyframes vt-in{from{opacity:0}}
+
+/* ---- reduced motion: show everything in its final state */
+@media (prefers-reduced-motion:reduce){
+  .js .ln,.js .ln>span,.js .rv .win__c,.js .rv .arch,.js .phero__img,.js .phero__kj,
+  .js :is(.collab__l,.ipcards) .rv figure,.js .office__l .rv img,.js .office__main.rv>img,.js .gp__map.rv>img{clip-path:none!important;transform:none!important}
+  .js .rv .win__c img,.js .rv .arch img,.js :is(.collab__l,.ipcards) .rv img{scale:none!important}
+  .js .rv .win::before{--ring:360deg!important}
+  @view-transition{navigation:none}
+}

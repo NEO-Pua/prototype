@@ -4,14 +4,73 @@
     {
       "name": "mockup",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "8765", "--directory", "mockup"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8765",
+        "--directory",
+        "mockup"
+      ],
       "port": 8765
     },
     {
       "name": "mockup-b",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "8766", "--directory", "mockup"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8766",
+        "--directory",
+        "mockup"
+      ],
       "port": 8766
+    },
+    {
+      "name": "wordpress",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "-y",
+        "@wp-playground/cli@latest",
+        "server",
+        "--php=8.5",
+        "--define-bool",
+        "WP_DEBUG",
+        "true",
+        "--define-bool",
+        "WP_DEBUG_DISPLAY",
+        "true",
+        "--wp=latest",
+        "--port=9400",
+        "--blueprint=wordpress/dev/blueprint.json",
+        "--mount-dir",
+        "wordpress/hanajirushi",
+        "/wordpress/wp-content/themes/hanajirushi",
+        "--mount-dir",
+        "wordpress/hanajirushi-core",
+        "/wordpress/wp-content/plugins/hanajirushi-core"
+      ],
+      "port": 9400
+    },
+    {
+      "name": "wordpress-zip",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "-y",
+        "@wp-playground/cli@latest",
+        "server",
+        "--php=8.4",
+        "--define-bool",
+        "WP_DEBUG",
+        "true",
+        "--define-bool",
+        "WP_DEBUG_DISPLAY",
+        "true",
+        "--wp=latest",
+        "--port=9401",
+        "--blueprint=wordpress/dist/blueprint-zip.json",
+        "--blueprint-may-read-adjacent-files"
+      ],
+      "port": 9401
     }
   ]
 }

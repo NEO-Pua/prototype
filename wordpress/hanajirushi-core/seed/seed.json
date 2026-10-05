@@ -1,0 +1,1465 @@
+{
+ "products": [
+  {
+   "slug": "cleansing-lotion-ma",
+   "order": 1,
+   "category": "cleansing",
+   "series": "",
+   "size": "380mL",
+   "kind": "cosmetic",
+   "is_new": false,
+   "coming_soon": false,
+   "show_on_home": true,
+   "home_order": 1,
+   "rakuten_code": "10000091",
+   "image": "hanajirushi_cl.jpg",
+   "image_temp": "",
+   "ja": {
+    "title": "花印クレンジングローションMa",
+    "sub": "Cleansing Lotion Ma",
+    "short": "うるおいを残して、しっかり落とす拭き取りクレンジング。",
+    "catch": "うるおい残して、\nしっかり落ちる。",
+    "desc": "ローションならではのさっぱりとした使用感で、メイクや汚れをコットンで拭き取るだけでしっかり落とします。保湿成分ヒアルロン酸Na・加水分解コラーゲン・アロエベラ葉エキス・ベタインを配合し、メイクオフしながらふっくら潤う肌に整えます。",
+    "usage": "キャップをはずし、コットンにたっぷり含ませ、ゆっくりふき取ってください。アイメイクを落とす際は目に入らないように注意し、しばらくなじませてからやさしくふき取ってください。しっかりメイクの時は新しいコットンに替えて、汚れがつかなくなるまで繰り返しお使いください。",
+    "inci": "水、DPG、PEG-7(カプリル／カプリン酸)グリセリズ、PEG-8(カプリル酸／カプリン酸)グリセリズ、フェノキシエタノール、ラウリルベタイン、メチルパラベン、クエン酸Na、クエン酸、ヒアルロン酸Na、ベタイン、BG、加水分解コラーゲン、アロエベラ葉エキス",
+    "badges": "特許技術\nダブル洗顔不要\nまつエクOK",
+    "free": "無香料\n無着色\nオイルフリー\nアルコールフリー",
+    "points": [
+     {
+      "title": "特許技術のクレンジング力",
+      "text": "特許取得技術を採用した処方で、メイク汚れから皮脂・古い角質まで拭き取るだけで落とします。"
+     },
+     {
+      "title": "4つの保湿成分",
+      "text": "ヒアルロン酸Na・加水分解コラーゲン・アロエベラ葉エキス・ベタイン。"
+     },
+     {
+      "title": "ダブル洗顔不要",
+      "text": "拭き取った後の洗顔は不要。まつエクの方も安心してお使いいただけます。"
+     }
+    ]
+   },
+   "en": {
+    "title": "Cleansing Lotion Ma",
+    "sub": "花印クレンジングローションMa",
+    "short": "A wipe-off cleanser that removes make-up and leaves moisture behind.",
+    "catch": "Removes thoroughly.\nLeaves moisture behind.",
+    "desc": "A light, fresh lotion that lifts make-up and impurities with a cotton pad. Hyaluronic acid, hydrolysed collagen, aloe vera leaf extract and betaine keep skin soft and moist while you cleanse.",
+    "usage": "Soak a cotton pad and wipe gently. For eye make-up, hold the pad in place for a moment first and keep the lotion out of your eyes. For heavier make-up, repeat with a fresh pad until it comes away clean.",
+    "inci": "",
+    "badges": "Patented\nNo double cleanse\nLash-extension safe",
+    "free": "Fragrance-free\nColorant-free\nOil-free\nAlcohol-free",
+    "points": [
+     {
+      "title": "Patented cleansing",
+      "text": "A patented formula lifts make-up, sebum and dead skin cells with just a cotton pad."
+     },
+     {
+      "title": "Four moisturisers",
+      "text": "Hyaluronic acid, hydrolysed collagen, aloe vera leaf extract and betaine."
+     },
+     {
+      "title": "No double cleanse",
+      "text": "No need to wash your face afterwards — and safe with eyelash extensions."
+     }
+    ]
+   }
+  },
+  {
+   "slug": "juicy-cleansing-lotion",
+   "order": 2,
+   "category": "cleansing",
+   "series": "",
+   "size": "380mL",
+   "kind": "cosmetic",
+   "is_new": false,
+   "coming_soon": false,
+   "show_on_home": false,
+   "home_order": 0,
+   "rakuten_code": "10000090peach-2",
+   "image": "",
+   "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/mem_item/imgrc0114516936.jpg",
+   "ja": {
+    "title": "花印ジューシークレンジングローション",
+    "sub": "Juicy Cleansing Lotion",
+    "short": "3種類の桃エキスを配合した、みずみずしい拭き取りクレンジング。",
+    "catch": "みずみずしく落として、\nつっぱらない。",
+    "desc": "花印クレンジングローションの処方に、保湿成分として3種類の桃エキス（モモ果汁・モモ種子エキス・モモ葉エキス）を配合。みずみずしい使用感で肌をいたわりながら潤いを与えるので、クレンジング後もつっぱりません。",
+    "usage": "キャップをはずし、コットンにたっぷり含ませ、ゆっくりふき取ってください。アイメイクを落とす際は目に入らないように注意し、しばらくなじませてからやさしくふき取ってください。しっかりメイクの時は新しいコットンに替えて、汚れがつかなくなるまで繰り返しお使いください。",
+    "inci": "水、DPG、PEG-7（カプリル/カプリン酸）グリセリズ、PEG-8（カプリル酸/カプリン酸）グリセリズ、ラウリルベタイン、フェノキシエタノール、メチルパラベン、クエン酸Na、香料、クエン酸、BG、モモ果汁、モモ種子エキス、モモ葉エキス",
+    "badges": "桃エキス配合\nまつエクOK",
+    "free": "無着色\nオイルフリー\nアルコールフリー",
+    "points": [
+     {
+      "title": "3種類の桃エキス",
+      "text": "モモ果汁・モモ種子エキス・モモ葉エキスが、クレンジング中も肌にうるおいを与えます。"
+     },
+     {
+      "title": "ダブル洗顔不要",
+      "text": "拭き取った後の洗顔は不要。まつエクの方もお使いいただけます。"
+     },
+     {
+      "title": "やさしい処方",
+      "text": "無着色・オイルフリー・アルコールフリー。"
+     }
+    ]
+   },
+   "en": {
+    "title": "Juicy Cleansing Lotion",
+    "sub": "花印ジューシークレンジングローション",
+    "short": "A juicy wipe-off cleanser with three peach extracts.",
+    "catch": "Fresh to use —\nnever tight after.",
+    "desc": "Our cleansing-lotion formula with three peach extracts — peach juice, peach kernel and peach leaf — for moisture. Fresh and gentle, so skin never feels tight after cleansing.",
+    "usage": "Soak a cotton pad and wipe gently. For eye make-up, hold the pad in place for a moment first and keep the lotion out of your eyes. For heavier make-up, repeat with a fresh pad until it comes away clean.",
+    "inci": "",
+    "badges": "Peach extracts\nLash-extension safe",
+    "free": "Colorant-free\nOil-free\nAlcohol-free",
+    "points": [
+     {
+      "title": "Three peach extracts",
+      "text": "Peach juice, kernel and leaf extracts keep skin moist while you cleanse."
+     },
+     {
+      "title": "No double cleanse",
+      "text": "No need to wash afterwards, and safe with eyelash extensions."
+     },
+     {
+      "title": "Gentle formula",
+      "text": "Colorant-free, oil-free and alcohol-free."
+     }
+    ]
+   }
+  },
+  {
+   "slug": "hatomugi-skin-conditioner",
+   "order": 3,
+   "category": "lotion",
+   "series": "hatomugi",
+   "size": "500mL",
+   "kind": "cosmetic",
+   "is_new": false,
+   "coming_soon": false,
+   "show_on_home": true,
+   "home_order": 2,
+   "rakuten_code": "10001008-set",
+   "image": "hanajirushi_hsc.jpg",
+   "image_temp": "",
+   "ja": {
+    "title": "花印ハトムギ化粧水",
+    "sub": "Hatomugi Skin Conditioner",
+    "short": "北海道産ハトムギ種子エキスを高配合。顔にも全身にも使える500mL。",
+    "catch": "毎日たっぷり、\n惜しみなく。",
+    "desc": "厳選した北海道産ハトムギ種子エキス（保湿成分）を高配合。ヨモギ葉エキス・ヒキオコシ葉/茎エキス・ユズ果実エキスが肌にうるおいを与え、なめらかで明るい印象の肌へ導きます。肌と同じ弱酸性で、べたつかないみずみずしい使用感です。",
+    "usage": "適量を手に取り、顔・体全体になじませてください。",
+    "inci": "水、DPG、グリセリン、メチルパラベン、エタノール、（スチレン/アクリレーツ）コポリマー、クエン酸Na、クエン酸、BG、ヨモギ葉エキス、ヒキオコシ葉/茎エキス、ハトムギ種子エキス、ユズ果実エキス",
+    "badges": "北海道産ハトムギ\n大容量",
+    "free": "合成香料フリー\n合成着色剤フリー\n鉱物油フリー\nシリコンフリー\n弱酸性",
+    "points": [
+     {
+      "title": "北海道産ハトムギ",
+      "text": "保湿成分のハトムギ種子エキスを高配合。乾燥から肌を守り、肌荒れを防ぎます。"
+     },
+     {
+      "title": "3つの植物エキス",
+      "text": "ヨモギ葉・ヒキオコシ葉/茎・ユズ果実のエキスが、うるおいと透明感のある肌へ。"
+     },
+     {
+      "title": "使い方いろいろ",
+      "text": "ブースター、コットンパック、全身ローション、日焼け後のほてりのケアにも。"
+     }
+    ]
+   },
+   "en": {
+    "title": "Hatomugi Skin Conditioner",
+    "sub": "花印ハトムギ化粧水",
+    "short": "Rich in Hokkaido coix seed extract. A generous 500mL for face and body.",
+    "catch": "Generous enough\nfor every day.",
+    "desc": "Rich in carefully selected coix seed extract from Hokkaido, with mugwort leaf, isodon and yuzu extracts for moisture and a smooth, bright look. Weakly acidic like skin, with a fresh, non-sticky feel.",
+    "usage": "Smooth a little over the face and body.",
+    "inci": "",
+    "badges": "Hokkaido coix seed\nLarge size",
+    "free": "No synthetic fragrance\nNo synthetic colour\nMineral-oil free\nSilicone free\nWeakly acidic",
+    "points": [
+     {
+      "title": "Hokkaido coix seed",
+      "text": "A high level of coix seed extract protects against dryness and prevents rough skin."
+     },
+     {
+      "title": "Three plant extracts",
+      "text": "Mugwort leaf, isodon and yuzu fruit extracts for moist, clear-looking skin."
+     },
+     {
+      "title": "Many ways to use it",
+      "text": "As a booster, a cotton pack, a body lotion, or to cool skin after the sun."
+     }
+    ]
+   }
+  },
+  {
+   "slug": "hatomugi-essence",
+   "order": 4,
+   "category": "lotion",
+   "series": "hatomugi",
+   "size": "200mL",
+   "kind": "cosmetic",
+   "is_new": true,
+   "coming_soon": false,
+   "show_on_home": true,
+   "home_order": 3,
+   "rakuten_code": "10001051",
+   "image": "",
+   "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/mem_product/11741495/imgrc0135285519.jpg",
+   "ja": {
+    "title": "花印ハトムギ豊潤美容液",
+    "sub": "Hatomugi Rich Essence",
+    "short": "ハトムギ化粧水と相性のよい、とろみのあるジェル美容液。",
+    "catch": "表面はさらり、\n内側はしっとり。",
+    "desc": "国産ハトムギ種子エキス（保湿成分）を高配合した、とろみのあるジェル状美容液。伸びがよく、かさつく部分にもすっとなじみ、使用後もべたつきません。お客様の声から生まれた、ハトムギシリーズの美容液です。",
+    "usage": "化粧水などでお肌を整えた後、適量を手にとり、お肌全体になじませてください。",
+    "inci": "水、DPG、グリセリン、グリセレス-26、ペンチレングリコール、イヌリン、PEG-60水添ヒマシ油、BG、フェノキシエタノール、(アクリレーツ/アクリル酸アルキル（C10-30）)クロスポリマー、水酸化K、オキシベンゾン-4、シロキクラゲ多糖体、ハトムギ種子エキス、ツボクサ葉エキス、バクチオール、コメ発酵液、異性化糖、クエン酸、乳酸桿菌/豆乳発酵液、ロドデンドロンフェルギネウムエキス、ユキノシタエキス、ヨモギ葉エキス、サッカロミセス/ハトムギ種子発酵液、ユズ果実エキス、クエン酸Na",
+    "badges": "新商品",
+    "free": "合成香料フリー\n合成着色剤フリー\n鉱物油フリー\nシリコンフリー\n弱酸性",
+    "points": [
+     {
+      "title": "ハトムギ種子エキス高配合",
+      "text": "天然保湿因子を補い、角質層の水分量を高めて、みずみずしい肌を保ちます。"
+     },
+     {
+      "title": "3種類の発酵エキス",
+      "text": "ハトムギ種子発酵液・コメ発酵液・乳酸桿菌/豆乳発酵液で、肌のバランスを整えます。"
+     },
+     {
+      "title": "9種類のボタニカル",
+      "text": "ヨモギ葉・ユズ果実・ユキノシタ・ツボクサ葉エキス、バクチオールなどを配合。"
+     }
+    ]
+   },
+   "en": {
+    "title": "Hatomugi Rich Essence",
+    "sub": "花印ハトムギ豊潤美容液",
+    "short": "A silky gel essence made to follow the Hatomugi lotion.",
+    "catch": "Light on the surface,\nmoist underneath.",
+    "desc": "A silky gel essence rich in Japanese coix seed extract. It spreads easily, settles into dry patches and leaves no stickiness. Made because customers asked for a serum to go with the Hatomugi lotion.",
+    "usage": "After your lotion, smooth a little over the whole face.",
+    "inci": "",
+    "badges": "New",
+    "free": "No synthetic fragrance\nNo synthetic colour\nMineral-oil free\nSilicone free\nWeakly acidic",
+    "points": [
+     {
+      "title": "Rich in coix seed",
+      "text": "Supports skin's natural moisturising factors for lasting hydration."
+     },
+     {
+      "title": "Three fermented extracts",
+      "text": "Fermented coix seed, rice and soy milk extracts help keep skin balanced."
+     },
+     {
+      "title": "Nine botanicals",
+      "text": "Including mugwort, yuzu, saxifrage, centella and bakuchiol."
+     }
+    ]
+   }
+  },
+  {
+   "slug": "hatomugi-cream",
+   "order": 5,
+   "category": "cream",
+   "series": "hatomugi",
+   "size": "100g",
+   "kind": "cosmetic",
+   "is_new": true,
+   "coming_soon": false,
+   "show_on_home": true,
+   "home_order": 4,
+   "rakuten_code": "10001050",
+   "image": "",
+   "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/mem_item/hatomugi-cream-mpr.jpg",
+   "ja": {
+    "title": "花印ハトムギクリーム",
+    "sub": "Hatomugi Cream",
+    "short": "ハトムギ化粧水と一緒に使える、みずみずしい保湿クリーム。",
+    "catch": "伸びがよく、\nべたつかない。",
+    "desc": "「ハトムギ化粧水と一緒に使えるクリームが欲しい」というお客様の声から生まれた保湿クリーム。日本産ハトムギ種子エキスを高配合し、3つの発酵エキスと和漢植物エキス、植物由来スクワランでうるおいを守ります。",
+    "usage": "化粧水の後に適量を手に取り、顔・体全体になじませてください。入浴後や日焼け後のボディケアにも。",
+    "inci": "水、スクワラン、グリセリン、BG、ジグリセリン、ステアリン酸ポリグリセリル-10、カルボマー、ステアリン酸グリセリル、ペンチレングリコール、メチルパラベン、フェノキシエタノール、水酸化K、オキシベンゾン-4、ハトムギ種子エキス、ツボクサ葉エキス、コメ発酵液、異性化糖、乳酸桿菌/豆乳発酵液、ユキノシタエキス、ヨモギ葉エキス、サッカロミセス/ハトムギ種子発酵液、ユズ果実エキス、クエン酸Na、クエン酸",
+    "badges": "新商品",
+    "free": "合成香料フリー\n合成着色剤フリー\n鉱物油フリー\nシリコンフリー\n弱酸性",
+    "points": [
+     {
+      "title": "ハトムギ種子エキス高配合",
+      "text": "角層の水分量を高め、肌をみずみずしく健やかに保ちます。"
+     },
+     {
+      "title": "3つの発酵エキス",
+      "text": "ハトムギ種子発酵液・コメ発酵液・豆乳発酵液を独自に配合。"
+     },
+     {
+      "title": "植物由来スクワラン",
+      "text": "うるおいを閉じ込め、乾燥から肌を守ります。"
+     }
+    ]
+   },
+   "en": {
+    "title": "Hatomugi Cream",
+    "sub": "花印ハトムギクリーム",
+    "short": "A light moisturising cream to pair with the Hatomugi lotion.",
+    "catch": "Spreads easily,\nnever sticky.",
+    "desc": "Made because customers asked for a cream to go with the Hatomugi lotion. Rich in Japanese coix seed extract, with three fermented extracts, traditional botanicals and plant-derived squalane to lock in moisture.",
+    "usage": "After your lotion, smooth a little over the face and body. Also good after a bath or a day in the sun.",
+    "inci": "",
+    "badges": "New",
+    "free": "No synthetic fragrance\nNo synthetic colour\nMineral-oil free\nSilicone free\nWeakly acidic",
+    "points": [
+     {
+      "title": "Rich in coix seed",
+      "text": "Keeps the skin's surface layer hydrated and healthy-looking."
+     },
+     {
+      "title": "Three fermented extracts",
+      "text": "Fermented coix seed, rice and soy milk extracts."
+     },
+     {
+      "title": "Plant-derived squalane",
+      "text": "Seals moisture in and protects against dryness."
+     }
+    ]
+   }
+  },
+  {
+   "slug": "booster-conditioner",
+   "order": 6,
+   "category": "lotion",
+   "series": "",
+   "size": "48mL",
+   "kind": "cosmetic",
+   "is_new": false,
+   "coming_soon": false,
+   "show_on_home": false,
+   "home_order": 0,
+   "rakuten_code": "1003335",
+   "image": "",
+   "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/mem_item/imgrc0099431473.jpg",
+   "ja": {
+    "title": "花印ブースターコンディショナー",
+    "sub": "Booster Conditioner — pre-serum",
+    "short": "化粧水の前のひと手間で、次のスキンケアがなじみやすい肌に。",
+    "catch": "化粧水の前に、\nひと押し。",
+    "desc": "洗顔後、化粧水の前に使う導入美容液。ナノキューブなどの成分が肌をやわらかく整え、後に使うスキンケアがなじみやすい肌に。アーティチョーク葉エキスが肌を引き締め、5種類の保湿成分がキメを整えます。",
+    "usage": "洗顔後、化粧水などをつける前にお使いください。手のひらに適量（2〜3プッシュ）をとり、やさしくお顔全体になじませてください。",
+    "inci": "水、BG、グリセリン、エタノール、ジメチコン、ペンチレングリコール、PEG-150、ベタイン、シクロヘキサン-1,4-ジカルボン酸ビスエトキシジグリコール、（アクリレーツ/アクリル酸アルキル（C10-30））クロスポリマー、水酸化K、オクチルドデセス-20、スクワラン、ビサボロール、水酸化レシチン、アーチチョーク葉エキス、オウゴン根エキス、イザヨイバラエキス、ハナビラタケエキス、テトラヒドロファルネシル酢酸グリセリル、カッパフィカスアルバレジエキス、ザクロ果実エキス、トコフェロール、フェノキシエタノール",
+    "badges": "導入美容液",
+    "free": "パラベンフリー\n着色料フリー\n香料フリー",
+    "points": [
+     {
+      "title": "スキンケアの前に",
+      "text": "肌をやわらかく整え、化粧水や美容液がなじみやすい状態に。"
+     },
+     {
+      "title": "引き締め成分",
+      "text": "アーティチョーク葉エキスが肌と毛穴を引き締めます。"
+     },
+     {
+      "title": "5つの保湿成分",
+      "text": "イザヨイバラ・ハナビラタケ・キリンサイ・オウゴン根エキス、ビサボロール。"
+     }
+    ]
+   },
+   "en": {
+    "title": "Booster Conditioner",
+    "sub": "花印ブースターコンディショナー（導入美容液）",
+    "short": "One step before your lotion, so the rest of your routine settles in.",
+    "catch": "One step\nbefore your lotion.",
+    "desc": "A pre-serum for after cleansing and before your lotion. Ingredients such as NanoCube soften skin so the products that follow settle in better. Artichoke leaf extract tightens, and five moisturisers smooth the skin's texture.",
+    "usage": "After cleansing and before your lotion, press 2–3 pumps into your palms and smooth gently over the face.",
+    "inci": "",
+    "badges": "Pre-serum",
+    "free": "Paraben-free\nColorant-free\nFragrance-free",
+    "points": [
+     {
+      "title": "Before your routine",
+      "text": "Softens skin so your lotion and serum settle in."
+     },
+     {
+      "title": "Tightening",
+      "text": "Artichoke leaf extract tightens skin and pores."
+     },
+     {
+      "title": "Five moisturisers",
+      "text": "Rosa roxburghii, cauliflower mushroom, kappaphycus and scutellaria extracts, and bisabolol."
+     }
+    ]
+   }
+  },
+  {
+   "slug": "moisture-face-cream",
+   "order": 7,
+   "category": "cream",
+   "series": "amino",
+   "size": "80g",
+   "kind": "cosmetic",
+   "is_new": false,
+   "coming_soon": false,
+   "show_on_home": false,
+   "home_order": 0,
+   "rakuten_code": "10000072",
+   "image": "",
+   "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/mem_item/imgrc0117465392.jpg",
+   "ja": {
+    "title": "花印モイスチュアフェイスクリーム",
+    "sub": "Moisture Face Cream — Amino Acid",
+    "short": "アミノ酸11種類とヒト型セラミド3種類を配合した保湿クリーム。",
+    "catch": "乾燥を防いで、\nみずみずしい肌に。",
+    "desc": "乾燥を防ぎ、みずみずしく透明感のある肌に導くフェイスクリーム。アミノ酸11種類、ヒアルロン酸3種類、水溶性コラーゲン、ヒト型セラミド3種類、ハトムギエキスを配合。リニューアルで保湿力を高めました。",
+    "usage": "",
+    "inci": "水、エチルヘキサン酸セチル、BG、グリセリン、トリ（カプリル酸/カプリン酸）グリセリル、ダイマージリノール酸（フィトステリル/イソステアリル/セチル/ステアリル/ベヘニル）、セテアリルアルコール、ベヘニルアルコール、マルチトール、水添パーム油、脂肪酸グリセリズ、マカデミアナッツ脂肪酸フィトステリル、ステアリン酸グリセリル（SE）、セテス-20、アセチルヒアルロン酸Na、ヒアルロン酸Na、ハトムギ種子エキス、ペンチレングリコール、PCA-Na、アルギニン、アスパラギン酸、PCA、グリシン、アラニン、セリン、バリン、イソロイシン、トレオニン、プロリン、ヒスチジン、フェニルアラニン、エチルヘキシルグリセリン、加水分解ヒアルロン酸、水溶性コラーゲン、ダイズステロール、ラウロイルグルタミン酸ジ(フィトステリル/オクチルドデシル)、セラミドNP、セラミドAP、フィトスフィンゴシン、セラミドEOP、ジフェニルシロキシフェニルトリメチコン、ジメチコン、乳酸Na、コレステロール、キサンタンガム、カルボマー、水添レシチン、ラウロイルラクチレートNa、エタノール、水酸化K、トコフェロール、EDTA-2Na、メチルパラベン、フェノキシエタノール、カラメル、シアノコバラミン",
+    "badges": "セラミド3種\nアミノ酸11種",
+    "free": "",
+    "points": [
+     {
+      "title": "アミノ酸11種類",
+      "text": "肌のうるおいを支えるアミノ酸を11種類配合。"
+     },
+     {
+      "title": "ヒアルロン酸3種類",
+      "text": "アセチルヒアルロン酸Na・ヒアルロン酸Na・加水分解ヒアルロン酸。"
+     },
+     {
+      "title": "ヒト型セラミド3種類",
+      "text": "セラミドAP・NP・EOPに、水溶性コラーゲンとハトムギエキス。"
+     }
+    ]
+   },
+   "en": {
+    "title": "Moisture Face Cream",
+    "sub": "花印モイスチュアフェイスクリーム",
+    "short": "A moisturising cream with 11 amino acids and three human-type ceramides.",
+    "catch": "Keeps dryness away,\nkeeps skin fresh.",
+    "desc": "A face cream that guards against dryness for fresh, clear-looking skin. With 11 amino acids, three hyaluronic acids, soluble collagen, three human-type ceramides and coix seed extract — renewed for more moisture.",
+    "usage": "",
+    "inci": "",
+    "badges": "3 ceramides\n11 amino acids",
+    "free": "",
+    "points": [
+     {
+      "title": "11 amino acids",
+      "text": "Eleven amino acids that support skin's moisture."
+     },
+     {
+      "title": "Three hyaluronic acids",
+      "text": "Acetyl, sodium and hydrolysed hyaluronic acid."
+     },
+     {
+      "title": "Three ceramides",
+      "text": "Ceramides AP, NP and EOP, with soluble collagen and coix seed extract."
+     }
+    ]
+   }
+  },
+  {
+   "slug": "wrinkle-eye-cream",
+   "order": 8,
+   "category": "cream",
+   "series": "",
+   "size": "30g",
+   "kind": "quasi",
+   "is_new": false,
+   "coming_soon": false,
+   "show_on_home": false,
+   "home_order": 0,
+   "rakuten_code": "10000074",
+   "image": "",
+   "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/mem_product/wrinkle-repair-cream/imgrc0131518738.jpg",
+   "ja": {
+    "title": "花印薬用リンクルアイクリーム",
+    "sub": "Whitening & Wrinkle Repair Cream",
+    "short": "有効成分ナイアシンアミドで、美白とシワ改善のWアプローチ。",
+    "catch": "美白とシワ改善を、\nひとつの目元ケアで。",
+    "desc": "有効成分ナイアシンアミドを配合した薬用アイクリーム。メラニンの生成を抑えてシミ・そばかすを防ぎ、シワを改善します。12種類の保湿成分を配合し、目元にぴったり密着してうるおい感が続きます。",
+    "usage": "適量（米粒大）を目元など肌の気になるところになじませてください。気になる部分には重ね付けしてください。",
+    "inci": "有効成分：ナイアシンアミド　その他の成分：精製水、1,3-ブチレングリコール、ジグリセリン、濃グリセリン、シュガースクワラン、ベヘニルアルコール、イソノナン酸イソノニル、ポリオキシエチレンソルビットミツロウ、親油型モノステアリン酸グリセリル、ステアリン酸、ジプロピレングリコール、トリステアリン酸ポリオキシエチレンソルビタン（20E.O.）、メチルポリシロキサン、トリポリヒドロキシステアリン酸ジペンタエリスリチル、アマチャヅルエキス、レモングラス抽出液、ジエチレントリアミン五酢酸五ナトリウム液、ポリエチレングリコール1540、グリセリンモノ2-エチルヘキシルエーテル、グリセリン脂肪酸エステル、プルーン酵素分解物、サクラ葉抽出液、ノバラエキス、キウイエキス、ヒメフウロエキス、メマツヨイグサ抽出液、オウゴンエキス、エイジツエキス、ヨクイニンエキス、ビルベリー葉エキス、N-ステアロイル-L-グルタミン酸ナトリウム、キサンタンガム、モノオレイン酸ポリオキシエチレンソルビタン（20E.O.）、フェノキシエタノール",
+    "badges": "医薬部外品\nナイアシンアミド",
+    "free": "香料フリー\n着色料フリー\nアルコールフリー\n鉱物油フリー\nパラベンフリー",
+    "points": [
+     {
+      "title": "有効成分ナイアシンアミド",
+      "text": "美白（メラニンの生成を抑え、シミ・そばかすを防ぐ）とシワ改善の効能。"
+     },
+     {
+      "title": "12種類の保湿成分",
+      "text": "プルーン酵素分解物、サクラ葉抽出液、ヨクイニンエキスなど。"
+     },
+     {
+      "title": "目元以外にも",
+      "text": "おでこや眉間、口周りなど、気になる部分にもお使いいただけます。"
+     }
+    ]
+   },
+   "en": {
+    "title": "Medicated Wrinkle Eye Cream",
+    "sub": "花印薬用リンクルアイクリーム",
+    "short": "Niacinamide for brightening and wrinkle care in one eye cream.",
+    "catch": "Brightening and wrinkle care\nin one eye cream.",
+    "desc": "A medicated eye cream with niacinamide as its active ingredient: it suppresses melanin to prevent dark spots and freckles, and improves wrinkles (approved quasi-drug claims in Japan). Twelve moisturisers keep the eye area comfortable.",
+    "usage": "Smooth a rice-grain amount over the eye area or other areas of concern; layer where needed.",
+    "inci": "",
+    "badges": "Quasi-drug\nNiacinamide",
+    "free": "Fragrance-free\nColorant-free\nAlcohol-free\nMineral-oil free\nParaben-free",
+    "points": [
+     {
+      "title": "Active: niacinamide",
+      "text": "Brightening (prevents dark spots and freckles) and wrinkle improvement."
+     },
+     {
+      "title": "Twelve moisturisers",
+      "text": "Including prune, cherry leaf and coix seed extracts."
+     },
+     {
+      "title": "Not only for the eyes",
+      "text": "Also for the forehead, between the brows and around the mouth."
+     }
+    ]
+   }
+  },
+  {
+   "slug": "amino-face-mask",
+   "order": 9,
+   "category": "mask",
+   "series": "amino",
+   "size": "80g",
+   "kind": "cosmetic",
+   "is_new": false,
+   "coming_soon": false,
+   "show_on_home": true,
+   "home_order": 5,
+   "rakuten_code": "10000057",
+   "image": "hanajirushi_smfm.jpg",
+   "image_temp": "",
+   "ja": {
+    "title": "花印スーパーモイスチュアフェイスマスク",
+    "sub": "Super Moisture Face Mask — Amino Acid 80g",
+    "short": "肌になじませると美容液に変わる、6つの機能のジェルマスク。",
+    "catch": "うるおいチャージで、\nしっとりなめらかに。",
+    "desc": "化粧水・乳液・美容液・クリーム・化粧下地・パックの6つの機能をひとつに。アミノ酸、加水分解コラーゲン、ヒアルロン酸Na、カミツレ花エキスが、乾燥しがちな肌をしっとりなめらかでハリのある肌に整えます。",
+    "usage": "パックとして：お手入れの最後にたっぷり塗ってください。口元や目元などには重ね塗りがおすすめです。オールインワンジェルとして：洗顔後に適量を手に取り、お顔に塗ってください。化粧下地としてもお使いいただけます。",
+    "inci": "水、ジメチコン、BG、エタノール、シクロペンタシロキサン、（ジメチコン、（PEG-10/15））クロスポリマー、加水分解コラーゲン、ヒアルロン酸Na、カミツレ花エキス、ベタイン、PCA-Na、セリン、グリシン、グルタミン酸、アラニン、リシン、アルギニン、トレオニン、プロリン、フラーレン、ソルビトール、ペンチレングリコール、塩化Na、クエン酸、クエン酸Na、トコフェロール、PVP、フェノキシエタノール、メチルパラベン、プロピルパラベン",
+    "badges": "6in1\nオールインワン",
+    "free": "",
+    "points": [
+     {
+      "title": "6つの機能",
+      "text": "化粧水・乳液・美容液・クリーム・化粧下地・パック。"
+     },
+     {
+      "title": "アミノ酸とコラーゲン",
+      "text": "アミノ酸、加水分解コラーゲン、ヒアルロン酸Naを配合。"
+     },
+     {
+      "title": "2通りの使い方",
+      "text": "夜のパックにも、朝のオールインワンジェルにも。"
+     }
+    ]
+   },
+   "en": {
+    "title": "Super Moisture Face Mask",
+    "sub": "花印スーパーモイスチュアフェイスマスク AMINO ACID",
+    "short": "A six-in-one gel mask that turns into a serum on the skin.",
+    "catch": "A moisture charge\nfor soft, smooth skin.",
+    "desc": "Lotion, emulsion, serum, cream, primer and pack in one. Amino acids, hydrolysed collagen, hyaluronic acid and chamomile extract leave dry skin soft, smooth and firm-looking.",
+    "usage": "As a pack: apply generously as the last step of your routine, layering on areas such as the eyes and mouth. As an all-in-one gel: after cleansing, smooth a little over the face. It also works as a make-up base.",
+    "inci": "",
+    "badges": "6-in-1\nAll-in-one",
+    "free": "",
+    "points": [
+     {
+      "title": "Six in one",
+      "text": "Lotion, emulsion, serum, cream, primer and pack."
+     },
+     {
+      "title": "Amino acids & collagen",
+      "text": "With amino acids, hydrolysed collagen and hyaluronic acid."
+     },
+     {
+      "title": "Two ways to use it",
+      "text": "A night pack or a morning all-in-one gel."
+     }
+    ]
+   }
+  },
+  {
+   "slug": "super-moisture-gel",
+   "order": 10,
+   "category": "mask",
+   "series": "amino",
+   "size": "200g",
+   "kind": "cosmetic",
+   "is_new": false,
+   "coming_soon": false,
+   "show_on_home": false,
+   "home_order": 0,
+   "rakuten_code": "10000002",
+   "image": "",
+   "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/mem_product/13773545/imgrc0159567170.jpg",
+   "ja": {
+    "title": "花印スーパーモイスチュアフェイスマスク 200g",
+    "sub": "Super Moisture Face Mask — All-in-one Gel",
+    "short": "パックにも、オールインワンジェルにも。うるおいチャージの200g。",
+    "catch": "乾燥、キメ、弾力が\n気になる肌へ。",
+    "desc": "乾燥しがちな肌、キメや弾力が気になる肌へ。アミノ酸、ヒアルロン酸Na、水溶性コラーゲン、セラミドを配合し、しっとりなめらかでハリのある肌に整えます。たっぷり使える200gです。",
+    "usage": "パックとして：お手入れの最後にたっぷり塗ってください。口元や目元などには重ね塗りがおすすめです。オールインワンジェルとして：洗顔後に適量を手に取り、お顔に塗ってください。化粧下地としてもお使いいただけます。",
+    "inci": "水、ジメチコン、BG、シクロペンタシロキサン、DPG、グリセリン、（ジメチコン/（PEG-10/15））クロスポリマー、（ジメチコン/ビニルジメチコン）クロスポリマー、プルラン、マルチトール、ヒノキ水、ローズマリー葉水、オレンジフラワー水、PCA-Na、アスコルビルグルコシド、アルギニン、アスパラギン酸、PCA、グリシン、アラニン、ヒアルロン酸Na、セリン、バリン、イソロイシン、トレオニン、プロリン、ヒスチジン、フェニルアラニン、ポリクオタニウム-51、水溶性コラーゲン、グリチルリチン酸2K、セラミド3、コレステロール、セラミド6Ⅱ、フィトスフィンゴシン、セラミド1、塩化Na、海水、温泉水、乳酸Na、カルボマー、キサンタンガム、ラウロイル乳酸Na、クエン酸Na、クエン酸、トコフェロール、ペンテト酸5Na、フェノキシエタノール、メチルパラベン、エチルパラベン、プロピルパラベン",
+    "badges": "オールインワン\n大容量",
+    "free": "",
+    "points": [
+     {
+      "title": "アミノ酸とセラミド",
+      "text": "アミノ酸、セラミド3種、水溶性コラーゲン、ヒアルロン酸Na。"
+     },
+     {
+      "title": "3つの使い方",
+      "text": "パック、オールインワンジェル、化粧下地として。"
+     },
+     {
+      "title": "たっぷり200g",
+      "text": "顔全体にたっぷり塗れる大容量。"
+     }
+    ]
+   },
+   "en": {
+    "title": "Super Moisture Face Mask 200g",
+    "sub": "オールインワンジェル・ジェルパック",
+    "short": "A pack or an all-in-one gel — 200g of moisture.",
+    "catch": "For dry skin,\ntexture and firmness.",
+    "desc": "For dry skin and skin concerned with texture and firmness. Amino acids, hyaluronic acid, soluble collagen and ceramides leave it soft, smooth and firm-looking — in a generous 200g jar.",
+    "usage": "As a pack: apply generously as the last step of your routine, layering on areas such as the eyes and mouth. As an all-in-one gel: after cleansing, smooth a little over the face. It also works as a make-up base.",
+    "inci": "",
+    "badges": "All-in-one\nLarge size",
+    "free": "",
+    "points": [
+     {
+      "title": "Amino acids & ceramides",
+      "text": "Amino acids, three ceramides, soluble collagen and hyaluronic acid."
+     },
+     {
+      "title": "Three ways to use it",
+      "text": "As a pack, an all-in-one gel or a make-up base."
+     },
+     {
+      "title": "A generous 200g",
+      "text": "Enough to apply generously every day."
+     }
+    ]
+   }
+  },
+  {
+   "slug": "clay-pack",
+   "order": 11,
+   "category": "mask",
+   "series": "",
+   "size": "195g",
+   "kind": "cosmetic",
+   "is_new": false,
+   "coming_soon": false,
+   "show_on_home": false,
+   "home_order": 0,
+   "rakuten_code": "10000105",
+   "image": "",
+   "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/11261505/11294025/imgrc0129945835.jpg",
+   "ja": {
+    "title": "花印クレーパック",
+    "sub": "Volcanic Clay Pack",
+    "short": "4種類のクレイが毛穴の汚れを吸着する、洗い流すタイプのパック。",
+    "catch": "週に1〜2回の、\n毛穴のスペシャルケア。",
+    "desc": "吸着力と洗浄力に優れた4種類のクレイを配合。モロッコ溶岩クレイ（ガッスール）が余分な皮脂や毛穴の汚れを吸着し、肌を引き締めます。ミネラルを含み、潤いを残してなめらかな肌に整えます。",
+    "usage": "洗顔後、水分をふき取ってから適量をとり、皮脂や毛穴の気になるTゾーン・Uゾーンに均一に伸ばします。そのまま5〜10分置き、ぬるま湯でくるくるなじませて洗い流します。週に1〜2回のご使用をおすすめします。",
+    "inci": "水、カオリン、グリセリン、BG、ベントナイト、グリコシルトレハロース、酸化チタン、加水分解水添デンプン、モロッコ溶岩クレイ、フェノキシエタノール、ヒドロキシプロピルメチルセルロース、メチルパラベン、香料、エチルパラベン、水酸化Al、ジミリスチン酸Al、海シルト、酸化鉄、酸化クロム",
+    "badges": "洗い流すタイプ\nモロッコ溶岩クレイ",
+    "free": "",
+    "points": [
+     {
+      "title": "4種類のクレイ",
+      "text": "余分な皮脂や毛穴の奥の汚れを吸着します。"
+     },
+     {
+      "title": "モロッコ溶岩クレイ",
+      "text": "多孔質構造で皮脂を吸着し、ミネラルで潤いを残します。"
+     },
+     {
+      "title": "たっぷり195g",
+      "text": "ピールオフではなく、洗い流すタイプです。日本製。"
+     }
+    ]
+   },
+   "en": {
+    "title": "Volcanic Clay Pack",
+    "sub": "花印クレーパック（火山灰マスク）",
+    "short": "A wash-off pack with four clays that lift dirt from pores.",
+    "catch": "A weekly treat\nfor your pores.",
+    "desc": "Four absorbent clays, including Moroccan lava clay (ghassoul), lift excess sebum and dirt from pores and tighten the skin. Rich in minerals, it leaves skin smooth without stripping moisture.",
+    "usage": "After cleansing, pat dry and spread evenly over the T-zone and U-zone. Leave for 5–10 minutes, then massage gently with lukewarm water and rinse. Use once or twice a week.",
+    "inci": "",
+    "badges": "Wash-off\nMoroccan lava clay",
+    "free": "",
+    "points": [
+     {
+      "title": "Four clays",
+      "text": "Lift excess sebum and dirt from deep in the pores."
+     },
+     {
+      "title": "Moroccan lava clay",
+      "text": "A porous clay that absorbs sebum, with minerals that leave moisture behind."
+     },
+     {
+      "title": "A generous 195g",
+      "text": "A wash-off pack, not a peel-off. Made in Japan."
+     }
+    ]
+   }
+  },
+  {
+   "slug": "uv-primer",
+   "order": 12,
+   "category": "uv",
+   "series": "",
+   "size": "35g",
+   "kind": "cosmetic",
+   "is_new": false,
+   "coming_soon": false,
+   "show_on_home": true,
+   "home_order": 6,
+   "rakuten_code": "10001006-copyy",
+   "image": "",
+   "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/mem_product/10049686/4941.jpg",
+   "ja": {
+    "title": "花印トーンアップUVプライマー",
+    "sub": "Tone-up UV Primer SPF50+ PA++++",
+    "short": "SPF50+・PA++++。ピンクパールで明るく見せるクリーム下地。",
+    "catch": "光をコントロールして、\n肌を明るく。",
+    "desc": "色ムラやくすみ、毛穴をぼかし、明るくツヤのある肌に見せるクリームタイプの化粧下地。SPF50+・PA++++で日やけによるシミ・そばかすを防ぎます。ウォータープルーフでありながら、普段の洗顔料や石けんで落とせます。",
+    "usage": "パール一粒大を手のひらに取り、おでこ・鼻先・両頬・あごの5点にのせ、内側から外側へやさしく伸ばします。頬骨など高いところから塗ると立体的に仕上がります。",
+    "inci": "水、メトキシケイヒ酸エチルヘキシル、BG、ジエチルアミノヒドロキシベンゾイル安息香酸ヘキシル、イソノナン酸イソノニル、エタノール、イソステアリン酸、トリエチルヘキサノイン、ビスエチルヘキシルオキシフェノールメトキシフェニルトリアジン、水酸化K、フェノキシエタノール、（アクリレーツ/アクリル酸アルキル（C10-30））クロスポリマー、メチルパラベン、ステアリン酸、キサンタンガム、アルミナ、トコフェロール、トリエトキシカプリリルシラン、イノシトール、セラミドNP、グリセリン、アクリレーツクロスポリマー、ザクロ果実エキス、ノイバラ果実エキス、酸化チタン、酸化鉄、シリカ、マイカ、水酸化Al、赤227",
+    "badges": "SPF50+・PA++++\nウォータープルーフ",
+    "free": "鉱物油不使用\n石油系合成界面活性剤不使用\n動物由来原料不使用\n無香料",
+    "points": [
+     {
+      "title": "SPF50+・PA++++",
+      "text": "最高レベルの紫外線防御効果で、日やけによるシミ・そばかすを防ぎます。"
+     },
+     {
+      "title": "トーンアップ",
+      "text": "血色感のあるピンクカラーとパールで、立体的なツヤ肌に。"
+     },
+     {
+      "title": "崩れにくく、落としやすい",
+      "text": "皮脂吸着パウダーでメイクが長持ち。ウォータープルーフなのに洗顔料でオフ。"
+     }
+    ]
+   },
+   "en": {
+    "title": "Tone-up UV Primer",
+    "sub": "花印トーンアップUVプライマー",
+    "short": "SPF50+ PA++++ — a pink-pearl primer for brighter-looking skin.",
+    "catch": "Light-controlling,\nfor brighter skin.",
+    "desc": "A cream primer that blurs uneven tone, dullness and pores for a bright, dewy look. SPF50+ PA++++ prevents dark spots and freckles caused by the sun. Waterproof, yet it washes off with your usual cleanser or soap.",
+    "usage": "Take a pearl-sized amount, dot it on the forehead, nose, cheeks and chin, and blend from the centre outwards. Starting on the cheekbones gives a more sculpted finish.",
+    "inci": "",
+    "badges": "SPF50+・PA++++\nWaterproof",
+    "free": "Mineral-oil free\nNo petroleum surfactants\nNo animal-derived ingredients\nFragrance-free",
+    "points": [
+     {
+      "title": "SPF50+ PA++++",
+      "text": "The highest UV protection rating, preventing sun-induced spots and freckles."
+     },
+     {
+      "title": "Tone-up",
+      "text": "A rosy pink tint and pearl for a dimensional glow."
+     },
+     {
+      "title": "Lasting, easy to remove",
+      "text": "Sebum-absorbing powder keeps make-up in place; waterproof yet washes off with cleanser."
+     }
+    ]
+   }
+  },
+  {
+   "slug": "vital-gel-men",
+   "order": 13,
+   "category": "mens",
+   "series": "",
+   "size": "80mL",
+   "kind": "cosmetic",
+   "is_new": false,
+   "coming_soon": false,
+   "show_on_home": false,
+   "home_order": 0,
+   "rakuten_code": "10000042",
+   "image": "",
+   "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/mem_item/item_42_01.jpg",
+   "ja": {
+    "title": "花印バイタル オールインワンジェル",
+    "sub": "Vital All-in-One Gel for Men",
+    "short": "これ1本で。テカリとべたつきを抑える、メンズのジェルクリーム。",
+    "catch": "1本で、\n男の肌に。",
+    "desc": "パウダーが余分な皮脂を吸着し、テカリやべたつきを抑えてさらさらの肌に仕上げるジェル状クリーム。爽快なメントールが肌を引き締め、不快なべたつきを長時間抑えます。",
+    "usage": "",
+    "inci": "水、グリセリン、パルミチン酸エチルヘキシル、ペンチレングリコール、タルク、BG、ヘキサ（ヒドロキシステアリン酸/ステアリン酸/ロジン酸）ジペンタエリスリチル、アルギニン、ステアリン酸ポリグリセリル-10、カルボマー、ヒドロキシプロピルメチルセルロース、メチルパラベン、香料、メントール、ジメチコン、カンフル、シリカ、ノイバラ果実エキス、チャ葉エキス、ダイズ種子エキス、ハマメリスエキス",
+    "badges": "メンズ\nオールインワン",
+    "free": "",
+    "points": [
+     {
+      "title": "皮脂吸着パウダー",
+      "text": "テカリ・べたつきを抑えて、さらさらの仕上がり。"
+     },
+     {
+      "title": "爽快メントール",
+      "text": "肌を引き締め、すっきりとした使用感。"
+     },
+     {
+      "title": "オールインワン",
+      "text": "化粧水・乳液・美容液の役割を1本で。"
+     }
+    ]
+   },
+   "en": {
+    "title": "Vital All-in-One Gel",
+    "sub": "花印バイタル オールインワンジェル（メンズ）",
+    "short": "One step for men: a gel cream that keeps shine and stickiness down.",
+    "catch": "One bottle\nfor men's skin.",
+    "desc": "A gel cream whose powder absorbs excess sebum, keeping shine and stickiness down for a matte finish. Cooling menthol tightens the skin and keeps it feeling fresh for hours.",
+    "usage": "",
+    "inci": "",
+    "badges": "For men\nAll-in-one",
+    "free": "",
+    "points": [
+     {
+      "title": "Sebum-absorbing powder",
+      "text": "Controls shine for a matte finish."
+     },
+     {
+      "title": "Cooling menthol",
+      "text": "Tightens skin with a refreshing feel."
+     },
+     {
+      "title": "All-in-one",
+      "text": "Lotion, emulsion and serum in one step."
+     }
+    ]
+   }
+  },
+  {
+   "slug": "cleansing-oil",
+   "order": 14,
+   "category": "cleansing",
+   "series": "",
+   "size": "",
+   "kind": "",
+   "is_new": false,
+   "coming_soon": true,
+   "show_on_home": false,
+   "home_order": 0,
+   "rakuten_code": "",
+   "image": "",
+   "image_temp": "",
+   "ja": {
+    "title": "花印クレンジングオイル",
+    "sub": "Cleansing Oil",
+    "short": "中国市場の看板アイテム。日本公式サイトへの掲載準備中です。",
+    "catch": "",
+    "desc": "",
+    "usage": "",
+    "inci": "",
+    "badges": "近日公開",
+    "free": "",
+    "points": []
+   },
+   "en": {
+    "title": "Cleansing Oil",
+    "sub": "花印クレンジングオイル",
+    "short": "Our signature item in the China market. Details coming soon.",
+    "catch": "",
+    "desc": "",
+    "usage": "",
+    "inci": "",
+    "badges": "Coming soon",
+    "free": "",
+    "points": []
+   }
+  }
+ ],
+ "slides": [
+  {
+   "order": 1,
+   "visual": "none",
+   "eyebrow": "Hanajirushi · Ginza, Tokyo",
+   "bg": "h_hanajirushi_top-1.jpg",
+   "bg_pos": "70% center",
+   "btn1_link": "/products/",
+   "btn2_link": "/brand/",
+   "ja": {
+    "tab": "花印について",
+    "label": "",
+    "heading": "ひとりに、ひとつの、\nキレイを咲かせる。",
+    "accent": false,
+    "text": "東京・銀座の自社研究室で開発する、\n無香料・無着色の日本製スキンケア。",
+    "btn1": "製品を見る",
+    "btn2": "ブランドについて"
+   },
+   "en": {
+    "tab": "Hanajirushi",
+    "label": "",
+    "heading": "Clean formula.\nGentle by design.\nMade in Japan.",
+    "accent": true,
+    "text": "Skincare formulated in our own laboratory in Ginza, Tokyo — sold in Japan and 12 countries.",
+    "btn1": "View products",
+    "btn2": "About the brand"
+   }
+  },
+  {
+   "order": 2,
+   "visual": "kanji",
+   "kanji": "出展",
+   "kanji_caption": "Hong Kong 2026",
+   "bg": "h_campany_top_p.jpg",
+   "bg_pos": "center 40%",
+   "btn1_link": "/cosmoprof-asia/",
+   "btn2_link": "",
+   "ja": {
+    "tab": "展示会",
+    "label": "展示会",
+    "heading": "Cosmoprof Asia 2026に\n出展します。",
+    "accent": true,
+    "text": "2026年11月、香港コンベンション＆エキシビションセンター。ブースでの商談のご予約を受け付けています。",
+    "btn1": "展示会専用ページへ",
+    "btn2": ""
+   },
+   "en": {
+    "tab": "Exhibition",
+    "label": "Exhibition",
+    "heading": "Meet us at\nCosmoprof Asia 2026",
+    "accent": true,
+    "text": "November 2026, Hong Kong Convention & Exhibition Centre. Meetings at our booth can be booked now.",
+    "btn1": "Open the event page",
+    "btn2": ""
+   }
+  },
+  {
+   "order": 3,
+   "visual": "products",
+   "products": [
+    "hatomugi-skin-conditioner",
+    "hatomugi-essence",
+    "hatomugi-cream"
+   ],
+   "bg": "",
+   "btn1_link": "/products/hatomugi-essence/",
+   "btn2_link": "/products/hatomugi-cream/",
+   "ja": {
+    "tab": "ハトムギシリーズ",
+    "label": "新商品",
+    "heading": "ハトムギシリーズに、\n美容液とクリーム。",
+    "accent": true,
+    "text": "ハトムギ化粧水と一緒に使える、ハトムギ豊潤美容液（200mL）とハトムギクリーム（100g）。",
+    "btn1": "美容液を見る",
+    "btn2": "クリームを見る"
+   },
+   "en": {
+    "tab": "Hatomugi series",
+    "label": "New",
+    "heading": "The Hatomugi series\nadds a serum and a cream.",
+    "accent": true,
+    "text": "Hatomugi Rich Essence (200mL) and Hatomugi Cream (100g), made to go with the Hatomugi lotion.",
+    "btn1": "See the essence",
+    "btn2": "See the cream"
+   }
+  },
+  {
+   "order": 4,
+   "visual": "product",
+   "product": "cleansing-lotion-ma",
+   "seal": "特許",
+   "bg": "h_brand_top_p.jpg",
+   "bg_pos": "center",
+   "btn1_link": "/products/cleansing-lotion-ma/",
+   "btn2_link": "",
+   "ja": {
+    "tab": "特許",
+    "label": "特許",
+    "heading": "特許技術を採用した、\nクレンジングローション。",
+    "accent": true,
+    "text": "うるおい残してしっかり落ちる、拭き取りタイプのクレンジングローション。",
+    "btn1": "製品を見る",
+    "btn2": ""
+   },
+   "en": {
+    "tab": "Patent",
+    "label": "Patent",
+    "heading": "A cleansing lotion\nwith patented technology.",
+    "accent": true,
+    "text": "A wipe-off cleansing lotion that removes make-up and leaves moisture behind.",
+    "btn1": "View the product",
+    "btn2": ""
+   }
+  }
+ ],
+ "collabs": [
+  {
+   "order": 1,
+   "image": "hanajirushi_col_sm.jpg",
+   "ja": {
+    "title": "美少女戦士セーラームーン",
+    "product": "クレンジングローション",
+    "label": "中国限定",
+    "channel": "中国市場限定販売"
+   },
+   "en": {
+    "title": "Sailor Moon",
+    "product": "Cleansing lotion",
+    "label": "China only",
+    "channel": "China-exclusive edition"
+   }
+  },
+  {
+   "order": 2,
+   "image": "hanajirushi_col_lts.jpg",
+   "ja": {
+    "title": "リトルツインスターズ",
+    "product": "フェイシャルマスク・クレンジング・シャンプー等",
+    "label": "専売品",
+    "channel": "TOKYO LIFESTYLE（東京生活館）専売品"
+   },
+   "en": {
+    "title": "Little Twin Stars",
+    "product": "Facial masks, cleansing, shampoo, etc.",
+    "label": "Exclusive",
+    "channel": "Exclusive to TOKYO LIFESTYLE"
+   }
+  },
+  {
+   "order": 3,
+   "image": "hanajirushi_col_fb.jpg",
+   "ja": {
+    "title": "フルーツバスケット",
+    "product": "ネイルコレクション",
+    "label": "コラボ",
+    "channel": ""
+   },
+   "en": {
+    "title": "Fruits Basket",
+    "product": "Nail collection",
+    "label": "Collab",
+    "channel": ""
+   }
+  },
+  {
+   "order": 4,
+   "image": "hanajirushi_col_yr.jpg",
+   "ja": {
+    "title": "ユーリ!!! on ICE",
+    "product": "洗顔クリーム",
+    "label": "販売終了",
+    "channel": "販売終了"
+   },
+   "en": {
+    "title": "Yuri!!! on ICE",
+    "product": "Face wash cream",
+    "label": "Ended",
+    "channel": "Sales ended"
+   }
+  }
+ ],
+ "news_cats": [
+  [
+   "exh",
+   "展示会",
+   "Exhibition"
+  ],
+  [
+   "info",
+   "お知らせ",
+   "Notice"
+  ],
+  [
+   "biz",
+   "企業情報",
+   "Business"
+  ],
+  [
+   "prod",
+   "製品情報",
+   "Product"
+  ]
+ ],
+ "news": [
+  {
+   "date": "2026-10-01",
+   "cat": "exh",
+   "ja": {
+    "title": "Cosmoprof Asia 2026（香港）に出展いたします"
+   },
+   "en": {
+    "title": "HANAJIRUSHI to exhibit at Cosmoprof Asia 2026, Hong Kong"
+   }
+  },
+  {
+   "date": "2026-09-25",
+   "cat": "info",
+   "ja": {
+    "title": "コーポレートサイトをリニューアルし、英語版を公開しました"
+   },
+   "en": {
+    "title": "Corporate website renewed — English edition now live"
+   }
+  },
+  {
+   "date": "2026-09-18",
+   "cat": "biz",
+   "ja": {
+    "title": "海外代理店・パートナー募集ページを公開しました"
+   },
+   "en": {
+    "title": "Partnership programme for overseas distributors launched"
+   }
+  },
+  {
+   "date": "2026-09-10",
+   "cat": "prod",
+   "ja": {
+    "title": "花印クレンジングオイル 日本公式サイト掲載のお知らせ（予定）"
+   },
+   "en": {
+    "title": "Cleansing Oil to join the official product line-up (planned)"
+   }
+  },
+  {
+   "date": "2026-09-01",
+   "cat": "prod",
+   "ja": {
+    "title": "ハトムギ化粧水 製品情報ページを更新しました"
+   },
+   "en": {
+    "title": "Hatomugi Skin Conditioner product information updated"
+   }
+  },
+  {
+   "date": "2022-07-01",
+   "cat": "info",
+   "ja": {
+    "title": "ホームページがリニューアルしました。"
+   },
+   "en": {
+    "title": "Website renewed."
+   }
+  }
+ ],
+ "settings": {
+  "ja": {
+   "company": "花印粧業研究所株式会社",
+   "tel": "03-6264-2154",
+   "fax": "03-6264-2354",
+   "hours": "受付時間 平日10:00〜18:00（土日祝除く）",
+   "address": "〒104-0061\n東京都中央区銀座2-12-12 深山ビル2F",
+   "founded": "2015年1月28日"
+  },
+  "en": {
+   "company": "Hanajirushi Institute of Cosmetics, Inc.",
+   "tel": "+81-3-6264-2154",
+   "fax": "+81-3-6264-2354",
+   "hours": "Mon–Fri 10:00–18:00 (JST)",
+   "address": "2-12-12 Ginza, Chuo-ku,\nTokyo 104-0061, Japan (Miyama Bldg. 2F)",
+   "founded": "28 January 2015"
+  },
+  "show_tbc": true
+ },
+ "settings_more": {
+  "profile_rows": [
+   {
+    "label": "社名",
+    "value": "花印粧業研究所株式会社\nHanajirushi Institute of Cosmetics, Inc.",
+    "label_en": "Company name",
+    "value_en": "Hanajirushi Institute of Cosmetics, Inc.\n花印粧業研究所株式会社"
+   },
+   {
+    "label": "創業",
+    "value": "2015年1月28日",
+    "label_en": "Founded",
+    "value_en": "28 January 2015"
+   },
+   {
+    "label": "本社所在地",
+    "value": "〒104-0061\n東京都中央区銀座2-12-12 深山ビル2F",
+    "label_en": "Head office",
+    "value_en": "2-12-12 Ginza, Chuo-ku,\nTokyo 104-0061, Japan (Miyama Bldg. 2F)"
+   },
+   {
+    "label": "TEL / FAX",
+    "value": "TEL 03-6264-2154 ／ FAX 03-6264-2354",
+    "label_en": "TEL / FAX",
+    "value_en": "TEL +81-3-6264-2154 ／ FAX +81-3-6264-2354"
+   },
+   {
+    "label": "代表者",
+    "value": "代表取締役 ［氏名］",
+    "label_en": "Representative",
+    "value_en": "Representative Director ［Name TBC］"
+   },
+   {
+    "label": "資本金",
+    "value": "1,000万円",
+    "label_en": "",
+    "value_en": ""
+   },
+   {
+    "label": "事業内容",
+    "value": "化粧品の原料、化粧品、健康食品の研究開発、製造、販売及び輸出入",
+    "label_en": "Business",
+    "value_en": "R&D, manufacturing, sales, import and export of cosmetic raw materials, cosmetics and health foods"
+   },
+   {
+    "label": "販売地域",
+    "value": "日本国内および世界12ヵ国 ［国名一覧］",
+    "label_en": "Markets",
+    "value_en": "Japan and 12 countries across East Asia, Southeast Asia and North America ［Country list TBC］"
+   },
+   {
+    "label": "取引銀行",
+    "value": "三井住友銀行、三菱UFJ銀行、みずほ銀行",
+    "label_en": "",
+    "value_en": ""
+   },
+   {
+    "label": "法人番号",
+    "value": "［要確認］",
+    "label_en": "Corporate number",
+    "value_en": "［TBC］"
+   }
+  ],
+  "history": [
+   {
+    "date": "2015年1月",
+    "text": "花印粧業研究所株式会社を東京都中央区銀座に設立",
+    "date_en": "Jan 2015",
+    "text_en": "Hanajirushi Institute of Cosmetics founded in Ginza, Tokyo"
+   },
+   {
+    "date": "［年月］",
+    "text": "花印クレンジングローション、ハトムギ化粧水などを発売",
+    "date_en": "［Date TBC］",
+    "text_en": "Deep Cleansing Lotion, Hatomugi Skin Conditioner and other core products launched"
+   },
+   {
+    "date": "［年月］",
+    "text": "中国市場へ進出（天猫・抖音・屈臣氏等）",
+    "date_en": "［Date TBC］",
+    "text_en": "Entered the China market (Tmall, Douyin, Watsons)"
+   },
+   {
+    "date": "［年月］",
+    "text": "日本の人気IPとの正規ライセンス商品の開発を開始",
+    "date_en": "［Date TBC］",
+    "text_en": "First officially licensed Japanese IP collaboration"
+   },
+   {
+    "date": "2022年7月",
+    "text": "コーポレートサイトをリニューアル",
+    "date_en": "Jul 2022",
+    "text_en": "Corporate website renewed"
+   },
+   {
+    "date": "2026年9月",
+    "text": "コーポレートサイト英語版を公開、海外代理店の募集を開始",
+    "date_en": "Sep 2026",
+    "text_en": "English website launched; overseas partnership programme opened"
+   },
+   {
+    "date": "2026年11月",
+    "text": "Cosmoprof Asia 2026（香港）に出展",
+    "date_en": "Nov 2026",
+    "text_en": "Exhibiting at Cosmoprof Asia 2026, Hong Kong"
+   }
+  ],
+  "terms": [
+   {
+    "label": "最小発注数量（MOQ）",
+    "value": "初回 ［要確認］　リピート ［要確認］",
+    "label_en": "Minimum order (MOQ)",
+    "value_en": "First order ［TBC］ · Repeat ［TBC］"
+   },
+   {
+    "label": "納期",
+    "value": "在庫品 ［要確認］　受注生産 ［要確認］",
+    "label_en": "Lead time",
+    "value_en": "In stock ［TBC］ · Made to order ［TBC］"
+   },
+   {
+    "label": "貿易条件",
+    "value": "EXW 東京 ／ FOB 東京・横浜 ／ CIF",
+    "label_en": "Incoterms",
+    "value_en": "EXW Tokyo / FOB Tokyo or Yokohama / CIF"
+   },
+   {
+    "label": "お支払条件",
+    "value": "T/T 前払い ［比率］、L/C は応相談",
+    "label_en": "Payment",
+    "value_en": "T/T advance ［% TBC］, L/C negotiable"
+   },
+   {
+    "label": "地域保護",
+    "value": "独占代理店契約に基づき設定",
+    "label_en": "Territory protection",
+    "value_en": "Defined under the exclusive distribution agreement"
+   },
+   {
+    "label": "価格体系",
+    "value": "数量に応じた段階価格（価格表は個別にご案内します）",
+    "label_en": "Pricing",
+    "value_en": "Tiered by volume; price lists are provided on request"
+   },
+   {
+    "label": "サンプル",
+    "value": "無償提供の範囲・送料負担 ［要確認］",
+    "label_en": "Samples",
+    "value_en": "Free sample allowance / freight ［TBC］"
+   },
+   {
+    "label": "販促支援",
+    "value": "販促物、商品研修、展示会への協力、販促費の補助",
+    "label_en": "Marketing support",
+    "value_en": "POS material, training, exhibition support, promotion subsidies"
+   },
+   {
+    "label": "価格・流通管理",
+    "value": "並行輸入・過度な値引きへの対策により、代理店様の利益を保護",
+    "label_en": "Price & channel control",
+    "value_en": "Measures against parallel imports and under-pricing to protect partner margins"
+   }
+  ],
+  "faq": [
+   {
+    "q": "最小発注数量（MOQ）はどのくらいですか？",
+    "a": "初回・リピートそれぞれの最小発注数量を設定しています。具体的な数量は ［要確認］。協業モデルにより異なりますので、お気軽にご相談ください。",
+    "q_en": "What is the minimum order quantity (MOQ)?",
+    "a_en": "We set separate MOQs for first and repeat orders. Exact quantities: ［TBC］. They vary by cooperation model — please ask."
+   },
+   {
+    "q": "サンプルを取り寄せることはできますか？",
+    "a": "サンプルのご提供が可能です。無償提供の範囲や送料のご負担については ［要確認］。",
+    "q_en": "Can we request samples?",
+    "a_en": "Yes, samples are available. Free allowance and freight terms: ［TBC］."
+   },
+   {
+    "q": "自国での化粧品登録に必要な書類は用意してもらえますか？",
+    "a": "INCI成分表、COA、MSDS/SDS、自由販売証明書、原産地証明書などをご用意し、現地での登録手続きを技術資料の提供で支援します。",
+    "q_en": "Can you provide documents for registration in our country?",
+    "a_en": "We provide the INCI list, COA, MSDS/SDS, Free Sale Certificate, Certificate of Origin and other technical documents to support your local registration."
+   },
+   {
+    "q": "独占代理店になることはできますか？",
+    "a": "国・地域ごとに独占代理店契約が可能です。年間仕入額の目安や販売目標などの条件をご提示のうえ、協議させていただきます。",
+    "q_en": "Can we become the exclusive distributor for our market?",
+    "a_en": "Yes, exclusive agreements are available by country or region, based on annual purchase thresholds and sales targets agreed together."
+   },
+   {
+    "q": "自社ブランド（OEM/ODM）での製造は可能ですか？",
+    "a": "自社研究室での処方開発を活かし、OEM/ODMにも対応しています。最小ロット・開発期間は ［要確認］。",
+    "q_en": "Do you offer OEM/ODM for private labels?",
+    "a_en": "Yes — using our in-house formulation capability. MOQ and development lead time: ［TBC］."
+   }
+  ],
+  "message": "（代表挨拶の原稿をご提供いただき掲載します。創業の想い、ものづくりへの姿勢、海外展開への展望などを400〜600字程度で想定しています。）",
+  "message_en": "(Message from the Representative Director to be supplied — around 150–250 words on the company's founding, approach to product-making and global ambitions.)",
+  "rep_title": "代表取締役",
+  "rep_title_en": "Representative Director",
+  "rep_name": "［氏名］",
+  "rep_name_en": "［Name TBC］",
+  "stations": "東京メトロ有楽町線「銀座一丁目駅」\n東京メトロ銀座線・丸ノ内線・日比谷線「銀座駅」\n徒歩［分数］",
+  "stations_en": "Ginza-itchome Station (Yurakucho Line)\nGinza Station (Ginza, Marunouchi, Hibiya Lines)\nWalk［min TBC］",
+  "show_contact": "［氏名］",
+  "show_whatsapp": "［番号］",
+  "show_wechat": "［ID］",
+  "show_email": "export@hanajirushi.co.jp ［要確認］"
+ },
+ "exhibitions": [
+  {
+   "slug": "cosmoprof-asia-2026",
+   "title": "Cosmoprof Asia 2026",
+   "year": "2026",
+   "month": "11月",
+   "month_en": "Nov",
+   "dates": "2026年11月 ［日程確定待ち］",
+   "dates_en": "November 2026 ［TBC］",
+   "venue": "香港コンベンション＆エキシビションセンター（香港・湾仔）",
+   "venue_en": "Hong Kong Convention & Exhibition Centre, Wan Chai",
+   "booth": "［確定待ち］",
+   "booth_en": "［TBC］",
+   "onshow": "スキンケア製品（クレンジング・化粧水・フェイスマスク）、IPコラボレーション商品、OEM/ODMのご案内",
+   "onshow_en": "Skincare (cleansing, lotion, face mask), licensed IP products, OEM/ODM services",
+   "languages": "日本語・英語・中国語 ［要確認］",
+   "languages_en": "Japanese, English, Chinese ［TBC］",
+   "status": "商談予約受付中",
+   "status_en": "Booking meetings now",
+   "page": "/cosmoprof-asia/",
+   "end": "20261130"
+  }
+ ],
+ "pages": [
+  [
+   "home",
+   "トップ",
+   "Top",
+   ""
+  ],
+  [
+   "brand",
+   "ブランド",
+   "Brand",
+   ""
+  ],
+  [
+   "collaboration",
+   "IPコラボレーション",
+   "IP collaborations",
+   "brand"
+  ],
+  [
+   "company",
+   "会社概要",
+   "Company",
+   ""
+  ],
+  [
+   "rd",
+   "研究開発・品質",
+   "R&D & quality",
+   "company"
+  ],
+  [
+   "news",
+   "お知らせ",
+   "News",
+   ""
+  ],
+  [
+   "partners",
+   "海外代理店・パートナー募集",
+   "Partnership programme",
+   ""
+  ],
+  [
+   "exhibition",
+   "展示会情報",
+   "Exhibitions",
+   ""
+  ],
+  [
+   "contact",
+   "お問い合わせ",
+   "Contact",
+   ""
+  ],
+  [
+   "cosmoprof-asia",
+   "Cosmoprof Asia 2026 商談ページ",
+   "Cosmoprof Asia 2026 — Buyer page",
+   ""
+  ]
+ ]
+}

@@ -1,0 +1,42 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"landingPage": "/",
+	"login": true,
+	"steps": [
+		{
+			"step": "setSiteLanguage",
+			"language": "ja"
+		},
+		{
+			"step": "setSiteOptions",
+			"options": {
+				"blogname": "花印 HANAJIRUSHI",
+				"timezone_string": "Asia/Tokyo",
+				"date_format": "Y.m.d",
+				"permalink_structure": "/%postname%/"
+			}
+		},
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "wordpress.org/plugins",
+				"slug": "secure-custom-fields"
+			},
+			"options": {
+				"activate": true
+			}
+		},
+		{
+			"step": "activatePlugin",
+			"pluginPath": "hanajirushi-core/hanajirushi-core.php"
+		},
+		{
+			"step": "activateTheme",
+			"themeFolderName": "hanajirushi"
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php require '/wordpress/wp-load.php'; wp_set_current_user(1); wp_delete_post(1, true); wp_delete_post(2, true); $r = hj_seed_import(); flush_rewrite_rules(); echo json_encode($r);"
+		}
+	]
+}

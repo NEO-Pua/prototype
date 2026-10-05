@@ -1,0 +1,74 @@
+{
+ "topics": [
+  "partner",
+  "product",
+  "oem",
+  "business"
+ ],
+ "ja": {
+  "kinds": [
+   "販売パートナー（代理店・卸）について",
+   "商品について",
+   "OEM・共同開発について",
+   "ビジネス全般・その他"
+  ],
+  "biz": [
+   "輸入業者",
+   "販売代理店",
+   "小売チェーン",
+   "ECプラットフォーム・EC事業者",
+   "自社ブランド（OEM/ODM）",
+   "メディア",
+   "その他"
+  ],
+  "volumes": [
+   "〜1,000個",
+   "1,000〜10,000個",
+   "10,000〜50,000個",
+   "50,000個以上"
+  ],
+  "lines": [
+   "IPコラボ商品",
+   "OEM/ODM"
+  ],
+  "days": [
+   "会期1日目",
+   "会期2日目",
+   "会期3日目",
+   "会期外・オンラインを希望"
+  ]
+ },
+ "en": {
+  "kinds": [
+   "Sales partnership (distribution / wholesale)",
+   "Products",
+   "OEM & co-development",
+   "General business / other"
+  ],
+  "biz": [
+   "Importer",
+   "Distributor",
+   "Retail chain",
+   "E-commerce platform / seller",
+   "Private label (OEM/ODM)",
+   "Media",
+   "Other"
+  ],
+  "volumes": [
+   "Up to 1,000 units",
+   "1,000–10,000",
+   "10,000–50,000",
+   "50,000+"
+  ],
+  "lines": [
+   "Licensed IP products",
+   "OEM/ODM"
+  ],
+  "days": [
+   "Day 1",
+   "Day 2",
+   "Day 3",
+   "After the show / online"
+  ]
+ }
+}

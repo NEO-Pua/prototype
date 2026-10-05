@@ -11,3 +11,6 @@ __pycache__/
 *.pptx
 *.pdf
 mockup/_screenshots/
+
+# WordPress: built zips (python wordpress/dev/package.py)
+wordpress/dist/

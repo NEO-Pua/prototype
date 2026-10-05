@@ -1,0 +1,11 @@
+/*
+Theme Name:        花印 HANAJIRUSHI
+Description:       花印 HANAJIRUSHI 公式サイトのテーマ（premium v1.3 デザイン）。プラグイン「花印 HANAJIRUSHI Core」と一緒に使います。デザインのCSS・JSは assets/ にあり、モックアップと同じファイルです。
+Version:           0.2.0
+Requires at least: 6.6
+Requires PHP:      8.1
+License:           GPL-2.0-or-later
+Text Domain:       hanajirushi
+*/
+
+/* The design lives in assets/css/premium*.css (enqueued in functions.php). */

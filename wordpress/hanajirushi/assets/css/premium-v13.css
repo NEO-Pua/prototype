@@ -1,0 +1,433 @@
+/* ======================================================================
+   花印 HANAJIRUSHI — premium v1.3 (loaded last on every v1.3 page, including the
+   Cosmoprof Asia buyer page). Reviewer feedback 2026-10 (意見まとめ.xlsx):
+   - Brighter overall: white paper instead of kinari, no washi grain, V1's light grey
+     #F6F5F3 for bands; the plum bands become light, the footer becomes light.
+   - The red is V1's crimson #A51D34 (seal, accents, buttons). The contact band is crimson
+     on the home page (as in V1) and a light rose tint elsewhere; labels are warm grey
+     (see "Crimson balance" at the end). Flower photos are lifted and desaturated.
+   - New parts: home photo slider (.hero13), product cards (.pcard), products list filter,
+     product page (.pdx, .pdf, .pdu, .pdd), brand story placeholders, short partnership.
+   Text colours pass WCAG AA (crimson on white 7.4:1, on #F6F5F3 6.8:1).
+   ====================================================================== */
+
+:root{
+  --paper:#fff;
+  --paper-2:#f6f5f3;
+  --white:#fff;
+  --blush:#f6f5f3;          /* V1 light band */
+  --beni:#a51d34;           /* V1 red */
+  --beni-d:#a51d34;
+  --seal:#a51d34;
+  --plum:#a51d34;           /* filled buttons, cards and tabs are crimson now */
+  --plum-2:#8e1a2d;
+  --on-plum:#fff;
+  --on-plum-2:#f2d9de;
+  --pink-l:#ffe0e6;
+  --gold-l:#ffe0e6;
+  --ink:#272628;
+  --ink-2:#5a575a;
+  --ink-3:#6b686b;
+  --line:#e6e2df;
+  --line-d:rgba(39,38,40,.13);
+  --line-w:rgba(255,255,255,.3);
+  --grain:none;
+  --grain-d:none;
+}
+.btn--fill::before{background:#7c1426}
+/* a little less air between sections than v1.2 (closer to V1) */
+.sec{padding:clamp(72px,8.5vw,128px) 0}
+
+/* ---- the former plum bands are light now (V1 grey); their parts follow */
+.dark{background:var(--blush);color:var(--ink);
+  --on-plum:var(--ink);--on-plum-2:var(--ink-2);--gold-l:var(--beni-d);--pink-l:var(--beni-d);--line-w:var(--line-d);--plum-2:#ebe7e4}
+.dark .btn--light{border-color:var(--ink);color:var(--ink)}
+.dark .btn--light::before{background:var(--ink)}
+.dark .btn--light:hover{color:#fff}
+.dark .tbd{border-color:var(--beni);color:var(--beni-d)}
+.dark .arch{background:#ebe7e4}
+
+/* ---- header: white when solid; the contact button in crimson, as in V1 */
+.hd.is-solid{background:rgba(255,255,255,.95)}
+html.menu-open .hd{background:rgba(255,255,255,.98)}
+.hd__cta{border-color:var(--beni-d);color:var(--beni-d)}
+.hd__cta:hover{background:var(--beni-d);color:#fff}
+.hd__nav ul{gap:clamp(14px,1.35vw,24px)}
+@media (max-width:1200px){
+  .hd__nav{display:none}
+  .hd__menu{display:flex}
+  .hd__r{margin-left:auto}
+}
+
+/* ---- contact band: V1 crimson */
+.cta{background:#a51d34;color:#fff;border-top:0;
+  --ink:#fff;--ink-2:#f6dfe3;--ink-3:#f6dfe3;--beni-d:#fff;--line-d:rgba(255,255,255,.42)}
+.cta .h2 em{color:#fff}
+.cta .seal{background:#fff;color:#a51d34;box-shadow:inset 0 0 0 2px #fff,inset 0 0 0 3px rgba(165,29,52,.45)}
+.cta .btn{border-color:rgba(255,255,255,.75)}
+.cta .btn::before{background:#fff}
+.cta .btn:hover{color:#a51d34}
+.cta .btn--fill{background:#fff;border-color:#fff;color:#a51d34}
+.cta .btn--fill::before{background:#f6f5f3}
+.cta .btn--fill:hover{color:#a51d34}
+
+/* ---- footer: light, as in V1 */
+.ft{background:var(--blush);color:var(--ink);
+  --on-plum:var(--ink);--on-plum-2:var(--ink-2);--gold-l:var(--beni-d);--line-w:var(--line-d)}
+.ft__logo img{filter:none}
+.ft__nav{grid-template-columns:repeat(4,minmax(0,1fr))}
+.ft__co{align-content:start}
+@media (max-width:1024px){.ft__nav{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ---- photographs: brighter and softer than the originals. The flower shots were the most
+        saturated thing on the page and their rose-pink fought V1's blue-red crimson, so they
+        are lifted and desaturated (no warm sepia: the palette is white now) */
+.hero__bg img,.hs13__bg img,.pg-brand .phero__img img,.phil__img .arch img{filter:saturate(.58) brightness(1.07) contrast(.93)}
+.split__img .arch img,.sq img{filter:none}
+.msg__img img,.office figure img{filter:saturate(.92)}
+.pg-company .phero__img img{filter:grayscale(1) brightness(1.08) contrast(.9)}
+
+/* ======================================================================
+   Home: photo slider (first view)
+   ====================================================================== */
+.hero13 .hs__s{position:relative;isolation:isolate;min-height:clamp(560px,86svh,800px);padding:120px 0 132px;align-items:center}
+.hs13__bg{position:absolute;inset:0;z-index:-1;overflow:hidden;background:var(--blush)}
+.hs13__bg img{width:100%;height:100%;object-fit:cover}
+.hs13__bg::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.8) 36%,rgba(255,255,255,.15) 70%,rgba(255,255,255,0) 100%)}
+.hs13__bg--plain{background:linear-gradient(115deg,#fff 0%,#f6f5f3 52%,#f4ecec 100%)}
+.hs13__bg--plain::after{display:none}
+.hs13--exh .hs13__bg img{filter:grayscale(1) brightness(1.32) contrast(.62)}   /* a pale wash, not a grey street */
+.hs13--exh .hs13__bg::after{background:linear-gradient(90deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.86) 42%,rgba(255,255,255,.62) 100%)}
+.hs13--patent .hs13__bg::after{background:linear-gradient(90deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.86) 44%,rgba(255,255,255,.5) 100%)}
+.js .hero13 .hs__s.is-on .hs13__bg img{animation:kb13 11s var(--ease) both}
+@keyframes kb13{from{transform:scale(1.08)}to{transform:scale(1)}}
+.hs13__in{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:clamp(32px,5vw,80px)}
+.hs13--brand .hs13__in{grid-template-columns:minmax(0,1fr)}
+.hero13 .hs__txt .eb{margin-bottom:6px}
+.hs13--brand .hs__h{font-size:clamp(32px,4.2vw,60px);line-height:1.55;letter-spacing:.12em}
+html[lang="en"] .hs13--brand .hs__h{font-size:clamp(44px,5.6vw,84px);line-height:1.04}
+.hero13 .hero__lead{margin-top:22px}
+.hs13__vis{position:relative;display:grid;justify-items:center}
+.hs13__vis .seal--l{position:absolute;right:8%;bottom:6%}
+.hs13__panels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,22px);width:100%;max-width:560px;align-items:start}
+.hs13__panels li:nth-child(2){margin-top:-36px}
+.hs13__panels .ppan{box-shadow:0 24px 48px -30px rgba(39,38,40,.4)}
+.hs13__panels p{margin-top:12px;font-family:var(--mincho);font-size:13px;line-height:1.6;letter-spacing:.04em;text-align:center}
+html[lang="en"] .hs13__panels p{font-family:var(--didone);font-size:15px;letter-spacing:0}
+.hs13__panels small{display:block;font-family:var(--caps);font-size:11px;letter-spacing:.14em;color:var(--ink-3)}
+.js .hs__s .hs13__panels li{transition:opacity .9s var(--ease-o),transform .9s var(--ease-o)}
+.js .hs__s.is-on .hs13__panels li:nth-child(2){transition-delay:.15s}
+.js .hs__s.is-on .hs13__panels li:nth-child(3){transition-delay:.3s}
+.js .hs__s:not(.is-on) .hs13__panels li{opacity:0;transform:translateY(24px)}
+@media (min-width:1025px){.hero13 .hs__ui{bottom:30px}}
+.hero13 .hs__tabs i{background:rgba(39,38,40,.16)}
+.hero13 .hs__btns button{background:rgba(255,255,255,.85)}
+
+@media (max-width:1024px){
+  .hero13 .hs__s{min-height:0;align-items:start;padding:140px 0 56px}
+  .hs13__in{grid-template-columns:1fr;gap:32px}
+  .hs13__vis{order:-1;width:100%;max-width:380px;margin-inline:auto}
+  .hero13 .win--xl{width:clamp(200px,52vw,300px)}
+  .hs13__bg::after,.hs13--patent .hs13__bg::after{background:linear-gradient(180deg,rgba(255,255,255,.4) 0%,rgba(255,255,255,.86) 50%,rgba(255,255,255,.96) 100%)}
+  .hs13__panels li:nth-child(2){margin-top:-20px}
+}
+@media (max-width:760px){
+  .hero13 .hs__s{padding-top:124px}
+}
+@media (prefers-reduced-motion:reduce){
+  .js .hs__s .hs13__panels li{opacity:1!important;transform:none!important}
+}
+
+/* ---- home figures: four in a row */
+.nums--4 .nums__l{grid-template-columns:repeat(4,1fr)}
+.nums--4 .nums__l li{border-top:0;border-left:1px solid var(--line)}
+.nums--4 .nums__l li:first-child{border-left:0}
+.nums--4 b{white-space:nowrap}   /* 2015年 and 自社研究室 stay on one line */
+@media (max-width:1024px){
+  .nums--4 .nums__l{grid-template-columns:repeat(2,1fr)}
+  .nums--4 .nums__l li:nth-child(odd){border-left:0}
+  .nums--4 .nums__l li:nth-child(n+3){border-top:1px solid var(--line)}
+}
+
+/* ======================================================================
+   Products: panels, cards, filter
+   ====================================================================== */
+.ppan{position:relative;display:grid;place-items:center;aspect-ratio:1;overflow:hidden;background:var(--blush)}
+.ppan img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+.ppan[data-src="rakuten"]{background:#fff;border:1px solid var(--line)}
+.ppan[data-src="rakuten"] img{object-fit:contain}
+.ppan--soon span{display:grid;justify-items:center;gap:14px;font-family:var(--caps);font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3)}
+a:hover .ppan img{transform:scale(1.04)}
+
+.pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(36px,3.4vw,52px) clamp(20px,2.4vw,36px);margin-top:clamp(36px,4vw,56px)}
+.pcard{position:relative}
+.pcard>a,.pcard>div{display:block}
+.pcard__new{display:inline-block;padding:1px 9px;background:var(--beni-d);color:#fff;font-size:11px;font-weight:500;letter-spacing:.12em;line-height:1.6}
+.pcard__new--soon{background:var(--ink-2)}
+.pcard__no .pcard__new{color:#fff}   /* the number line's grey span colour was overriding the tag text */
+.pcard__no{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;margin-top:20px;font-family:var(--didone);font-style:italic;font-size:14px;color:var(--beni-d)}
+.pcard__no span{font-family:var(--caps);font-style:normal;font-size:10.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+.pcard__n{margin-top:8px;font-family:var(--mincho);font-weight:500;font-size:17px;line-height:1.7;letter-spacing:.06em;transition:color .3s}
+html[lang="en"] .pcard__n{font-family:var(--didone);font-weight:400;font-size:22px;line-height:1.25;letter-spacing:0}
+.pcard a:hover .pcard__n{color:var(--beni-d)}
+.pcard__d{margin-top:8px;font-size:13px;line-height:1.9;color:var(--ink-2)}
+.pcard__go{display:block;margin-top:12px;color:var(--beni-d)}
+.pcard__go .arr{width:32px}
+.pcard a:hover .pcard__go .arr{transform:translateX(6px)}
+.pcard--soon .ppan{background:var(--paper-2)}
+.pcard[hidden]{display:none}
+@media (min-width:1180px){
+  .pgrid--all{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .pgrid--all .pcard__n{font-size:16px;letter-spacing:.02em}
+}
+
+.pfilter{display:flex;flex-wrap:wrap;gap:8px}
+.pfilter button{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:1px solid var(--line-d);background:#fff;font-size:13px;letter-spacing:.08em;line-height:1.4;transition:background .3s,color .3s,border-color .3s}
+html[lang="en"] .pfilter button{font-family:var(--caps);font-size:12px;letter-spacing:.12em}
+.pfilter button small{font-family:var(--caps);font-size:11px;color:var(--ink-3)}
+.pfilter button:hover{border-color:var(--beni-d)}
+.pfilter button.on{background:var(--beni-d);border-color:var(--beni-d);color:#fff}
+.pfilter button.on small{color:rgba(255,255,255,.85)}
+.plist13 .note{margin-top:40px}
+
+/* home: products section */
+.col13__h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px 40px}
+.col13__cats{display:flex;flex-wrap:wrap;gap:8px 10px;margin-top:28px}
+.col13__cats a{padding:6px 16px;border:1px solid var(--line-d);border-radius:999px;font-size:12.5px;letter-spacing:.08em;transition:border-color .3s,color .3s}
+.col13__cats a:hover{border-color:var(--beni-d);color:var(--beni-d)}
+
+@media (max-width:1024px){
+  .pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:760px){
+  .pfilter{flex-wrap:nowrap;overflow-x:auto;margin-inline:calc(var(--gut)*-1);padding:0 var(--gut) 4px;scrollbar-width:none}
+  .pfilter::-webkit-scrollbar{display:none}
+  .pfilter button{flex:none;padding:9px 14px}
+}
+@media (max-width:480px){
+  .pgrid{column-gap:14px}
+  .pcard__n{font-size:14.5px;letter-spacing:.03em}
+  html[lang="en"] .pcard__n{font-size:18px}
+  .pcard__d{display:none}
+  .pcard__no span{letter-spacing:.1em}
+}
+
+/* ======================================================================
+   Product page
+   ====================================================================== */
+.crumb--pdx{margin-top:88px}
+.pdx{padding:clamp(36px,4vw,64px) 0 clamp(56px,6vw,96px)}
+.pdx__g{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(36px,6vw,96px);align-items:start}
+.pdx__vis{position:relative;padding:48px clamp(28px,4vw,56px) 64px;background:var(--blush)}
+.pdx__lbl{position:absolute;top:16px;left:20px;font-family:var(--caps);font-size:10.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3)}
+.pdx__size{position:absolute;right:22px;bottom:12px;font-family:var(--didone);font-size:28px;line-height:1.4;color:var(--beni-d)}
+.pdx__n{margin-top:18px;font-family:var(--mincho);font-weight:500;font-size:clamp(26px,2.8vw,40px);line-height:1.5;letter-spacing:.08em}
+html[lang="en"] .pdx__n{font-family:var(--didone);font-weight:400;font-size:clamp(36px,4vw,54px);line-height:1.08;letter-spacing:-.01em}
+.pdx__sub{margin-top:6px;font-family:var(--didone);font-style:italic;font-size:17px;color:var(--ink-2)}
+html[lang="en"] .pdx__sub{font-family:var(--mincho);font-style:normal;font-size:14px;letter-spacing:.12em}
+.pdx__badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.pdx__badges li{padding:3px 12px;border:1px solid var(--beni);color:var(--beni-d);font-size:11.5px;letter-spacing:.1em;line-height:1.6}
+.pdx__d{margin-top:22px;color:var(--ink-2)}
+.pdx__free{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:20px}
+.pdx__free li{padding-bottom:2px;border-bottom:1px solid currentColor;font-size:13px;line-height:1.6;color:var(--beni-d)}
+.pdx__spec{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 22px;margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}
+.pdx__spec b{font-family:var(--didone);font-weight:400;font-size:26px;line-height:1.2}
+.pdx__spec span{font-size:12.5px;letter-spacing:.1em;color:var(--ink-3)}
+.pdx .ctas{margin-top:28px}
+.pdx__trade{margin-top:14px}
+.anc--pdx{position:sticky;top:68px;z-index:20;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+
+.pdf__l{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,2.4vw,36px);margin-top:clamp(40px,4vw,64px)}
+.pdf__l li{padding-top:28px;border-top:1px solid var(--line-d);text-align:center}
+.pdf__n{display:block;font-family:var(--didone);font-size:46px;line-height:1;color:var(--beni);opacity:.4}
+.pdf__l h3{margin-top:14px;font-family:var(--mincho);font-weight:500;font-size:18px;line-height:1.6;letter-spacing:.08em;color:var(--beni-d)}
+html[lang="en"] .pdf__l h3{font-family:var(--didone);font-weight:400;font-size:23px;letter-spacing:0}
+.pdf__l p{margin-top:10px;font-size:13.5px;line-height:1.95;color:var(--ink-2)}
+
+.pd__cp em{font-style:normal;color:var(--beni-d)}
+.pdu__g{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(32px,6vw,96px);align-items:start}
+.pdu__t{font-size:15px;line-height:2.1}
+html[lang="en"] .pdu__t{font-size:16.5px;line-height:1.8}
+
+.pdd{border-top:1px solid var(--line-d)}
+.pdd__i{border-bottom:1px solid var(--line-d)}
+.pdd__i summary{display:flex;align-items:center;gap:16px;padding:22px 0;cursor:pointer;list-style:none;font-family:var(--mincho);font-weight:500;font-size:16px;letter-spacing:.08em;transition:color .3s}
+.pdd__i summary::-webkit-details-marker{display:none}
+.pdd__i summary::after{content:"+";margin-left:auto;font-family:var(--didone);font-size:24px;line-height:1;color:var(--beni-d)}
+.pdd__i[open] summary::after{content:"\2212"}
+.pdd__i summary:hover{color:var(--beni-d)}
+html[lang="en"] .pdd__i summary{font-family:var(--didone);font-weight:400;font-size:20px;letter-spacing:0}
+.pdd__b{padding:0 0 26px}
+.pdd__b .dl{margin-top:0}
+.pdd__b .dl div{grid-template-columns:150px 1fr}
+.pdd__inci{font-size:12.5px;line-height:2;color:var(--ink-2)}
+.pdd__ja{display:block;margin-top:10px;font-size:12px;line-height:1.9}
+
+@media (max-width:1024px){
+  .pdx__g,.pdu__g{grid-template-columns:1fr}
+  .pdx__vis{max-width:520px}
+}
+@media (max-width:760px){
+  .crumb--pdx{margin-top:68px}
+  .pdf__l{grid-template-columns:1fr;gap:8px}
+  .pdx__vis{padding:44px 24px 56px}
+  .pdd__b .dl div{grid-template-columns:96px 1fr}
+}
+
+/* ======================================================================
+   Home: brand, partnership · Brand page: story
+   ====================================================================== */
+.br13__g{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(40px,7vw,120px);align-items:center}
+.br13__mark{display:flex;justify-content:center;align-items:flex-start;gap:clamp(24px,3vw,48px)}
+.seal--xl{width:120px;height:120px;font-size:40px;transform:rotate(-3deg)}
+.br13__tate{writing-mode:vertical-rl;font-family:var(--mincho);font-size:clamp(20px,2vw,28px);line-height:2;letter-spacing:.24em;white-space:nowrap}
+.br13__txt>p{margin-top:22px;color:var(--ink-2)}
+.br13__txt .shd+p{margin-top:32px}
+
+.gp13__g{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(40px,6vw,96px);align-items:center}
+.gp13__lead{margin-top:28px;color:var(--ink-2)}
+.gp13__fig{padding:clamp(24px,3vw,40px);background:var(--blush)}
+.gp13__fig img{width:100%;mix-blend-mode:multiply}
+.gp13__big{display:flex;align-items:baseline;gap:12px;margin-top:16px}
+.gp13__big b{font-family:var(--didone);font-weight:400;font-size:clamp(56px,6vw,84px);line-height:1;color:var(--beni-d)}
+.gp13__big span{font-size:13px;letter-spacing:.14em;color:var(--ink-2)}
+.gp13__ch{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;margin-top:18px;border-top:1px solid var(--line-d)}
+.gp13__ch li{display:flex;align-items:baseline;gap:12px;padding:12px 0;border-bottom:1px solid var(--line-d);font-size:13.5px;line-height:1.6}
+.gp13__ch i{font-family:var(--didone);font-style:italic;font-size:13px;color:var(--beni-d)}
+
+.story13{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,2.4vw,36px);margin-top:clamp(40px,4vw,56px)}
+.story13 li{padding:clamp(24px,2.6vw,36px);background:#fff;border:1px solid var(--line)}
+.story13__n{display:block;font-family:var(--didone);font-size:40px;line-height:1;color:var(--beni);opacity:.45}
+.story13 h3{margin-top:16px;font-family:var(--mincho);font-weight:500;font-size:19px;letter-spacing:.1em}
+html[lang="en"] .story13 h3{font-family:var(--didone);font-weight:400;font-size:24px;letter-spacing:0}
+.story13 p{margin-top:10px;font-size:13px;line-height:1.9;color:var(--ink-2)}
+.story13 li::after{content:"";display:block;height:56px;margin-top:18px;background:repeating-linear-gradient(180deg,transparent 0 13px,var(--line) 13px 14px)}
+.story13 .tbd{margin-top:16px}
+
+@media (max-width:1024px){
+  .br13__g,.gp13__g{grid-template-columns:1fr}
+  .story13{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .seal--xl{width:88px;height:88px;font-size:30px}
+  .gp13__ch{grid-template-columns:1fr}
+}
+
+/* ======================================================================
+   Crimson balance (review of v1.3): crimson is kept for what it means (buttons, the seal,
+   headline accents, current states, section numbers); labels and quiet headings go to
+   warm grey, and the full crimson contact band stays on the home page only.
+   ====================================================================== */
+.eb{color:var(--ink-3)}
+.eb i{color:var(--beni-d)}
+.eb span::before,.shd--c .eb span::after,.stores .eb span::after{background:var(--beni-d)}
+.dark .eb{color:var(--ink-3)}
+.ft__nav h3{color:var(--ink-2)}
+
+/* contact band: light (rose-tinted) on every page except the home page */
+body:not(.pg-home) .cta{background:#fbf4f5;color:var(--ink);border-top:1px solid #f1e3e6;
+  --ink:#272628;--ink-2:#5a575a;--ink-3:#6b686b;--beni-d:#a51d34;--line-d:rgba(39,38,40,.13)}
+body:not(.pg-home) .cta .h2 em{color:var(--beni-d)}
+body:not(.pg-home) .cta .seal{background:#a51d34;color:#fff;box-shadow:inset 0 0 0 2px #a51d34,inset 0 0 0 3px rgba(255,255,255,.6)}
+body:not(.pg-home) .cta .btn{border-color:var(--ink)}
+body:not(.pg-home) .cta .btn::before{background:var(--ink)}
+body:not(.pg-home) .cta .btn:hover{color:#fff}
+body:not(.pg-home) .cta .btn--fill{background:#a51d34;border-color:#a51d34;color:#fff}
+body:not(.pg-home) .cta .btn--fill::before{background:#7c1426}
+body:not(.pg-home) .cta .btn--fill:hover{color:#fff}
+
+/* ======================================================================
+   Home slider height (review of v1.3): about three-quarters of the screen on desktop (V1:
+   650-760 px) and a real reduction on phones, where every slide took the height of the
+   tallest one and the slider was taller than the screen.
+   ====================================================================== */
+@media (min-width:1025px){
+  .hero13 .hs__s{min-height:clamp(620px,76svh,720px);padding:104px 0 112px}
+  .hero13 .win--xl{width:clamp(240px,min(30vw,46svh),400px)}
+  .hs13__panels{max-width:500px}
+  /* the brand slide's large headline follows the screen height too (short laptop screens) */
+  .hs13--brand .hs__h{font-size:clamp(32px,min(4.2vw,6svh),60px)}
+  html[lang="en"] .hs13--brand .hs__h{font-size:clamp(44px,min(5.6vw,8svh),84px)}
+}
+/* tablets: smaller visuals as well */
+@media (min-width:761px) and (max-width:1024px){
+  .hero13 .hs__s{padding:128px 0 48px}
+  .hero13 .win--xl{width:clamp(200px,30vw,250px)}
+  .hs13__panels{max-width:420px}
+}
+@media (max-width:760px){
+  .hero13 .hs__s{padding:112px 0 28px}
+  .hs13__in{gap:22px}
+  .hero13 .win--xl{width:clamp(150px,44vw,190px)}
+  .hs13__vis .seal--l{width:52px;height:52px;font-size:17px;right:2%;bottom:2%}
+  /* the kanji circle (出展, 新) scales with the smaller window and never wraps into columns */
+  .hero13 .win--kj .win__c{gap:10px}
+  .hero13 .win__kj{font-size:clamp(38px,12vw,50px);white-space:nowrap}
+  .hero13 .win--kj small{font-size:12px}
+  .hs13__panels{max-width:270px;gap:10px}
+  .hs13__panels small{display:none}
+  .hs13__panels li:nth-child(2){margin-top:-14px}
+  .hs13__panels p{margin-top:8px;font-size:11.5px;line-height:1.5}
+  html[lang="en"] .hs13__panels p{font-size:12.5px}
+  .hero13 .hs__h{font-size:24px;line-height:1.55}
+  html[lang="en"] .hero13 .hs__h{font-size:31px;line-height:1.08}
+  .hs13--brand .hs__h{font-size:26px}
+  html[lang="en"] .hs13--brand .hs__h{font-size:36px}
+  .hero13 .hero__lead{margin-top:14px;font-size:13px;line-height:1.85}
+  html[lang="en"] .hero13 .hero__lead{font-size:14px;line-height:1.7}
+  .hero13 .hero__ctas{margin-top:22px}
+}
+/* tablets held sideways: side by side like desktop, not stacked */
+@media (min-width:761px) and (max-width:1024px) and (orientation:landscape){
+  .hero13 .hs__s{align-items:center;padding:120px 0 64px}
+  .hs13__in{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}
+  .hs13__vis{order:0;max-width:none}
+}
+/* short phones (iPhone SE class): smaller visuals still */
+@media (max-width:760px) and (max-height:700px){
+  .hero13 .win--xl{width:clamp(130px,38vw,150px)}
+  .hs13__panels{max-width:228px}
+  .hs13__in{gap:16px}
+  html[lang="en"] .hero13 .hs__h{font-size:27px}
+}
+@media (max-width:760px){.win__kj{white-space:nowrap}}
+/* Brand slide on phones and upright tablets: it has no visual, so its text sits at the foot
+   (where the text is on the other slides) and the flower photo fills the top. */
+@media (max-width:760px),(max-width:1024px) and (orientation:portrait){
+  .hero13 .hs13--brand{align-items:end}
+  .hs13--brand .hs13__bg::after{background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.1) 28%,rgba(255,255,255,.82) 56%,rgba(255,255,255,.96) 100%)}
+}
+
+/* ======================================================================
+   Review of v1.3 (2026-10-02)
+   ====================================================================== */
+/* product cards: the New / Coming soon tag sits on the photo, so the names line up; the brand
+   is a small line above the name; on phones the series is dropped from the category line */
+.pcard__no .pcard__new{position:absolute;top:10px;left:10px;z-index:2;letter-spacing:.14em}
+.pcard__no i{font-style:normal}
+.pcard__b{display:block;margin-bottom:2px;font-family:var(--mincho);font-size:11.5px;font-weight:500;letter-spacing:.24em;color:var(--ink-3)}
+.plist13__ip{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 20px;margin-top:40px;font-size:13.5px;color:var(--ink-2)}
+@media (max-width:760px){
+  .pcard__no i{display:none}
+  .pcard__b{font-size:10.5px}
+}
+
+/* product page: how to use is one short row, not a full band */
+.pg-product #usage{padding:clamp(40px,4.5vw,64px) 0}
+.pg-product .pdu__g{align-items:center}
+
+/* contact band: the seal sits above the heading, on the text's left edge */
+.cta__in{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);row-gap:24px;align-items:center}
+.cta__in>.seal{grid-column:1;grid-row:1;align-self:end}
+.cta__h{grid-column:1;grid-row:2;align-self:start}
+.cta__r{grid-column:2;grid-row:1/3}
+@media (max-width:1024px){
+  .cta__in{grid-template-columns:1fr}
+  .cta__r{grid-column:1;grid-row:3;margin-top:16px}
+}
+
+/* home company photo: smaller on phones (it was the largest picture on the page) */
+@media (max-width:760px){
+  .cosplit .split__img{max-width:240px}
+}
