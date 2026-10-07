@@ -1101,7 +1101,7 @@ def p_company():
     hd = phero("Company", "会社概要", "Company",
                t("東京・銀座から、日本のスキンケアを世界へ。","Japanese skincare, from Ginza, Tokyo to the world."),
                "h_campany_top_p.jpg", "銀座",
-               [A("message","代表挨拶","Message"),A("profile","会社概要","Profile"),A("business","事業内容","Business")] + ([] if V14() else [A("history","沿革","History")]) + [A("office","オフィス紹介","Office"),A("access","アクセス","Access"),("rd.html",t("研究開発・品質","R&amp;D &amp; quality"))], pos="30% center")
+               [A("message","代表メッセージ" if V14() else "代表挨拶","Message"),A("profile","会社概要","Profile"),A("business","事業内容","Business")] + ([] if V14() else [A("history","沿革","History")]) + [A("office","オフィス紹介","Office"),A("access","アクセス","Access"),("rd.html",t("研究開発・品質","R&amp;D &amp; quality"))], pos="30% center")
     head_ = t(f'<h2 class="msg__tate">{lines("銀座から、<br>世界へ。")}</h2>', f'<h2 class="msg__h">{lines("From Ginza,<br><em>to the world.</em>")}</h2>')
     msg = f'''<section class="sec msg" id="message"><div class="wrap msg__g">
 <div class="msg__s rv">{eb("Message","01")}{head_}</div>
@@ -1115,11 +1115,11 @@ def p_company():
 <div class="msg__s rv">{eb("Message","01")}{head_}</div>
 <div class="msg__txt rv"><p class="msg__lead">{t("一人ひとりの美しさに、寄り添い続ける。","Staying close to the beauty of every person.")}</p>{paras}
 <p class="msg__end" lang="ja">ひとりに、ひとつの、キレイを咲かせる。</p>
-<p class="msg__sig">{t("花印粧業研究所株式会社<br>代表取締役 ","Hanajirushi Institute of Cosmetics, Inc.<br>Representative Director ")}{tbd("氏名","Name TBC")}</p></div>
+<p class="msg__sig">{t("花印粧業研究所株式会社<br>代表取締役","Hanajirushi Institute of Cosmetics, Inc.<br>Representative Director")}</p></div>
 </div></section>'''
     prof = f'''<section class="sec sec--t blush" id="profile"><div class="wrap prof__g">
 {shd("02","Profile","会社概要","Company profile", kj="会社概要")}
-<table class="ptbl rv">{b.company_rows(full=True)}</table></div></section>'''
+<table class="ptbl rv">{b.company_rows(full=True).replace(" " + tbd("氏名","Name TBC"), "") if V14() else b.company_rows(full=True)}</table></div></section>'''
     # EN_ONLY: corporate structure note
     struct = '' if not EN() else f'''<section class="sec--s"><div class="wrap"><div class="note-box rv">{eb("Corporate structure")}<p>{b.STRUCTURE_EN()}</p></div></div></section>'''
     kan = ["一", "二", "三"]
@@ -1149,7 +1149,7 @@ def p_company():
 {lnk("https://maps.google.com/?q=2-12-12+Ginza+Chuo-ku+Tokyo","Googleマップで見る","Open in Google Maps")}</div>
 </div></section>'''
     return page("company.html", "company", t("会社概要","Company"),
-                t("花印粧業研究所株式会社の会社概要。代表挨拶、事業内容、沿革、オフィス紹介、アクセス。2015年創業、東京・銀座本社。",
+                t("花印粧業研究所株式会社の会社概要。代表メッセージ、事業内容、オフィス紹介、アクセス。2015年創業、東京・銀座本社。" if V14() else "花印粧業研究所株式会社の会社概要。代表挨拶、事業内容、沿革、オフィス紹介、アクセス。2015年創業、東京・銀座本社。",
                   "Company profile of Hanajirushi Institute of Cosmetics, Inc. Founded 2015, headquartered in Ginza, Tokyo, with in-house R&D, manufacturing and export."),
                 hd + msg + prof + struct + business + ("" if V14() else history) + office + access)
 

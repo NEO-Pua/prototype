@@ -1330,7 +1330,7 @@ def hub():
 <link rel="stylesheet" href="assets/css/style.css"></head><body class="hubpage">
 <div class="hub"><div class="hub__in">
 <div class="hub__hd"><img class="hub__logo" src="assets/img/logo.svg" alt="花印 HANAJIRUSHI"><div><h1>Website <span>Mockup</span></h1><p>花印 公式サイト デザインモックアップ ／ 日本語版・英語版</p></div></div>
-<h2 class="hub__ver">Premium v1.4 <span>クライアント修正案（2026-10-07）— 正式ロゴ、ブランドページ・代表挨拶の原稿、スライドのボタンは1つ、製品の購入ストア選択、製品情報の項目整理、沿革は保留</span></h2>
+<h2 class="hub__ver">Premium v1.4 <span>クライアント修正案（2026-10-07）— 正式ロゴ、ブランドページ・代表メッセージの原稿（代表者名は非公開）、スライドのボタンは1つ、製品の購入ストア選択、製品情報の項目整理、沿革は保留</span></h2>
 <div class="hub__g">{col13("ja","日本語版 Japanese","JA · Premium v1.4","1.4")}{col13("en","英語版 English","EN · Premium v1.4","1.4")}</div>
 <h2 class="hub__ver">Premium v1.3 <span>レビュー反映（意見まとめ）— 明るい配色（白・V1の赤）、メニュー順の変更、ブランドと製品の分離、製品一覧＋製品詳細ページ（楽天の商品情報）、大きな画像のスライド、パートナー欄の簡潔化</span></h2>
 <div class="hub__g">{col13("ja","日本語版 Japanese","JA · Premium v1.3")}{col13("en","英語版 English","EN · Premium v1.3")}</div>
