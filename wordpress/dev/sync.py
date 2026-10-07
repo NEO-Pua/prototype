@@ -30,7 +30,7 @@ import build_premium as bp  # noqa: E402  (premium v1.4: the client's brand text
 
 CSS = ["premium.css", "premium-v11.css", "premium-v12.css", "premium-v13.css", "premium-v14.css", "premium-v15.css", "premium-lp.css"]
 JS = ["premium.js", "premium-v11.js", "premium-v12.js", "premium-v13.js", "premium-v14.js", "premium-lp.js"]
-THEME_IMG = ["logo.svg", "rakuten.svg", "amazon.png", "yahoo.svg", "qoo10.png", "world_map_v15.png",
+THEME_IMG = ["logo_v15.svg", "rakuten.svg", "amazon.png", "yahoo.svg", "qoo10.png", "world_map_v15.png",
              "h_brand_top_p.jpg", "h_campany_bldg.jpg", "h_campany_lab.jpg", "h_campany_top_p.jpg",
              "h_campany_sr.jpg", "h_campany_dr.jpg", "h_campany_ent.jpg", "h_hanajirushi_top-1.jpg",
              "hanajirushi_hsc.jpg", "logo_mark.png", "logo_mark_w.png"]

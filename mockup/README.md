@@ -163,7 +163,8 @@ booth. v1.2 = v1.1 plus that page; gated by `V12()` (v1 and v1.1 output unchange
 
 v1.4 plus three requests (in Chinese, relayed by the user). Gated by `V15()` in
 `_build/build_premium.py`; v1–v1.4 output does not change. Files: `assets/css/premium-v15.css`,
-`assets/img/world_map_v15.png` (the sales map in the new colour, converted from Adobe RGB to sRGB).
+`assets/img/world_map_v15.png` (the sales map in the new colour, converted from Adobe RGB to sRGB),
+`assets/img/logo_v15.svg` (the header and footer wordmark in the official magenta, LOGO－2020版 06).
 
 - **The logo's red** (「用logo的红色，替换现有的红色」, LOGO－2020版 06): magenta `#D92070` replaces the
   crimson `#A51D34` for buttons, bands, the seal, lines and the map. Text uses `#CC1E69`, a hair

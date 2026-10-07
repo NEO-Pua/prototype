@@ -25,7 +25,7 @@ $qr   = strtok( hj_switch_url( 'en' ), '?' );
 <?php wp_body_open(); ?>
 <a class="skip" href="#main"><?php echo hj_t( '本文へスキップ', 'Skip to content' ); ?></a>
 <header class="lp-hd" data-hd><div class="lp-hd__in">
-<a class="hd__logo" href="<?php echo esc_url( hj_link( '/' ) ); ?>"><img src="<?php echo esc_url( hj_img( 'logo.svg' ) ); ?>" alt="花印 HANAJIRUSHI" width="132" height="35"></a>
+<a class="hd__logo" href="<?php echo esc_url( hj_link( '/' ) ); ?>"><img src="<?php echo esc_url( hj_img( 'logo_v15.svg' ) ); ?>" alt="花印 HANAJIRUSHI" width="132" height="35"></a>
 <p class="lp-hd__ev"><b><?php echo $name; ?></b><span><?php echo hj_t( '香港・2026年11月', 'Hong Kong · November 2026' ); ?></span></p>
 <div class="hd__r"><?php echo $lng; ?><a class="hd__cta" href="#booking"><?php echo hj_t( '商談を予約', 'Book a meeting' ); ?></a></div>
 </div></header>
@@ -173,7 +173,7 @@ echo hj_fld( 'biz', hj_t( '事業形態', 'Business type' ), hj_select( 'biz', h
 </div></section>
 </main>
 <footer class="ft lp-ft"><div class="wrap">
-<div class="lp-ft__g"><div class="ft__co"><a class="ft__logo" href="<?php echo esc_url( hj_link( '/' ) ); ?>"><img src="<?php echo esc_url( hj_img( 'logo.svg' ) ); ?>" alt="花印 HANAJIRUSHI" width="150" height="40"></a><?php echo hj_seal( '花印', 'seal--s' ); ?>
+<div class="lp-ft__g"><div class="ft__co"><a class="ft__logo" href="<?php echo esc_url( hj_link( '/' ) ); ?>"><img src="<?php echo esc_url( hj_img( 'logo_v15.svg' ) ); ?>" alt="花印 HANAJIRUSHI" width="150" height="40"></a><?php echo hj_seal( '花印', 'seal--s' ); ?>
 <p class="ft__name"><?php echo esc_html( (string) hj_opt( 'company' ) ); ?></p>
 <p><?php echo hj_text( hj_opt( 'address' ) ); ?></p><p class="ft__tel">TEL <?php echo esc_html( hj_tel() ); ?></p></div>
 <ul class="lp-ft__l"><li><a href="<?php echo esc_url( hj_link( '/' ) ); ?>"><?php echo hj_t( '公式サイト トップ', 'Main website' ); ?></a></li><li><a href="<?php echo esc_url( hj_link( '/products/' ) ); ?>"><?php echo hj_t( '製品', 'Products' ); ?></a></li>

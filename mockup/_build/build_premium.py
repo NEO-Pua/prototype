@@ -84,6 +84,10 @@ KJ_EN = {"花印": "Bloom", "製品": "Skincare", "銀座": "Ginza", "研究": "
 SEAL_EN = {"特許": "Patent", "出展": "Expo", "募集中": "Join<br>us"}
 SLOGAN_EN = "Helping every person’s own beauty bloom."
 
+def LOGO():
+    """The HANAJIRUSHI 花印 wordmark; v1.5 uses the official magenta version (LOGO－2020版 06)."""
+    return "logo_v15.svg" if V15() else "logo.svg"
+
 def MAP():
     """The sales map; v1.5 recolours the markets to the logo magenta."""
     return "world_map_v15.png" if V15() else "world_map_brand.png"
@@ -253,7 +257,7 @@ def header(fn):
     lng = f'<span class="lng" role="group" aria-label="Language"><a href="../ja/{fn}" class="{ja_on}" lang="ja">JA</a><a href="../en/{fn}" class="{en_on}" lang="en">EN</a></span>'
     return f'''<header class="hd" data-hd>
 <div class="hd__in">
-<a class="hd__logo" href="index.html"><img src="{IMG}logo.svg" alt="花印 HANAJIRUSHI" width="132" height="35"></a>
+<a class="hd__logo" href="index.html"><img src="{IMG}{LOGO()}" alt="花印 HANAJIRUSHI" width="132" height="35"></a>
 <nav class="hd__nav" aria-label="{t("メインメニュー","Main menu")}"><ul>{nav}</ul></nav>
 <div class="hd__r">{lng}
 <a class="hd__cta" href="contact.html">{t("お問い合わせ","Contact")}</a>
@@ -304,7 +308,7 @@ def footer(fn):
 {band}
 <footer class="ft"><div class="wrap">
 <div class="ft__top">
-<div class="ft__co"><a class="ft__logo" href="index.html"><img src="{IMG}logo.svg" alt="花印 HANAJIRUSHI" width="150" height="40"></a>{seal(cls="seal--s")}
+<div class="ft__co"><a class="ft__logo" href="index.html"><img src="{IMG}{LOGO()}" alt="花印 HANAJIRUSHI" width="150" height="40"></a>{seal(cls="seal--s")}
 <p class="ft__name">{t("花印粧業研究所株式会社","Hanajirushi Institute of Cosmetics, Inc.")}</p>
 <p>{ADDR(True)}</p><p class="ft__tel">TEL {TEL()}<br>FAX {FAX()}</p></div>
 <nav class="ft__nav" aria-label="{t("フッターメニュー","Footer menu")}">{cg}</nav>
@@ -1643,7 +1647,7 @@ def lp_page():
 </div></section>'''
 
     foot = f'''<footer class="ft lp-ft"><div class="wrap">
-<div class="lp-ft__g"><div class="ft__co"><a class="ft__logo" href="{lp_site("index.html")}"><img src="{IMG}logo.svg" alt="花印 HANAJIRUSHI" width="150" height="40"></a>{seal(cls="seal--s")}
+<div class="lp-ft__g"><div class="ft__co"><a class="ft__logo" href="{lp_site("index.html")}"><img src="{IMG}{LOGO()}" alt="花印 HANAJIRUSHI" width="150" height="40"></a>{seal(cls="seal--s")}
 <p class="ft__name">{t("花印粧業研究所株式会社","Hanajirushi Institute of Cosmetics, Inc.")}</p>
 <p>{ADDR(True)}</p><p class="ft__tel">TEL {TEL()}</p></div>
 <ul class="lp-ft__l"><li><a href="{lp_site("index.html")}">{t("公式サイト トップ","Main website")}</a></li><li><a href="{lp_site("products.html" if V13() else "brand.html")}">{t("製品","Products") if V13() else t("ブランド・製品","Brand &amp; products")}</a></li>
@@ -1679,7 +1683,7 @@ def lp_page():
 <body class="pg-lp">
 <a class="skip" href="#main">{t("本文へスキップ","Skip to content")}</a>
 <header class="lp-hd" data-hd><div class="lp-hd__in">
-<a class="hd__logo" href="{lp_site("index.html")}"><img src="{IMG}logo.svg" alt="花印 HANAJIRUSHI" width="132" height="35"></a>
+<a class="hd__logo" href="{lp_site("index.html")}"><img src="{IMG}{LOGO()}" alt="花印 HANAJIRUSHI" width="132" height="35"></a>
 <p class="lp-hd__ev"><b>Cosmoprof Asia 2026</b><span>{t("香港・2026年11月","Hong Kong · November 2026")}</span></p>
 <div class="hd__r">{lng}<a class="hd__cta" href="#booking">{t("商談を予約","Book a meeting")}</a></div>
 </div></header>

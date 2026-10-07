@@ -39,7 +39,7 @@ $lng = '<span class="lng" role="group" aria-label="Language"><a href="' . esc_ur
 <a class="skip" href="#main"><?php echo hj_t( '本文へスキップ', 'Skip to content' ); ?></a>
 <header class="hd" data-hd>
 <div class="hd__in">
-<a class="hd__logo" href="<?php echo esc_url( hj_link( '/' ) ); ?>"><img src="<?php echo esc_url( hj_img( 'logo.svg' ) ); ?>" alt="花印 HANAJIRUSHI" width="132" height="35"></a>
+<a class="hd__logo" href="<?php echo esc_url( hj_link( '/' ) ); ?>"><img src="<?php echo esc_url( hj_img( 'logo_v15.svg' ) ); ?>" alt="花印 HANAJIRUSHI" width="132" height="35"></a>
 <nav class="hd__nav" aria-label="<?php echo esc_attr( hj_t( 'メインメニュー', 'Main menu' ) ); ?>"><ul><?php echo $nav; ?></ul></nav>
 <div class="hd__r"><?php echo $lng; ?>
 <a class="hd__cta" href="<?php echo esc_url( hj_link( '/contact/' ) ); ?>"><?php echo hj_t( 'お問い合わせ', 'Contact' ); ?></a>
