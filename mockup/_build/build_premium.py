@@ -44,6 +44,7 @@ OUT = os.path.join(b.ROOT, "premium")
 OUT11 = os.path.join(b.ROOT, "premium-1.1")
 OUT12 = os.path.join(b.ROOT, "premium-1.2")
 OUT13 = os.path.join(b.ROOT, "premium-1.3")
+OUT14 = os.path.join(b.ROOT, "premium-1.4")
 _VER = 1.0
 
 def V11():
@@ -57,6 +58,11 @@ def V12():
 def V13():
     """True while building premium v1.3: v1.2 brightened, with separate Brand and Products pages."""
     return _VER >= 1.3
+
+def V14():
+    """True while building premium v1.4: the client's change proposal (2026-10-07) on v1.3 —
+    official logo, the client's brand text and message, one button per slide, store chooser."""
+    return _VER >= 1.4
 ASSETS = "../../assets/"
 IMG = ASSETS + "img/"
 FONTS = ("family=Zen+Old+Mincho:wght@400;500;600&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500"
@@ -66,7 +72,13 @@ ARR = '<svg class="arr" viewBox="0 0 40 10" fill="none" stroke="currentColor" st
 
 # ------------------------------------------------------------ primitives
 def seal(txt="花印", cls=""):
-    """The 花印 seal (落款). Square, filled, characters set vertically."""
+    """The 花印 seal (落款). Square, filled, characters set vertically.
+    v1.4: the client allows only the official logo (change proposal 2026-10-07), so the 花印 seal
+    is the official square mark; the white-square version shows on the crimson contact band.
+    Word stamps (特許, 出展, 募集中) are not the logo and stay."""
+    if V14() and txt == "花印":
+        return (f'<span class="seal seal--logo {cls}" aria-hidden="true"><img class="lm" src="{IMG}logo_mark.png" alt="">'
+                f'<img class="lm-w" src="{IMG}logo_mark_w.png" alt=""></span>')
     return f'<span class="seal {cls}" aria-hidden="true"><span>{txt}</span></span>'
 
 def eb(word, num=""):
@@ -169,7 +181,7 @@ def v11_css():
     return f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v11.css">' if V11() else ''
 
 def v13_css():
-    return f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v13.css">' if V13() else ''
+    return (f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v13.css">' if V13() else '') + (f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v14.css">' if V14() else '')
 
 # Global menu kept short (feedback 2026-10: 「菜单不要太多」): four sections plus the show and
 # the contact button. Secondary pages sit under a parent: reached from the parent page's
@@ -252,7 +264,7 @@ def footer(fn):
         cols = [
          (t("ブランド","Brand"), [("brand.html",t("ブランドについて","About the brand")),("collaboration.html",t("IPコラボレーション","IP collaborations")),("rd.html",t("研究開発・品質管理","R&amp;D and quality"))]),
          (t("製品","Products"), [("products.html",t("製品一覧","All products"))] + [(cat.page_of(by[s]), by[s]["name"]) for s in cat.FEATURED[:4]]),
-         (t("会社情報","Company"), [("company.html",t("会社概要","Company profile")),("company.html#history",t("沿革","History")),("company.html#access",t("アクセス","Access")),("news.html",t("お知らせ","News"))]),
+         (t("会社情報","Company"), [("company.html",t("会社概要","Company profile"))] + ([] if V14() else [("company.html#history",t("沿革","History"))]) + [("company.html#access",t("アクセス","Access")),("news.html",t("お知らせ","News"))]),
          (t("パートナーシップ","Partnership"), [("partners.html",t("海外代理店・パートナー募集","Partnership programme")),glob,("exhibition.html",t("展示会情報","Exhibitions")),("contact.html",t("お問い合わせ","Contact"))]),
         ]
     cg = ''.join(f'<div><h3>{h}</h3><ul>' + ''.join(f'<li><a href="{u}">{x}</a></li>' for u, x in items) + '</ul></div>' for h, items in cols)
@@ -272,7 +284,7 @@ def footer(fn):
 </div></footer>
 <button class="totop" type="button" aria-label="{t("ページトップへ","Back to top")}">{I["up"]}</button>
 <div class="toast" role="status" aria-live="polite"></div>
-<script src="{ASSETS}js/premium.js"></script>{f'\n<script src="{ASSETS}js/premium-v11.js"></script>' if V11() else ''}{f'\n<script src="{ASSETS}js/premium-v12.js"></script>' if V12() and fn == "index.html" else ''}{f'\n<script src="{ASSETS}js/premium-v13.js"></script>' if V13() else ''}
+<script src="{ASSETS}js/premium.js"></script>{f'\n<script src="{ASSETS}js/premium-v11.js"></script>' if V11() else ''}{f'\n<script src="{ASSETS}js/premium-v12.js"></script>' if V12() and fn == "index.html" else ''}{f'\n<script src="{ASSETS}js/premium-v13.js"></script>' if V13() else ''}{f'\n<script src="{ASSETS}js/premium-v14.js"></script>' if V14() else ''}
 </body></html>'''
 
 def page(fn, pg, title, desc, body):
@@ -711,7 +723,8 @@ def hero13():
               if s["bg"] else '<div class="hs13__bg hs13__bg--plain" aria-hidden="true"></div>')
         k = f'<p class="hs__k">{s["k"]}</p>' if s["k"] else eb(s["eyebrow"])
         chip = tbd(s["tbc"], s["tbc"]) if s.get("tbc") else ""
-        ctas = ''.join(btn(h, lab[0], lab[1], "btn--fill") if kind == "fill" else lnk(h, lab[0], lab[1]) for h, lab, kind in s["ctas"])
+        ctas = ''.join(btn(h, lab[0], lab[1], "btn--fill") if kind == "fill" else lnk(h, lab[0], lab[1])
+                       for h, lab, kind in (s["ctas"][:1] if V14() else s["ctas"]))   # v1.4: one button per slide
         v = s["vis"]
         vis = ''
         if v and v[0] == "kanji":
@@ -751,7 +764,7 @@ def h_products13():
 {btn("products.html","すべての製品を見る","All products")}</div>
 <nav class="col13__cats rv" aria-label="{t("カテゴリー","Categories")}">{chips}</nav>
 <ul class="pgrid">{cards}</ul>
-<ul class="free rv">{free}</ul>
+{"" if V14() else f'<ul class="free rv">{free}</ul>'}
 </div></section>'''
 
 def h_brand13():
@@ -806,6 +819,86 @@ def brand_collab(num="03", idattr=""):
 <ul class="collab__l collab__l--4">{ip_cards()}</ul>
 <div class="ctr ctr--2">{lnk("collaboration.html","コラボレーションについて","About our collaborations")}{cta_lnk("oem")}</div></div></section>'''
 
+def VALUES14():
+    """OUR VALUES (client text, change proposal 2026-10-07): in place of the five free-from circles.
+    (number, English word, Japanese title, English title, Japanese text, English text)"""
+    return [
+     ("INDIVIDUALITY", "一人ひとりを尊重する", "Respect for each person",
+      "肌も悩みも、美しさのかたちも人それぞれ。画一的な美しさを押しつけず、一人ひとりに合った選択肢を考えます。",
+      "Skin, concerns and ideas of beauty differ from person to person. We never impose one standard of beauty, and think about the choice that suits each individual."),
+     ("INTEGRITY", "誠実であること", "Honesty",
+      "商品の品質、原料、使用方法、情報発信に誠実に向き合い、お客様との信頼関係を大切にします。",
+      "We are honest about quality, ingredients, how our products are used and what we say about them, and we value our customers' trust."),
+     ("QUALITY", "品質を追求する", "The pursuit of quality",
+      "原料選定、処方設計、製造、品質管理の各段階で改善を重ね、日々のケアにふさわしい品質を追求します。",
+      "We keep improving every stage — ingredients, formulation, manufacturing and quality control — for a quality worthy of daily care."),
+     ("ACCESSIBILITY", "美しさを身近に", "Beauty within reach",
+      "品質と価格のバランスを大切にし、毎日のスキンケアを無理なく続けられる選択肢を届けます。",
+      "We balance quality and price, offering choices that make daily skincare easy to keep up."),
+     ("GROWTH", "ともに成長する", "Growing together",
+      "お客様の声に耳を傾け、時代や生活の変化に合わせて商品とサービスを進化させます。国や文化の違いも理解し、世界の人々に寄り添います。",
+      "We listen to our customers and evolve our products and services as times and lifestyles change — understanding different countries and cultures, and staying close to people around the world."),
+    ]
+
+def STORY14():
+    """BRAND STORY (client text): label, headline, text — Japanese, then our English draft."""
+    return [
+     (t("花印が大切にしている想い", "What we care about"), t("一人ひとりの美しさに、寄り添う。", "Close to every person's beauty."),
+      t("肌質も、年齢も、理想の美しさも、人それぞれ。花印は、一人ひとりの肌に向き合い、毎日のスキンケアを通じて、自分らしい美しさを育むことを大切にしています。",
+        "Skin type, age and the beauty people hope for all differ. Hanajirushi meets each person's skin and helps them nurture a beauty of their own through everyday skincare.")),
+     (t("花印のものづくり", "How we make our products"), t("毎日の肌に、確かな品質と心地よさを。", "Reliable quality and comfort, every day."),
+      t("原料選びから処方、使い心地まで。毎日無理なく続けられる、身近で心地よいスキンケアを目指して、商品づくりに取り組んでいます。",
+        "From the choice of ingredients to the formula and the feel on the skin, we make skincare that is easy to live with and pleasant to use every day.")),
+     (t("銀座から、世界へ", "From Ginza to the world"), t("日本の美しさを、世界の一人ひとりへ。", "Japanese beauty, for every person worldwide."),
+      t("銀座を起点に、日本で培ってきたスキンケアへの想いを世界へ。国や文化を越えて、一人ひとりの「キレイ」に寄り添うブランドを目指します。",
+        "From Ginza, we take the care for skin we have built in Japan to the world — a brand that stays close to every person's beauty, across countries and cultures.")),
+    ]
+
+def p_brand14():
+    """v1.4 brand page: the client's text (ブランドページ文字案, change proposal 2026-10-07) —
+    header, brand concept, OUR VALUES in place of the free-from circles, brand story in place of
+    the placeholders, research. The IP collaborations block moved to the products page."""
+    A = b.A
+    hd = phero("Brand", "ブランド", "Brand",
+               t("一人ひとりの肌に寄り添い、その人らしい美しさを育む。<br>花印は、毎日のスキンケアを通じて、一人ひとりが自分らしい美しさを楽しめる毎日を届けるブランドです。",
+                 "Close to every skin, nurturing a beauty that is truly one's own. Through everyday skincare, Hanajirushi helps each person enjoy a beauty of their own, every day."),
+               "h_brand_top_p.jpg", "花印",
+               [A("concept","ブランドコンセプト","Concept"),A("values","5つの価値観","Our values"),A("story","ブランドストーリー","Our story"),A("research","研究への取り組み","Research"),("products.html",t("製品一覧","All products"))])
+    # EN_ONLY: the English slogan is re-written, not translated; the Japanese line stays as an accent
+    slogan = t(f'<h2 class="phil__tate">{lines("ひとりに、ひとつの、<br>キレイを咲かせる。")}</h2>',
+               f'<h2 class="phil__h">{lines("Clean formula.<br><em>Gentle by design.</em><br>Made in Japan.")}</h2><p class="phil__jp" aria-hidden="true">ひとりに、ひとつの、キレイを咲かせる。</p>')
+    concept = f'''<section class="sec phil" id="concept"><div class="wrap phil__g">
+<div class="phil__s rv">{eb("Brand concept","01")}{slogan}</div>
+<div class="phil__txt rv"><p class="phil__lead">{t("美しさのかたちは、人それぞれ。","Beauty takes as many forms as there are people.")}</p>
+<p>{t("肌質も、年齢も、ライフスタイルも、理想とする美しさも、一人ひとり違います。だから花印は、誰かの美しさをそのまま当てはめるのではなく、一人ひとりの肌と向き合い、その人に合った美しさを育むことを大切にしています。",
+     "Skin type, age, lifestyle, the beauty you hope for — no two people are alike. So rather than fitting anyone to someone else's idea of beauty, Hanajirushi starts from each person's skin and helps the beauty that suits them grow.")}</p>
+<p>{t("毎日使うものだからこそ、品質にこだわり、使いやすく、無理なく続けられること。特別な日のためだけではなく、何気ない毎日の中で、自分の肌を大切にする時間を届けること。それが、花印が考えるスキンケアです。",
+     "Because it is something you use every day, it should be well made, easy to use and easy to keep up — not only for special days, but as everyday time to look after your skin. That is what skincare means to Hanajirushi.")}</p></div>
+<div class="phil__img rv"><div class="arch"><img src="{IMG}h_brand_top_p.jpg" alt="" loading="lazy" style="object-position:0% center"></div></div>
+</div></section>'''
+    vals = ''.join(f'<li class="rv"><span class="vals__n">{i+1:02d}</span><span class="vals__w">{w}</span><h3>{t(ja, en)}</h3><p>{t(dja, den)}</p></li>'
+                   for i, (w, ja, en, dja, den) in enumerate(VALUES14()))
+    values = f'''<section class="sec sec--t vals-sec" id="values"><div class="wrap">
+{shd("02","Our values","花印が大切にする、<br>5つの価値観。","Five values<br><em>we hold to</em>", kj="5つの価値観", cls="shd--c")}
+<ol class="vals">{vals}</ol></div></section>'''
+    items = ''.join(f'<li class="rv"><span class="story13__n">{i+1:02d}</span><p class="story13__k">{k}</p><h3>{h}</h3><p>{x}</p></li>'
+                    for i, (k, h, x) in enumerate(STORY14()))
+    story = f'''<section class="sec sec--t blush" id="story"><div class="wrap">
+{shd("03","Brand story","美しさは、<br>一人ひとり違う。","Every beauty<br><em>is different.</em>", kj="ブランドストーリー", cls="shd--c",
+     lead=t("だからこそ、私たちは一人ひとりの肌と向き合い、その人らしい美しさを育むスキンケアを届けたい。それが、花印のものづくりの原点です。",
+            "That is why we want to offer skincare that meets each person's skin and nurtures a beauty of their own — the starting point of everything Hanajirushi makes."))}
+<ol class="story13 story13--full">{items}</ol></div></section>'''
+    research = f'''<section class="sec" id="research"><div class="wrap split__g">
+<div class="split__img split__img--win rv">{win("h_campany_lab.jpg", t("銀座本社の研究室","Our laboratory in Ginza"), "win--m")}</div>
+<div class="split__txt rv">{shd("04","Research","銀座の研究室から、<br>確かな処方を。","Reliable formulas<br><em>from our Ginza lab.</em>", kj="研究への取り組み")}
+<p class="pd__cp">{b.RD_CATCH()}</p><p>{b.RD_P1()}</p>
+<div class="ctas">{btn("rd.html","研究開発・品質管理","R&amp;D and quality")}{lnk("products.html","製品一覧","All products")}</div></div></div></section>'''
+    return page("brand.html", "brand", t("ブランド","Brand"),
+                t("花印のブランドコンセプト、5つの価値観、ブランドストーリー。ひとりに、ひとつの、キレイを咲かせる。東京・銀座の日本製スキンケア。",
+                  "The HANAJIRUSHI brand: our concept, our five values and our story — Japanese skincare from Ginza, Tokyo."),
+                hd + concept + values + story + research + store_section())
+
+
 def p_brand13():
     """v1.3: the brand page on its own (products moved to products.html). The fuller brand text
     arrives from the client on 2026-10-05; its place is held below."""
@@ -827,6 +920,8 @@ def p_brand13():
 <div class="split__txt rv">{shd("03","Research","銀座の研究室から、<br>確かな処方を。","Reliable formulas<br><em>from our Ginza lab.</em>", kj="研究への取り組み")}
 <p class="pd__cp">{b.RD_CATCH()}</p><p>{b.RD_P1()}</p>
 <div class="ctas">{btn("rd.html","研究開発・品質管理","R&amp;D and quality")}{lnk("products.html","製品一覧","All products")}</div></div></div></section>'''
+    if V14():
+        return p_brand14()
     return page("brand.html", "brand", t("ブランド","Brand"),
                 t("花印のブランド理念とブランドストーリー。ひとりに、ひとつの、キレイを咲かせる。東京・銀座の自社研究室で開発する日本製スキンケア。",
                   "The HANAJIRUSHI brand: our philosophy and story, research in our own Ginza laboratory, and licensed IP collaborations."),
@@ -851,9 +946,11 @@ def p_products13():
 <div class="pfilter rv" role="group" aria-label="{t("カテゴリーで絞り込む","Filter by category")}">{tabs}</div>
 <ul class="pgrid pgrid--all">{cards}</ul>
 <p class="note">{note}</p>{trade}
-<ul class="free rv">{free}</ul>
-<p class="plist13__ip rv">{t("人気IPとの正規ライセンス商品は","Officially licensed collaborations with popular characters: ")}{lnk("collaboration.html","IPコラボレーション商品へ","See IP collaborations")}</p>
+{"" if V14() else f'<ul class="free rv">{free}</ul>'}
+{"" if V14() else f'<p class="plist13__ip rv">{t("人気IPとの正規ライセンス商品は","Officially licensed collaborations with popular characters: ")}{lnk("collaboration.html","IPコラボレーション商品へ","See IP collaborations")}</p>'}
 </div></section>'''
+    if V14():   # the IP collaborations block moves here from the brand page (change proposal)
+        body += brand_collab("01", ' id="collab"')
     return page("products.html", "products", t("製品","Products"),
                 t("花印の製品一覧。クレンジング、化粧水・美容液、クリーム・ジェル、マスク・パック、UV化粧下地、メンズ。日本製のスキンケア。",
                   "HANAJIRUSHI products: cleansing, lotions and serums, creams and gels, masks, UV primer and men's care. Made in Japan."),
@@ -870,6 +967,8 @@ def p_product13(p):
     free = ''.join(f'<li>{x}</li>' for x in p["free"])
     ask = cta_btn("product", "" if not EN() else "btn--fill", p["slug"], ("この製品について相談する", "Ask about this product"))
     buy = f'<a class="btn btn--fill" href="{cat.RAKUTEN}{p["rk"]}/" target="_blank" rel="noopener"><span>楽天市場で購入する</span>{ARR}</a>'
+    if V14():   # change proposal: one 「この製品を購入する」 button opening a choice of stores
+        buy = f'<button class="btn btn--fill" type="button" data-buy aria-haspopup="dialog" aria-controls="buy"><span>この製品を購入する</span>{ARR}</button>'
     ctas = t(buy + ask, ask + btn("partners.html", "", "Become a distributor"))   # EN_ONLY: no consumer store link
     crumb = (f'<nav class="crumb crumb--pdx" aria-label="breadcrumb"><div class="wrap"><a href="index.html">{t("ホーム","Home")}</a>'
              f'<a href="products.html">{t("製品","Products")}</a><a href="products.html?cat={p["cat"]}#list">{cats[p["cat"]]}</a><span>{p["name"]}</span></div></nav>')
@@ -898,6 +997,9 @@ def p_product13(p):
 <div class="split__txt rv">{shd("03","Research","銀座の研究室から、<br>確かな処方を。","Reliable formulas<br><em>from our Ginza lab.</em>", kj="研究への取り組み")}<p>{b.RD_P1()}</p>
 <div class="ctas">{lnk("rd.html","研究開発・品質管理","R&amp;D and quality")}</div></div></div></section>'''
     info = [(t("製品名","Product"), p["name"]), (t("内容量","Size"), p["size"]), (t("区分","Category"), p["kind"]), (t("原産国","Made in"), t("日本","Japan"))] + cat.TBC(p)
+    if V14():   # change proposal: no 区分, 使用期限, 入数・ケースサイズ or 製造販売元 rows
+        tbc = cat.TBC(p)
+        info = [(t("製品名","Product"), p["name"]), (t("内容量","Size"), p["size"]), (t("原産国","Made in"), t("日本","Japan")), tbc[0], tbc[2]]
     dl = ''.join(f'<div><dt>{a}</dt><dd>{v}</dd></div>' for a, v in info)
     inci = p["inci"] if not EN() else (f'{tbd("英文表記 要確認", "English INCI list TBC")}<span class="pdd__ja" lang="ja">{p["inci"]}</span>')
     docs = ''.join(f'<li>{a}</li>' for a, d in b.EXPORT_DOCS())
@@ -914,8 +1016,24 @@ def p_product13(p):
     more = f'''<section class="sec sec--t" id="more"><div class="wrap">
 <div class="col13__h">{shd("05","More","その他の製品","More products", kj="その他の製品")}{lnk("products.html","製品一覧へ","All products")}</div>
 <ul class="pgrid">{"".join(pcard(x, k + 1) for k, x in enumerate(more_l))}</ul></div></section>'''
+    dlg = buy_dialog(p) if (V14() and not EN()) else ''
     return page(fn, "product", p["name"], f'{p["name"]}（{p["size"]}）｜{p["short"]}' if not EN() else f'{p["name"]} ({p["size"]}) — {p["short"]}',
-                crumb + top + feat + usage + research + details + more)
+                crumb + top + feat + usage + research + details + more + dlg)
+
+def buy_dialog(p):
+    """v1.4: the store chooser behind 「この製品を購入する」 (premium-v14.js opens it). Rakuten opens
+    this product's page; the other stores' addresses are still to come from the client."""
+    rk = f'{cat.RAKUTEN}{p["rk"]}/'
+    stores = [("rakuten.svg", "楽天市場", "花印 公式ショップ", rk), ("amazon.png", "Amazon", "公式ストア", None),
+              ("yahoo.svg", "Yahoo!ショッピング", "公式ストア", None), ("qoo10.png", "Qoo10", "公式ショップ", None)]
+    li = ''.join((f'<li><a href="{u}" target="_blank" rel="noopener">' if u else '<li><a href="#" aria-disabled="true">')
+                 + f'<img src="{IMG}{im}" alt=""><b>{n}</b><small>{x}</small>{"" if u else tbd("URL 要確認","URL TBC")}</a></li>'
+                 for im, n, x, u in stores)
+    return f'''
+<dialog class="buy" id="buy" aria-labelledby="buy-h"><div class="buy__in">
+{eb("Online store")}<h2 id="buy-h">購入するストアを選ぶ</h2><p class="buy__p">{p["name"]}（{p["size"]}）</p>
+<ul class="buy__l">{li}</ul>
+<button class="buy__x" type="button" data-close aria-label="閉じる">×</button></div></dialog>'''
 
 def p_brand():
     if V13():
@@ -965,18 +1083,39 @@ def msg_img():
                 f'{tbd("撮影・ご提供待ち","To be supplied")}</div></figure>')
     return f'<figure class="msg__img rv"><img src="{IMG}h_campany_ent.jpg" alt="" loading="lazy"><figcaption>{t("銀座本社 エントランス","Ginza head office, entrance")}</figcaption></figure>'
 
+def MESSAGE14():
+    """The representative's message (client text, change proposal 2026-10-07; English is our draft)."""
+    return t(["私たち花印は、銀座を出発点に、一人ひとりが自分らしい美しさと出会えるスキンケアを追求してきました。",
+              "肌質も、年齢も、求める美しさも、人それぞれです。だからこそ、私たちは一人ひとりの肌と真摯に向き合い、毎日の暮らしの中で無理なく続けられる、身近で心地よいスキンケアを届けたいと考えています。",
+              "私たちが目指すのは、日本のお客様だけでなく、世界中の人々に、花印のスキンケアを通じて自分らしい美しさを育んでいただくことです。",
+              "品質と使い心地にこだわり、お客様の声に耳を傾けながら、国や文化を越えて、一人ひとりに寄り添う商品づくりに取り組んでまいります。",
+              "銀座から世界へ。これからも花印は、毎日のスキンケアを通じて、一人ひとりの「キレイ」を応援し続けます。"],
+             ["Starting from Ginza, Hanajirushi has pursued skincare that helps each person discover a beauty of their own.",
+              "Skin type, age and the beauty people seek all differ. That is why we meet each person's skin sincerely, and want to offer skincare that is approachable, comfortable and easy to keep up in daily life.",
+              "Our aim is for people not only in Japan but all over the world to nurture their own beauty through Hanajirushi skincare.",
+              "Committed to quality and comfort, and listening to our customers, we will keep making products that stay close to each person, across countries and cultures.",
+              "From Ginza to the world: through everyday skincare, Hanajirushi will keep supporting the beauty of every person."])
+
 def p_company():
     A = b.A
     hd = phero("Company", "会社概要", "Company",
                t("東京・銀座から、日本のスキンケアを世界へ。","Japanese skincare, from Ginza, Tokyo to the world."),
                "h_campany_top_p.jpg", "銀座",
-               [A("message","代表挨拶","Message"),A("profile","会社概要","Profile"),A("business","事業内容","Business"),A("history","沿革","History"),A("office","オフィス紹介","Office"),A("access","アクセス","Access"),("rd.html",t("研究開発・品質","R&amp;D &amp; quality"))], pos="30% center")
+               [A("message","代表挨拶","Message"),A("profile","会社概要","Profile"),A("business","事業内容","Business")] + ([] if V14() else [A("history","沿革","History")]) + [A("office","オフィス紹介","Office"),A("access","アクセス","Access"),("rd.html",t("研究開発・品質","R&amp;D &amp; quality"))], pos="30% center")
     head_ = t(f'<h2 class="msg__tate">{lines("銀座から、<br>世界へ。")}</h2>', f'<h2 class="msg__h">{lines("From Ginza,<br><em>to the world.</em>")}</h2>')
     msg = f'''<section class="sec msg" id="message"><div class="wrap msg__g">
 <div class="msg__s rv">{eb("Message","01")}{head_}</div>
 <div class="msg__txt rv"><p>{b.MESSAGE_PH()}</p>
 <p class="msg__sig">{t("花印粧業研究所株式会社<br>代表取締役 ","Hanajirushi Institute of Cosmetics, Inc.<br>Representative Director ")}{tbd("氏名","Name TBC")}</p></div>
 {msg_img()}
+</div></section>'''
+    if V14():   # change proposal: the client's message, no portrait
+        paras = ''.join(f'<p>{x}</p>' for x in MESSAGE14())
+        msg = f'''<section class="sec msg msg--noimg" id="message"><div class="wrap msg__g">
+<div class="msg__s rv">{eb("Message","01")}{head_}</div>
+<div class="msg__txt rv"><p class="msg__lead">{t("一人ひとりの美しさに、寄り添い続ける。","Staying close to the beauty of every person.")}</p>{paras}
+<p class="msg__end" lang="ja">ひとりに、ひとつの、キレイを咲かせる。</p>
+<p class="msg__sig">{t("花印粧業研究所株式会社<br>代表取締役 ","Hanajirushi Institute of Cosmetics, Inc.<br>Representative Director ")}{tbd("氏名","Name TBC")}</p></div>
 </div></section>'''
     prof = f'''<section class="sec sec--t blush" id="profile"><div class="wrap prof__g">
 {shd("02","Profile","会社概要","Company profile", kj="会社概要")}
@@ -997,7 +1136,7 @@ def p_company():
     shown = {im for im, *_ in b.BUSINESS()} if V11() else set()
     ph = ''.join(f'<li class="rv"><figure><img src="{IMG}{im}" alt="" loading="lazy"><figcaption>{x}</figcaption></figure></li>' for im, x in b.OFFICE_PHOTOS() if im not in shown)
     office = f'''<section class="sec office" id="office"><div class="wrap">
-{shd("05","Office","オフィス紹介","Our Ginza office", kj="オフィス紹介", cls="shd--c",
+{shd("04" if V14() else "05","Office","オフィス紹介","Our Ginza office", kj="オフィス紹介", cls="shd--c",
      lead=t("銀座二丁目の本社に、研究室・ショールーム・応接室を備えています。","Our head office in Ginza 2-chome houses our laboratory, showroom and meeting rooms."))}
 <div class="office__g"><figure class="office__main rv"><img src="{IMG}h_campany_bldg.jpg" alt="" loading="lazy"><figcaption>{t("本社ビル（銀座二丁目）","Head office, Ginza 2-chome")}</figcaption></figure>
 <ul class="office__l">{ph}</ul></div></div></section>'''
@@ -1005,14 +1144,14 @@ def p_company():
             ("TEL", TEL()), ("FAX", FAX()), (t("受付時間","Hours"), t("平日 10:00〜18:00（土日祝除く）","Mon–Fri 10:00–18:00 (JST)"))]
     access = f'''<section class="sec sec--t blush" id="access"><div class="wrap acc__g">
 <div class="acc__map rv"><iframe loading="lazy" title="{t("地図","Map")}" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA%E9%8A%80%E5%BA%A72-12-12&output=embed&hl={b.L}"></iframe></div>
-<div class="rv">{shd("06","Access","アクセス","Access", kj="アクセス")}
+<div class="rv">{shd("05" if V14() else "06","Access","アクセス","Access", kj="アクセス")}
 <dl class="dl">{"".join(f"<div><dt>{a}</dt><dd>{v}</dd></div>" for a, v in rows)}</dl>
 {lnk("https://maps.google.com/?q=2-12-12+Ginza+Chuo-ku+Tokyo","Googleマップで見る","Open in Google Maps")}</div>
 </div></section>'''
     return page("company.html", "company", t("会社概要","Company"),
                 t("花印粧業研究所株式会社の会社概要。代表挨拶、事業内容、沿革、オフィス紹介、アクセス。2015年創業、東京・銀座本社。",
                   "Company profile of Hanajirushi Institute of Cosmetics, Inc. Founded 2015, headquartered in Ginza, Tokyo, with in-house R&D, manufacturing and export."),
-                hd + msg + prof + struct + business + history + office + access)
+                hd + msg + prof + struct + business + ("" if V14() else history) + office + access)
 
 # ============================================================ R&D
 def p_rd():
@@ -1527,7 +1666,7 @@ PAGES = {"index.html": p_home, "brand.html": p_brand, "company.html": p_company,
 def build():
     global _VER
     b.IMG = IMG  # build.py helpers that print image paths resolve from premium/<lang>/
-    for out, ver in ((OUT, 1.0), (OUT11, 1.1), (OUT12, 1.2), (OUT13, 1.3)):
+    for out, ver in ((OUT, 1.0), (OUT11, 1.1), (OUT12, 1.2), (OUT13, 1.3), (OUT14, 1.4)):
         _VER = ver
         for lang in ("ja", "en"):
             b.L = lang

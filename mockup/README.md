@@ -25,6 +25,7 @@ Tip: `ja/index.html#kv=3` (or `en/…`) opens the top carousel on slide 3 with a
 
 | Version | Folder | Look |
 |---|---|---|
+| **Premium v1.4** | `premium-1.4/ja/`, `premium-1.4/en/`, `premium-1.4/cosmoprof-asia/` | Premium v1.3 with the client's change proposal (2026-10-07): the official logo, the client's brand-page text and message, one button per slide, a store chooser on product pages, fewer product spec rows, no history for now (see *Premium v1.4* below). |
 | **Premium v1.3** | `premium-1.3/ja/`, `premium-1.3/en/`, `premium-1.3/cosmoprof-asia/` | Premium v1.2 with the reviewer's changes (意見まとめ.xlsx, 2026-10): brighter (white, V1 crimson), new menu order, separate Brand and Products pages, a products list plus one page per product from the Rakuten store, a large-image home slider, a short partnership section (see *Premium v1.3* below). |
 | **Premium v1.2** | `premium-1.2/ja/`, `premium-1.2/en/`, `premium-1.2/cosmoprof-asia/` | Premium v1.1 plus a standalone Cosmoprof Asia buyer page for the booth QR code, and a home slider for news (see *Premium v1.2* below). |
 | **Premium v1.1** | `premium-1.1/ja/`, `premium-1.1/en/` | Premium v1 plus the fixes and motion from the 2026-10 review (see *Premium v1.1* below). |
@@ -156,6 +157,30 @@ booth. v1.2 = v1.1 plus that page; gated by `V12()` (v1 and v1.1 output unchange
   reduced motion. The small exhibition note under the v1.1 hero is replaced by the
   exhibition slide.
 - Files: `assets/css/premium-v12.css` (every v1.2 site page), `assets/js/premium-v12.js` (home page only).
+
+### Premium v1.4 — the client's change proposal (2026-10-07)
+
+v1.3 plus the changes the client marked on screenshots of v1.3 and the text in
+ブランドページ文字案.docx (`~/Downloads/LOGO－2020版/change proposal/`). Gated by `V14()` in
+`_build/build_premium.py`; v1–v1.3 output does not change. Files: `assets/css/premium-v14.css`,
+`assets/js/premium-v14.js` (store chooser), `assets/img/logo_mark.png` / `logo_mark_w.png` (cropped
+from the client's LOGO－2020版 files).
+
+- **Official logo only** (「LOGOは正式のものしか使えないです」): the drawn 花印 seal is now the official
+  square mark (magenta; the white-square version on the crimson contact band of the home page). Word
+  stamps (特許, 出展, 募集中) are not the logo and stay — to confirm with the client.
+- **Home:** one button per slide (the first); no 無香料・無着色… line under the products.
+- **Brand** (`brand.html`): the client's text — header lead, BRAND CONCEPT, **OUR VALUES** (five values,
+  in place of the five free-from circles: 「用以下内容代替」), BRAND STORY (fills the three placeholders);
+  the IP collaborations block moved to the products page. English is our draft for the client to check.
+- **Products:** no free-from line; the IP collaborations block is at the foot of the list.
+- **Product page:** 「この製品を購入する」 opens a choice of stores (楽天市場 = the product's Rakuten page;
+  Amazon, Yahoo!ショッピング, Qoo10 marked URL 要確認 until the client sends the addresses). The details
+  table keeps 製品名, 内容量, 原産国, 全成分, JANコード (区分, 使用期限, 入数・ケースサイズ, 製造販売元 removed).
+- **Company:** the client's representative message (English is our draft), no portrait; 沿革 is on hold
+  (「保留」) — hidden from the page, the in-page links and the footer.
+- **To confirm:** the representative's name; whether the magenta logo should change the site's crimson;
+  the Amazon / Yahoo / Qoo10 store addresses; the English drafts.
 
 ### Premium v1.3 — reviewer feedback (意見まとめ.xlsx)
 

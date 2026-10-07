@@ -1,0 +1,64 @@
+/* 花印 HANAJIRUSHI — premium v1.4: the client's change proposal (2026-10-07) on v1.3.
+   Loaded after premium-v13.css on every v1.4 page.
+   - the official square logo mark in place of the drawn 花印 seal (white-square version on the
+     crimson contact band of the home page)
+   - brand page: OUR VALUES (in place of the free-from circles) and the written brand story
+   - company page: the representative's message without a portrait
+   - product page: the store chooser behind 「この製品を購入する」 */
+
+/* ---- official logo mark (seal() prints both images; CSS picks one) */
+.seal.seal--logo,.cta .seal.seal--logo,body:not(.pg-home) .cta .seal.seal--logo{background:none;box-shadow:none;border-radius:0;transform:none;color:inherit}
+.seal--logo img{display:block;width:100%;height:100%;object-fit:contain}
+.seal--logo .lm-w{display:none}
+.pg-home .cta .seal--logo .lm{display:none}
+.pg-home .cta .seal--logo .lm-w{display:block}
+.hs13__vis .seal--logo,.lp-hero__vis .seal--logo{box-shadow:0 10px 24px -14px rgba(39,38,40,.45)}
+
+/* ---- brand: OUR VALUES */
+.vals{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0 clamp(16px,2vw,28px);margin-top:clamp(40px,4vw,56px)}
+.vals li{padding-top:24px;border-top:1px solid var(--line-d)}
+.vals__n{display:block;font-family:var(--didone);font-size:34px;line-height:1;color:var(--beni);opacity:.5}
+.vals__w{display:block;margin-top:16px;font-family:var(--caps);font-size:10.5px;font-weight:500;letter-spacing:.22em;color:var(--beni-d)}
+.vals h3{margin-top:8px;font-family:var(--mincho);font-weight:500;font-size:17px;line-height:1.6;letter-spacing:.08em}
+html[lang="en"] .vals h3{font-family:var(--didone);font-weight:400;font-size:21px;line-height:1.25;letter-spacing:0}
+.vals p{margin-top:12px;font-size:13px;line-height:1.95;color:var(--ink-2)}
+@media (max-width:1180px){.vals{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:40px}}
+@media (max-width:760px){.vals{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px}}
+@media (max-width:480px){.vals{grid-template-columns:1fr}}
+
+/* ---- brand: the written brand story (the v1.3 placeholder cards, filled) */
+.story13--full li::after{display:none}
+.story13__k{margin-top:18px;font-size:12px;letter-spacing:.14em;color:var(--beni-d)}
+html[lang="en"] .story13__k{font-family:var(--caps);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase}
+.story13--full h3{margin-top:8px;font-size:18px;line-height:1.7}
+html[lang="en"] .story13--full h3{font-size:23px;line-height:1.25}
+.story13--full p:last-child{margin-top:14px;font-size:13.5px;line-height:2}
+
+/* ---- company: message without a portrait */
+.msg--noimg .msg__g{grid-template-columns:auto minmax(0,1fr)}
+html[lang="en"] .msg--noimg .msg__g{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}
+.msg--noimg .msg__txt{max-width:720px}
+.msg--noimg .msg__txt p+p{margin-top:1.2em}
+.msg__lead{font-family:var(--mincho);font-size:clamp(18px,1.8vw,22px);line-height:1.8;letter-spacing:.08em;color:var(--ink)}
+html[lang="en"] .msg__lead{font-family:var(--didone);font-style:italic;font-size:clamp(22px,2.2vw,28px);line-height:1.35;letter-spacing:0}
+.msg__end{margin-top:1.8em!important;font-family:var(--mincho);font-size:16px;letter-spacing:.14em;color:var(--beni-d)}
+@media (max-width:760px){html[lang="en"] .msg--noimg .msg__g{grid-template-columns:1fr}}
+
+/* ---- product: store chooser */
+.buy{width:min(560px,calc(100% - 32px));max-height:calc(100% - 32px);margin:auto;padding:0;border:0;background:#fff;color:var(--ink);box-shadow:0 30px 80px -30px rgba(39,38,40,.45)}
+.buy::backdrop{background:rgba(39,38,40,.45)}
+.buy__in{position:relative;padding:clamp(28px,4vw,44px)}
+.buy h2{margin-top:8px;font-family:var(--mincho);font-weight:500;font-size:22px;line-height:1.6;letter-spacing:.08em}
+.buy__p{margin-top:4px;font-size:13px;color:var(--ink-2)}
+.buy__l{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:24px}
+.buy__l a{display:grid;justify-items:center;align-content:start;gap:6px;height:100%;padding:22px 12px 18px;border:1px solid var(--line-d);text-align:center;transition:border-color .3s}
+.buy__l a:hover{border-color:var(--beni-d)}
+.buy__l a[aria-disabled="true"]{cursor:default}
+.buy__l a[aria-disabled="true"]:hover{border-color:var(--line-d)}
+.buy__l img{height:24px;width:auto;margin-bottom:6px}
+.buy__l b{font-size:13.5px;font-weight:500;letter-spacing:.06em}
+.buy__l small{font-size:11px;letter-spacing:.06em;color:var(--ink-3)}
+.buy__l .tbd{margin-top:4px}
+.buy__x{position:absolute;top:10px;right:10px;width:44px;height:44px;font-size:24px;line-height:1;color:var(--ink-2)}
+.buy__x:hover{color:var(--beni-d)}
+@media (max-width:420px){.buy__l{grid-template-columns:1fr}}
