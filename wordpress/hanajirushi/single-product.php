@@ -21,7 +21,23 @@ $li   = fn( $lines ) => implode( '', array_map( fn( $x ) => '<li>' . esc_html( $
 // Buttons. English pages never link to the Japanese consumer store (EN_ONLY rule).
 $ask = hj_cta_btn( 'product', hj_is_en() ? 'btn--fill' : '', $p->post_name, array( 'この製品について相談する', 'Ask about this product' ) );
 $rk  = (string) hj_raw( 'rakuten_code', $id );
-$buy = $rk ? '<a class="btn btn--fill" href="' . esc_url( 'https://item.rakuten.co.jp/hanajirushi/' . rawurlencode( $rk ) . '/' ) . '" target="_blank" rel="noopener"><span>楽天市場で購入する</span>' . HJ_ARR . '</a>' : '';
+// 「この製品を購入する」 opens a choice of stores (client, 2026-10-07). A store without its address is
+// marked 要確認 on the review site and left out on the live site.
+$stores = array(
+	array( 'rakuten.svg', '楽天市場', '花印 公式ショップ', $rk ? 'https://item.rakuten.co.jp/hanajirushi/' . rawurlencode( $rk ) . '/' : '' ),
+	array( 'amazon.png', 'Amazon', '公式ストア', (string) hj_raw( 'amazon_url', $id ) ),
+	array( 'yahoo.svg', 'Yahoo!ショッピング', '公式ストア', (string) hj_raw( 'yahoo_url', $id ) ),
+	array( 'qoo10.png', 'Qoo10', '公式ショップ', (string) hj_raw( 'qoo10_url', $id ) ),
+);
+$store_li = '';
+foreach ( $stores as $s ) {
+	if ( $s[3] ) {
+		$store_li .= '<li><a href="' . esc_url( $s[3] ) . '" target="_blank" rel="noopener"><img src="' . esc_url( hj_img( $s[0] ) ) . '" alt=""><b>' . $s[1] . '</b><small>' . $s[2] . '</small></a></li>';
+	} elseif ( hj_show_tbc() ) {
+		$store_li .= '<li><a href="#" aria-disabled="true"><img src="' . esc_url( hj_img( $s[0] ) ) . '" alt=""><b>' . $s[1] . '</b><small>' . $s[2] . '</small>' . hj_tbd( 'URL 要確認', 'URL TBC' ) . '</a></li>';
+	}
+}
+$buy = ( $store_li && ! hj_is_en() ) ? '<button class="btn btn--fill" type="button" data-buy aria-haspopup="dialog" aria-controls="buy"><span>この製品を購入する</span>' . HJ_ARR . '</button>' : '';
 $ctas = hj_is_en() ? $ask . hj_btn( hj_link( '/partners/' ), '', 'Become a distributor' ) : $buy . $ask;
 
 $free = hj_split_lines( hj_get( 'free', $id ) );
@@ -70,12 +86,12 @@ $trade = function ( string $field ) use ( $id ): string {
 	$v = (string) hj_raw( $field, $id );
 	return '' !== $v ? esc_html( $v ) : hj_tbd();
 };
-$dl = $row( hj_t( '製品名', 'Product' ), esc_html( $name ) ) . $row( hj_t( '内容量', 'Size' ), esc_html( $size ) ) . $row( hj_t( '区分', 'Category' ), esc_html( $kind ) ) . $row( hj_t( '原産国', 'Made in' ), hj_t( '日本', 'Japan' ) );
+// The client keeps 製品名, 内容量, 原産国, 全成分（INCI表記）, JANコード (2026-10-07).
+$dl = $row( hj_t( '製品名', 'Product' ), esc_html( $name ) ) . $row( hj_t( '内容量', 'Size' ), esc_html( $size ) ) . $row( hj_t( '原産国', 'Made in' ), hj_t( '日本', 'Japan' ) );
 foreach ( array(
-	array( hj_t( '使用期限', 'Shelf life' ), hj_t( '未開封 ', 'Unopened ' ) . $trade( 'shelf_unopened' ) . hj_t( '　開封後 ', ' · After opening ' ) . $trade( 'shelf_opened' ), (string) hj_raw( 'shelf_unopened', $id ) . hj_raw( 'shelf_opened', $id ) ),
+	// the English INCI list itself sits under 全成分 below; this row says whether it is there
+	array( hj_t( '全成分（INCI表記）', 'Full INCI list' ), hj_raw( 'inci_en', $id ) ? hj_t( '下記「全成分」に掲載', 'Under “Ingredients” below' ) : hj_tbd( '掲載予定', 'To be listed' ), (string) hj_raw( 'inci_en', $id ) ),
 	array( hj_t( 'JANコード', 'JAN / EAN' ), $trade( 'jan' ), (string) hj_raw( 'jan', $id ) ),
-	array( hj_t( '入数・ケースサイズ', 'Case pack' ), $trade( 'case_pack' ), (string) hj_raw( 'case_pack', $id ) ),
-	array( hj_t( '製造販売元', 'Manufacturer' ), $trade( 'maker' ), (string) hj_raw( 'maker', $id ) ),
 ) as $r ) {
 	if ( '' !== $r[2] || hj_show_tbc() ) {   // empty facts: hidden on the live site, marked 要確認 on the review site
 		$dl .= $row( $r[0], $r[1] );
@@ -118,5 +134,11 @@ foreach ( array_slice( array_merge( $same, $home ), 0, 3 ) as $k => $x ) {
 <section class="sec sec--t" id="more"><div class="wrap">
 <div class="col13__h"><?php echo hj_shd( '05', 'More', 'その他の製品', 'More products', 'その他の製品' ) . hj_lnk( hj_link( '/products/' ), '製品一覧へ', 'All products' ); ?></div>
 <ul class="pgrid"><?php echo $more; ?></ul></div></section>
+<?php if ( $buy ) : ?>
+<dialog class="buy" id="buy" aria-labelledby="buy-h"><div class="buy__in">
+<?php echo hj_eb( 'Online store' ); ?><h2 id="buy-h">購入するストアを選ぶ</h2><p class="buy__p"><?php echo esc_html( $name . '（' . $size . '）' ); ?></p>
+<ul class="buy__l"><?php echo $store_li; ?></ul>
+<button class="buy__x" type="button" data-close aria-label="閉じる">×</button></div></dialog>
+<?php endif; ?>
 <?php
 get_footer();

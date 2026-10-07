@@ -38,6 +38,12 @@ function hj_c( string $key ) {
 
 /** The 花印 seal (落款). */
 function hj_seal( string $txt = '花印', string $cls = '' ): string {
+	// Only the official logo may stand for 花印 (client, 2026-10-07): the square mark, with the
+	// white-square version for the crimson contact band (premium-v14.css picks one).
+	if ( '花印' === $txt ) {
+		return '<span class="seal seal--logo ' . esc_attr( $cls ) . '" aria-hidden="true"><img class="lm" src="' . esc_url( hj_img( 'logo_mark.png' ) ) . '" alt="">'
+			. '<img class="lm-w" src="' . esc_url( hj_img( 'logo_mark_w.png' ) ) . '" alt=""></span>';
+	}
 	return '<span class="seal ' . esc_attr( $cls ) . '" aria-hidden="true"><span>' . $txt . '</span></span>';
 }
 

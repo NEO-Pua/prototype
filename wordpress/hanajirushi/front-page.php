@@ -49,7 +49,6 @@ foreach ( hj_categories() as $k => $label ) {
 <?php echo hj_btn( hj_link( '/products/' ), 'すべての製品を見る', 'All products' ); ?></div>
 <nav class="col13__cats rv" aria-label="<?php echo esc_attr( hj_t( 'カテゴリー', 'Categories' ) ); ?>"><?php echo $chips; ?></nav>
 <ul class="pgrid"><?php echo $cards; ?></ul>
-<?php echo hj_free_list(); ?>
 </div></section>
 
 <?php // ------------------------------------------------------------------ 03 brand ?>

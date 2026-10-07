@@ -26,13 +26,14 @@ PLUGIN = os.path.join(WP, "hanajirushi-core")
 sys.path.insert(0, os.path.join(MOCK, "_build"))
 import build as b          # noqa: E402  (mockup copy and data; t() follows b.L)
 import catalog as cat      # noqa: E402
+import build_premium as bp  # noqa: E402  (premium v1.4: the client's brand text and message)
 
-CSS = ["premium.css", "premium-v11.css", "premium-v12.css", "premium-v13.css", "premium-lp.css"]
-JS = ["premium.js", "premium-v11.js", "premium-v12.js", "premium-v13.js", "premium-lp.js"]
+CSS = ["premium.css", "premium-v11.css", "premium-v12.css", "premium-v13.css", "premium-v14.css", "premium-lp.css"]
+JS = ["premium.js", "premium-v11.js", "premium-v12.js", "premium-v13.js", "premium-v14.js", "premium-lp.js"]
 THEME_IMG = ["logo.svg", "rakuten.svg", "amazon.png", "yahoo.svg", "qoo10.png", "world_map_brand.png",
              "h_brand_top_p.jpg", "h_campany_bldg.jpg", "h_campany_lab.jpg", "h_campany_top_p.jpg",
              "h_campany_sr.jpg", "h_campany_dr.jpg", "h_campany_ent.jpg", "h_hanajirushi_top-1.jpg",
-             "hanajirushi_hsc.jpg"]
+             "hanajirushi_hsc.jpg", "logo_mark.png", "logo_mark_w.png"]
 
 
 def copy_assets():
@@ -40,7 +41,13 @@ def copy_assets():
         dst = os.path.join(THEME, "assets", sub)
         os.makedirs(dst, exist_ok=True)
         for n in names:
-            shutil.copy2(os.path.join(MOCK, "assets", sub, n), os.path.join(dst, n))
+            src = os.path.join(MOCK, "assets", sub, n)
+            if n.endswith(".png"):   # few-colour PNGs (map, logos): a 256-colour palette keeps the zip under 2 MB uploads
+                im = Image.open(src)
+                im = im.convert("RGBA").quantize(colors=256, method=Image.Quantize.FASTOCTREE)
+                im.save(os.path.join(dst, n), optimize=True)
+            else:
+                shutil.copy2(src, os.path.join(dst, n))
     import budoux
     src = os.path.join(os.path.dirname(budoux.__file__), "models", "ja.json")
     shutil.copy2(src, os.path.join(PLUGIN, "inc", "budoux-ja.json"))
@@ -78,6 +85,7 @@ def products():
             "is_new": bool(p["new"]), "coming_soon": bool(p["soon"]),
             "show_on_home": p["slug"] in cat.FEATURED, "home_order": cat.FEATURED.index(p["slug"]) + 1 if p["slug"] in cat.FEATURED else 0,
             "rakuten_code": p["rk"] or "", "image": img or "", "image_temp": "" if img else (p["rimg"] or ""),
+            "amazon_url": "", "yahoo_url": "", "qoo10_url": "",
             "ja": {"title": plain(p["name"]), "sub": plain(p["sub"]), "short": plain(p["short"]), "catch": plain(p["catch"]),
                    "desc": plain(p["desc"]), "usage": plain(p["usage"]), "inci": plain(p["inci"]),
                    "badges": "\n".join(plain(x) for x in p["badges"]), "free": "\n".join(plain(x) for x in p["free"]),
@@ -95,34 +103,34 @@ def slides():
     """Field for field the kv_slide post type. Links are site paths; the plugin adds /en."""
     return [
         {"order": 1, "visual": "none", "eyebrow": "Hanajirushi · Ginza, Tokyo", "bg": "h_hanajirushi_top-1.jpg", "bg_pos": "70% center",
-         "btn1_link": "/products/", "btn2_link": "/brand/",
+         "btn1_link": "/products/",
          "ja": {"tab": "花印について", "label": "", "heading": "ひとりに、ひとつの、\nキレイを咲かせる。", "accent": False,
-                "text": "東京・銀座の自社研究室で開発する、\n無香料・無着色の日本製スキンケア。", "btn1": "製品を見る", "btn2": "ブランドについて"},
+                "text": "東京・銀座の自社研究室で開発する、\n無香料・無着色の日本製スキンケア。", "btn1": "製品を見る"},
          "en": {"tab": "Hanajirushi", "label": "", "heading": "Clean formula.\nGentle by design.\nMade in Japan.", "accent": True,
                 "text": "Skincare formulated in our own laboratory in Ginza, Tokyo — sold in Japan and 12 countries.",
-                "btn1": "View products", "btn2": "About the brand"}},
+                "btn1": "View products"}},
         {"order": 2, "visual": "kanji", "kanji": "出展", "kanji_caption": "Hong Kong 2026", "bg": "h_campany_top_p.jpg", "bg_pos": "center 40%",
-         "btn1_link": "/cosmoprof-asia/", "btn2_link": "",
+         "btn1_link": "/cosmoprof-asia/",
          "ja": {"tab": "展示会", "label": "展示会", "heading": "Cosmoprof Asia 2026に\n出展します。", "accent": True,
                 "text": "2026年11月、香港コンベンション＆エキシビションセンター。ブースでの商談のご予約を受け付けています。",
-                "btn1": "展示会専用ページへ", "btn2": ""},
+                "btn1": "展示会専用ページへ"},
          "en": {"tab": "Exhibition", "label": "Exhibition", "heading": "Meet us at\nCosmoprof Asia 2026", "accent": True,
                 "text": "November 2026, Hong Kong Convention & Exhibition Centre. Meetings at our booth can be booked now.",
-                "btn1": "Open the event page", "btn2": ""}},
+                "btn1": "Open the event page"}},
         {"order": 3, "visual": "products", "products": ["hatomugi-skin-conditioner", "hatomugi-essence", "hatomugi-cream"], "bg": "",
-         "btn1_link": "/products/hatomugi-essence/", "btn2_link": "/products/hatomugi-cream/",
+         "btn1_link": "/products/hatomugi-essence/",
          "ja": {"tab": "ハトムギシリーズ", "label": "新商品", "heading": "ハトムギシリーズに、\n美容液とクリーム。", "accent": True,
                 "text": "ハトムギ化粧水と一緒に使える、ハトムギ豊潤美容液（200mL）とハトムギクリーム（100g）。",
-                "btn1": "美容液を見る", "btn2": "クリームを見る"},
+                "btn1": "美容液を見る"},
          "en": {"tab": "Hatomugi series", "label": "New", "heading": "The Hatomugi series\nadds a serum and a cream.", "accent": True,
                 "text": "Hatomugi Rich Essence (200mL) and Hatomugi Cream (100g), made to go with the Hatomugi lotion.",
-                "btn1": "See the essence", "btn2": "See the cream"}},
+                "btn1": "See the essence"}},
         {"order": 4, "visual": "product", "product": "cleansing-lotion-ma", "seal": "特許", "bg": "h_brand_top_p.jpg", "bg_pos": "center",
-         "btn1_link": "/products/cleansing-lotion-ma/", "btn2_link": "",
+         "btn1_link": "/products/cleansing-lotion-ma/",
          "ja": {"tab": "特許", "label": "特許", "heading": "特許技術を採用した、\nクレンジングローション。", "accent": True,
-                "text": "うるおい残してしっかり落ちる、拭き取りタイプのクレンジングローション。", "btn1": "製品を見る", "btn2": ""},
+                "text": "うるおい残してしっかり落ちる、拭き取りタイプのクレンジングローション。", "btn1": "製品を見る"},
          "en": {"tab": "Patent", "label": "Patent", "heading": "A cleansing lotion\nwith patented technology.", "accent": True,
-                "text": "A wipe-off cleansing lotion that removes make-up and leaves moisture behind.", "btn1": "View the product", "btn2": ""}},
+                "text": "A wipe-off cleansing lotion that removes make-up and leaves moisture behind.", "btn1": "View the product"}},
     ]
 
 
@@ -178,9 +186,13 @@ def marks(x):
 
 def copy_data():
     out = {}
+    bp._VER = 1.4
     for lang in ("ja", "en"):
         b.L = lang
         out[lang] = {n: marks(getattr(b, n)()) for n in COPY}
+        out[lang]["VALUES14"] = [[w, b.t(ja, en), b.t(dja, den)] for w, ja, en, dja, den in bp.VALUES14()]
+        out[lang]["STORY14"] = [list(x) for x in bp.STORY14()]
+    bp._VER = 1.0
     b.L = "ja"
     return out
 
@@ -208,17 +220,31 @@ def settings_more():
     rows = []
     for a, v in ja["rows"]:
         e = match.get(a)
-        rows.append({"label": a, "value": v, "label_en": e or "", "value_en": en_rows.get(e, "") if e else ""})
+        row = {"label": a, "value": v, "label_en": e or "", "value_en": en_rows.get(e, "") if e else ""}
+        if a == "代表者":   # premium v1.4: the representative stays anonymous
+            row["value"], row["value_en"] = "代表取締役", "Representative Director"
+        rows.append(row)
     return {
         "profile_rows": rows,
         "history": [{"date": a, "text": v, "date_en": c, "text_en": d} for (a, v), (c, d) in zip(ja["history"], en["history"])],
         "terms": [{"label": a, "value": v, "label_en": c, "value_en": d} for (a, v), (c, d) in zip(ja["terms"], en["terms"])],
         "faq": [{"q": a, "a": v, "q_en": c, "a_en": d} for (a, v), (c, d) in zip(ja["faq"], en["faq"])],
-        "message": ja["message"], "message_en": en["message"],
-        "rep_title": "代表取締役", "rep_title_en": "Representative Director", "rep_name": "［氏名］", "rep_name_en": "［Name TBC］",
+        "message": message14("ja"), "message_en": message14("en"),
+        "message_lead": "一人ひとりの美しさに、寄り添い続ける。", "message_lead_en": "Staying close to the beauty of every person.",
+        "rep_title": "代表取締役", "rep_title_en": "Representative Director",
         "stations": ja["stations"] + "［分数］", "stations_en": en["stations"] + "［min TBC］",
         "show_contact": "［氏名］", "show_whatsapp": "［番号］", "show_wechat": "［ID］", "show_email": "export@hanajirushi.co.jp ［要確認］",
     }
+
+
+def message14(lang):
+    """The representative's message (premium v1.4, client text; English is our draft)."""
+    b.L = lang
+    bp._VER = 1.4
+    out = "\n\n".join(bp.MESSAGE14())
+    bp._VER = 1.0
+    b.L = "ja"
+    return out
 
 
 def exhibitions():

@@ -69,7 +69,7 @@ function hj_footer_cols(): array {
 	return array(
 		array( hj_t( 'ブランド', 'Brand' ), array( array( '/brand/', hj_t( 'ブランドについて', 'About the brand' ) ), array( '/collaboration/', hj_t( 'IPコラボレーション', 'IP collaborations' ) ), array( '/rd/', hj_t( '研究開発・品質管理', 'R&amp;D and quality' ) ) ) ),
 		array( hj_t( '製品', 'Products' ), $prods ),
-		array( hj_t( '会社情報', 'Company' ), array( array( '/company/', hj_t( '会社概要', 'Company profile' ) ), array( '/company/#history', hj_t( '沿革', 'History' ) ), array( '/company/#access', hj_t( 'アクセス', 'Access' ) ), array( '/news/', hj_t( 'お知らせ', 'News' ) ) ) ),
+		array( hj_t( '会社情報', 'Company' ), array( array( '/company/', hj_t( '会社概要', 'Company profile' ) ), ...( hj_opt_raw( 'show_history' ) ? array( array( '/company/#history', hj_t( '沿革', 'History' ) ) ) : array() ), array( '/company/#access', hj_t( 'アクセス', 'Access' ) ), array( '/news/', hj_t( 'お知らせ', 'News' ) ) ) ),
 		array( hj_t( 'パートナーシップ', 'Partnership' ), array( array( '/partners/', hj_t( '海外代理店・パートナー募集', 'Partnership programme' ) ), array( '/partners/#network', hj_t( '海外展開・販売実績', 'Global network' ) ), array( '/exhibition/', hj_t( '展示会情報', 'Exhibitions' ) ), array( '/contact/', hj_t( 'お問い合わせ', 'Contact' ) ) ) ),
 	);
 }
@@ -77,9 +77,9 @@ function hj_footer_cols(): array {
 /** Page titles and descriptions by page slug: [Japanese title, English title, JA description, EN description]. */
 function hj_pages(): array {
 	return array(
-		'brand'          => array( 'ブランド', 'Brand', '花印のブランド理念とブランドストーリー。ひとりに、ひとつの、キレイを咲かせる。東京・銀座の自社研究室で開発する日本製スキンケア。', 'The HANAJIRUSHI brand: our philosophy and story, research in our own Ginza laboratory, and licensed IP collaborations.' ),
+		'brand'          => array( 'ブランド', 'Brand', '花印のブランドコンセプト、5つの価値観、ブランドストーリー。ひとりに、ひとつの、キレイを咲かせる。東京・銀座の日本製スキンケア。', 'The HANAJIRUSHI brand: our concept, our five values and our story — Japanese skincare from Ginza, Tokyo.' ),
 		'collaboration'  => array( 'IPコラボレーション', 'Licensed IP Collaborations', '花印のIPコラボレーション。美少女戦士セーラームーン、リトルツインスターズ、フルーツバスケット、ユーリ!!! on ICE との正規ライセンス商品。', 'HANAJIRUSHI licensed IP collaborations: Sailor Moon, Little Twin Stars, Fruits Basket, Yuri!!! on ICE. Full co-development capability for distributors.' ),
-		'company'        => array( '会社概要', 'Company', '花印粧業研究所株式会社の会社概要。代表挨拶、事業内容、沿革、オフィス紹介、アクセス。2015年創業、東京・銀座本社。', 'Company profile of Hanajirushi Institute of Cosmetics, Inc. Founded 2015, headquartered in Ginza, Tokyo, with in-house R&D, manufacturing and export.' ),
+		'company'        => array( '会社概要', 'Company', '花印粧業研究所株式会社の会社概要。代表メッセージ、事業内容、オフィス紹介、アクセス。2015年創業、東京・銀座本社。', 'Company profile of Hanajirushi Institute of Cosmetics, Inc. Founded 2015, headquartered in Ginza, Tokyo, with in-house R&D, manufacturing and export.' ),
 		'rd'             => array( '研究開発・品質', 'R&D & Quality', '花印の研究開発と品質管理。銀座の自社研究室での処方開発、日本国内での製造、輸出書類、各国登録の技術支援。', 'HANAJIRUSHI R&D and quality: in-house formulation in Ginza, manufacturing in Japan, export documentation and registration support.' ),
 		'news'           => array( 'お知らせ', 'News', '花印粧業研究所株式会社からのお知らせ。展示会、製品情報、企業情報。', 'News from Hanajirushi Institute of Cosmetics, Inc.: exhibitions, products and business updates.' ),
 		'partners'       => array( '海外代理店・パートナー募集', 'Partnership Programme', '花印の海外代理店・パートナー募集。世界12ヵ国での販売実績、中国市場での実績、協業モデル、取引条件、輸出書類、各国登録の技術支援、お取引開始までの流れ、よくあるご質問。', 'Become a HANAJIRUSHI distributor: sold in 12 countries, proven in China; cooperation models, trade terms, export documentation, registration support, how to start and FAQ.' ),

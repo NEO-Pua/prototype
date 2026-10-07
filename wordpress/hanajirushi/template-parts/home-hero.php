@@ -29,9 +29,6 @@ foreach ( $slides as $i => $s ) {
 	if ( hj_get( 'btn1', $id ) ) {
 		$ctas .= '<a class="btn btn--fill" href="' . esc_url( hj_link( hj_raw( 'btn1_link', $id ) ) ) . '"><span>' . esc_html( hj_get( 'btn1', $id ) ) . '</span>' . HJ_ARR . '</a>';
 	}
-	if ( hj_get( 'btn2', $id ) ) {
-		$ctas .= '<a class="lnk" href="' . esc_url( hj_link( hj_raw( 'btn2_link', $id ) ) ) . '"><span>' . esc_html( hj_get( 'btn2', $id ) ) . '</span>' . HJ_ARR . '</a>';
-	}
 
 	$vis = '';
 	if ( 'kanji' === $visual ) {

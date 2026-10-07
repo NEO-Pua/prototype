@@ -39,9 +39,8 @@ echo hj_phero( 'Products', '製品', 'Products',
 <?php if ( hj_is_en() ) : ?>
 <p class="note">Trade specifications (INCI, shelf life, JAN codes, case packs) and price lists are available on request. <?php echo hj_cta_lnk( 'product', 'lnk--s' ); ?></p>
 <?php endif; ?>
-<?php echo hj_free_list(); ?>
-<p class="plist13__ip rv"><?php echo hj_t( '人気IPとの正規ライセンス商品は', 'Officially licensed collaborations with popular characters: ' ) . hj_lnk( hj_link( '/collaboration/' ), 'IPコラボレーション商品へ', 'See IP collaborations' ); ?></p>
 </div></section>
 <?php
+echo hj_brand_collab( '01', 'collab' );   // moved here from the brand page (client, 2026-10-07)
 get_template_part( 'template-parts/stores' );
 get_footer();

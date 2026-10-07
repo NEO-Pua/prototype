@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       花印 HANAJIRUSHI Core
  * Description:       花印サイトのコンテンツ（製品・スライド・IPコラボ・展示会・お知らせの英語欄・サイト設定）、お問い合わせ・商談予約フォーム、日本語／英語の切り替え（/en/）、和文の改行調整、初期データの取り込み。テーマ「花印 HANAJIRUSHI」と組み合わせて使います。
- * Version:           0.2.0
+ * Version:           0.3.0
  * Requires at least: 6.6
  * Requires PHP:      8.1
  * Requires Plugins:  secure-custom-fields
@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'HJ_CORE_VERSION', '0.2.0' );
+define( 'HJ_CORE_VERSION', '0.3.0' );
 define( 'HJ_CORE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'HJ_CORE_URL', plugin_dir_url( __FILE__ ) );
 

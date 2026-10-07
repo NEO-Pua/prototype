@@ -14,6 +14,9 @@
    "rakuten_code": "10000091",
    "image": "hanajirushi_cl.jpg",
    "image_temp": "",
+   "amazon_url": "",
+   "yahoo_url": "",
+   "qoo10_url": "",
    "ja": {
     "title": "花印クレンジングローションMa",
     "sub": "Cleansing Lotion Ma",
@@ -79,6 +82,9 @@
    "rakuten_code": "10000090peach-2",
    "image": "",
    "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/mem_item/imgrc0114516936.jpg",
+   "amazon_url": "",
+   "yahoo_url": "",
+   "qoo10_url": "",
    "ja": {
     "title": "花印ジューシークレンジングローション",
     "sub": "Juicy Cleansing Lotion",
@@ -144,6 +150,9 @@
    "rakuten_code": "10001008-set",
    "image": "hanajirushi_hsc.jpg",
    "image_temp": "",
+   "amazon_url": "",
+   "yahoo_url": "",
+   "qoo10_url": "",
    "ja": {
     "title": "花印ハトムギ化粧水",
     "sub": "Hatomugi Skin Conditioner",
@@ -209,6 +218,9 @@
    "rakuten_code": "10001051",
    "image": "",
    "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/mem_product/11741495/imgrc0135285519.jpg",
+   "amazon_url": "",
+   "yahoo_url": "",
+   "qoo10_url": "",
    "ja": {
     "title": "花印ハトムギ豊潤美容液",
     "sub": "Hatomugi Rich Essence",
@@ -274,6 +286,9 @@
    "rakuten_code": "10001050",
    "image": "",
    "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/mem_item/hatomugi-cream-mpr.jpg",
+   "amazon_url": "",
+   "yahoo_url": "",
+   "qoo10_url": "",
    "ja": {
     "title": "花印ハトムギクリーム",
     "sub": "Hatomugi Cream",
@@ -339,6 +354,9 @@
    "rakuten_code": "1003335",
    "image": "",
    "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/mem_item/imgrc0099431473.jpg",
+   "amazon_url": "",
+   "yahoo_url": "",
+   "qoo10_url": "",
    "ja": {
     "title": "花印ブースターコンディショナー",
     "sub": "Booster Conditioner — pre-serum",
@@ -404,6 +422,9 @@
    "rakuten_code": "10000072",
    "image": "",
    "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/mem_item/imgrc0117465392.jpg",
+   "amazon_url": "",
+   "yahoo_url": "",
+   "qoo10_url": "",
    "ja": {
     "title": "花印モイスチュアフェイスクリーム",
     "sub": "Moisture Face Cream — Amino Acid",
@@ -469,6 +490,9 @@
    "rakuten_code": "10000074",
    "image": "",
    "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/mem_product/wrinkle-repair-cream/imgrc0131518738.jpg",
+   "amazon_url": "",
+   "yahoo_url": "",
+   "qoo10_url": "",
    "ja": {
     "title": "花印薬用リンクルアイクリーム",
     "sub": "Whitening & Wrinkle Repair Cream",
@@ -534,6 +558,9 @@
    "rakuten_code": "10000057",
    "image": "hanajirushi_smfm.jpg",
    "image_temp": "",
+   "amazon_url": "",
+   "yahoo_url": "",
+   "qoo10_url": "",
    "ja": {
     "title": "花印スーパーモイスチュアフェイスマスク",
     "sub": "Super Moisture Face Mask — Amino Acid 80g",
@@ -599,6 +626,9 @@
    "rakuten_code": "10000002",
    "image": "",
    "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/mem_product/13773545/imgrc0159567170.jpg",
+   "amazon_url": "",
+   "yahoo_url": "",
+   "qoo10_url": "",
    "ja": {
     "title": "花印スーパーモイスチュアフェイスマスク 200g",
     "sub": "Super Moisture Face Mask — All-in-one Gel",
@@ -664,6 +694,9 @@
    "rakuten_code": "10000105",
    "image": "",
    "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/11261505/11294025/imgrc0129945835.jpg",
+   "amazon_url": "",
+   "yahoo_url": "",
+   "qoo10_url": "",
    "ja": {
     "title": "花印クレーパック",
     "sub": "Volcanic Clay Pack",
@@ -729,6 +762,9 @@
    "rakuten_code": "10001006-copyy",
    "image": "",
    "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/mem_product/10049686/4941.jpg",
+   "amazon_url": "",
+   "yahoo_url": "",
+   "qoo10_url": "",
    "ja": {
     "title": "花印トーンアップUVプライマー",
     "sub": "Tone-up UV Primer SPF50+ PA++++",
@@ -794,6 +830,9 @@
    "rakuten_code": "10000042",
    "image": "",
    "image_temp": "https://shop.r10s.jp/hanajirushi/cabinet/mem_item/item_42_01.jpg",
+   "amazon_url": "",
+   "yahoo_url": "",
+   "qoo10_url": "",
    "ja": {
     "title": "花印バイタル オールインワンジェル",
     "sub": "Vital All-in-One Gel for Men",
@@ -859,6 +898,9 @@
    "rakuten_code": "",
    "image": "",
    "image_temp": "",
+   "amazon_url": "",
+   "yahoo_url": "",
+   "qoo10_url": "",
    "ja": {
     "title": "花印クレンジングオイル",
     "sub": "Cleansing Oil",
@@ -893,15 +935,13 @@
    "bg": "h_hanajirushi_top-1.jpg",
    "bg_pos": "70% center",
    "btn1_link": "/products/",
-   "btn2_link": "/brand/",
    "ja": {
     "tab": "花印について",
     "label": "",
     "heading": "ひとりに、ひとつの、\nキレイを咲かせる。",
     "accent": false,
     "text": "東京・銀座の自社研究室で開発する、\n無香料・無着色の日本製スキンケア。",
-    "btn1": "製品を見る",
-    "btn2": "ブランドについて"
+    "btn1": "製品を見る"
    },
    "en": {
     "tab": "Hanajirushi",
@@ -909,8 +949,7 @@
     "heading": "Clean formula.\nGentle by design.\nMade in Japan.",
     "accent": true,
     "text": "Skincare formulated in our own laboratory in Ginza, Tokyo — sold in Japan and 12 countries.",
-    "btn1": "View products",
-    "btn2": "About the brand"
+    "btn1": "View products"
    }
   },
   {
@@ -921,15 +960,13 @@
    "bg": "h_campany_top_p.jpg",
    "bg_pos": "center 40%",
    "btn1_link": "/cosmoprof-asia/",
-   "btn2_link": "",
    "ja": {
     "tab": "展示会",
     "label": "展示会",
     "heading": "Cosmoprof Asia 2026に\n出展します。",
     "accent": true,
     "text": "2026年11月、香港コンベンション＆エキシビションセンター。ブースでの商談のご予約を受け付けています。",
-    "btn1": "展示会専用ページへ",
-    "btn2": ""
+    "btn1": "展示会専用ページへ"
    },
    "en": {
     "tab": "Exhibition",
@@ -937,8 +974,7 @@
     "heading": "Meet us at\nCosmoprof Asia 2026",
     "accent": true,
     "text": "November 2026, Hong Kong Convention & Exhibition Centre. Meetings at our booth can be booked now.",
-    "btn1": "Open the event page",
-    "btn2": ""
+    "btn1": "Open the event page"
    }
   },
   {
@@ -951,15 +987,13 @@
    ],
    "bg": "",
    "btn1_link": "/products/hatomugi-essence/",
-   "btn2_link": "/products/hatomugi-cream/",
    "ja": {
     "tab": "ハトムギシリーズ",
     "label": "新商品",
     "heading": "ハトムギシリーズに、\n美容液とクリーム。",
     "accent": true,
     "text": "ハトムギ化粧水と一緒に使える、ハトムギ豊潤美容液（200mL）とハトムギクリーム（100g）。",
-    "btn1": "美容液を見る",
-    "btn2": "クリームを見る"
+    "btn1": "美容液を見る"
    },
    "en": {
     "tab": "Hatomugi series",
@@ -967,8 +1001,7 @@
     "heading": "The Hatomugi series\nadds a serum and a cream.",
     "accent": true,
     "text": "Hatomugi Rich Essence (200mL) and Hatomugi Cream (100g), made to go with the Hatomugi lotion.",
-    "btn1": "See the essence",
-    "btn2": "See the cream"
+    "btn1": "See the essence"
    }
   },
   {
@@ -979,15 +1012,13 @@
    "bg": "h_brand_top_p.jpg",
    "bg_pos": "center",
    "btn1_link": "/products/cleansing-lotion-ma/",
-   "btn2_link": "",
    "ja": {
     "tab": "特許",
     "label": "特許",
     "heading": "特許技術を採用した、\nクレンジングローション。",
     "accent": true,
     "text": "うるおい残してしっかり落ちる、拭き取りタイプのクレンジングローション。",
-    "btn1": "製品を見る",
-    "btn2": ""
+    "btn1": "製品を見る"
    },
    "en": {
     "tab": "Patent",
@@ -995,8 +1026,7 @@
     "heading": "A cleansing lotion\nwith patented technology.",
     "accent": true,
     "text": "A wipe-off cleansing lotion that removes make-up and leaves moisture behind.",
-    "btn1": "View the product",
-    "btn2": ""
+    "btn1": "View the product"
    }
   }
  ],
@@ -1197,9 +1227,9 @@
    },
    {
     "label": "代表者",
-    "value": "代表取締役 ［氏名］",
+    "value": "代表取締役",
     "label_en": "Representative",
-    "value_en": "Representative Director ［Name TBC］"
+    "value_en": "Representative Director"
    },
    {
     "label": "資本金",
@@ -1364,12 +1394,12 @@
     "a_en": "Yes — using our in-house formulation capability. MOQ and development lead time: ［TBC］."
    }
   ],
-  "message": "（代表挨拶の原稿をご提供いただき掲載します。創業の想い、ものづくりへの姿勢、海外展開への展望などを400〜600字程度で想定しています。）",
-  "message_en": "(Message from the Representative Director to be supplied — around 150–250 words on the company's founding, approach to product-making and global ambitions.)",
+  "message": "私たち花印は、銀座を出発点に、一人ひとりが自分らしい美しさと出会えるスキンケアを追求してきました。\n\n肌質も、年齢も、求める美しさも、人それぞれです。だからこそ、私たちは一人ひとりの肌と真摯に向き合い、毎日の暮らしの中で無理なく続けられる、身近で心地よいスキンケアを届けたいと考えています。\n\n私たちが目指すのは、日本のお客様だけでなく、世界中の人々に、花印のスキンケアを通じて自分らしい美しさを育んでいただくことです。\n\n品質と使い心地にこだわり、お客様の声に耳を傾けながら、国や文化を越えて、一人ひとりに寄り添う商品づくりに取り組んでまいります。\n\n銀座から世界へ。これからも花印は、毎日のスキンケアを通じて、一人ひとりの「キレイ」を応援し続けます。",
+  "message_en": "Starting from Ginza, Hanajirushi has pursued skincare that helps each person discover a beauty of their own.\n\nSkin type, age and the beauty people seek all differ. That is why we meet each person's skin sincerely, and want to offer skincare that is approachable, comfortable and easy to keep up in daily life.\n\nOur aim is for people not only in Japan but all over the world to nurture their own beauty through Hanajirushi skincare.\n\nCommitted to quality and comfort, and listening to our customers, we will keep making products that stay close to each person, across countries and cultures.\n\nFrom Ginza to the world: through everyday skincare, Hanajirushi will keep supporting the beauty of every person.",
+  "message_lead": "一人ひとりの美しさに、寄り添い続ける。",
+  "message_lead_en": "Staying close to the beauty of every person.",
   "rep_title": "代表取締役",
   "rep_title_en": "Representative Director",
-  "rep_name": "［氏名］",
-  "rep_name_en": "［Name TBC］",
   "stations": "東京メトロ有楽町線「銀座一丁目駅」\n東京メトロ銀座線・丸ノ内線・日比谷線「銀座駅」\n徒歩［分数］",
   "stations_en": "Ginza-itchome Station (Yurakucho Line)\nGinza Station (Ginza, Marunouchi, Hibiya Lines)\nWalk［min TBC］",
   "show_contact": "［氏名］",

@@ -45,7 +45,7 @@ function hj_seed_import(): array {
 	foreach ( $data['products'] as $p ) {
 		$id = hj_seed_post( 'product', $p['slug'], $p['ja']['title'], $p['order'] );
 		$ids[ $p['slug'] ] = $id;
-		foreach ( array( 'category', 'series', 'size', 'kind', 'rakuten_code', 'image_temp' ) as $k ) {
+		foreach ( array( 'category', 'series', 'size', 'kind', 'rakuten_code', 'image_temp', 'amazon_url', 'yahoo_url', 'qoo10_url' ) as $k ) {
 			hj_seed_set( 'product', $k, $p[ $k ], $id );
 		}
 		hj_seed_set( 'product', 'is_new', $p['is_new'] ? 1 : 0, $id );
@@ -67,12 +67,12 @@ function hj_seed_import(): array {
 		hj_seed_set( 'slide', 'tab', $s['ja']['tab'], $id );
 		hj_seed_set( 'slide', 'title_en', $s['en']['tab'], $id );
 		foreach ( array( '' => $s['ja'], '_en' => $s['en'] ) as $sfx => $l ) {
-			foreach ( array( 'label', 'heading', 'text', 'btn1', 'btn2' ) as $k ) {
+			foreach ( array( 'label', 'heading', 'text', 'btn1' ) as $k ) {
 				hj_seed_set( 'slide', $k . $sfx, $l[ $k ], $id );
 			}
 			hj_seed_set( 'slide', 'accent' . $sfx, $l['accent'] ? 1 : 0, $id );
 		}
-		foreach ( array( 'eyebrow', 'visual', 'kanji', 'kanji_caption', 'seal', 'bg_pos', 'btn1_link', 'btn2_link' ) as $k ) {
+		foreach ( array( 'eyebrow', 'visual', 'kanji', 'kanji_caption', 'seal', 'bg_pos', 'btn1_link' ) as $k ) {
 			hj_seed_set( 'slide', $k, $s[ $k ] ?? '', $id );
 		}
 		hj_seed_set( 'slide', 'product', isset( $s['product'] ) ? ( $ids[ $s['product'] ] ?? 0 ) : '', $id );

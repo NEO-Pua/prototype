@@ -1,7 +1,9 @@
 # 花印 HANAJIRUSHI — WordPress theme and plugin
 
-The premium v1.3 mockup (`../mockup/premium-1.3/`) as an installable WordPress theme and
-plugin. **Status (v0.2.0): every v1.3 page is built** — home, brand, IP collaborations,
+The premium v1.4 mockup (`../mockup/premium-1.4/`) as an installable WordPress theme and
+plugin. **Status (v0.3.0): every page is built, with the client's v1.4 changes** (official
+logo, brand text, one button per slide, store chooser, fewer product rows, 代表メッセージ,
+history on hold) — home, brand, IP collaborations,
 products and each product page, company, R&D, news (list, categories, years, article),
 partnership, exhibitions, contact (with a working form) and the Cosmoprof Asia buyer page
 (booth QR code, booking form) — in Japanese and English.
@@ -77,14 +79,14 @@ database, then replace the old site address (e.g. *Better Search Replace*).
 
 | Menu | Content |
 |---|---|
-| 製品 | One post per product: 基本情報 (category, series, size, new / coming soon, on the home page, Rakuten code), 日本語, English, 取引情報 (shelf life, JAN, case pack, manufacturer, cautions). Photo = アイキャッチ画像. Order = 属性 → 順序. |
-| トップスライド | One post per slide: texts per language (with character limits), visual (none / product / 3 products / kanji), seal, background photo, links, optional start and end dates. |
+| 製品 | One post per product: 基本情報 (category, series, size, new / coming soon, on the home page, store pages for 「この製品を購入する」: Rakuten code, Amazon, Yahoo!ショッピング, Qoo10), 日本語, English, 取引情報 (JAN, cautions). Photo = アイキャッチ画像. Order = 属性 → 順序. A store without its address is marked 要確認 on the review site and left out of the chooser on the live site. |
+| トップスライド | One post per slide: texts per language (with character limits), one button and its link, visual (none / product / 3 products / kanji), seal, background photo, optional start and end dates. |
 | IPコラボ | Name, product, label, sales channel per language; photo = アイキャッチ画像. |
 | 投稿 (お知らせ) | Japanese title and text as usual; English title and text in the *English* box. Categories: 展示会, お知らせ, 企業情報, 製品情報. |
 | 展示会 | One post per show: dates, venue, booth, on show, languages, status, its buyer page, last day (after it, the show moves to 過去の出展). The next show also fills the buyer page and the news sidebar. |
-| サイト設定 | Tabs: company details (JA / EN), 会社概要の表, 代表挨拶 (text, name, photo), 沿革, 取引条件, よくあるご質問, アクセス (stations), 展示会担当 (contact, WhatsApp, WeChat, QR images, PDFs), お問い合わせ (notification address, auto-reply), 表示 (要確認 marks). |
+| サイト設定 | Tabs: company details (JA / EN), 会社概要の表, 代表メッセージ (heading, text with a blank line between paragraphs, title — the representative stays anonymous, no portrait), 沿革 (on hold: a 表示 switch puts it back on the page and in the footer), 取引条件, よくあるご質問, アクセス (stations), 展示会担当 (contact, WhatsApp, WeChat, QR images, PDFs), お問い合わせ (notification address, auto-reply), 表示 (要確認 marks). |
 | お問い合わせ履歴 | Every contact enquiry and booth booking, as sent (read only). |
-| 固定ページ | The pages exist so their addresses work; their layout is the theme's. ブランド's own text replaces the 「ブランドストーリー」 placeholders once it is written there. |
+| 固定ページ | The pages exist so their addresses work; their layout and text are the theme's (the brand text is the client's, from the mockup). |
 
 **要確認 marks:** in any field, text in full-width square brackets — ［要確認］, ［氏名］,
 ［TBC］ — shows as the dashed 要確認 mark while サイト設定 → 表示 is on, and disappears when it is
