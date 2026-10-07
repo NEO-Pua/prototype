@@ -69,7 +69,7 @@ foreach ( $shown as $i => $p ) {
 $j4  = '';
 $kan = array( '研', '造', '質', '績' );
 foreach ( hj_c( 'JAPAN4' ) as $i => $j ) {
-	$j4 .= '<li class="rv"><span class="j4__k" aria-hidden="true">' . $kan[ $i ] . '</span><p class="j4__n">' . sprintf( '%02d', $i + 1 ) . '</p><h3>' . $j[1] . '</h3><p>' . $j[2] . '</p>' . $j[3] . '</li>';
+	$j4 .= '<li class="rv">' . hj_j4_mark( $i, $kan[ $i ] ) . '<p class="j4__n">' . sprintf( '%02d', $i + 1 ) . '</p><h3>' . $j[1] . '</h3><p>' . $j[2] . '</p>' . $j[3] . '</li>';
 }
 ?>
 <section class="nums lp-nums"><div class="wrap"><ul class="nums__l"><?php echo $nums; ?></ul></div></section>

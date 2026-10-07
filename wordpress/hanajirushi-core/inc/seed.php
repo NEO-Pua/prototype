@@ -72,7 +72,7 @@ function hj_seed_import(): array {
 			}
 			hj_seed_set( 'slide', 'accent' . $sfx, $l['accent'] ? 1 : 0, $id );
 		}
-		foreach ( array( 'eyebrow', 'visual', 'kanji', 'kanji_caption', 'seal', 'bg_pos', 'btn1_link' ) as $k ) {
+		foreach ( array( 'eyebrow', 'visual', 'kanji', 'kanji_en', 'kanji_caption', 'seal', 'bg_pos', 'btn1_link' ) as $k ) {
 			hj_seed_set( 'slide', $k, $s[ $k ] ?? '', $id );
 		}
 		hj_seed_set( 'slide', 'product', isset( $s['product'] ) ? ( $ids[ $s['product'] ] ?? 0 ) : '', $id );

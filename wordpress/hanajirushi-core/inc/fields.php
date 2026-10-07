@@ -158,6 +158,7 @@ add_action( 'acf/include_fields', function () {
 				hj_f( 'product', '製品', 'post_object', array( 'post_type' => array( 'product' ), 'return_format' => 'id', 'conditional_logic' => array( array( array( 'field' => 'field_hj_slide_visual', 'operator' => '==', 'value' => 'product' ) ) ) ) ),
 				hj_f( 'products', '製品（3点まで）', 'relationship', array( 'post_type' => array( 'product' ), 'max' => 3, 'return_format' => 'id', 'filters' => array( 'search' ), 'conditional_logic' => array( array( array( 'field' => 'field_hj_slide_visual', 'operator' => '==', 'value' => 'products' ) ) ) ) ),
 				hj_f( 'kanji', '漢字（1〜2文字）', 'text', array( 'maxlength' => 2, 'conditional_logic' => array( array( array( 'field' => 'field_hj_slide_visual', 'operator' => '==', 'value' => 'kanji' ) ) ) ) ),
+				hj_f( 'kanji_en', '英語ページで漢字の代わりに出す語（例：Hong Kong）', 'text', array( 'maxlength' => 12, 'conditional_logic' => array( array( array( 'field' => 'field_hj_slide_visual', 'operator' => '==', 'value' => 'kanji' ) ) ) ) ),
 				hj_f( 'kanji_caption', '漢字の下の英字', 'text', array( 'maxlength' => 20, 'conditional_logic' => array( array( array( 'field' => 'field_hj_slide_visual', 'operator' => '==', 'value' => 'kanji' ) ) ) ) ),
 				hj_f( 'seal', '落款（1〜2文字）', 'text', array( 'maxlength' => 2, 'instructions' => '任意。画像に押す赤い印（例：特許）。' ) ),
 				hj_f( 'bg', '背景写真', 'image', array( 'return_format' => 'id', 'preview_size' => 'medium', 'instructions' => '横長の写真（幅2000px程度）。空欄なら淡い無地。' ) ),

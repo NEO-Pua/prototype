@@ -28,9 +28,9 @@ import build as b          # noqa: E402  (mockup copy and data; t() follows b.L)
 import catalog as cat      # noqa: E402
 import build_premium as bp  # noqa: E402  (premium v1.4: the client's brand text and message)
 
-CSS = ["premium.css", "premium-v11.css", "premium-v12.css", "premium-v13.css", "premium-v14.css", "premium-lp.css"]
+CSS = ["premium.css", "premium-v11.css", "premium-v12.css", "premium-v13.css", "premium-v14.css", "premium-v15.css", "premium-lp.css"]
 JS = ["premium.js", "premium-v11.js", "premium-v12.js", "premium-v13.js", "premium-v14.js", "premium-lp.js"]
-THEME_IMG = ["logo.svg", "rakuten.svg", "amazon.png", "yahoo.svg", "qoo10.png", "world_map_brand.png",
+THEME_IMG = ["logo.svg", "rakuten.svg", "amazon.png", "yahoo.svg", "qoo10.png", "world_map_v15.png",
              "h_brand_top_p.jpg", "h_campany_bldg.jpg", "h_campany_lab.jpg", "h_campany_top_p.jpg",
              "h_campany_sr.jpg", "h_campany_dr.jpg", "h_campany_ent.jpg", "h_hanajirushi_top-1.jpg",
              "hanajirushi_hsc.jpg", "logo_mark.png", "logo_mark_w.png"]
@@ -109,7 +109,7 @@ def slides():
          "en": {"tab": "Hanajirushi", "label": "", "heading": "Clean formula.\nGentle by design.\nMade in Japan.", "accent": True,
                 "text": "Skincare formulated in our own laboratory in Ginza, Tokyo — sold in Japan and 12 countries.",
                 "btn1": "View products"}},
-        {"order": 2, "visual": "kanji", "kanji": "出展", "kanji_caption": "Hong Kong 2026", "bg": "h_campany_top_p.jpg", "bg_pos": "center 40%",
+        {"order": 2, "visual": "kanji", "kanji": "出展", "kanji_en": "Hong Kong", "kanji_caption": "Hong Kong 2026", "bg": "h_campany_top_p.jpg", "bg_pos": "center 40%",
          "btn1_link": "/cosmoprof-asia/",
          "ja": {"tab": "展示会", "label": "展示会", "heading": "Cosmoprof Asia 2026に\n出展します。", "accent": True,
                 "text": "2026年11月、香港コンベンション＆エキシビションセンター。ブースでの商談のご予約を受け付けています。",

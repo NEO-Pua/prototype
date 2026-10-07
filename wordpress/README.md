@@ -1,9 +1,10 @@
 # 花印 HANAJIRUSHI — WordPress theme and plugin
 
-The premium v1.4 mockup (`../mockup/premium-1.4/`) as an installable WordPress theme and
-plugin. **Status (v0.3.0): every page is built, with the client's v1.4 changes** (official
-logo, brand text, one button per slide, store chooser, fewer product rows, 代表メッセージ,
-history on hold) — home, brand, IP collaborations,
+The premium v1.5 mockup (`../mockup/premium-1.5/`) as an installable WordPress theme and
+plugin. **Status (v0.4.0): every page is built, with the client's v1.4 and v1.5 changes**
+(official logo, brand text, one button per slide, store chooser, fewer product rows,
+代表メッセージ, history on hold; v1.5: the logo's magenta #D92070, English pages without
+Japanese labels) — home, brand, IP collaborations,
 products and each product page, company, R&D, news (list, categories, years, article),
 partnership, exhibitions, contact (with a working form) and the Cosmoprof Asia buyer page
 (booth QR code, booking form) — in Japanese and English.
@@ -80,7 +81,7 @@ database, then replace the old site address (e.g. *Better Search Replace*).
 | Menu | Content |
 |---|---|
 | 製品 | One post per product: 基本情報 (category, series, size, new / coming soon, on the home page, store pages for 「この製品を購入する」: Rakuten code, Amazon, Yahoo!ショッピング, Qoo10), 日本語, English, 取引情報 (JAN, cautions). Photo = アイキャッチ画像. Order = 属性 → 順序. A store without its address is marked 要確認 on the review site and left out of the chooser on the live site. |
-| トップスライド | One post per slide: texts per language (with character limits), one button and its link, visual (none / product / 3 products / kanji), seal, background photo, optional start and end dates. |
+| トップスライド | One post per slide: texts per language (with character limits), one button and its link, visual (none / product / 3 products / kanji — with an English word for the English site, e.g. Hong Kong), seal, background photo, optional start and end dates. |
 | IPコラボ | Name, product, label, sales channel per language; photo = アイキャッチ画像. |
 | 投稿 (お知らせ) | Japanese title and text as usual; English title and text in the *English* box. Categories: 展示会, お知らせ, 企業情報, 製品情報. |
 | 展示会 | One post per show: dates, venue, booth, on show, languages, status, its buyer page, last day (after it, the show moves to 過去の出展). The next show also fills the buyer page and the news sidebar. |

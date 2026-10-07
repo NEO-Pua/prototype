@@ -25,6 +25,7 @@ Tip: `ja/index.html#kv=3` (or `en/…`) opens the top carousel on slide 3 with a
 
 | Version | Folder | Look |
 |---|---|---|
+| **Premium v1.5** | `premium-1.5/ja/`, `premium-1.5/en/`, `premium-1.5/cosmoprof-asia/` | Premium v1.4 with the client's second round (2026-10-07): the logo's magenta #D92070 in place of the crimson, and English pages without Japanese labels (see *Premium v1.5* below). |
 | **Premium v1.4** | `premium-1.4/ja/`, `premium-1.4/en/`, `premium-1.4/cosmoprof-asia/` | Premium v1.3 with the client's change proposal (2026-10-07): the official logo, the client's brand-page text and message, one button per slide, a store chooser on product pages, fewer product spec rows, no history for now (see *Premium v1.4* below). |
 | **Premium v1.3** | `premium-1.3/ja/`, `premium-1.3/en/`, `premium-1.3/cosmoprof-asia/` | Premium v1.2 with the reviewer's changes (意見まとめ.xlsx, 2026-10): brighter (white, V1 crimson), new menu order, separate Brand and Products pages, a products list plus one page per product from the Rakuten store, a large-image home slider, a short partnership section (see *Premium v1.3* below). |
 | **Premium v1.2** | `premium-1.2/ja/`, `premium-1.2/en/`, `premium-1.2/cosmoprof-asia/` | Premium v1.1 plus a standalone Cosmoprof Asia buyer page for the booth QR code, and a home slider for news (see *Premium v1.2* below). |
@@ -157,6 +158,27 @@ booth. v1.2 = v1.1 plus that page; gated by `V12()` (v1 and v1.1 output unchange
   reduced motion. The small exhibition note under the v1.1 hero is replaced by the
   exhibition slide.
 - Files: `assets/css/premium-v12.css` (every v1.2 site page), `assets/js/premium-v12.js` (home page only).
+
+### Premium v1.5 — the client's second round (2026-10-07)
+
+v1.4 plus three requests (in Chinese, relayed by the user). Gated by `V15()` in
+`_build/build_premium.py`; v1–v1.4 output does not change. Files: `assets/css/premium-v15.css`,
+`assets/img/world_map_v15.png` (the sales map in the new colour, converted from Adobe RGB to sRGB).
+
+- **The logo's red** (「用logo的红色，替换现有的红色」, LOGO－2020版 06): magenta `#D92070` replaces the
+  crimson `#A51D34` for buttons, bands, the seal, lines and the map. Text uses `#CC1E69`, a hair
+  darker, so it keeps WCAG AA on the grey bands (4.9:1); white on `#D92070` is 4.8:1.
+- **English pages in English** (「英语页面里存在的日语部分，试试用英语替代」) and **no repeats**
+  (「重复的话，可以不显示」): no small Japanese line under page titles, section headings, menu items,
+  region, model and quality labels. The faint word behind each page title is English and differs from
+  the title (Bloom, Skincare, Ginza, Lab, Co-create, Grow, Meet us, Updates, Hello). Word stamps are
+  English (Patent, Expo, Join us); 一二三 are I II III; the 日本製 circles carry icons; the exhibition
+  slide's circle says Hong Kong.
+- **Kept in Japanese on English pages** (agreed with the user): the 日本語 switch, the logo, product
+  names and ingredient lists as printed on the pack, the legal company name, and the slogan
+  ひとりに、ひとつの、キレイを咲かせる。 with an English line under it (*Helping every person's own
+  beauty bloom.* — our draft for the client to check).
+- Japanese pages change colour only.
 
 ### Premium v1.4 — the client's change proposal (2026-10-07)
 

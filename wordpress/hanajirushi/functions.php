@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'HJ_THEME_VERSION', '0.3.0' );
+define( 'HJ_THEME_VERSION', '0.4.0' );
 
 require get_template_directory() . '/inc/fallbacks.php';
 require get_template_directory() . '/inc/helpers.php';
@@ -39,7 +39,8 @@ add_action( 'wp_enqueue_scripts', function () {
 		wp_enqueue_style( 'hj-premium-v13', $u . 'css/premium-v13.css', array( 'hj-premium-v12' ), $v );
 	}
 	wp_enqueue_style( 'hj-premium-v14', $u . 'css/premium-v14.css', array( 'hj-premium-v13' ), $v );
-	wp_enqueue_style( 'hj-wp', $u . 'css/wp.css', array( 'hj-premium-v14' ), $v );
+	wp_enqueue_style( 'hj-premium-v15', $u . 'css/premium-v15.css', array( 'hj-premium-v14' ), $v );
+	wp_enqueue_style( 'hj-wp', $u . 'css/wp.css', array( 'hj-premium-v15' ), $v );
 
 	wp_enqueue_script( 'hj-premium', $u . 'js/premium.js', array(), $v, true );
 	wp_enqueue_script( 'hj-premium-v11', $u . 'js/premium-v11.js', array( 'hj-premium' ), $v, true );

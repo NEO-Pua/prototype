@@ -53,7 +53,7 @@ foreach ( hj_categories() as $k => $label ) {
 
 <?php // ------------------------------------------------------------------ 03 brand ?>
 <section class="sec blush br13" id="brand"><div class="wrap br13__g">
-<div class="br13__mark rv"><?php echo hj_seal( '花印', 'seal--xl' ); ?><p class="br13__tate" aria-hidden="true">ひとりに、ひとつの、<br>キレイを咲かせる。</p></div>
+<div class="br13__mark rv"><?php echo hj_seal( '花印', 'seal--xl' ); ?><p class="br13__tate" aria-hidden="true">ひとりに、ひとつの、<br>キレイを咲かせる。</p><?php echo hj_slogan_en( 'slogan-en--mark' ); ?></div>
 <div class="br13__txt rv"><?php echo hj_shd( '03', 'Brand', '肌に咲く、<br>花の印。', 'Hana-jirushi —<br><em>a flower\'s seal.</em>', 'ブランド' ); ?>
 <p><?php echo hj_t( '人の肌を想い、ひとりの悩みを見つめ、ひとつしかないキレイを、メイド・イン・ジャパンのスキンケアの力で届けていく。', 'We look closely at each person\'s skin and each individual concern, and deliver a beauty that is theirs alone — with the power of Japanese-made skincare.' ); ?></p>
 <p><?php echo hj_t( '「花印」の名には、ひとりひとりの肌に咲く花の印という想いを込めています。日本ならではの上質で誠実なものづくりが認められ、花印は国内はもとより世界12ヵ国で販売されています。', 'The name HANAJIRUSHI, “flower seal”, stands for the mark of a flower blooming on each person\'s skin. Recognised for the quality and honesty of Japanese manufacturing, our products are sold in Japan and 12 countries worldwide.' ); ?></p>
@@ -69,7 +69,7 @@ $j4  = array(
 );
 $li4 = '';
 foreach ( $j4 as $i => $j ) {
-	$li4 .= '<li class="rv"><span class="j4__k" aria-hidden="true">' . $j[0] . '</span><p class="j4__n">' . sprintf( '%02d', $i + 1 ) . '</p><h3>' . $j[1] . '</h3><p>' . $j[2] . '</p>' . $j[3] . '</li>';
+	$li4 .= '<li class="rv">' . hj_j4_mark( $i, $j[0] ) . '<p class="j4__n">' . sprintf( '%02d', $i + 1 ) . '</p><h3>' . $j[1] . '</h3><p>' . $j[2] . '</p>' . $j[3] . '</li>';
 }
 ?>
 <section class="sec dark j4" id="japan"><div class="wrap">
@@ -103,7 +103,7 @@ foreach ( hj_t( array( '独占代理店', '販売代理店', 'モダントレー
 <div class="rv"><?php echo hj_shd( '06', 'Partnership', '海外のパートナーの<br>皆さまへ', 'For partners<br><em>around the world</em>', 'パートナーシップ' ); ?>
 <p class="gp13__lead"><?php echo hj_t( '日本ならではの上質で誠実なものづくりを、世界のお客様へ。それぞれの市場をよく知るパートナーの皆さまと、花印の新しい可能性を育てていきます。', 'Japanese quality and honest manufacturing, for customers around the world. We grow Hanajirushi together with partners who know their markets.' ); ?></p>
 <div class="ctas"><?php echo hj_btn( hj_link( '/partners/' ), 'パートナーシップについて', 'Partnership programme', 'btn--fill' ) . hj_cta_lnk( 'partner' ); ?></div></div>
-<div class="gp13__fig rv"><img src="<?php echo esc_url( hj_img( 'world_map_brand.png' ) ); ?>" alt="<?php echo esc_attr( hj_t( '販売地域の地図', 'Map of our markets' ) ); ?>" loading="lazy">
+<div class="gp13__fig rv"><img src="<?php echo esc_url( hj_img( 'world_map_v15.png' ) ); ?>" alt="<?php echo esc_attr( hj_t( '販売地域の地図', 'Map of our markets' ) ); ?>" loading="lazy">
 <p class="gp13__big"><b>12</b><span><?php echo hj_t( 'ヵ国で販売', 'countries' ); ?></span></p>
 <ol class="gp13__ch"><?php echo $chans; ?></ol></div>
 </div></section>

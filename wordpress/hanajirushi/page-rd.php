@@ -14,15 +14,14 @@ echo hj_phero( 'R&amp;D / Quality', '研究開発・<br>品質管理', 'R&amp;D 
 	array( 'anchors' => array( array( 'lab', hj_t( '自社研究室', 'Laboratory' ) ), array( 'process', hj_t( '開発から出荷まで', 'Process' ) ), array( 'quality', hj_t( '品質管理体制', 'Quality' ) ),
 		array( 'docs', hj_t( '輸出書類', 'Export documents' ) ), array( 'regist', hj_t( '各国登録の支援', 'Registration' ) ) ) ) );
 
-$kan  = array( '一', '二', '三' );
 $trio = '';
 for ( $i = 1; $i <= 3; $i++ ) {
-	$trio .= '<li class="rv"><p class="craft__n"><span>' . $kan[ $i - 1 ] . '</span></p><h3>' . hj_c( "RD_POINT{$i}_T" ) . '</h3><p>' . hj_c( "RD_POINT{$i}_D" ) . '</p></li>';
+	$trio .= '<li class="rv"><p class="craft__n"><span>' . hj_kan( $i - 1 ) . '</span></p><h3>' . hj_c( "RD_POINT{$i}_T" ) . '</h3><p>' . hj_c( "RD_POINT{$i}_D" ) . '</p></li>';
 }
 $tags = implode( '', array_map( fn( $x ) => '<li>' . $x . '</li>', hj_c( 'RD_TAGS' ) ) );
 $q    = '';
 for ( $i = 1; $i <= 3; $i++ ) {
-	$q .= '<li class="rv"><small>' . hj_c( "QUALITY{$i}_S" ) . '</small><h3>' . hj_c( "QUALITY{$i}_T" ) . '</h3><p>' . hj_c( "QUALITY{$i}_B" ) . '</p></li>';
+	$q .= '<li class="rv">' . ( hj_is_en() ? '' : '<small>' . hj_c( "QUALITY{$i}_S" ) . '</small>' ) . '<h3>' . hj_c( "QUALITY{$i}_T" ) . '</h3><p>' . hj_c( "QUALITY{$i}_B" ) . '</p></li>';
 }
 ?>
 <section class="sec split" id="lab"><div class="wrap split__g">

@@ -1313,7 +1313,7 @@ def hub():
     def lp(lang):  # premium v1.2: the standalone Cosmoprof Asia buyer page
         return f'<li><a href="premium-1.2/cosmoprof-asia/{"ja.html" if lang == "ja" else "index.html"}">Cosmoprof Asia buyer page<span>展示会専用ページ（QR用）</span></a></li>'
     prem = tuple(f for f, _, _ in names if f != "global.html")  # premium: 海外展開 is part of 代理店募集
-    def col13(lang, label, tag, ver="1.3"):  # premium v1.3 / v1.4: menu order, separate Brand and Products, product pages
+    def col13(lang, label, tag, ver="1.3"):  # premium v1.3 / v1.4 / v1.5: menu order, separate Brand and Products, product pages
         n13 = [("index.html", "Top", "TOP"), ("brand.html", "Brand", "ブランド"), ("products.html", "Products", "製品一覧"),
                ("product-hatomugi-skin-conditioner.html", "Product page (example)", "製品詳細（例）"),
                ("company.html", "Company", "会社情報"), ("rd.html", "R&amp;D &amp; Quality", "研究開発・品質"),
@@ -1330,6 +1330,8 @@ def hub():
 <link rel="stylesheet" href="assets/css/style.css"></head><body class="hubpage">
 <div class="hub"><div class="hub__in">
 <div class="hub__hd"><img class="hub__logo" src="assets/img/logo.svg" alt="花印 HANAJIRUSHI"><div><h1>Website <span>Mockup</span></h1><p>花印 公式サイト デザインモックアップ ／ 日本語版・英語版</p></div></div>
+<h2 class="hub__ver">Premium v1.5 <span>クライアント修正案 第2弾（2026-10-07）— ロゴのマゼンタ（#D92070）を基調色に、英語版の日本語表記を英語に置き換え（重複する日本語の小見出しは非表示）</span></h2>
+<div class="hub__g">{col13("ja","日本語版 Japanese","JA · Premium v1.5","1.5")}{col13("en","英語版 English","EN · Premium v1.5","1.5")}</div>
 <h2 class="hub__ver">Premium v1.4 <span>クライアント修正案（2026-10-07）— 正式ロゴ、ブランドページ・代表メッセージの原稿（代表者名は非公開）、スライドのボタンは1つ、製品の購入ストア選択、製品情報の項目整理、沿革は保留</span></h2>
 <div class="hub__g">{col13("ja","日本語版 Japanese","JA · Premium v1.4","1.4")}{col13("en","英語版 English","EN · Premium v1.4","1.4")}</div>
 <h2 class="hub__ver">Premium v1.3 <span>レビュー反映（意見まとめ）— 明るい配色（白・V1の赤）、メニュー順の変更、ブランドと製品の分離、製品一覧＋製品詳細ページ（楽天の商品情報）、大きな画像のスライド、パートナー欄の簡潔化</span></h2>

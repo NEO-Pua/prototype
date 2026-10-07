@@ -54,7 +54,12 @@ function hj_show_tbc(): bool {
  */
 function hj_marks( string $html ): string {
 	return preg_replace_callback( '/［([^］]*)］/u', function ( $m ) {
-		return hj_show_tbc() ? '<span class="tbd">' . $m[1] . '</span>' : '';
+		$txt = $m[1];
+		// a Japanese mark in a field both languages share (e.g. ［番号］) reads in English on English pages
+		if ( hj_is_en() && preg_match( '/[\p{Han}\p{Hiragana}\p{Katakana}]/u', $txt ) ) {
+			$txt = array( '氏名' => 'Name TBC', '番号' => 'Number TBC', '日付' => 'Date TBC' )[ $txt ] ?? 'TBC';
+		}
+		return hj_show_tbc() ? '<span class="tbd">' . $txt . '</span>' : '';
 	}, $html );
 }
 

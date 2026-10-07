@@ -20,7 +20,7 @@ echo hj_phero( 'Brand', 'ブランド', 'Brand',
 // ------------------------------------------------------------------ 01 brand concept
 // EN_ONLY: the English slogan is re-written, not translated; the Japanese line stays as an accent.
 $slogan = hj_is_en()
-	? '<h2 class="phil__h">' . hj_lines( 'Clean formula.<br><em>Gentle by design.</em><br>Made in Japan.' ) . '</h2><p class="phil__jp" aria-hidden="true">ひとりに、ひとつの、キレイを咲かせる。</p>'
+	? '<h2 class="phil__h">' . hj_lines( 'Clean formula.<br><em>Gentle by design.</em><br>Made in Japan.' ) . '</h2><p class="phil__jp" aria-hidden="true">ひとりに、ひとつの、キレイを咲かせる。</p>' . hj_slogan_en()
 	: '<h2 class="phil__tate">' . hj_lines( 'ひとりに、ひとつの、<br>キレイを咲かせる。' ) . '</h2>';
 ?>
 <section class="sec phil" id="concept"><div class="wrap phil__g">

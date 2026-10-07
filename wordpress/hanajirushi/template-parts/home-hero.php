@@ -32,7 +32,14 @@ foreach ( $slides as $i => $s ) {
 
 	$vis = '';
 	if ( 'kanji' === $visual ) {
-		$vis = '<figure class="win win--xl win--kj"><div class="win__c"><span class="win__kj">' . esc_html( (string) hj_raw( 'kanji', $id ) ) . '</span><small>' . esc_html( (string) hj_raw( 'kanji_caption', $id ) ) . '</small></div></figure>';
+		// English pages: the English word in place of the kanji, and the caption without it
+		$kj  = (string) hj_raw( 'kanji', $id );
+		$cap = (string) hj_raw( 'kanji_caption', $id );
+		$kje = (string) hj_raw( 'kanji_en', $id );
+		if ( hj_is_en() ) {
+			[ $kj, $cap ] = $kje ? array( $kje, trim( str_replace( $kje, '', $cap ) ) ) : array( $cap, '' );
+		}
+		$vis = '<figure class="win win--xl win--kj"><div class="win__c"><span class="win__kj' . ( hj_is_en() ? ' win__kj--en' : '' ) . '">' . esc_html( $kj ) . '</span><small>' . esc_html( $cap ) . '</small></div></figure>';
 	} elseif ( 'product' === $visual && ( $p = get_post( (int) hj_raw( 'product', $id ) ) ) ) {
 		$vis = hj_win( hj_product_photo( $p->ID ), hj_title( $p ), 'win--xl' );
 	} elseif ( 'products' === $visual ) {

@@ -24,7 +24,7 @@ foreach ( $pages as $i => $item ) {
 		}
 		$sub .= '</ul>';
 	}
-	$mlist .= '<li><a href="' . esc_url( hj_link( $path ) ) . '"' . ( hj_page_key() === $key ? ' aria-current="page"' : '' ) . '><i>' . sprintf( '%02d', $i ) . '</i><b>' . hj_t( $ja, $en ) . '</b><small>' . hj_t( $en, $ja ) . '</small></a>' . $sub . '</li>';
+	$mlist .= '<li><a href="' . esc_url( hj_link( $path ) ) . '"' . ( hj_page_key() === $key ? ' aria-current="page"' : '' ) . '><i>' . sprintf( '%02d', $i ) . '</i><b>' . hj_t( $ja, $en ) . '</b>' . ( hj_is_en() ? '' : '<small>' . $en . '</small>' ) . '</a>' . $sub . '</li>';
 }
 $lng = '<span class="lng" role="group" aria-label="Language"><a href="' . esc_url( hj_switch_url( 'ja' ) ) . '" class="' . ( hj_is_en() ? '' : 'on' ) . '" lang="ja">JA</a><a href="' . esc_url( hj_switch_url( 'en' ) ) . '" class="' . ( hj_is_en() ? 'on' : '' ) . '" lang="en">EN</a></span>';
 ?><!DOCTYPE html>

@@ -1,0 +1,59 @@
+/* 花印 HANAJIRUSHI — premium v1.5: the client's second round (2026-10-07) on v1.4.
+   Loaded after premium-v14.css on every v1.5 page.
+   - The red is the logo's magenta #D92070 (LOGO－2020版 06) in place of V1's crimson #A51D34.
+     Text uses a hair darker #CC1E69 so it keeps WCAG AA on the light grey bands (4.9:1 on
+     #F6F5F3; #D92070 itself is 4.8:1 on white, 4.4:1 on the grey). White on #D92070 is 4.8:1.
+   - English pages: no Japanese labels. The faint word behind each page title is English,
+     word stamps are English, 一二三 are I II III, the 日本製 circles carry icons, and the
+     slogan keeps its Japanese with an English line under it. */
+
+:root{
+  --beni:#d92070;           /* logo magenta */
+  --beni-d:#cc1e69;         /* magenta for text */
+  --seal:#d92070;
+  --plum:#d92070;           /* filled buttons, cards and tabs */
+  --plum-2:#b81b5f;
+  --on-plum-2:#fde3ee;
+  --pink-l:#ffe0ee;
+  --gold-l:#ffe0ee;
+}
+
+/* ---- contact band: magenta on the home page */
+.cta{background:#d92070;--ink-2:#fff;--ink-3:#fff}
+.cta .seal{color:#d92070;box-shadow:inset 0 0 0 2px #fff,inset 0 0 0 3px rgba(217,32,112,.45)}
+.cta .btn:hover,.cta .btn--fill,.cta .btn--fill:hover{color:#d92070}
+
+/* light (pink-tinted) on every other page */
+body:not(.pg-home) .cta{background:#fdf4f8;border-top-color:#f8e1eb;--beni-d:#cc1e69}
+body:not(.pg-home) .cta .seal{background:#d92070;box-shadow:inset 0 0 0 2px #d92070,inset 0 0 0 3px rgba(255,255,255,.6)}
+body:not(.pg-home) .cta .btn--fill{background:#d92070;border-color:#d92070}
+body:not(.pg-home) .cta .btn--fill::before{background:#a3184f}
+
+.hs13__bg--plain{background:linear-gradient(115deg,#fff 0%,#f6f5f3 52%,#f8edf2 100%)}
+.fld input:focus,.fld select:focus,.fld textarea:focus{box-shadow:0 0 0 3px rgba(217,32,112,.14)}
+
+/* ---- English pages: English words in place of the Japanese accents */
+.phero__kj--en{font-family:var(--didone);font-style:italic;font-weight:400;letter-spacing:0;white-space:nowrap;font-size:clamp(64px,7.4vw,118px)}
+.phero--plain .phero__kj--en{font-size:clamp(72px,11vw,168px);bottom:-.16em}
+
+.seal--en span{writing-mode:horizontal-tb;font-family:var(--caps);font-size:10px;font-weight:500;letter-spacing:.14em;line-height:1.3;text-align:center;text-transform:uppercase}
+.seal--en.seal--m span{font-size:11px}
+.seal--en.seal--l span{font-size:12px}
+
+.j4__k--ic svg{width:40%;height:auto}
+
+.win__kj--en{writing-mode:horizontal-tb;font-family:var(--didone);font-style:italic;font-weight:400;font-size:clamp(36px,4vw,60px);letter-spacing:0;white-space:nowrap}
+
+html[lang="en"] .craft__n span{font-family:var(--didone);font-size:24px}
+
+.slogan-en{margin-top:8px;font-family:var(--didone);font-style:italic;font-size:16px;line-height:1.5;color:var(--ink-2)}
+.br13__mark{flex-wrap:wrap}
+.slogan-en--mark{flex-basis:100%;margin-top:4px;text-align:center}
+.msg__txt .slogan-en--msg{margin-top:.3em}
+
+@media (max-width:760px){
+  .hero13 .win__kj--en{font-size:clamp(22px,7vw,30px)}
+}
+
+/* the sales map: the recoloured image (world_map_v15.png) at full colour */
+.phero--map .phero__img img{filter:none}

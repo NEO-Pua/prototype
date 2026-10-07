@@ -36,13 +36,48 @@ function hj_c( string $key ) {
 	return $m( $copy[ hj_lang() ][ $key ] ?? '' );
 }
 
+/**
+ * English pages (premium v1.5, client 2026-10-07): no Japanese labels. The faint word behind
+ * each page title is an English word of its own (not the title again), word stamps are English.
+ */
+const HJ_KJ_EN   = array( '花印' => 'Bloom', '製品' => 'Skincare', '銀座' => 'Ginza', '研究' => 'Lab', '協創' => 'Co-create', '協業' => 'Grow', '出展' => 'Meet us', '便り' => 'Updates', '相談' => 'Hello' );
+const HJ_SEAL_EN = array( '特許' => 'Patent', '出展' => 'Expo', '募集中' => 'Join<br>us' );
+
+/** The slogan stays in Japanese on English pages, with this line under it (our draft for the client). */
+function hj_slogan_en( string $cls = '' ): string {
+	return hj_is_en() ? '<p class="slogan-en ' . esc_attr( $cls ) . '">Helping every person’s own beauty bloom.</p>' : '';
+}
+
+/** Line icons for the 日本製 circles on English pages (in place of 研 造 質 績). */
+const HJ_J4_ICONS = array(
+	'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7.5 14h9"/></svg>',
+	'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l6 3.5V10l6 3.5V6h3l1 15H3z"/><path d="M7 17h2M11 17h2M15 17h2"/></svg>',
+	'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="M8.8 12.2l2.2 2.2 4.4-4.6"/></svg>',
+	'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>',
+);
+
+/** One 日本製 circle: the kanji in Japanese, an icon in English. */
+function hj_j4_mark( int $i, string $kanji ): string {
+	return hj_is_en()
+		? '<span class="j4__k j4__k--ic" aria-hidden="true">' . HJ_J4_ICONS[ $i ] . '</span>'
+		: '<span class="j4__k" aria-hidden="true">' . $kanji . '</span>';
+}
+
+/** 一 二 三 in Japanese, I II III in English. */
+function hj_kan( int $i ): string {
+	return hj_t( array( '一', '二', '三' ), array( 'I', 'II', 'III' ) )[ $i ];
+}
+
 /** The 花印 seal (落款). */
 function hj_seal( string $txt = '花印', string $cls = '' ): string {
 	// Only the official logo may stand for 花印 (client, 2026-10-07): the square mark, with the
-	// white-square version for the crimson contact band (premium-v14.css picks one).
+	// white-square version for the coloured contact band (premium-v14.css picks one).
 	if ( '花印' === $txt ) {
 		return '<span class="seal seal--logo ' . esc_attr( $cls ) . '" aria-hidden="true"><img class="lm" src="' . esc_url( hj_img( 'logo_mark.png' ) ) . '" alt="">'
 			. '<img class="lm-w" src="' . esc_url( hj_img( 'logo_mark_w.png' ) ) . '" alt=""></span>';
+	}
+	if ( hj_is_en() && isset( HJ_SEAL_EN[ $txt ] ) ) {
+		return '<span class="seal seal--en ' . esc_attr( $cls ) . '" aria-hidden="true"><span>' . HJ_SEAL_EN[ $txt ] . '</span></span>';
 	}
 	return '<span class="seal ' . esc_attr( $cls ) . '" aria-hidden="true"><span>' . $txt . '</span></span>';
 }
@@ -90,11 +125,13 @@ function hj_heading( $text, bool $accent ): string {
 	return hj_lines( implode( '<br>', $out ) );
 }
 
-/** Section heading: Japanese title in Mincho; English title in Bodoni with a small kanji accent. */
+/**
+ * Section heading: Japanese title in Mincho; English title in Bodoni. $kj (the small kanji line
+ * under English titles until v1.4) is no longer shown: the client wants no Japanese on English pages.
+ */
 function hj_shd( string $num, string $word, string $ja, string $en, ?string $kj = null, ?string $lead = null, string $cls = '' ): string {
-	$k = ( hj_is_en() && $kj ) ? '<p class="kj">' . $kj . '</p>' : '';
 	$l = $lead ? '<p class="lead">' . $lead . '</p>' : '';
-	return '<div class="shd ' . $cls . '">' . hj_eb( $word, $num ) . '<h2 class="h2">' . hj_lines( hj_t( $ja, $en ) ) . '</h2>' . $k . $l . '</div>';
+	return '<div class="shd ' . $cls . '">' . hj_eb( $word, $num ) . '<h2 class="h2">' . hj_lines( hj_t( $ja, $en ) ) . '</h2>' . $l . '</div>';
 }
 
 function hj_lnk( string $href, string $ja, string $en, string $cls = '' ): string {
@@ -187,7 +224,7 @@ function hj_news_row( WP_Post $np ): string {
 
 /**
  * Lower-page header (mockup: phero()): title on paper, optional photo on the right, large
- * decorative kanji, then the breadcrumb. $crumbs: [[url, label]…] between Home and the title.
+ * decorative kanji (an English word on English pages), then the breadcrumb. $crumbs: [[url, label]…] between Home and the title.
  */
 function hj_phero( string $label, string $ja, string $en, string $sub, string $img, string $kanji, array $crumbs = array(), array $opt = array() ): string {
 	$title = hj_t( $ja, $en );
@@ -204,8 +241,8 @@ function hj_phero( string $label, string $ja, string $en, string $sub, string $i
 		$up .= '<a href="' . esc_url( $c[0] ) . '">' . $c[1] . '</a>';
 	}
 	return '<section class="phero' . $cls . '">
-<div class="phero__txt"><div class="phero__t rv">' . hj_eb( $label ) . '<h1>' . hj_lines( $title ) . '</h1>' . ( hj_is_en() ? '<p class="kj">' . str_replace( '<br>', '', $ja ) . '</p>' : '' ) . '<p class="phero__sub">' . $sub . '</p></div>
-<p class="phero__kj" aria-hidden="true">' . $kanji . '</p></div>
+<div class="phero__txt"><div class="phero__t rv">' . hj_eb( $label ) . '<h1>' . hj_lines( $title ) . '</h1><p class="phero__sub">' . $sub . '</p></div>
+' . ( hj_is_en() ? '<p class="phero__kj phero__kj--en" aria-hidden="true">' . ( HJ_KJ_EN[ $kanji ] ?? '' ) . '</p>' : '<p class="phero__kj" aria-hidden="true">' . $kanji . '</p>' ) . '</div>
 ' . $pic . '
 </section>
 <nav class="crumb" aria-label="breadcrumb"><div class="wrap"><a href="' . esc_url( hj_link( '/' ) ) . '">' . hj_t( 'ホーム', 'Home' ) . '</a>' . $up . '<span>' . str_replace( '<br>', '', $title ) . '</span></div></nav>

@@ -11,7 +11,7 @@ get_header();
 
 echo hj_phero( 'For Partners', '海外代理店・<br>パートナー募集', 'Partnership Programme',
 	hj_t( '市場と規模に合わせた協業モデルをご用意しています。', 'Cooperation models to fit your market and scale.' ),
-	hj_img( 'world_map_brand.png' ), '協業', array(),
+	hj_img( 'world_map_v15.png' ), '協業', array(),
 	array( 'pos' => '30% center', 'variant' => 'map', 'anchors' => array( array( 'why', hj_t( '選ばれる理由', 'Why us' ) ), array( 'network', hj_t( '海外展開・実績', 'Global network' ) ), array( 'models', hj_t( '協業モデル', 'Models' ) ),
 		array( 'terms', hj_t( '取引条件', 'Trade terms' ) ), array( 'support', hj_t( '輸出書類・登録支援', 'Export support' ) ), array( 'flow', hj_t( 'お取引の流れ', 'How to start' ) ), array( 'faq', hj_t( 'よくあるご質問', 'FAQ' ) ) ) ) );
 
@@ -30,7 +30,7 @@ for ( $i = 1; $i <= 3; $i++ ) {
 // ------------------------------------------------------------------ 02 network, 03 China
 $regs = '';
 foreach ( hj_c( 'REGIONS' ) as $r ) {
-	$regs .= '<li class="rv"><small>' . $r[1] . '</small><h3>' . $r[0] . '</h3><p>' . $r[2] . '</p><ul class="tags tags--ink">' . implode( '', array_map( fn( $c ) => '<li>' . $c . '</li>', $r[3] ) ) . '</ul></li>';
+	$regs .= '<li class="rv">' . ( hj_is_en() ? '' : '<small>' . $r[1] . '</small>' ) . '<h3>' . $r[0] . '</h3><p>' . $r[2] . '</p><ul class="tags tags--ink">' . implode( '', array_map( fn( $c ) => '<li>' . $c . '</li>', $r[3] ) ) . '</ul></li>';
 }
 $china = '';
 for ( $i = 1; $i <= 4; $i++ ) {
@@ -52,7 +52,7 @@ for ( $i = 1; $i <= 4; $i++ ) {
 // ------------------------------------------------------------------ 04 models, 05 terms, 06 support
 $rows = '';
 foreach ( hj_c( 'MODES' ) as $m ) {
-	$rows .= '<tr><th>' . $m[0] . '<small>' . $m[1] . '</small></th><td>' . $m[2] . '</td><td>' . $m[3] . '</td></tr>';
+	$rows .= '<tr><th>' . $m[0] . ( hj_is_en() ? '' : '<small>' . $m[1] . '</small>' ) . '</th><td>' . $m[2] . '</td><td>' . $m[3] . '</td></tr>';
 }
 $terms = '';
 foreach ( hj_pairs( 'terms', 'label', 'value' ) as $t ) {

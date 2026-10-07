@@ -33,7 +33,7 @@ $company = esc_html( (string) hj_opt( 'company' ) );
 <section class="sec msg msg--noimg" id="message"><div class="wrap msg__g">
 <div class="msg__s rv"><?php echo hj_eb( 'Message', '01' ) . $head; ?></div>
 <div class="msg__txt rv"><?php echo $lead ? '<p class="msg__lead">' . esc_html( $lead ) . '</p>' : ''; ?><?php echo $paras; ?>
-<p class="msg__end" lang="ja">ひとりに、ひとつの、キレイを咲かせる。</p>
+<p class="msg__end" lang="ja">ひとりに、ひとつの、キレイを咲かせる。</p><?php echo hj_slogan_en( 'slogan-en--msg' ); ?>
 <p class="msg__sig"><?php echo $company; ?><br><?php echo esc_html( (string) hj_opt( 'rep_title' ) ); ?></p></div>
 </div></section>
 <?php
@@ -51,12 +51,11 @@ foreach ( hj_pairs( 'profile_rows', 'label', 'value' ) as $r ) {
 <?php endif; ?>
 <?php
 // ------------------------------------------------------------------ 03 business
-$kan = array( '一', '二', '三' );
 $biz = '';
 foreach ( hj_c( 'BUSINESS' ) as $i => $b ) {
 	$tags = implode( '', array_map( fn( $c ) => '<li>' . $c . '</li>', $b[4] ) );
 	$biz .= '<li class="rv"><div class="arch"><img src="' . esc_url( hj_img( $b[0] ) ) . '" alt="" loading="lazy"></div>
-<p class="craft__n"><span>' . $kan[ $i ] . '</span>' . $b[1] . '</p><h3>' . $b[2] . '</h3><p>' . $b[3] . '</p><ul class="tags tags--ink">' . $tags . '</ul></li>';
+<p class="craft__n"><span>' . hj_kan( $i ) . '</span>' . $b[1] . '</p><h3>' . $b[2] . '</h3><p>' . $b[3] . '</p><ul class="tags tags--ink">' . $tags . '</ul></li>';
 }
 ?>
 <section class="sec biz" id="business"><div class="wrap">
