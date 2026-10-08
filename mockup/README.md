@@ -180,8 +180,10 @@ v1.4 plus three requests (in Chinese, relayed by the user). Gated by `V15()` in
   ひとりに、ひとつの、キレイを咲かせる。 with an English line under it (*Helping every person's own
   beauty bloom.* — our draft for the client to check).
 - **Brand film** on the home page, under the brand section (03): the client's 2022 film (0:50, from
-  their current site). It shows the logo frame (12 s) until the visitor presses play, then plays from
-  the start with sound; nothing loads beforehand except that frame. The film is letterboxed (about
+  their current site). Once it scrolls into view it plays by itself, muted (browsers allow no sound
+  before a click), once per visit, with pause and 「音声をオン」 buttons; scrolled away it pauses.
+  「音声をオン」 restarts it with sound and the player's controls. At the end it shows the logo frame
+  (12 s) and a play button. With reduced motion or data saving it waits for the play button. The film is letterboxed (about
   2.54:1), so the frame is 2.6:1 and crops the black bars. `assets/js/premium-v15.js` (home only).
   To confirm: the products seen in the film (an OLIVE jar and dark serum bottles are not in the
   current line-up), and the rights for continued web use.

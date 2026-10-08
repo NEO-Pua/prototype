@@ -68,7 +68,21 @@ html[lang="en"] .craft__n span{font-family:var(--didone);font-size:24px}
 .film__ic svg{width:34%;margin-left:8%}
 .film__play:hover .film__ic,.film__play:focus-visible .film__ic{transform:scale(1.08);background:var(--plum-2)}
 .film__play:focus-visible{outline:2px solid var(--beni);outline-offset:-8px}
-.film.is-playing .film__play{display:none}
+.film.is-playing .film__play,.film.is-auto .film__play{display:none}
+/* while it plays muted by itself: pause and sound-on buttons, lower left */
+.film__bar{position:absolute;left:clamp(14px,2.4vw,32px);bottom:clamp(14px,2.4vw,32px);display:none;gap:8px}
+.film.is-auto .film__bar{display:flex}
+.film__btn{display:inline-flex;align-items:center;gap:8px;height:40px;min-width:40px;padding:0 14px;border:0;border-radius:20px;background:rgba(255,255,255,.9);color:var(--ink);font-family:var(--caps);font-size:12px;font-weight:500;letter-spacing:.12em;cursor:pointer;box-shadow:0 6px 18px -10px rgba(39,38,40,.5);transition:background .3s,color .3s}
+.film__btn:hover,.film__btn:focus-visible{background:var(--plum);color:#fff}
+.film__btn:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.film__btn svg{width:18px;height:18px}
+.film__btn[data-film-pause]{justify-content:center;padding:0}
+.film__pz{position:relative;width:12px;height:12px}
+.film__pz::before,.film__pz::after{content:"";position:absolute;top:0;width:4px;height:12px;background:currentColor}
+.film__pz::before{left:1px}.film__pz::after{right:1px}
+.film__pz.is-paused::before{left:2px;width:0;height:0;background:none;border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent currentColor}
+.film__pz.is-paused::after{display:none}
+@media (max-width:760px){.film__btn{height:34px;min-width:34px;padding:0 11px;font-size:11px}.film__btn--snd span{display:none}}
 .film__cap{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;margin-top:20px;font-size:inherit;letter-spacing:0;color:var(--ink)}
 .film__cap::before{display:none}
 .film__cap b{font-family:var(--mincho);font-weight:500;font-size:16px;letter-spacing:.1em}

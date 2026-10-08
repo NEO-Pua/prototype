@@ -57,8 +57,9 @@ const HJ_J4_ICONS = array(
 );
 
 /**
- * Home: the brand film under the brand text (サイト設定 → ブランドムービー). Only its first frames load
- * until the visitor presses play; premium-v15.js starts it with sound and shows the length.
+ * Home: the brand film under the brand text (サイト設定 → ブランドムービー). premium-v15.js starts it
+ * muted once it is in view (browsers allow no sound before a click), with pause and sound-on buttons;
+ * with reduced motion or data saving it waits for the play button. It also shows the length.
  */
 function hj_brand_film(): string {
 	$src = hj_file_url( hj_opt_raw( 'film' ) ) ?: (string) hj_opt_raw( 'film_url' );
@@ -71,8 +72,10 @@ function hj_brand_film(): string {
 	$plain = trim( preg_replace( '/［[^］]*］/u', '', $title ) );
 	$play  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>';
 	return '<div class="wrap"><figure class="film rv" data-film>
-<div class="film__v"><video src="' . esc_url( $src ) . '#t=' . $at . '" preload="metadata" playsinline controlslist="nodownload" aria-label="' . esc_attr( $plain ) . '"></video>
-<button class="film__play" type="button" aria-label="' . esc_attr( hj_t( $plain . 'を再生（音声あり）', 'Play: ' . $plain . ' (with sound)' ) ) . '"><span class="film__ic">' . $play . '</span></button></div>
+<div class="film__v"><video src="' . esc_url( $src ) . '#t=' . $at . '" preload="metadata" muted playsinline controlslist="nodownload" aria-label="' . esc_attr( $plain ) . '"></video>
+<button class="film__play" type="button" aria-label="' . esc_attr( hj_t( $plain . 'を再生（音声あり）', 'Play: ' . $plain . ' (with sound)' ) ) . '"><span class="film__ic">' . $play . '</span></button>
+<div class="film__bar"><button class="film__btn" type="button" data-film-pause aria-label="' . esc_attr( hj_t( '一時停止', 'Pause' ) ) . '" data-pause="' . esc_attr( hj_t( '一時停止', 'Pause' ) ) . '" data-play="' . esc_attr( hj_t( '再生', 'Play' ) ) . '"><i class="film__pz" aria-hidden="true"></i></button>'
+		. '<button class="film__btn film__btn--snd" type="button" data-film-sound><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg><span>' . hj_t( '音声をオン', 'Sound on' ) . '</span></button></div></div>
 <figcaption class="film__cap"><b>' . hj_marks( esc_html( $title ) ) . '</b><i data-film-len></i></figcaption>
 </figure></div>';
 }

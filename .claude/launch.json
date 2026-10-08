@@ -26,6 +26,18 @@
       "port": 8766
     },
     {
+      "name": "mockup-c",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8767",
+        "--directory",
+        "mockup"
+      ],
+      "port": 8767
+    },
+    {
       "name": "wordpress",
       "runtimeExecutable": "npx",
       "runtimeArgs": [

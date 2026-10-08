@@ -93,15 +93,24 @@ def LOGO():
 FILM_URL = "https://hanajirushi.co.jp/wp/wp-content/uploads/2022/06/hanajirushi.mp4"
 FILM_POSTER_T = 12   # seconds: the logo on flowers, shown before play
 
+def film_bar():
+    """Buttons over the film while it plays muted by itself: pause / play, and sound on."""
+    spk = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg>'
+    return (f'<div class="film__bar"><button class="film__btn" type="button" data-film-pause aria-label="{t("一時停止","Pause")}" '
+            f'data-pause="{t("一時停止","Pause")}" data-play="{t("再生","Play")}"><i class="film__pz" aria-hidden="true"></i></button>'
+            f'<button class="film__btn film__btn--snd" type="button" data-film-sound>{spk}<span>{t("音声をオン","Sound on")}</span></button></div>')
+
 def brand_film():
-    """v1.5 home: the brand film under the brand text. It loads only its first frames until the
-    visitor presses play (no autoplay, sound allowed); premium-v15.js starts it."""
+    """v1.5 home: the brand film under the brand text. premium-v15.js starts it muted once it is in
+    view (once per visit to the page; browsers allow no sound before a click), with pause and
+    sound-on buttons; with reduced motion or data saving it waits for the play button."""
     if not V15():
         return ""
     play = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>'
     return f'''<figure class="film rv" data-film>
-<div class="film__v"><video src="{FILM_URL}#t={FILM_POSTER_T}" preload="metadata" playsinline controlslist="nodownload" aria-label="{t("花印 ブランドムービー","Hanajirushi brand film")}"></video>
-<button class="film__play" type="button" aria-label="{t("ブランドムービーを再生（0:50・音声あり）","Play the brand film (0:50, with sound)")}"><span class="film__ic">{play}</span></button></div>
+<div class="film__v"><video src="{FILM_URL}#t={FILM_POSTER_T}" preload="metadata" muted playsinline controlslist="nodownload" aria-label="{t("花印 ブランドムービー","Hanajirushi brand film")}"></video>
+<button class="film__play" type="button" aria-label="{t("ブランドムービーを再生（0:50・音声あり）","Play the brand film (0:50, with sound)")}"><span class="film__ic">{play}</span></button>
+{film_bar()}</div>
 <figcaption class="film__cap"><b>{t("花印 ブランドムービー","Hanajirushi brand film")}</b><i data-film-len>0:50</i>{tbd("映像内の製品 要確認","Products shown TBC")}</figcaption>
 </figure>'''
 
