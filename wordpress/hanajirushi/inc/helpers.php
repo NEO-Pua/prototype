@@ -56,6 +56,27 @@ const HJ_J4_ICONS = array(
 	'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>',
 );
 
+/**
+ * Home: the brand film under the brand text (サイト設定 → ブランドムービー). Only its first frames load
+ * until the visitor presses play; premium-v15.js starts it with sound and shows the length.
+ */
+function hj_brand_film(): string {
+	$src = hj_file_url( hj_opt_raw( 'film' ) ) ?: (string) hj_opt_raw( 'film_url' );
+	if ( ! $src ) {
+		return '';
+	}
+	$at    = hj_opt_raw( 'film_poster' );
+	$at    = is_numeric( $at ) ? (float) $at : 12.0;
+	$title = (string) hj_opt( 'film_title' ) ?: hj_t( '花印 ブランドムービー', 'Hanajirushi brand film' );
+	$plain = trim( preg_replace( '/［[^］]*］/u', '', $title ) );
+	$play  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>';
+	return '<div class="wrap"><figure class="film rv" data-film>
+<div class="film__v"><video src="' . esc_url( $src ) . '#t=' . $at . '" preload="metadata" playsinline controlslist="nodownload" aria-label="' . esc_attr( $plain ) . '"></video>
+<button class="film__play" type="button" aria-label="' . esc_attr( hj_t( $plain . 'を再生（音声あり）', 'Play: ' . $plain . ' (with sound)' ) ) . '"><span class="film__ic">' . $play . '</span></button></div>
+<figcaption class="film__cap"><b>' . hj_marks( esc_html( $title ) ) . '</b><i data-film-len></i></figcaption>
+</figure></div>';
+}
+
 /** One 日本製 circle: the kanji in Japanese, an icon in English. */
 function hj_j4_mark( int $i, string $kanji ): string {
 	return hj_is_en()

@@ -85,7 +85,7 @@ database, then replace the old site address (e.g. *Better Search Replace*).
 | IPコラボ | Name, product, label, sales channel per language; photo = アイキャッチ画像. |
 | 投稿 (お知らせ) | Japanese title and text as usual; English title and text in the *English* box. Categories: 展示会, お知らせ, 企業情報, 製品情報. |
 | 展示会 | One post per show: dates, venue, booth, on show, languages, status, its buyer page, last day (after it, the show moves to 過去の出展). The next show also fills the buyer page and the news sidebar. |
-| サイト設定 | Tabs: company details (JA / EN), 会社概要の表, 代表メッセージ (heading, text with a blank line between paragraphs, title — the representative stays anonymous, no portrait), 沿革 (on hold: a 表示 switch puts it back on the page and in the footer), 取引条件, よくあるご質問, アクセス (stations), 展示会担当 (contact, WhatsApp, WeChat, QR images, PDFs), お問い合わせ (notification address, auto-reply), 表示 (要確認 marks). |
+| サイト設定 | Tabs: company details (JA / EN), 会社概要の表, 代表メッセージ (heading, text with a blank line between paragraphs, title — the representative stays anonymous, no portrait), ブランドムービー (the home page film: an MP4 from メディア, or a URL; the frame shown before play; title — empty means no film section), 沿革 (on hold: a 表示 switch puts it back on the page and in the footer), 取引条件, よくあるご質問, アクセス (stations), 展示会担当 (contact, WhatsApp, WeChat, QR images, PDFs), お問い合わせ (notification address, auto-reply), 表示 (要確認 marks). |
 | お問い合わせ履歴 | Every contact enquiry and booth booking, as sent (read only). |
 | 固定ページ | The pages exist so their addresses work; their layout and text are the theme's (the brand text is the client's, from the mockup). |
 

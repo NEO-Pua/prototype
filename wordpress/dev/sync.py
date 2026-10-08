@@ -29,7 +29,7 @@ import catalog as cat      # noqa: E402
 import build_premium as bp  # noqa: E402  (premium v1.4: the client's brand text and message)
 
 CSS = ["premium.css", "premium-v11.css", "premium-v12.css", "premium-v13.css", "premium-v14.css", "premium-v15.css", "premium-lp.css"]
-JS = ["premium.js", "premium-v11.js", "premium-v12.js", "premium-v13.js", "premium-v14.js", "premium-lp.js"]
+JS = ["premium.js", "premium-v11.js", "premium-v12.js", "premium-v13.js", "premium-v14.js", "premium-v15.js", "premium-lp.js"]
 THEME_IMG = ["logo_v15.svg", "rakuten.svg", "amazon.png", "yahoo.svg", "qoo10.png", "world_map_v15.png",
              "h_brand_top_p.jpg", "h_campany_bldg.jpg", "h_campany_lab.jpg", "h_campany_top_p.jpg",
              "h_campany_sr.jpg", "h_campany_dr.jpg", "h_campany_ent.jpg", "h_hanajirushi_top-1.jpg",
@@ -233,6 +233,9 @@ def settings_more():
         "message_lead": "一人ひとりの美しさに、寄り添い続ける。", "message_lead_en": "Staying close to the beauty of every person.",
         "rep_title": "代表取締役", "rep_title_en": "Representative Director",
         "stations": ja["stations"] + "［分数］", "stations_en": en["stations"] + "［min TBC］",
+        # the brand film: played from the client's current site until it is uploaded to the new one
+        "film_url": bp.FILM_URL, "film_poster": bp.FILM_POSTER_T,
+        "film_title": "花印 ブランドムービー［映像内の製品 要確認］", "film_title_en": "Hanajirushi brand film［Products shown TBC］",
         "show_contact": "［氏名］", "show_whatsapp": "［番号］", "show_wechat": "［ID］", "show_email": "export@hanajirushi.co.jp ［要確認］",
     }
 

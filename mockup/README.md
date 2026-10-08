@@ -179,7 +179,13 @@ v1.4 plus three requests (in Chinese, relayed by the user). Gated by `V15()` in
   names and ingredient lists as printed on the pack, the legal company name, and the slogan
   ひとりに、ひとつの、キレイを咲かせる。 with an English line under it (*Helping every person's own
   beauty bloom.* — our draft for the client to check).
-- Japanese pages change colour only.
+- **Brand film** on the home page, under the brand section (03): the client's 2022 film (0:50, from
+  their current site). It shows the logo frame (12 s) until the visitor presses play, then plays from
+  the start with sound; nothing loads beforehand except that frame. The film is letterboxed (about
+  2.54:1), so the frame is 2.6:1 and crops the black bars. `assets/js/premium-v15.js` (home only).
+  To confirm: the products seen in the film (an OLIVE jar and dark serum bottles are not in the
+  current line-up), and the rights for continued web use.
+- Japanese pages change colour only, apart from the film.
 
 ### Premium v1.4 — the client's change proposal (2026-10-07)
 

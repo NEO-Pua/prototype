@@ -58,7 +58,7 @@ foreach ( hj_categories() as $k => $label ) {
 <p><?php echo hj_t( '人の肌を想い、ひとりの悩みを見つめ、ひとつしかないキレイを、メイド・イン・ジャパンのスキンケアの力で届けていく。', 'We look closely at each person\'s skin and each individual concern, and deliver a beauty that is theirs alone — with the power of Japanese-made skincare.' ); ?></p>
 <p><?php echo hj_t( '「花印」の名には、ひとりひとりの肌に咲く花の印という想いを込めています。日本ならではの上質で誠実なものづくりが認められ、花印は国内はもとより世界12ヵ国で販売されています。', 'The name HANAJIRUSHI, “flower seal”, stands for the mark of a flower blooming on each person\'s skin. Recognised for the quality and honesty of Japanese manufacturing, our products are sold in Japan and 12 countries worldwide.' ); ?></p>
 <div class="ctas"><?php echo hj_btn( hj_link( '/brand/' ), 'ブランドについて', 'About the brand', 'btn--fill' ) . hj_lnk( hj_link( '/rd/' ), '研究開発・品質管理', 'R&amp;D and quality' ); ?></div></div>
-</div></section>
+</div><?php echo hj_brand_film(); ?></section>
 <?php
 // ------------------------------------------------------------------ 04 made in Japan
 $j4  = array(

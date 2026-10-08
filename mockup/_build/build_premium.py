@@ -88,6 +88,23 @@ def LOGO():
     """The HANAJIRUSHI 花印 wordmark; v1.5 uses the official magenta version (LOGO－2020版 06)."""
     return "logo_v15.svg" if V15() else "logo.svg"
 
+# v1.5: the brand film from the client's current site (2022, 0:50). The mockup plays it from
+# there; the WordPress build takes it from サイト設定 (uploaded to the new site's media).
+FILM_URL = "https://hanajirushi.co.jp/wp/wp-content/uploads/2022/06/hanajirushi.mp4"
+FILM_POSTER_T = 12   # seconds: the logo on flowers, shown before play
+
+def brand_film():
+    """v1.5 home: the brand film under the brand text. It loads only its first frames until the
+    visitor presses play (no autoplay, sound allowed); premium-v15.js starts it."""
+    if not V15():
+        return ""
+    play = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>'
+    return f'''<figure class="film rv" data-film>
+<div class="film__v"><video src="{FILM_URL}#t={FILM_POSTER_T}" preload="metadata" playsinline controlslist="nodownload" aria-label="{t("花印 ブランドムービー","Hanajirushi brand film")}"></video>
+<button class="film__play" type="button" aria-label="{t("ブランドムービーを再生（0:50・音声あり）","Play the brand film (0:50, with sound)")}"><span class="film__ic">{play}</span></button></div>
+<figcaption class="film__cap"><b>{t("花印 ブランドムービー","Hanajirushi brand film")}</b><i data-film-len>0:50</i>{tbd("映像内の製品 要確認","Products shown TBC")}</figcaption>
+</figure>'''
+
 def MAP():
     """The sales map; v1.5 recolours the markets to the logo magenta."""
     return "world_map_v15.png" if V15() else "world_map_brand.png"
@@ -318,7 +335,7 @@ def footer(fn):
 </div></footer>
 <button class="totop" type="button" aria-label="{t("ページトップへ","Back to top")}">{I["up"]}</button>
 <div class="toast" role="status" aria-live="polite"></div>
-<script src="{ASSETS}js/premium.js"></script>{f'\n<script src="{ASSETS}js/premium-v11.js"></script>' if V11() else ''}{f'\n<script src="{ASSETS}js/premium-v12.js"></script>' if V12() and fn == "index.html" else ''}{f'\n<script src="{ASSETS}js/premium-v13.js"></script>' if V13() else ''}{f'\n<script src="{ASSETS}js/premium-v14.js"></script>' if V14() else ''}
+<script src="{ASSETS}js/premium.js"></script>{f'\n<script src="{ASSETS}js/premium-v11.js"></script>' if V11() else ''}{f'\n<script src="{ASSETS}js/premium-v12.js"></script>' if V12() and fn == "index.html" else ''}{f'\n<script src="{ASSETS}js/premium-v13.js"></script>' if V13() else ''}{f'\n<script src="{ASSETS}js/premium-v14.js"></script>' if V14() else ''}{f'<script src="{ASSETS}js/premium-v15.js"></script>' if V15() and fn == "index.html" else ''}
 </body></html>'''
 
 def page(fn, pg, title, desc, body):
@@ -809,7 +826,7 @@ def h_brand13():
 <div class="br13__txt rv">{shd(hn("brand","03"),"Brand","肌に咲く、<br>花の印。","Hana-jirushi —<br><em>a flower's seal.</em>", kj="ブランド")}
 <p>{p1}</p><p>{p2}</p>
 <div class="ctas">{btn("brand.html","ブランドについて","About the brand","btn--fill")}{lnk("rd.html","研究開発・品質管理","R&amp;D and quality")}</div></div>
-</div></section>'''
+</div>{f'<div class="wrap">{brand_film()}</div>' if V15() else ""}</section>'''
 
 def h_partners13():
     """Home partnership, kept short and without figures that cannot be published yet

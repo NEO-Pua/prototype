@@ -46,6 +46,7 @@ add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_script( 'hj-premium-v11', $u . 'js/premium-v11.js', array( 'hj-premium' ), $v, true );
 	if ( is_front_page() ) {
 		wp_enqueue_script( 'hj-premium-v12', $u . 'js/premium-v12.js', array( 'hj-premium' ), $v, true );
+		wp_enqueue_script( 'hj-premium-v15', $u . 'js/premium-v15.js', array(), $v, true );   // the brand film
 	}
 	if ( $lp ) {
 		wp_enqueue_script( 'hj-qrcode', 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js', array(), null, true );
