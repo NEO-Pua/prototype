@@ -90,3 +90,17 @@ html[lang="en"] .film__cap b{font-family:var(--didone);font-weight:400;font-size
 .film__cap b .tbd{margin-left:10px}
 .film__cap i{font-family:var(--didone);font-style:italic;font-size:15px;color:var(--ink-3)}
 @media (prefers-reduced-motion:reduce){.film__ic{transition:none}}
+
+/* ---- page header photo: a fixed 16:9 frame on every screen, so one 16:9 photo (2400×1350) shows
+   whole everywhere. Desktop: the photo column keeps 16:9 and the header follows the screen width;
+   when the title and lead are taller than the photo, the photo sits centred beside them. Very wide
+   screens cap the height (only there are the top and bottom trimmed). The fade into the text side
+   is shorter, since nothing else is cut. */
+@media (min-width:1025px){
+  .phero:not(.phero--plain){min-height:0}
+  .phero:not(.phero--plain) .phero__img{align-self:center;width:100%;aspect-ratio:16/9;min-height:0;max-height:760px}
+}
+.phero__img::after{background:linear-gradient(90deg,var(--paper) 0,rgba(255,255,255,0) 16%)}
+@media (max-width:1024px){
+  .phero__img::after{background:linear-gradient(180deg,var(--paper) 0,rgba(255,255,255,0) 10%)}
+}

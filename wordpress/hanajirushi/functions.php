@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'HJ_THEME_VERSION', '0.4.0' );
+define( 'HJ_THEME_VERSION', '0.4.1' );
 
 require get_template_directory() . '/inc/fallbacks.php';
 require get_template_directory() . '/inc/helpers.php';

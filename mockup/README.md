@@ -187,7 +187,13 @@ v1.4 plus three requests (in Chinese, relayed by the user). Gated by `V15()` in
   2.54:1), so the frame is 2.6:1 and crops the black bars. `assets/js/premium-v15.js` (home only).
   To confirm: the products seen in the film (an OLIVE jar and dark serum bottles are not in the
   current line-up), and the rights for continued web use.
-- Japanese pages change colour only, apart from the film.
+- **Page header photos in a fixed 16:9 frame** on every screen (before: the frame changed shape with
+  the screen, from about 1.4:1 to 2.4:1 on desktop, so photos were cropped differently). One 16:9
+  photo (2400×1350) now shows whole on desktop, tablet and phone; the header follows the screen
+  width, and very wide screens (over about 2300 px) cap it at 760 px tall, trimming the top and bottom
+  slightly. The fade into the text side is shorter (1/6 of the width on desktop, 1/10 of the height
+  on phones). In WordPress each header photo can be replaced in サイト設定 → ページ上部の画像.
+- Japanese pages change colour only, apart from the film and the header frame.
 
 ### Premium v1.4 — the client's change proposal (2026-10-07)
 

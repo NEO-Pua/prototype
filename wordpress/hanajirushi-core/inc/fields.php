@@ -51,6 +51,39 @@ function hj_points_field( string $name, string $label ): array {
 	) );
 }
 
+/** Pages whose header (タイトルの横の写真) can be set in サイト設定: page key => name in the admin. */
+const HJ_HEADER_PAGES = array(
+	'brand'         => 'ブランド',
+	'collaboration' => 'IPコラボレーション',
+	'products'      => '製品一覧',
+	'company'       => '会社概要',
+	'rd'            => '研究開発・品質',
+	'news'          => 'お知らせ',
+	'partners'      => 'パートナーシップ',
+	'exhibition'    => '展示会情報',
+	'contact'       => 'お問い合わせ',
+);
+
+/** サイト設定 → ページ上部の画像: a photo and its focus for each page header. */
+function hj_header_fields(): array {
+	$out = array(
+		hj_f( 'header_note', '', 'message', array( 'message' => '各ページのタイトルの横に表示する写真です。空欄のページは今の写真（写真のないページは写真なし）のまま表示します。<br>'
+			. '写真は 16:9 の枠に表示され、パソコンでもスマートフォンでも全体が見えます（とても横長の大画面では上下が少しだけ切れます）。<br>'
+			. '推奨：16:9、2400×1350px（最小 1920×1080px）、JPG 300〜500KB、カラープロファイルは sRGB。文字は入れないでください。<br>'
+			. 'パソコンでは左端の約1/6、スマートフォンでは上端の約1/10を白くぼかして文字側になじませるため、そこには大事なものを置かないでください。' ) ),
+	);
+	foreach ( HJ_HEADER_PAGES as $key => $label ) {
+		$out[] = hj_f( 'header_' . $key, $label, 'image', array( 'return_format' => 'id', 'preview_size' => 'medium', 'wrapper' => array( 'width' => '60' ) ) );
+		$out[] = hj_f( 'header_' . $key . '_pos', '見せたい位置', 'select', array(
+			'choices'       => array( 'center' => '中央', 'center top' => '上寄り', 'center bottom' => '下寄り', '30% center' => '左寄り', '70% center' => '右寄り' ),
+			'default_value' => 'center',
+			'wrapper'       => array( 'width' => '40' ),
+			'instructions'  => '16:9 でない写真や、とても横長の画面で切り取られるときに残す位置。',
+		) );
+	}
+	return $out;
+}
+
 const HJ_CATS = array(
 	'cleansing' => array( 'クレンジング', 'Cleansing' ),
 	'lotion'    => array( '化粧水・美容液', 'Lotions & serums' ),
@@ -264,6 +297,7 @@ add_action( 'acf/include_fields', function () {
 				hj_f( 'mail_to', '通知先メールアドレス', 'text', array( 'instructions' => 'お問い合わせ・商談予約の通知先。複数はカンマ区切り。空欄の場合はサイト管理者のメールアドレス。送信内容は「お問い合わせ履歴」にも保存されます。' ) ),
 				hj_f( 'autoreply', '自動返信', 'true_false', array( 'ui' => 1, 'default_value' => 1, 'message' => '送信者に受付確認メールを送る（会社案内PDFがあればリンクを付けます）' ) ),
 			),
+			array( hj_tab( 'settings_headers', 'ページ上部の画像' ) ), hj_header_fields(),
 			array( hj_tab( 'settings_film', 'ブランドムービー' ),
 				hj_f( 'film', '動画ファイル（MP4）', 'file', array( 'return_format' => 'id', 'mime_types' => 'mp4,webm',
 					'instructions' => 'トップページのブランド欄の下に表示します。再生ボタンを押したときだけ読み込み、音声付きで再生します。上下に黒帯のある横長の映像（約2.5:1）は、黒帯を切って表示します。' ) ),

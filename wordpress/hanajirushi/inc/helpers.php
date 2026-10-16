@@ -252,14 +252,27 @@ function hj_news_row( WP_Post $np ): string {
  */
 function hj_phero( string $label, string $ja, string $en, string $sub, string $img, string $kanji, array $crumbs = array(), array $opt = array() ): string {
 	$title = hj_t( $ja, $en );
-	$pic   = $img ? '<div class="phero__img"><img src="' . esc_url( $img ) . '" alt="" style="object-position:' . esc_attr( $opt['pos'] ?? 'center' ) . '"></div>' : '';
+	// サイト設定 → ページ上部の画像: a photo set there replaces the theme's (or adds one to a page without)
+	$key = hj_page_key();
+	$own = ( defined( 'HJ_HEADER_PAGES' ) && isset( HJ_HEADER_PAGES[ $key ] ) ) ? (int) hj_opt_raw( 'header_' . $key ) : 0;
+	$set = '';
+	if ( $own && ( $src = wp_get_attachment_image_url( $own, 'full' ) ) ) {
+		$img        = $src;
+		$opt['pos'] = (string) ( hj_opt_raw( 'header_' . $key . '_pos' ) ?: 'center' );
+		$set        = (string) wp_get_attachment_image_srcset( $own, 'full' );
+		if ( 'map' === ( $opt['variant'] ?? '' ) ) {
+			unset( $opt['variant'] );   // a photo fills the frame; the map was shown whole
+		}
+		$opt['variant'] = trim( ( $opt['variant'] ?? '' ) . ' own' );
+	}
+	$pic   = $img ? '<div class="phero__img"><img src="' . esc_url( $img ) . '"' . ( $set ? ' srcset="' . esc_attr( $set ) . '" sizes="(max-width:1024px) 100vw, 60vw"' : '' ) . ' alt="" style="object-position:' . esc_attr( $opt['pos'] ?? 'center' ) . '"></div>' : '';
 	// in-page links: [id, label]; an id starting with / is a child page (last, with an arrow)
 	$anc = '';
 	foreach ( $opt['anchors'] ?? array() as $a ) {
 		$anc .= str_starts_with( $a[0], '/' ) ? '<a class="anc__pg" href="' . esc_url( hj_link( $a[0] ) ) . '">' . $a[1] . '</a>' : '<a href="#' . esc_attr( $a[0] ) . '">' . $a[1] . '</a>';
 	}
 	$navs = $anc ? '<nav class="anc" aria-label="' . esc_attr( hj_t( 'ページ内リンク', 'On this page' ) ) . '"><div class="wrap">' . $anc . '</div></nav>' : '';
-	$cls  = ( $img ? '' : ' phero--plain' ) . ( ! empty( $opt['variant'] ) ? ' phero--' . $opt['variant'] : '' );
+	$cls  = ( $img ? '' : ' phero--plain' ) . ( ! empty( $opt['variant'] ) ? ' phero--' . str_replace( ' ', ' phero--', $opt['variant'] ) : '' );
 	$up    = '';
 	foreach ( $crumbs as $c ) {
 		$up .= '<a href="' . esc_url( $c[0] ) . '">' . $c[1] . '</a>';

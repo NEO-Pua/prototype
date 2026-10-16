@@ -43,3 +43,7 @@ html[lang="en"] .art__t{font-family:var(--didone);font-weight:400;font-size:clam
 
 /* QR images uploaded in サイト設定 fill the mockup's QR boxes */
 .qrs figure img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain;background:#fff}
+
+/* page header photo chosen in サイト設定 → ページ上部の画像: shown as supplied, without the
+   colour grading the design gives its own photos */
+.phero--own .phero__img img{filter:none}
