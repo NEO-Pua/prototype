@@ -74,7 +74,7 @@ $use = (string) hj_get( 'usage', $id );
 
 <?php // ------------------------------------------------------------------ 03 research ?>
 <section class="sec sec--t"><div class="wrap split__g">
-<div class="split__img split__img--win rv"><?php echo hj_win( hj_img( 'h_campany_lab.jpg' ), hj_t( '銀座本社の研究室', 'Our laboratory in Ginza' ), 'win--m' ); ?></div>
+<div class="split__img split__img--win rv"><?php echo hj_win( hj_photo( 'product_lab', 'h_campany_lab.jpg' ), hj_t( '銀座本社の研究室', 'Our laboratory in Ginza' ), 'win--m' ); ?></div>
 <div class="split__txt rv"><?php echo hj_shd( '03', 'Research', '銀座の研究室から、<br>確かな処方を。', 'Reliable formulas<br><em>from our Ginza lab.</em>', '研究への取り組み' ); ?><p><?php echo hj_t( '花印の処方は、東京・銀座本社の研究室で原料レベルから開発しています。肌へのやさしさと確かな実感を両立させるため、無香料・無着色・オイルフリー・アルコールフリーを基本設計としています。', 'HANAJIRUSHI formulas are developed from the raw-material level in the laboratory at our Ginza head office. Our baseline design is fragrance-free, colorant-free, oil-free and alcohol-free — gentle on skin, with results you can feel.' ); ?></p>
 <div class="ctas"><?php echo hj_lnk( hj_link( '/rd/' ), '研究開発・品質管理', 'R&amp;D and quality' ); ?></div></div></div></section>
 <?php

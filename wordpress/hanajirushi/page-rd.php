@@ -25,7 +25,7 @@ for ( $i = 1; $i <= 3; $i++ ) {
 }
 ?>
 <section class="sec split" id="lab"><div class="wrap split__g">
-<div class="split__img split__img--win rv"><?php echo hj_win( hj_img( 'h_campany_lab.jpg' ), hj_t( '銀座本社の研究室', 'Our laboratory in Ginza' ), 'win--m' ); ?></div>
+<div class="split__img split__img--win rv"><?php echo hj_win( hj_photo( 'rd_lab', 'h_campany_lab.jpg' ), hj_t( '銀座本社の研究室', 'Our laboratory in Ginza' ), 'win--m' ); ?></div>
 <div class="split__txt rv"><?php echo hj_shd( '01', 'Laboratory', '銀座の自社研究室', 'Our laboratory in Ginza', '自社研究室' ); ?>
 <p class="pd__cp"><?php echo hj_c( 'RD_CATCH' ); ?></p><p><?php echo hj_c( 'RD_P1' ); ?></p><p><?php echo hj_c( 'RD_P2' ); ?></p>
 <ul class="tags tags--ink"><?php echo $tags; ?></ul>

@@ -114,6 +114,11 @@ def brand_film():
 <figcaption class="film__cap"><b>{t("花印 ブランドムービー","Hanajirushi brand film")}</b><i data-film-len>0:50</i>{tbd("映像内の製品 要確認","Products shown TBC")}</figcaption>
 </figure>'''
 
+def guide_js():
+    """v1.5 mockup only: tags on every replaceable photo with the shape and size to prepare
+    (assets/js/premium-guide.js; the WordPress theme does not load it)."""
+    return f'\n<script src="{ASSETS}js/premium-guide.js"></script>' if V15() else ''
+
 def MAP():
     """The sales map; v1.5 recolours the markets to the logo magenta."""
     return "world_map_v15.png" if V15() else "world_map_brand.png"
@@ -344,7 +349,7 @@ def footer(fn):
 </div></footer>
 <button class="totop" type="button" aria-label="{t("ページトップへ","Back to top")}">{I["up"]}</button>
 <div class="toast" role="status" aria-live="polite"></div>
-<script src="{ASSETS}js/premium.js"></script>{f'\n<script src="{ASSETS}js/premium-v11.js"></script>' if V11() else ''}{f'\n<script src="{ASSETS}js/premium-v12.js"></script>' if V12() and fn == "index.html" else ''}{f'\n<script src="{ASSETS}js/premium-v13.js"></script>' if V13() else ''}{f'\n<script src="{ASSETS}js/premium-v14.js"></script>' if V14() else ''}{f'<script src="{ASSETS}js/premium-v15.js"></script>' if V15() and fn == "index.html" else ''}
+<script src="{ASSETS}js/premium.js"></script>{f'\n<script src="{ASSETS}js/premium-v11.js"></script>' if V11() else ''}{f'\n<script src="{ASSETS}js/premium-v12.js"></script>' if V12() and fn == "index.html" else ''}{f'\n<script src="{ASSETS}js/premium-v13.js"></script>' if V13() else ''}{f'\n<script src="{ASSETS}js/premium-v14.js"></script>' if V14() else ''}{f'<script src="{ASSETS}js/premium-v15.js"></script>' if V15() and fn == "index.html" else ''}{guide_js()}
 </body></html>'''
 
 def page(fn, pg, title, desc, body):
@@ -1686,7 +1691,7 @@ def lp_page():
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="{ASSETS}js/premium.js"></script>
 <script src="{ASSETS}js/premium-v11.js"></script>
-<script src="{ASSETS}js/premium-lp.js"></script>
+<script src="{ASSETS}js/premium-lp.js"></script>{guide_js()}
 </body></html>'''
 
     return f'''<!DOCTYPE html>

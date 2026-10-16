@@ -109,7 +109,7 @@ foreach ( hj_t( array( '独占代理店', '販売代理店', 'モダントレー
 </div></section>
 <?php // ------------------------------------------------------------------ 07 company ?>
 <section class="sec dark cosplit"><div class="wrap split__g">
-<div class="split__img rv"><div class="arch"><img src="<?php echo esc_url( hj_img( 'h_campany_bldg.jpg' ) ); ?>" alt="<?php echo esc_attr( hj_t( '銀座二丁目の本社ビル', 'Head office building, Ginza 2-chome' ) ); ?>" loading="lazy"></div></div>
+<div class="split__img rv"><div class="arch"><img <?php echo hj_photo_src( 'home_company', 'h_campany_bldg.jpg' ); ?> alt="<?php echo esc_attr( hj_t( '銀座二丁目の本社ビル', 'Head office building, Ginza 2-chome' ) ); ?>" loading="lazy"></div></div>
 <div class="split__txt rv"><?php echo hj_shd( '07', 'Company', '銀座から、世界へ。', 'From Ginza,<br><em>to the world.</em>', '会社情報' ); ?>
 <dl class="dl">
 <div><dt><?php echo hj_t( '社名', 'Company' ); ?></dt><dd><?php echo esc_html( (string) hj_opt( 'company' ) ); ?></dd></div>

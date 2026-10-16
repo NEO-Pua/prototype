@@ -80,6 +80,36 @@ function hj_brand_film(): string {
 </figure></div>';
 }
 
+/**
+ * A photo inside a page: the one set in サイト設定 → 写真 for $slot, or the theme's $file.
+ * hj_photo_src() gives the img attributes; a chosen photo is marked data-own (shown without the
+ * design's colour grading, wp.css).
+ */
+function hj_photo_id( string $slot ): int {
+	return defined( 'HJ_PHOTOS' ) && isset( HJ_PHOTOS[ $slot ] ) ? (int) hj_opt_raw( 'photo_' . $slot ) : 0;
+}
+
+function hj_photo( string $slot, string $file ): string {
+	$id = hj_photo_id( $slot );
+	return ( $id ? (string) wp_get_attachment_image_url( $id, 'full' ) : '' ) ?: hj_img( $file );
+}
+
+function hj_photo_src( string $slot, string $file, string $pos = '' ): string {
+	$id  = hj_photo_id( $slot );
+	$src = $id ? (string) wp_get_attachment_image_url( $id, 'full' ) : '';
+	if ( $src ) {
+		$set = (string) wp_get_attachment_image_srcset( $id, 'full' );
+		return 'src="' . esc_url( $src ) . '"' . ( $set ? ' srcset="' . esc_attr( $set ) . '" sizes="(max-width:760px) 100vw, 50vw"' : '' ) . ' data-own';
+	}
+	return 'src="' . esc_url( hj_img( $file ) ) . '"' . ( $pos ? ' style="object-position:' . esc_attr( $pos ) . '"' : '' );
+}
+
+/** The caption of a photo with a caption field (office photos): the one typed, or $default. */
+function hj_photo_cap( string $slot, string $default ): string {
+	$c = (string) hj_opt( 'photo_' . $slot . '_cap' );
+	return '' !== trim( $c ) ? esc_html( $c ) : $default;
+}
+
 /** One 日本製 circle: the kanji in Japanese, an icon in English. */
 function hj_j4_mark( int $i, string $kanji ): string {
 	return hj_is_en()

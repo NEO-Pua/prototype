@@ -67,7 +67,11 @@ const HJ_HEADER_PAGES = array(
 /** サイト設定 → ページ上部の画像: a photo and its focus for each page header. */
 function hj_header_fields(): array {
 	$out = array(
-		hj_f( 'header_note', '', 'message', array( 'message' => '各ページのタイトルの横に表示する写真です。空欄のページは今の写真（写真のないページは写真なし）のまま表示します。<br>'
+		hj_f( 'photos_note', '', 'message', array( 'message' => '<strong>写真は3つの形だけです。</strong>どの画面でも同じ形で表示されるので、1枚の写真がパソコンでもスマートフォンでも使えます。<br>'
+			. '・16:9（横長）2400×1350px ／ ・4:5（縦長）1600×2000px ／ ・1:1（正方形）1600×1600px<br>'
+			. 'JPG 300〜500KB、カラープロファイルは sRGB、文字は入れないでください。空欄の欄は今の写真のまま表示します。<br>'
+			. '製品写真（1:1・白背景）は各製品の「アイキャッチ画像」、IPコラボの画像（1:1）は各IPコラボの「アイキャッチ画像」で設定します。' ) ),
+		hj_f( 'header_note', '', 'message', array( 'message' => '<strong>■ ページ上部の写真（16:9）</strong><br>各ページのタイトルの横に表示する写真です。空欄のページは今の写真（写真のないページは写真なし）のまま表示します。<br>'
 			. '写真は 16:9 の枠に表示され、パソコンでもスマートフォンでも全体が見えます（とても横長の大画面では上下が少しだけ切れます）。<br>'
 			. '推奨：16:9、2400×1350px（最小 1920×1080px）、JPG 300〜500KB、カラープロファイルは sRGB。文字は入れないでください。<br>'
 			. 'パソコンでは左端の約1/6、スマートフォンでは上端の約1/10を白くぼかして文字側になじませるため、そこには大事なものを置かないでください。' ) ),
@@ -80,6 +84,37 @@ function hj_header_fields(): array {
 			'wrapper'       => array( 'width' => '40' ),
 			'instructions'  => '16:9 でない写真や、とても横長の画面で切り取られるときに残す位置。',
 		) );
+	}
+	return $out;
+}
+
+/** Photos inside the pages (サイト設定 → 写真): slot => [admin label, shape, has a caption]. */
+const HJ_PHOTOS = array(
+	'home_company'        => array( 'トップ：会社情報', '4:5', false ),
+	'brand_concept'       => array( 'ブランド：ブランドコンセプト', '4:5', false ),
+	'brand_research'      => array( 'ブランド：研究への取り組み（円形）', '1:1', false ),
+	'company_business_1'  => array( '会社概要：事業内容 一（研究開発）', '4:5', false ),
+	'company_business_2'  => array( '会社概要：事業内容 二（製造）', '4:5', false ),
+	'company_business_3'  => array( '会社概要：事業内容 三（販売・輸出入）', '4:5', false ),
+	'company_office_main' => array( '会社概要：オフィス紹介（大）', '4:5', true ),
+	'company_office_1'    => array( '会社概要：オフィス紹介（小・1枚目）', '16:9', true ),
+	'company_office_2'    => array( '会社概要：オフィス紹介（小・2枚目）', '16:9', true ),
+	'rd_lab'              => array( '研究開発・品質：研究室（円形）', '1:1', false ),
+	'product_lab'         => array( '製品ページ（全製品共通）：研究室（円形）', '1:1', false ),
+);
+const HJ_SHAPES = array( '16:9' => '2400×1350px', '4:5' => '1600×2000px', '1:1' => '1600×1600px' );
+
+/** サイト設定 → 写真: the photos inside the pages, each with its shape in the label. */
+function hj_photo_fields(): array {
+	$out = array(
+		hj_f( 'photo_note', '', 'message', array( 'message' => '<strong>■ ページ内の写真</strong><br>形と大きさは各欄の名前のとおりです。4:5 の写真は上部が丸く、1:1 の写真は円形に切り取られるので、主役は中央に置いてください。' ) ),
+	);
+	foreach ( HJ_PHOTOS as $slot => $p ) {
+		$out[] = hj_f( 'photo_' . $slot, $p[0] . '（' . $p[1] . '・' . HJ_SHAPES[ $p[1] ] . '）', 'image', array( 'return_format' => 'id', 'preview_size' => 'medium', 'wrapper' => array( 'width' => $p[2] ? '40' : '100' ) ) );
+		if ( $p[2] ) {
+			$out[] = hj_f( 'photo_' . $slot . '_cap', '写真の説明', 'text', array( 'wrapper' => array( 'width' => '30' ), 'instructions' => '空欄なら今の説明のまま。' ) );
+			$out[] = hj_f( 'photo_' . $slot . '_cap_en', '写真の説明（英語）', 'text', array( 'wrapper' => array( 'width' => '30' ) ) );
+		}
 	}
 	return $out;
 }
@@ -297,7 +332,7 @@ add_action( 'acf/include_fields', function () {
 				hj_f( 'mail_to', '通知先メールアドレス', 'text', array( 'instructions' => 'お問い合わせ・商談予約の通知先。複数はカンマ区切り。空欄の場合はサイト管理者のメールアドレス。送信内容は「お問い合わせ履歴」にも保存されます。' ) ),
 				hj_f( 'autoreply', '自動返信', 'true_false', array( 'ui' => 1, 'default_value' => 1, 'message' => '送信者に受付確認メールを送る（会社案内PDFがあればリンクを付けます）' ) ),
 			),
-			array( hj_tab( 'settings_headers', 'ページ上部の画像' ) ), hj_header_fields(),
+			array( hj_tab( 'settings_photos', '写真' ) ), hj_header_fields(), hj_photo_fields(),
 			array( hj_tab( 'settings_film', 'ブランドムービー' ),
 				hj_f( 'film', '動画ファイル（MP4）', 'file', array( 'return_format' => 'id', 'mime_types' => 'mp4,webm',
 					'instructions' => 'トップページのブランド欄の下に表示します。再生ボタンを押したときだけ読み込み、音声付きで再生します。上下に黒帯のある横長の映像（約2.5:1）は、黒帯を切って表示します。' ) ),

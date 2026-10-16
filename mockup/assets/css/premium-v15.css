@@ -104,3 +104,20 @@ html[lang="en"] .film__cap b{font-family:var(--didone);font-weight:400;font-size
 @media (max-width:1024px){
   .phero__img::after{background:linear-gradient(180deg,var(--paper) 0,rgba(255,255,255,0) 10%)}
 }
+
+/* ---- three photo shapes for every replaceable photo (16:9, 4:5, 1:1), the same on every screen,
+   so one photo per spot works everywhere:
+   - 16:9 (2400×1350): page headers (above), the two office photos
+   - 4:5  (1600×2000): every arch (home company, brand concept, business), the main office photo
+   - 1:1  (1600×1600): round windows, product photos, IP collaboration images (unchanged)
+   Phones: the portrait arches are capped in width so they do not fill the screen. */
+.arch{aspect-ratio:4/5!important}
+.office__main img{aspect-ratio:4/5;width:100%;object-fit:cover}
+.office__l img{aspect-ratio:16/9;width:100%;object-fit:cover}
+@media (max-width:1024px){
+  .phil__img .arch,.cosplit .arch,.split__img .arch{max-width:360px;margin-inline:auto}
+  .office__main{max-width:360px}
+}
+@media (max-width:760px){
+  .craft__l .arch{max-width:300px;margin-inline:auto}
+}

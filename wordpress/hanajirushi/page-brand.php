@@ -30,7 +30,7 @@ $slogan = hj_is_en()
 	'Skin type, age, lifestyle, the beauty you hope for — no two people are alike. So rather than fitting anyone to someone else\'s idea of beauty, Hanajirushi starts from each person\'s skin and helps the beauty that suits them grow.' ); ?></p>
 <p><?php echo hj_t( '毎日使うものだからこそ、品質にこだわり、使いやすく、無理なく続けられること。特別な日のためだけではなく、何気ない毎日の中で、自分の肌を大切にする時間を届けること。それが、花印が考えるスキンケアです。',
 	'Because it is something you use every day, it should be well made, easy to use and easy to keep up — not only for special days, but as everyday time to look after your skin. That is what skincare means to Hanajirushi.' ); ?></p></div>
-<div class="phil__img rv"><div class="arch"><img src="<?php echo esc_url( hj_img( 'h_brand_top_p.jpg' ) ); ?>" alt="" loading="lazy" style="object-position:0% center"></div></div>
+<div class="phil__img rv"><div class="arch"><img <?php echo hj_photo_src( 'brand_concept', 'h_brand_top_p.jpg', '0% center' ); ?> alt="" loading="lazy"></div></div>
 </div></section>
 <?php
 // ------------------------------------------------------------------ 02 our values, 03 brand story
@@ -52,7 +52,7 @@ foreach ( hj_c( 'STORY14' ) as $i => $st ) {
 		'That is why we want to offer skincare that meets each person\'s skin and nurtures a beauty of their own — the starting point of everything Hanajirushi makes.' ), 'shd--c' ); ?>
 <ol class="story13 story13--full"><?php echo $story; ?></ol></div></section>
 <section class="sec" id="research"><div class="wrap split__g">
-<div class="split__img split__img--win rv"><?php echo hj_win( hj_img( 'h_campany_lab.jpg' ), hj_t( '銀座本社の研究室', 'Our laboratory in Ginza' ), 'win--m' ); ?></div>
+<div class="split__img split__img--win rv"><?php echo hj_win( hj_photo( 'brand_research', 'h_campany_lab.jpg' ), hj_t( '銀座本社の研究室', 'Our laboratory in Ginza' ), 'win--m' ); ?></div>
 <div class="split__txt rv"><?php echo hj_shd( '04', 'Research', '銀座の研究室から、<br>確かな処方を。', 'Reliable formulas<br><em>from our Ginza lab.</em>', '研究への取り組み' ); ?>
 <p class="pd__cp"><?php echo hj_c( 'RD_CATCH' ); ?></p><p><?php echo hj_c( 'RD_P1' ); ?></p>
 <div class="ctas"><?php echo hj_btn( hj_link( '/rd/' ), '研究開発・品質管理', 'R&amp;D and quality' ) . hj_lnk( hj_link( '/products/' ), '製品一覧', 'All products' ); ?></div></div></div></section>

@@ -54,7 +54,7 @@ foreach ( hj_pairs( 'profile_rows', 'label', 'value' ) as $r ) {
 $biz = '';
 foreach ( hj_c( 'BUSINESS' ) as $i => $b ) {
 	$tags = implode( '', array_map( fn( $c ) => '<li>' . $c . '</li>', $b[4] ) );
-	$biz .= '<li class="rv"><div class="arch"><img src="' . esc_url( hj_img( $b[0] ) ) . '" alt="" loading="lazy"></div>
+	$biz .= '<li class="rv"><div class="arch"><img ' . hj_photo_src( 'company_business_' . ( $i + 1 ), $b[0] ) . ' alt="" loading="lazy"></div>
 <p class="craft__n"><span>' . hj_kan( $i ) . '</span>' . $b[1] . '</p><h3>' . $b[2] . '</h3><p>' . $b[3] . '</p><ul class="tags tags--ink">' . $tags . '</ul></li>';
 }
 ?>
@@ -77,15 +77,17 @@ endif;
 // ------------------------------------------------------------------ 05 office (photos not already shown under 事業内容)
 $shown = array_map( fn( $b ) => $b[0], hj_c( 'BUSINESS' ) );
 $ph    = '';
+$k = 0;   // the two small office photos: the theme's office photos not already used above, or サイト設定 → 写真
 foreach ( hj_c( 'OFFICE_PHOTOS' ) as $o ) {
-	if ( ! in_array( $o[0], $shown, true ) ) {
-		$ph .= '<li class="rv"><figure><img src="' . esc_url( hj_img( $o[0] ) ) . '" alt="" loading="lazy"><figcaption>' . $o[1] . '</figcaption></figure></li>';
+	if ( ! in_array( $o[0], $shown, true ) && $k < 2 ) {
+		$slot = 'company_office_' . ( ++$k );
+		$ph  .= '<li class="rv"><figure><img ' . hj_photo_src( $slot, $o[0] ) . ' alt="" loading="lazy"><figcaption>' . hj_photo_cap( $slot, $o[1] ) . '</figcaption></figure></li>';
 	}
 }
 ?>
 <section class="sec office" id="office"><div class="wrap">
 <?php echo hj_shd( $n[1], 'Office', 'オフィス紹介', 'Our Ginza office', 'オフィス紹介', hj_t( '銀座二丁目の本社に、研究室・ショールーム・応接室を備えています。', 'Our head office in Ginza 2-chome houses our laboratory, showroom and meeting rooms.' ), 'shd--c' ); ?>
-<div class="office__g"><figure class="office__main rv"><img src="<?php echo esc_url( hj_img( 'h_campany_bldg.jpg' ) ); ?>" alt="" loading="lazy"><figcaption><?php echo hj_t( '本社ビル（銀座二丁目）', 'Head office, Ginza 2-chome' ); ?></figcaption></figure>
+<div class="office__g"><figure class="office__main rv"><img <?php echo hj_photo_src( 'company_office_main', 'h_campany_bldg.jpg' ); ?> alt="" loading="lazy"><figcaption><?php echo hj_photo_cap( 'company_office_main', hj_t( '本社ビル（銀座二丁目）', 'Head office, Ginza 2-chome' ) ); ?></figcaption></figure>
 <ul class="office__l"><?php echo $ph; ?></ul></div></div></section>
 <?php
 // ------------------------------------------------------------------ 06 access

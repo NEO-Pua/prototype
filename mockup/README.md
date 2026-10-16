@@ -193,7 +193,15 @@ v1.4 plus three requests (in Chinese, relayed by the user). Gated by `V15()` in
   width, and very wide screens (over about 2300 px) cap it at 760 px tall, trimming the top and bottom
   slightly. The fade into the text side is shorter (1/6 of the width on desktop, 1/10 of the height
   on phones). In WordPress each header photo can be replaced in サイト設定 → ページ上部の画像.
-- Japanese pages change colour only, apart from the film and the header frame.
+- **Three photo shapes** for every replaceable photo, the same on every screen: 16:9 (2400×1350:
+  page headers, the two small office photos), 4:5 (1600×2000: every arch — home company, brand
+  concept, the three business photos — and the main office photo), 1:1 (1600×1600: round windows,
+  product photos, IP collaboration images). Before, arches were 3:4 to 5:6 and turned 4:3 on phones.
+  On phones the portrait arches are capped in width.
+- **Image guide tags** (mockup only, `assets/js/premium-guide.js`): every replaceable photo shows a
+  small tag with what it is, its shape and size, and a note (e.g. 「上部は丸く切り取り」). A button at
+  the lower left hides or shows them. The WordPress theme does not load this file.
+- Japanese pages change colour only, apart from the film, the header frame and the photo shapes.
 
 ### Premium v1.4 — the client's change proposal (2026-10-07)
 
