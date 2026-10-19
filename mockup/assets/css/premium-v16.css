@@ -1,0 +1,33 @@
+/* 花印 HANAJIRUSHI — premium v1.6: the client's feedback of 2026-10-14 (20261014 フィードバック).
+   Loaded after premium-v15.css on every v1.6 page.
+   - home: the cleansing-oil slide shows the client's banner (image 1) in full colour; on phones and
+     tablets the banner is a picture above the text, cropped to the product
+   - company: the closing slogan of the message is larger and stronger; the office photos are a
+     balanced grid (three 4:5 above three 16:9) with the new lab photos */
+
+/* ---- home: the cleansing-oil slide */
+.hs13--oil .hs13__bg img{filter:none}
+.hs13--oil .hs13__bg::after{background:linear-gradient(90deg,rgba(255,255,255,.94) 0%,rgba(255,255,255,.78) 30%,rgba(255,255,255,0) 56%)}
+.hs13__pn{display:block;margin-bottom:6px;font-weight:500;color:var(--ink);letter-spacing:.08em}
+.hs13__banner{display:none}
+@media (max-width:1024px){
+  .hs13--oil .hs13__bg{display:none}
+  .hs13__banner{display:block;width:100%;aspect-ratio:4/3;overflow:hidden;box-shadow:0 20px 40px -28px rgba(39,38,40,.45)}
+  .hs13__banner img{width:100%;height:100%;object-fit:cover;object-position:66% center}
+}
+
+/* ---- company: the closing slogan of the message, easier to read */
+.msg__end{font-size:clamp(18px,1.7vw,22px)!important;font-weight:600;letter-spacing:.16em;line-height:1.8;color:var(--beni-d)}
+
+/* ---- company: office photos, three portrait above three wide */
+.ofc16{display:grid;gap:clamp(20px,2.4vw,32px);margin-top:clamp(48px,5vw,72px)}
+.ofc16 ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,28px)}
+.ofc16 img{width:100%;object-fit:cover;filter:saturate(.92)}
+.ofc16__p img{aspect-ratio:4/5}
+.ofc16__w img{aspect-ratio:16/9}
+@media (max-width:760px){
+  .ofc16 ul{gap:8px}
+  .ofc16 figcaption{font-size:10.5px;letter-spacing:.06em}
+  .ofc16__w{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .ofc16__w li:last-child{grid-column:1/-1}
+}

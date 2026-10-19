@@ -12,6 +12,8 @@
   var SPOTS = [
     ['.phero:not(.phero--plain) .phero__img', null, L('ヘッダー写真', 'Header photo'), H, L('左1/6はぼかし', 'left 1/6 fades')],
     ['.phero--plain .phero__txt', null, L('ヘッダー写真（任意）', 'Header photo (optional)'), H, L('追加すると写真付きの見出しに', 'adds a photo to this header')],
+    ['.hs13--oil .hs13__bg', null, L('スライド画像', 'Slide image'), ['12:5', '2880×1200'], L('製品は右寄せ・左側は文字', 'product on the right, text on the left')],
+    ['.hs13__banner', null, L('スライド画像（スマートフォン）', 'Slide image (phones)'), ['12:5', '2880×1200'], L('製品部分を切り取って表示', 'cropped to the product')],
     ['.hs13__bg:not(.hs13__bg--plain)', null, L('スライド背景', 'Slide background'), H, L('文字の背景・画面により切り取り', 'behind text, cropped by screen')],
     ['.hs13__bg--plain', null, L('スライド背景（任意）', 'Slide background (optional)'), H, ''],
     ['.ppan:not(.ppan--soon)', null, L('製品写真', 'Product photo'), S, L('白背景・製品は中央', 'white background, centred')],
@@ -19,6 +21,8 @@
     ['.win:not(.win--kj)', null, L('製品写真', 'Product photo'), S, L('円形に表示', 'shown as a circle')],
     ['.arch', null, L('写真', 'Photo'), P, L('上部は丸く切り取り', 'rounded at the top')],
     ['.office__main', null, L('写真', 'Photo'), P, ''],
+    ['.ofc16__p figure', null, L('写真', 'Photo'), P, ''],
+    ['.ofc16__w figure', null, L('写真', 'Photo'), H, ''],
     ['.office__l figure', null, L('写真', 'Photo'), H, ''],
     [':is(.collab__l, .ipcards) figure', null, L('IPコラボ画像', 'IP collaboration image'), S, ''],
     ['.film__v', null, L('動画', 'Film'), ['MP4', '1920×1080'], L('横長（約2.5:1）で表示', 'shown wide (about 2.5:1)')]

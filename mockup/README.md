@@ -25,6 +25,7 @@ Tip: `ja/index.html#kv=3` (or `en/…`) opens the top carousel on slide 3 with a
 
 | Version | Folder | Look |
 |---|---|---|
+| **Premium v1.6** | `premium-1.6/ja/`, `premium-1.6/en/`, `premium-1.6/cosmoprof-asia/` | Premium v1.5 with the client's feedback of 2026-10-14: home slides and lead, the new cleansing oil, brand and R&D lab text, OEM quality cards, company table, office photos, access and hours, the new product list, order and photos (see *Premium v1.6* below). |
 | **Premium v1.5** | `premium-1.5/ja/`, `premium-1.5/en/`, `premium-1.5/cosmoprof-asia/` | Premium v1.4 with the client's second round (2026-10-07): the logo's magenta #D92070 in place of the crimson, and English pages without Japanese labels (see *Premium v1.5* below). |
 | **Premium v1.4** | `premium-1.4/ja/`, `premium-1.4/en/`, `premium-1.4/cosmoprof-asia/` | Premium v1.3 with the client's change proposal (2026-10-07): the official logo, the client's brand-page text and message, one button per slide, a store chooser on product pages, fewer product spec rows, no history for now (see *Premium v1.4* below). |
 | **Premium v1.3** | `premium-1.3/ja/`, `premium-1.3/en/`, `premium-1.3/cosmoprof-asia/` | Premium v1.2 with the reviewer's changes (意見まとめ.xlsx, 2026-10): brighter (white, V1 crimson), new menu order, separate Brand and Products pages, a products list plus one page per product from the Rakuten store, a large-image home slider, a short partnership section (see *Premium v1.3* below). |
@@ -158,6 +159,37 @@ booth. v1.2 = v1.1 plus that page; gated by `V12()` (v1 and v1.1 output unchange
   reduced motion. The small exhibition note under the v1.1 hero is replaced by the
   exhibition slide.
 - Files: `assets/css/premium-v12.css` (every v1.2 site page), `assets/js/premium-v12.js` (home page only).
+
+### Premium v1.6 — the client's feedback (2026-10-14)
+
+From `~/Downloads/花印官网/20261014/` (20261014 フィードバック のコピー.xlsx, with the product photos,
+the lab photos 2-1–2-4 and the cleansing-oil banner `１.png`). Gated by `V16()` in
+`_build/build_premium.py` and `catalog.V16` (set per version by `build()`); v1–v1.5 output does not
+change. Files: `assets/css/premium-v16.css`, `assets/img/p16/<slug>.jpg` (product photos, squared on
+white, sRGB), `assets/img/lab16_1–4.jpg` (lab photos; 2-1 turned upright and converted from Display
+P3), `assets/img/slide16_oil.jpg` (the banner).
+
+- **Home:** slide 1 lead 「東京・銀座の研究開発力から生まれる、肌に寄り添う日本製スキンケア。」 (無香料・無着色
+  is not true of every product) and one button 「ブランドについて」 to the brand page. The new-product slide
+  is the cleansing oil (新商品, 「洗うスキンケア」クレンジング誕生！, their banner in full colour; on phones the
+  banner is a picture above the text). Home products start with the oil.
+- **Brand / R&D / product pages:** the research paragraph is the client's text (no 無香料・無着色 claim);
+  the round lab windows use their new lab photo.
+- **R&D quality:** OEM production — three new cards (PARTNER FACTORY, QC & INSPECTION, TRACEABILITY &
+  SUPPORT), the 要確認 note removed.
+- **Company:** the closing slogan of the message is larger; no 代表者, 販売地域 or 法人番号 rows; office
+  photos as three 4:5 above three 16:9 with the new lab photos; stations 「…徒歩5～6分」 (their second
+  wording — the first lists 「銀座駅」 twice); hours 10:00〜17:00 everywhere.
+- **Products:** the client's 14 products in their order and their photos. ディープクレンジングローション
+  (was クレンジングローションMa), ピュアメルトクレンジングオイル 150mL (on sale, 新商品), new クレンジングバーム 70g
+  and モイスチュア洗顔クリーム 150g (text 要確認), モイスチュアフェイスクリーム 70g; クレーパック and the 80g
+  AMINO mask are gone. No 「化粧品」 label (医薬部外品 stays) and no 全成分 row or section.
+- **Buyer page:** the products on display come from the new catalogue; no 無香料・無着色 line.
+- **To raise with the client (OEM):** in-house manufacturing is still claimed in places — partnership
+  「研究開発・製造・輸出入を自社で担います」, R&D 「自社で研究開発・製造・輸出入を担う」 and 「製造 MAKE 日本国内での
+  化粧品製造」, the process step 「日本国内で化粧品を製造します」, company business 「製造 日本国内での化粧品製造」,
+  home 「日本で製造」. Their PARTNER FACTORY card says factories in Japan *and abroad*, while products are
+  labelled 日本製 / 原産国 日本.
 
 ### Premium v1.5 — the client's second round (2026-10-07)
 

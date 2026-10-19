@@ -46,6 +46,7 @@ OUT12 = os.path.join(b.ROOT, "premium-1.2")
 OUT13 = os.path.join(b.ROOT, "premium-1.3")
 OUT14 = os.path.join(b.ROOT, "premium-1.4")
 OUT15 = os.path.join(b.ROOT, "premium-1.5")
+OUT16 = os.path.join(b.ROOT, "premium-1.6")
 _VER = 1.0
 
 def V11():
@@ -71,6 +72,34 @@ def V15():
     language switch, the logo, product names and ingredients as printed, the legal company name
     and the slogan (with its translation)."""
     return _VER >= 1.5
+
+def V16():
+    """True while building premium v1.6: the client's feedback of 2026-10-14 (20261014 フィードバック):
+    new home slides and lead, the brand / R&D lab text, OEM quality cards, company profile, office
+    and access, the new product list, order and photos, no 化粧品 label or INCI row."""
+    return _VER >= 1.6
+
+_HOURS = HOURS
+def HOURS():
+    """v1.6: reception hours are 10:00–17:00 (client 2026-10-14)."""
+    return t("受付時間 平日10:00〜17:00（土日祝除く）", "Mon–Fri 10:00–17:00 (JST)") if V16() else _HOURS()
+
+def STATIONS16():
+    """v1.6: the client's second wording (their first lists 「銀座駅」 twice)."""
+    return t("東京メトロ有楽町線「銀座一丁目駅」<br>東京メトロ銀座線・丸ノ内線・日比谷線「銀座駅」<br>徒歩5～6分",
+             "Ginza-itchome Station (Yurakucho Line)<br>Ginza Station (Ginza, Marunouchi, Hibiya Lines)<br>5–6 min walk")
+
+def LAB():
+    """The laboratory photo in the round windows: v1.6 uses the client's new lab photos."""
+    return "lab16_4.jpg" if V16() else "h_campany_lab.jpg"
+
+def RD_P1():
+    """The research paragraph (brand, R&D, product pages): v1.6 is the client's text, which drops
+    the 無香料・無着色 claims (not true of every product)."""
+    if V16():
+        return t("花印の処方は、東京・銀座の研究室で開発しています。原料の選定から処方設計まで、一つひとつの可能性を丁寧に追求し、肌へのやさしさと確かな実感の両立を目指しています。",
+                 "Hanajirushi formulas are developed in our laboratory in Ginza, Tokyo. From choosing ingredients to designing each formula, we explore every possibility with care, aiming for skincare that is gentle on the skin and that you can feel working.")
+    return b.RD_P1()
 
 def EN15():
     """An English page of v1.5 or later: Japanese labels are left out or put into English."""
@@ -246,7 +275,7 @@ def v11_css():
     return f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v11.css">' if V11() else ''
 
 def v13_css():
-    return (f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v13.css">' if V13() else '') + (f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v14.css">' if V14() else '') + (f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v15.css">' if V15() else '')
+    return (f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v13.css">' if V13() else '') + (f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v14.css">' if V14() else '') + (f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v15.css">' if V15() else '') + (f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v16.css">' if V16() else '')
 
 # Global menu kept short (feedback 2026-10: 「菜单不要太多」): four sections plus the show and
 # the contact button. Secondary pages sit under a parent: reached from the parent page's
@@ -328,7 +357,7 @@ def footer(fn):
         by = cat.BY_SLUG()
         cols = [
          (t("ブランド","Brand"), [("brand.html",t("ブランドについて","About the brand")),("collaboration.html",t("IPコラボレーション","IP collaborations")),("rd.html",t("研究開発・品質管理","R&amp;D and quality"))]),
-         (t("製品","Products"), [("products.html",t("製品一覧","All products"))] + [(cat.page_of(by[s]), by[s]["name"]) for s in cat.FEATURED[:4]]),
+         (t("製品","Products"), [("products.html",t("製品一覧","All products"))] + [(cat.page_of(by[s]), by[s]["name"]) for s in cat.featured()[:4]]),
          (t("会社情報","Company"), [("company.html",t("会社概要","Company profile"))] + ([] if V14() else [("company.html#history",t("沿革","History"))]) + [("company.html#access",t("アクセス","Access")),("news.html",t("お知らせ","News"))]),
          (t("パートナーシップ","Partnership"), [("partners.html",t("海外代理店・パートナー募集","Partnership programme")),glob,("exhibition.html",t("展示会情報","Exhibitions")),("contact.html",t("お問い合わせ","Contact"))]),
         ]
@@ -754,12 +783,14 @@ def SLIDES13():
     切り替わるスライド形式」). The client will supply brand and new-product images; until then
     the existing site photographs stand in. Order: brand, exhibition, new product, patent."""
     by = cat.BY_SLUG()
-    return [
+    sl = [
      dict(kind="brand", tab=t("花印について", "Hanajirushi"), k=None, eyebrow="Hanajirushi · Ginza, Tokyo",
           head=t("ひとりに、ひとつの、<br>キレイを咲かせる。", "Clean formula.<br><em>Gentle by design.</em><br>Made in Japan."),
-          text=t("東京・銀座の自社研究室で開発する、<br>無香料・無着色の日本製スキンケア。", "Skincare formulated in our own laboratory in Ginza, Tokyo — sold in Japan and 12 countries."),
+          text=(t("東京・銀座の研究開発力から生まれる、<br>肌に寄り添う日本製スキンケア。", "Japanese skincare that stays close to your skin,<br>born of our research in Ginza, Tokyo.") if V16()
+                else t("東京・銀座の自社研究室で開発する、<br>無香料・無着色の日本製スキンケア。", "Skincare formulated in our own laboratory in Ginza, Tokyo — sold in Japan and 12 countries.")),
           bg="h_hanajirushi_top-1.jpg", pos="70% center", vis=None,
-          ctas=[("products.html", ("製品を見る", "View products"), "fill"), ("brand.html", ("ブランドについて", "About the brand"), "lnk")]),
+          ctas=([("brand.html", ("ブランドについて", "About the brand"), "fill")] if V16()   # v1.6: to the brand page
+                else [("products.html", ("製品を見る", "View products"), "fill"), ("brand.html", ("ブランドについて", "About the brand"), "lnk")])),
      dict(kind="exh", tab=t("展示会", "Exhibition"), k=t("展示会", "Exhibition"),
           head=t('<span class="nw"><span class="lat">Cosmoprof Asia 2026</span>に</span><br><em>出展します。</em>', "Meet us at<br><em>Cosmoprof Asia 2026</em>"),
           text=t("2026年11月、香港コンベンション＆エキシビションセンター。ブースでの商談のご予約を受け付けています。", "November 2026, Hong Kong Convention &amp; Exhibition Centre. Meetings at our booth can be booked now."),
@@ -776,6 +807,14 @@ def SLIDES13():
           tbc=t("特許番号 要確認", "Patent no. TBC"), bg="h_brand_top_p.jpg", pos="center", vis=("win", by["cleansing-lotion-ma"]),
           ctas=[(cat.page_of(by["cleansing-lotion-ma"]), ("製品を見る", "View the product"), "fill")]),
     ]
+    if V16():   # client 2026-10-14: the new-product slide is the cleansing oil, with their banner (image 1)
+        sl[2] = dict(kind="oil", tab=t("クレンジングオイル", "Cleansing oil"), k=t("新商品", "New"),
+                     head=t("「洗うスキンケア」<br><em>クレンジング誕生！</em>", "Cleansing,<br><em>reimagined as skincare.</em>"),
+                     text=t('<span class="hs13__pn">花印ピュアメルトクレンジングオイル</span>メイクも毛穴汚れもするんとオフ。<br>落とすたび、うるおいまで奪わない！',
+                            '<span class="hs13__pn">Pure Melt Cleansing Oil</span>Melts away make-up and pore dirt — <br>without taking moisture with it.'),
+                     bg="slide16_oil.jpg", pos="62% center", vis=("banner", "slide16_oil.jpg"),
+                     ctas=[(cat.page_of(by["cleansing-oil"]), ("クレンジングオイル", "Cleansing oil"), "fill")])
+    return sl
 
 def hero13():
     sl = SLIDES13()
@@ -797,6 +836,8 @@ def hero13():
             vis = f'<figure class="win win--xl win--kj"><div class="win__c"><span class="win__kj{" win__kj--en" if EN15() else ""}">{kj}</span><small>{cap}</small></div></figure>'
         elif v and v[0] == "win":
             vis = win(v[1]["img"], v[1]["name"], "win--xl") + seal("特許", "seal--l seal--txt")
+        elif v and v[0] == "banner":   # v1.6: on phones the banner shows as a picture above the text
+            vis = f'<figure class="hs13__banner"><img src="{IMG}{v[1]}" alt="{t("花印ピュアメルトクレンジングオイル","Pure Melt Cleansing Oil")}"></figure>'
         elif v and v[0] == "panels":
             vis = '<ul class="hs13__panels">' + ''.join(f'<li>{pimg(p)}<p>{p["name"]}<small>{p["size"]}</small></p></li>' for p in v[1]) + '</ul>'
         vis = f'<div class="hs13__vis">{vis}</div>' if vis else ''
@@ -821,7 +862,7 @@ def h_numbers13():
 def h_products13():
     """Home: the products at the front (reviewer 2026-10: the home page is mainly for consumers)."""
     by = cat.BY_SLUG()
-    cards = ''.join(pcard(by[s], i + 1) for i, s in enumerate(cat.FEATURED))   # numbered by position in the list
+    cards = ''.join(pcard(by[s], i + 1) for i, s in enumerate(cat.featured()))   # numbered by position in the list
     chips = ''.join(f'<a href="products.html?cat={k}#list">{v}</a>' for k, v in cat.CATS())
     free = ''.join(f'<li>{nobr(a)}</li>' for a, _ in b.FREE_FROM())
     return f'''<section class="sec col13" id="collection"><div class="wrap">
@@ -955,9 +996,9 @@ def p_brand14():
             "That is why we want to offer skincare that meets each person's skin and nurtures a beauty of their own — the starting point of everything Hanajirushi makes."))}
 <ol class="story13 story13--full">{items}</ol></div></section>'''
     research = f'''<section class="sec" id="research"><div class="wrap split__g">
-<div class="split__img split__img--win rv">{win("h_campany_lab.jpg", t("銀座本社の研究室","Our laboratory in Ginza"), "win--m")}</div>
+<div class="split__img split__img--win rv">{win(LAB(), t("銀座本社の研究室","Our laboratory in Ginza"), "win--m")}</div>
 <div class="split__txt rv">{shd("04","Research","銀座の研究室から、<br>確かな処方を。","Reliable formulas<br><em>from our Ginza lab.</em>", kj="研究への取り組み")}
-<p class="pd__cp">{b.RD_CATCH()}</p><p>{b.RD_P1()}</p>
+<p class="pd__cp">{b.RD_CATCH()}</p><p>{RD_P1()}</p>
 <div class="ctas">{btn("rd.html","研究開発・品質管理","R&amp;D and quality")}{lnk("products.html","製品一覧","All products")}</div></div></div></section>'''
     return page("brand.html", "brand", t("ブランド","Brand"),
                 t("花印のブランドコンセプト、5つの価値観、ブランドストーリー。ひとりに、ひとつの、キレイを咲かせる。東京・銀座の日本製スキンケア。",
@@ -982,9 +1023,9 @@ def p_brand13():
      lead=t("ブランドの背景や魅力をお伝えする本文は、ご提供いただく原稿を掲載します。","The full brand story will be added from the text being supplied."))}
 <ol class="story13">{"".join(f'<li class="rv"><span class="story13__n">{i+1:02d}</span><h3>{h}</h3><p>{d}</p>{due}</li>' for i, (h, d) in enumerate(slots))}</ol></div></section>'''
     research = f'''<section class="sec" id="research"><div class="wrap split__g">
-<div class="split__img split__img--win rv">{win("h_campany_lab.jpg", t("銀座本社の研究室","Our laboratory in Ginza"), "win--m")}</div>
+<div class="split__img split__img--win rv">{win(LAB(), t("銀座本社の研究室","Our laboratory in Ginza"), "win--m")}</div>
 <div class="split__txt rv">{shd("03","Research","銀座の研究室から、<br>確かな処方を。","Reliable formulas<br><em>from our Ginza lab.</em>", kj="研究への取り組み")}
-<p class="pd__cp">{b.RD_CATCH()}</p><p>{b.RD_P1()}</p>
+<p class="pd__cp">{b.RD_CATCH()}</p><p>{RD_P1()}</p>
 <div class="ctas">{btn("rd.html","研究開発・品質管理","R&amp;D and quality")}{lnk("products.html","製品一覧","All products")}</div></div></div></section>'''
     if V14():
         return p_brand14()
@@ -1006,12 +1047,14 @@ def p_products13():
     cards = ''.join(pcard(p, i + 1) for i, p in enumerate(allp))
     note = t("※ 製品画像の一部は、楽天市場 花印公式ショップの商品画像を仮に表示しています。正式な製品写真に差し替えます。",
              "Some product images are temporary, taken from our Japanese online store, and will be replaced with final photography.")
+    if V16():   # every photo is now the client's own (20261014 PRODUCT folder)
+        note = ''
     trade = f'<p class="note">Trade specifications (INCI, shelf life, JAN codes, case packs) and price lists are available on request. {cta_lnk("product","lnk--s")}</p>' if EN() else ''
     free = ''.join(f'<li>{nobr(a)}</li>' for a, _ in b.FREE_FROM())
     body = f'''<section class="sec sec--t plist13" id="list"><div class="wrap">
 <div class="pfilter rv" role="group" aria-label="{t("カテゴリーで絞り込む","Filter by category")}">{tabs}</div>
 <ul class="pgrid pgrid--all">{cards}</ul>
-<p class="note">{note}</p>{trade}
+{f'<p class="note">{note}</p>' if note else ''}{trade}
 {"" if V14() else f'<ul class="free rv">{free}</ul>'}
 {"" if V14() else f'<p class="plist13__ip rv">{t("人気IPとの正規ライセンス商品は","Officially licensed collaborations with popular characters: ")}{lnk("collaboration.html","IPコラボレーション商品へ","See IP collaborations")}</p>'}
 </div></section>'''
@@ -1045,32 +1088,36 @@ def p_product13(p):
 <ul class="pdx__badges">{badges}</ul>
 <p class="pdx__d">{p["desc"]}</p>
 {f'<ul class="pdx__free">{free}</ul>' if free else ''}
-<p class="pdx__spec"><b>{p["size"]}</b><span>{p["kind"]}</span><span>{t("日本製","Made in Japan")}</span></p>
+<p class="pdx__spec"><b>{p["size"]}</b>{"" if V16() and p["kind"] in ("化粧品", "Cosmetic") else f'<span>{p["kind"]}</span>'}<span>{t("日本製","Made in Japan")}</span></p>
 <div class="ctas">{ctas}</div>
 <p class="pdx__trade">{lnk("partners.html","販売代理店・輸入商・小売企業の皆さまへ","For distributors, importers and retailers","lnk--s")}</p></div>
 </div></section>
-<nav class="anc anc--pdx" aria-label="{t("ページ内リンク","On this page")}"><div class="wrap"><a href="#features">{t("製品の特長","Features")}</a><a href="#usage">{t("使い方","How to use")}</a><a href="#details">{t("製品情報","Details")}</a><a class="anc__pg" href="{topic_href("product", p["slug"])}">{t("お問い合わせ","Enquire")}</a></div></nav>'''
+<nav class="anc anc--pdx" aria-label="{t("ページ内リンク","On this page")}"><div class="wrap">{"" if V16() and not p["points"] else f'<a href="#features">{t("製品の特長","Features")}</a>'}<a href="#usage">{t("使い方","How to use")}</a><a href="#details">{t("製品情報","Details")}</a><a class="anc__pg" href="{topic_href("product", p["slug"])}">{t("お問い合わせ","Enquire")}</a></div></nav>'''
     pts = ''.join(f'<li class="rv"><span class="pdf__n">{k+1:02d}</span><h3>{h}</h3><p>{d}{(" " + tbd("特許番号 要確認","Patent no. TBC")) if flag == "patent" else ""}</p></li>'
                   for k, (h, d, flag) in enumerate(p["points"]))
     feat = f'''<section class="sec pdf" id="features"><div class="wrap">
 <div class="shd shd--c">{eb("Features","01")}<h2 class="h2">{lines(p["catch"])}</h2></div>
 <ol class="pdf__l">{pts}</ol></div></section>'''
     use = p["usage"] or tbd("使用方法 要確認", "How to use: TBC")
+    if V16() and not p["points"]:   # a new product whose text is still to come: no empty features block
+        feat = ''
     usage = f'''<section class="sec sec--t blush" id="usage"><div class="wrap pdu__g">
 <div class="rv">{shd("02","How to use","使い方","How to use", kj="使い方")}</div><p class="pdu__t rv">{use}</p></div></section>'''
     research = f'''<section class="sec sec--t"><div class="wrap split__g">
-<div class="split__img split__img--win rv">{win("h_campany_lab.jpg", t("銀座本社の研究室","Our laboratory in Ginza"), "win--m")}</div>
-<div class="split__txt rv">{shd("03","Research","銀座の研究室から、<br>確かな処方を。","Reliable formulas<br><em>from our Ginza lab.</em>", kj="研究への取り組み")}<p>{b.RD_P1()}</p>
+<div class="split__img split__img--win rv">{win(LAB(), t("銀座本社の研究室","Our laboratory in Ginza"), "win--m")}</div>
+<div class="split__txt rv">{shd("03","Research","銀座の研究室から、<br>確かな処方を。","Reliable formulas<br><em>from our Ginza lab.</em>", kj="研究への取り組み")}<p>{RD_P1()}</p>
 <div class="ctas">{lnk("rd.html","研究開発・品質管理","R&amp;D and quality")}</div></div></div></section>'''
     info = [(t("製品名","Product"), p["name"]), (t("内容量","Size"), p["size"]), (t("区分","Category"), p["kind"]), (t("原産国","Made in"), t("日本","Japan"))] + cat.TBC(p)
     if V14():   # change proposal: no 区分, 使用期限, 入数・ケースサイズ or 製造販売元 rows
         tbc = cat.TBC(p)
         info = [(t("製品名","Product"), p["name"]), (t("内容量","Size"), p["size"]), (t("原産国","Made in"), t("日本","Japan")), tbc[0], tbc[2]]
+        if V16():   # client 2026-10-14: no 全成分（INCI表記）
+            info = info[:3] + [tbc[2]]
     dl = ''.join(f'<div><dt>{a}</dt><dd>{v}</dd></div>' for a, v in info)
-    inci = p["inci"] if not EN() else (f'{tbd("英文表記 要確認", "English INCI list TBC")}<span class="pdd__ja" lang="ja">{p["inci"]}</span>')
+    inci = (p["inci"] or "") if not EN() else (f'{tbd("英文表記 要確認", "English INCI list TBC")}<span class="pdd__ja" lang="ja">{p["inci"]}</span>')
     docs = ''.join(f'<li>{a}</li>' for a, d in b.EXPORT_DOCS())
     acc = [(t("製品情報","Product information"), f'<dl class="dl">{dl}</dl>', True),
-           (t("全成分","Ingredients"), f'<p class="pdd__inci">{inci}</p>', False),
+           *([] if V16() else [(t("全成分","Ingredients"), f'<p class="pdd__inci">{inci}</p>', False)]),
            (t("使用上の注意","Cautions"), f'<p>{t("パッケージ記載の使用上の注意を掲載します。","The cautions printed on the pack will be listed here.")} {tbd()}</p>', False),
            (t("輸出関連資料（お取引先向け）","Export documents (for trade partners)"), f'<ul class="tags tags--ink">{docs}</ul><p class="note">{t("製品ごとにご用意します。","Prepared for each product.")} {tbd()}</p>', False)]
     det = ''.join(f'<details class="pdd__i"{" open" if o else ""}><summary><span>{h}</span></summary><div class="pdd__b">{c}</div></details>' for h, c, o in acc)
@@ -1078,7 +1125,7 @@ def p_product13(p):
 <div>{shd("04","Product details","製品情報","Product details", kj="製品情報")}</div>
 <div class="pdd rv">{det}</div></div></section>'''
     others = [x for x in allp if x["slug"] != p["slug"] and not x["soon"]]
-    more_l = ([x for x in others if x["cat"] == p["cat"]] + [x for x in others if x["cat"] != p["cat"] and x["slug"] in cat.FEATURED])[:3]
+    more_l = ([x for x in others if x["cat"] == p["cat"]] + [x for x in others if x["cat"] != p["cat"] and x["slug"] in cat.featured()])[:3]
     more = f'''<section class="sec sec--t" id="more"><div class="wrap">
 <div class="col13__h">{shd("05","More","その他の製品","More products", kj="その他の製品")}{lnk("products.html","製品一覧へ","All products")}</div>
 <ul class="pgrid">{"".join(pcard(x, k + 1) for k, x in enumerate(more_l))}</ul></div></section>'''
@@ -1089,7 +1136,7 @@ def p_product13(p):
 def buy_dialog(p):
     """v1.4: the store chooser behind 「この製品を購入する」 (premium-v14.js opens it). Rakuten opens
     this product's page; the other stores' addresses are still to come from the client."""
-    rk = f'{cat.RAKUTEN}{p["rk"]}/'
+    rk = f'{cat.RAKUTEN}{p["rk"]}/' if p["rk"] else None   # v1.6: new products have no Rakuten page yet
     stores = [("rakuten.svg", "楽天市場", "花印 公式ショップ", rk), ("amazon.png", "Amazon", "公式ストア", None),
               ("yahoo.svg", "Yahoo!ショッピング", "公式ストア", None), ("qoo10.png", "Qoo10", "公式ショップ", None)]
     li = ''.join((f'<li><a href="{u}" target="_blank" rel="noopener">' if u else '<li><a href="#" aria-disabled="true">')
@@ -1162,6 +1209,24 @@ def MESSAGE14():
               "Committed to quality and comfort, and listening to our customers, we will keep making products that stay close to each person, across countries and cultures.",
               "From Ginza to the world: through everyday skincare, Hanajirushi will keep supporting the beauty of every person."])
 
+def profile_rows():
+    """The company table. v1.4: no representative's name. v1.6: no 代表者, 販売地域 or 法人番号 rows."""
+    if not V14():
+        return b.company_rows(full=True)
+    rows = b.company_rows(full=True).replace(" " + tbd("氏名","Name TBC"), "")
+    if V16():
+        rows = re.sub(r'<tr><th>(代表者|販売地域|法人番号|Representative|Markets|Corporate number)</th>.*?</tr>', '', rows)
+    return rows
+
+def office16():
+    """v1.6 office: the client's new lab photos (2-1–2-4) and a balanced grid — three portrait
+    photos (4:5) above three wide ones (16:9) — instead of one tall photo beside two small."""
+    lab = t("研究室", "Laboratory")
+    tall = [("h_campany_bldg.jpg", t("本社ビル（銀座二丁目）", "Head office, Ginza 2-chome")), ("lab16_1.jpg", lab), ("lab16_2.jpg", lab)]
+    wide = [("h_campany_ent.jpg", t("エントランス", "Entrance")), ("lab16_4.jpg", lab), ("h_campany_dr.jpg", t("応接室", "Meeting room"))]
+    li = lambda xs: ''.join(f'<li class="rv"><figure><img src="{IMG}{im}" alt="" loading="lazy"><figcaption>{x}</figcaption></figure></li>' for im, x in xs)
+    return f'<div class="ofc16"><ul class="ofc16__p">{li(tall)}</ul><ul class="ofc16__w">{li(wide)}</ul></div>'
+
 def p_company():
     A = b.A
     hd = phero("Company", "会社概要", "Company",
@@ -1185,11 +1250,11 @@ def p_company():
 </div></section>'''
     prof = f'''<section class="sec sec--t blush" id="profile"><div class="wrap prof__g">
 {shd("02","Profile","会社概要","Company profile", kj="会社概要")}
-<table class="ptbl rv">{b.company_rows(full=True).replace(" " + tbd("氏名","Name TBC"), "") if V14() else b.company_rows(full=True)}</table></div></section>'''
+<table class="ptbl rv">{profile_rows()}</table></div></section>'''
     # EN_ONLY: corporate structure note
     struct = '' if not EN() else f'''<section class="sec--s"><div class="wrap"><div class="note-box rv">{eb("Corporate structure")}<p>{b.STRUCTURE_EN()}</p></div></div></section>'''
     kan = ["I", "II", "III"] if EN15() else ["一", "二", "三"]
-    biz = ''.join(f'''<li class="rv"><div class="arch"><img src="{IMG}{im}" alt="" loading="lazy"></div>
+    biz = ''.join(f'''<li class="rv"><div class="arch"><img src="{IMG}{("lab16_3.jpg" if V16() and im == "h_campany_lab.jpg" else im)}" alt="" loading="lazy"></div>
 <p class="craft__n"><span>{kan[i]}</span>{n}</p><h3>{h}</h3><p>{p}</p><ul class="tags tags--ink">{"".join(f"<li>{c}</li>" for c in cs)}</ul></li>''' for i, (im, n, h, p, cs, u) in enumerate(b.BUSINESS()))
     business = f'''<section class="sec biz" id="business"><div class="wrap">
 {shd("03","Business","事業内容","Our business", kj="事業内容", cls="shd--c",
@@ -1204,10 +1269,9 @@ def p_company():
     office = f'''<section class="sec office" id="office"><div class="wrap">
 {shd("04" if V14() else "05","Office","オフィス紹介","Our Ginza office", kj="オフィス紹介", cls="shd--c",
      lead=t("銀座二丁目の本社に、研究室・ショールーム・応接室を備えています。","Our head office in Ginza 2-chome houses our laboratory, showroom and meeting rooms."))}
-<div class="office__g"><figure class="office__main rv"><img src="{IMG}h_campany_bldg.jpg" alt="" loading="lazy"><figcaption>{t("本社ビル（銀座二丁目）","Head office, Ginza 2-chome")}</figcaption></figure>
-<ul class="office__l">{ph}</ul></div></div></section>'''
-    rows = [(t("所在地","Address"), ADDR(True)), (t("最寄駅","Stations"), b.STATIONS() + tbd("分数","min TBC")),
-            ("TEL", TEL()), ("FAX", FAX()), (t("受付時間","Hours"), t("平日 10:00〜18:00（土日祝除く）","Mon–Fri 10:00–18:00 (JST)"))]
+{office16() if V16() else f'<div class="office__g"><figure class="office__main rv"><img src="{IMG}h_campany_bldg.jpg" alt="" loading="lazy"><figcaption>{t("本社ビル（銀座二丁目）","Head office, Ginza 2-chome")}</figcaption></figure>{chr(10)}<ul class="office__l">{ph}</ul></div>'}</div></section>'''
+    rows = [(t("所在地","Address"), ADDR(True)), (t("最寄駅","Stations"), STATIONS16() if V16() else b.STATIONS() + tbd("分数","min TBC")),
+            ("TEL", TEL()), ("FAX", FAX()), (t("受付時間","Hours"), t("平日 10:00〜17:00（土日祝除く）","Mon–Fri 10:00–17:00 (JST)") if V16() else t("平日 10:00〜18:00（土日祝除く）","Mon–Fri 10:00–18:00 (JST)"))]
     access = f'''<section class="sec sec--t blush" id="access"><div class="wrap acc__g">
 <div class="acc__map rv"><iframe loading="lazy" title="{t("地図","Map")}" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA%E9%8A%80%E5%BA%A72-12-12&output=embed&hl={b.L}"></iframe></div>
 <div class="rv">{shd("05" if V14() else "06","Access","アクセス","Access", kj="アクセス")}
@@ -1231,9 +1295,9 @@ def p_rd():
     kan = ["I", "II", "III"] if EN15() else ["一", "二", "三"]
     trio = ''.join(f'<li class="rv"><p class="craft__n"><span>{kan[i]}</span></p><h3>{h}</h3><p>{d}</p></li>' for i, (h, d) in enumerate(pts))
     lab = f'''<section class="sec split" id="lab"><div class="wrap split__g">
-{f'<div class="split__img split__img--win rv">{win("h_campany_lab.jpg", t("銀座本社の研究室","Our laboratory in Ginza"), "win--m")}</div>' if V11() else f'<div class="split__img rv"><div class="arch"><img src="{IMG}h_campany_lab.jpg" alt="" loading="lazy"></div></div>'}
+{f'<div class="split__img split__img--win rv">{win(LAB(), t("銀座本社の研究室","Our laboratory in Ginza"), "win--m")}</div>' if V11() else f'<div class="split__img rv"><div class="arch"><img src="{IMG}h_campany_lab.jpg" alt="" loading="lazy"></div></div>'}
 <div class="split__txt rv">{shd("01","Laboratory","銀座の自社研究室","Our laboratory in Ginza", kj="自社研究室")}
-<p class="pd__cp">{b.RD_CATCH()}</p><p>{b.RD_P1()}</p><p>{b.RD_P2()}</p>
+<p class="pd__cp">{b.RD_CATCH()}</p><p>{RD_P1()}</p><p>{b.RD_P2()}</p>
 <ul class="tags tags--ink">{"".join(f"<li>{x}</li>" for x in b.RD_TAGS())}</ul>
 <div class="ctas">{cta_btn("oem","btn--fill")}</div></div>
 </div>
@@ -1246,6 +1310,19 @@ def p_rd():
 {shd("03","Quality","品質管理体制","Quality management", kj="品質管理",
      lead=t("工場情報・認証・生産能力は確認のうえ掲載します。","Factory details, certifications and capacity will be published once confirmed."))}
 <ul class="cells cells--3">{"".join(f'<li class="rv">{"" if EN15() else f"<small>{s}</small>"}<h3>{h}</h3><p>{d}</p></li>' for h, s, d in q)}</ul></div></section>'''
+    if V16():   # client 2026-10-14: OEM production — the section is rewritten with their three cards
+        q16 = [("PARTNER FACTORY", t("厳選された提携工場", "Selected partner factories"),
+                t("国内外のGMP認証工場やISO取得工場など、高い技術力と実績を持つ提携先のみを厳選。",
+                  "We work only with partners of proven skill and track record, such as GMP-certified and ISO-certified factories in Japan and abroad.")),
+               ("QC &amp; INSPECTION", t("二重の品質管理・検査体制", "Two-stage quality control"),
+                t("工場出荷時の全数/抜取検査に加え、自社倉庫での受入検査（外観・機能・異物混入等のチェック）を実施し、不良品流出を二重で防止。",
+                  "Beyond full or sample inspection when products leave the factory, every delivery is inspected at our own warehouse (appearance, function, foreign matter), so defects are stopped twice.")),
+               ("TRACEABILITY &amp; SUPPORT", t("追跡管理・アフターサポート", "Traceability and after-sales support"),
+                t("ロットごとの製造・検査履歴の管理（トレーサビリティ）、保存サンプルの保管、万が一の不具合発生時の迅速な原因究明と代替対応。",
+                  "Manufacturing and inspection records for every lot, retained samples, and — should a problem ever arise — prompt investigation and replacement."))]
+        quality = f'''<section class="sec" id="quality"><div class="wrap">
+{shd("03","Quality","品質管理体制","Quality management", kj="品質管理")}
+<ul class="cells cells--3">{"".join(f'<li class="rv"><small>{s_}</small><h3>{h}</h3><p>{d}</p></li>' for s_, h, d in q16)}</ul></div></section>'''
     docs = f'''<section class="sec dark" id="docs"><div class="wrap docs__g">
 <div>{shd("04","Export documents","輸出書類への対応","Export<br><em>documentation</em>", kj="輸出書類",
      lead=t("海外のお取引先の輸入・登録手続きに必要な書類を、製品ごとにご用意します。","The documents your importer and regulator will ask for — prepared for each product."))}</div>
@@ -1550,6 +1627,8 @@ def lp_block():
 def lp_page():
     p_all = b.PRODUCTS()
     hato = p_all[2]
+    if V16():   # the v1.6 catalogue and photos
+        hato = cat.BY_SLUG()["hatomugi-skin-conditioner"]
     other = "ja.html" if EN() else "index.html"
     # ?lang=ja / ?lang=en (links in the V1 style) open the matching file
     want = "ja" if EN() else "en"
@@ -1589,9 +1668,17 @@ def lp_page():
 <p class="lp-prod__a"><a class="lnk lnk--s" href="#booking" data-pick="{p["id"]}"><span>{t("この製品を相談する","Discuss this product")}</span>{ARR}</a>
 <a class="lnk lnk--s" href="{lp_site(prod_href(p["id"]))}"><span>{t("製品の詳細","Product details")}</span>{ARR}</a></p></li>'''
     soon = ''.join(f'<p class="col__soon rv"><i>No.{i+1:02d}</i>{p["name"]} — {p["short"]}</p>' for i, p in enumerate(p_all) if not p["img"])
+    if V16():   # the products on display from the v1.6 catalogue: the new oil, the cleansing lotion, the Hatomugi lotion
+        by, cats = cat.BY_SLUG(), dict(cat.CATS())
+        cards = ''.join(f'''<li class="rv">{win(p["img"], p["name"])}
+<p class="col__no">No.{i+1:02d}<span>{cats[p["cat"]]}</span></p><h3>{pname(p["name"])}</h3><p class="col__d">{p["short"]}</p>
+<p class="lp-prod__a"><a class="lnk lnk--s" href="#booking" data-pick="{p["slug"]}"><span>{t("この製品を相談する","Discuss this product")}</span>{ARR}</a>
+<a class="lnk lnk--s" href="{lp_site(cat.page_of(p))}"><span>{t("製品の詳細","Product details")}</span>{ARR}</a></p></li>'''
+                        for i, p in enumerate(by[x] for x in ("cleansing-oil", "cleansing-lotion-ma", "hatomugi-skin-conditioner")))
+        soon = ''
     products = f'''<section class="sec col lp-prod" id="products"><div class="wrap">
 {shd("01","On display","出展製品","On display", kj="出展製品", cls="shd--c",
-     lead=t("無香料・無着色・オイルフリー・アルコールフリー。ブースでお試しいただけます。","Fragrance-free, colorant-free, oil-free, alcohol-free. Try them at our booth."))}
+     lead=t("ブースで製品をお試しいただけます。","Try our products at the booth.") if V16() else t("無香料・無着色・オイルフリー・アルコールフリー。ブースでお試しいただけます。","Fragrance-free, colorant-free, oil-free, alcohol-free. Try them at our booth."))}
 <ul class="col__l col__l--3">{cards}</ul>{soon}</div></section>'''
 
     kan = ["研", "造", "質", "績"]
@@ -1732,8 +1819,9 @@ PAGES = {"index.html": p_home, "brand.html": p_brand, "company.html": p_company,
 def build():
     global _VER
     b.IMG = IMG  # build.py helpers that print image paths resolve from premium/<lang>/
-    for out, ver in ((OUT, 1.0), (OUT11, 1.1), (OUT12, 1.2), (OUT13, 1.3), (OUT14, 1.4), (OUT15, 1.5)):
+    for out, ver in ((OUT, 1.0), (OUT11, 1.1), (OUT12, 1.2), (OUT13, 1.3), (OUT14, 1.4), (OUT15, 1.5), (OUT16, 1.6)):
         _VER = ver
+        cat.V16 = V16()   # the v1.6 product list
         for lang in ("ja", "en"):
             b.L = lang
             d = os.path.join(out, lang); os.makedirs(d, exist_ok=True)
@@ -1761,6 +1849,7 @@ def build():
                     f.write(html)
                 print(f"{os.path.basename(out)} {LP_DIR}/{fn:14} {len(html):>7} bytes")
     _VER = 1.0
+    cat.V16 = False
 
 if __name__ == "__main__":
     build()

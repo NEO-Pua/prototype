@@ -21,6 +21,10 @@ product is adding one entry. Order = display order on the products page.
 """
 from build import t, tbd
 
+# premium v1.6 (client feedback 2026-10-14) uses PRODUCTS16(): set by build_premium.build() per
+# version, so PRODUCTS13(), BY_SLUG() and featured() answer for the version being built.
+V16 = False
+
 RAKUTEN = "https://item.rakuten.co.jp/hanajirushi/"
 RIMG = "https://shop.r10s.jp/hanajirushi/cabinet/"
 
@@ -48,6 +52,9 @@ def _HATO_FREE():
                ["No synthetic fragrance", "No synthetic colour", "Mineral-oil free", "Silicone free", "Weakly acidic"])
 
 def PRODUCTS13():
+    return PRODUCTS16() if V16 else _products13()
+
+def _products13():
     return [
      dict(slug="cleansing-lotion-ma", legacy="p1", rk="10000091", cat="cleansing", series=None, new=False, soon=False,
           img="hanajirushi_cl.jpg", rimg=RIMG + "11261505/11-25-2.jpg",
@@ -267,6 +274,55 @@ def PRODUCTS13():
           catch="", desc="", points=[], free=[], usage=None, inci=None),
     ]
 
+def PRODUCTS16():
+    """v1.6: the client's list and order (20261014 フィードバック, sheet 製品 順番) with their new
+    photos (assets/img/p16/<slug>.jpg, product1–14). The cleansing oil is on sale; クレンジング
+    ローションMa is now ディープクレンジングローション; クレンジングバーム and モイスチュア洗顔クリーム
+    are new (their text is to come, marked 要確認); クレーパック and the 80g AMINO face mask are
+    not in the list. 新商品 only where the client marked it (the oil)."""
+    by = {p["slug"]: p for p in _products13()}
+    todo = tbd("紹介文 要確認", "Description TBC")
+
+    def up(slug, **kw):
+        d = dict(by[slug]) if slug in by else {}
+        d.update(kw)
+        d["slug"] = slug
+        d["img"] = f"p16/{slug}.jpg"
+        return d
+
+    def fresh(slug, cat, series, name, size, short):
+        return up(slug, legacy=None, rk=None, cat=cat, series=series, new=False, soon=False, rimg=None,
+                  name=name, sub=name, size=size, kind=t("化粧品", "Cosmetic"),
+                  badges=[], short=short, catch="", desc=todo, points=[], free=[], usage=None, inci=None)
+
+    return [
+     up("cleansing-oil", rk=None, new=True, soon=False, size="150mL", kind=t("化粧品", "Cosmetic"),
+        name=t("花印ピュアメルトクレンジングオイル", "Pure Melt Cleansing Oil"), sub=t("Pure Melt Cleansing Oil", "花印ピュアメルトクレンジングオイル"),
+        badges=[t("新商品", "New")],
+        short=t("メイクも毛穴汚れもするんとオフ。落とすたび、うるおいまで奪わない。", "Melts away make-up and pore dirt — without taking moisture with it."),
+        catch=t("「洗うスキンケア」<br>クレンジング誕生。", "Cleansing<br><em>as skincare.</em>"),
+        desc=t("メイクも毛穴汚れもするんとオフ。落とすたび、うるおいまで奪わない、「洗うスキンケア」のクレンジングオイルです。",
+               "Melts away make-up and pore dirt, and never takes moisture with it — a cleansing oil that cares for skin as it cleanses. ") + " " + todo,
+        points=[], free=[], usage=None, inci=None),
+     up("cleansing-lotion-ma", name=t("花印ディープクレンジングローション", "Deep Cleansing Lotion"), sub=t("Deep Cleansing Lotion", "花印ディープクレンジングローション")),
+     up("juicy-cleansing-lotion"),
+     dict(fresh("cleansing-balm", "cleansing", None, t("花印クレンジングバーム", "Cleansing Balm"), "70g",
+                t("クレンジングバーム。紹介文は準備中です。", "A cleansing balm. Description to follow.")),
+          sub=t("Cleansing Balm", "花印クレンジングバーム")),
+     up("hatomugi-skin-conditioner"),
+     up("hatomugi-essence", new=False, badges=[]),
+     up("hatomugi-cream", new=False, badges=[]),
+     dict(fresh("moisture-washing-cream", "cleansing", "amino", t("花印モイスチュア洗顔クリーム", "Moisture Washing Cream"), "150g",
+                t("洗顔クリーム。紹介文は準備中です。", "A face-washing cream. Description to follow.")),
+          sub=t("Moisture Washing Cream — Amino Acid", "花印モイスチュア洗顔クリーム")),
+     up("super-moisture-gel", name=t("花印スーパーモイスチュアフェイスマスク", "Super Moisture Face Mask")),
+     up("moisture-face-cream", size="70g"),
+     up("booster-conditioner"),
+     up("wrinkle-eye-cream"),
+     up("uv-primer"),
+     up("vital-gel-men"),
+    ]
+
 def BY_SLUG():
     return {p["slug"]: p for p in PRODUCTS13()}
 
@@ -274,6 +330,11 @@ def BY_LEGACY():
     return {p["legacy"]: p for p in PRODUCTS13() if p["legacy"]}
 
 FEATURED = ["cleansing-lotion-ma", "hatomugi-skin-conditioner", "hatomugi-essence", "hatomugi-cream", "amino-face-mask", "uv-primer"]
+# v1.6: the new cleansing oil first; the 80g AMINO mask is no longer sold
+FEATURED16 = ["cleansing-oil", "cleansing-lotion-ma", "hatomugi-skin-conditioner", "hatomugi-essence", "hatomugi-cream", "uv-primer"]
+
+def featured():
+    return FEATURED16 if V16 else FEATURED
 
 def page_of(p):
     return f"product-{p['slug']}.html"
