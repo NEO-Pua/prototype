@@ -185,6 +185,11 @@ P3), `assets/img/slide16_oil.jpg` (the banner).
   and モイスチュア洗顔クリーム 150g (text 要確認), モイスチュアフェイスクリーム 70g; クレーパック and the 80g
   AMINO mask are gone. No 「化粧品」 label (医薬部外品 stays) and no 全成分 row or section.
 - **Buyer page:** the products on display come from the new catalogue; no 無香料・無着色 line.
+- **Contact form flow** (mockup only, `assets/js/premium-v16-form.js`): 「入力内容を確認する」 shows the
+  確認 screen with what was entered (sample values when the form is empty), 「送信する」 the 完了 screen,
+  then a preview of the two emails the WordPress site sends — the notification to the address in
+  サイト設定 (Japanese field names, Reply-To the customer) and the automatic reply to the customer (in
+  the page's language, with the company-profile PDF line when a PDF is uploaded). Nothing is sent.
 - **To raise with the client (OEM):** in-house manufacturing is still claimed in places — partnership
   「研究開発・製造・輸出入を自社で担います」, R&D 「自社で研究開発・製造・輸出入を担う」 and 「製造 MAKE 日本国内での
   化粧品製造」, the process step 「日本国内で化粧品を製造します」, company business 「製造 日本国内での化粧品製造」,
