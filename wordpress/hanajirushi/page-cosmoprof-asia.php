@@ -74,7 +74,7 @@ foreach ( hj_c( 'JAPAN4' ) as $i => $j ) {
 ?>
 <section class="nums lp-nums"><div class="wrap"><ul class="nums__l"><?php echo $nums; ?></ul></div></section>
 <section class="sec col lp-prod" id="products"><div class="wrap">
-<?php echo hj_shd( '01', 'On display', '出展製品', 'On display', '出展製品', hj_t( '無香料・無着色・オイルフリー・アルコールフリー。ブースでお試しいただけます。', 'Fragrance-free, colorant-free, oil-free, alcohol-free. Try them at our booth.' ), 'shd--c' ); ?>
+<?php echo hj_shd( '01', 'On display', '出展製品', 'On display', '出展製品', hj_t( 'ブースで製品をお試しいただけます。', 'Try our products at the booth.' ), 'shd--c' ); ?>
 <ul class="col__l col__l--3"><?php echo $cards; ?></ul>
 <div class="ctr"><?php echo hj_lnk( hj_link( '/products/' ), 'すべての製品を見る', 'All products' ); ?></div></div></section>
 <section class="sec sec--t dark j4" id="strengths"><div class="wrap">

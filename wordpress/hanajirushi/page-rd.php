@@ -19,9 +19,9 @@ for ( $i = 1; $i <= 3; $i++ ) {
 	$trio .= '<li class="rv"><p class="craft__n"><span>' . hj_kan( $i - 1 ) . '</span></p><h3>' . hj_c( "RD_POINT{$i}_T" ) . '</h3><p>' . hj_c( "RD_POINT{$i}_D" ) . '</p></li>';
 }
 $tags = implode( '', array_map( fn( $x ) => '<li>' . $x . '</li>', hj_c( 'RD_TAGS' ) ) );
-$q    = '';
-for ( $i = 1; $i <= 3; $i++ ) {
-	$q .= '<li class="rv">' . ( hj_is_en() ? '' : '<small>' . hj_c( "QUALITY{$i}_S" ) . '</small>' ) . '<h3>' . hj_c( "QUALITY{$i}_T" ) . '</h3><p>' . hj_c( "QUALITY{$i}_B" ) . '</p></li>';
+$q    = '';   // v1.6 (OEM production, client 2026-10-14): partner factories, two-stage QC, traceability
+foreach ( (array) hj_c( 'QUALITY16' ) as $c ) {
+	$q .= '<li class="rv"><small>' . $c[0] . '</small><h3>' . $c[1] . '</h3><p>' . $c[2] . '</p></li>';
 }
 ?>
 <section class="sec split" id="lab"><div class="wrap split__g">
@@ -35,7 +35,7 @@ for ( $i = 1; $i <= 3; $i++ ) {
 <section class="sec sec--t blush" id="process"><div class="wrap">
 <?php echo hj_shd( '02', 'Process', '開発から出荷まで', 'From formulation<br><em>to shipment</em>', '開発プロセス', null, 'shd--c' ) . hj_flow( hj_c( 'RD_STEPS' ) ); ?></div></section>
 <section class="sec" id="quality"><div class="wrap">
-<?php echo hj_shd( '03', 'Quality', '品質管理体制', 'Quality management', '品質管理', hj_show_tbc() ? hj_t( '工場情報・認証・生産能力は確認のうえ掲載します。', 'Factory details, certifications and capacity will be published once confirmed.' ) : null ); ?>
+<?php echo hj_shd( '03', 'Quality', '品質管理体制', 'Quality management', '品質管理' ); ?>
 <ul class="cells cells--3"><?php echo $q; ?></ul></div></section>
 <section class="sec dark" id="docs"><div class="wrap docs__g">
 <div><?php echo hj_shd( '04', 'Export documents', '輸出書類への対応', 'Export<br><em>documentation</em>', '輸出書類', hj_t( '海外のお取引先の輸入・登録手続きに必要な書類を、製品ごとにご用意します。', 'The documents your importer and regulator will ask for — prepared for each product.' ) ); ?></div>

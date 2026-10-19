@@ -1218,6 +1218,18 @@ def profile_rows():
         rows = re.sub(r'<tr><th>(代表者|販売地域|法人番号|Representative|Markets|Corporate number)</th>.*?</tr>', '', rows)
     return rows
 
+def QUALITY16():
+    """v1.6 R&D quality cards (client 2026-10-14, OEM production): (English label, title, text)."""
+    return [("PARTNER FACTORY", t("厳選された提携工場", "Selected partner factories"),
+            t("国内外のGMP認証工場やISO取得工場など、高い技術力と実績を持つ提携先のみを厳選。",
+              "We work only with partners of proven skill and track record, such as GMP-certified and ISO-certified factories in Japan and abroad.")),
+           ("QC &amp; INSPECTION", t("二重の品質管理・検査体制", "Two-stage quality control"),
+            t("工場出荷時の全数/抜取検査に加え、自社倉庫での受入検査（外観・機能・異物混入等のチェック）を実施し、不良品流出を二重で防止。",
+              "Beyond full or sample inspection when products leave the factory, every delivery is inspected at our own warehouse (appearance, function, foreign matter), so defects are stopped twice.")),
+           ("TRACEABILITY &amp; SUPPORT", t("追跡管理・アフターサポート", "Traceability and after-sales support"),
+            t("ロットごとの製造・検査履歴の管理（トレーサビリティ）、保存サンプルの保管、万が一の不具合発生時の迅速な原因究明と代替対応。",
+              "Manufacturing and inspection records for every lot, retained samples, and — should a problem ever arise — prompt investigation and replacement."))]
+
 def office16():
     """v1.6 office: the client's new lab photos (2-1–2-4) and a balanced grid — three portrait
     photos (4:5) above three wide ones (16:9) — instead of one tall photo beside two small."""
@@ -1311,15 +1323,7 @@ def p_rd():
      lead=t("工場情報・認証・生産能力は確認のうえ掲載します。","Factory details, certifications and capacity will be published once confirmed."))}
 <ul class="cells cells--3">{"".join(f'<li class="rv">{"" if EN15() else f"<small>{s}</small>"}<h3>{h}</h3><p>{d}</p></li>' for h, s, d in q)}</ul></div></section>'''
     if V16():   # client 2026-10-14: OEM production — the section is rewritten with their three cards
-        q16 = [("PARTNER FACTORY", t("厳選された提携工場", "Selected partner factories"),
-                t("国内外のGMP認証工場やISO取得工場など、高い技術力と実績を持つ提携先のみを厳選。",
-                  "We work only with partners of proven skill and track record, such as GMP-certified and ISO-certified factories in Japan and abroad.")),
-               ("QC &amp; INSPECTION", t("二重の品質管理・検査体制", "Two-stage quality control"),
-                t("工場出荷時の全数/抜取検査に加え、自社倉庫での受入検査（外観・機能・異物混入等のチェック）を実施し、不良品流出を二重で防止。",
-                  "Beyond full or sample inspection when products leave the factory, every delivery is inspected at our own warehouse (appearance, function, foreign matter), so defects are stopped twice.")),
-               ("TRACEABILITY &amp; SUPPORT", t("追跡管理・アフターサポート", "Traceability and after-sales support"),
-                t("ロットごとの製造・検査履歴の管理（トレーサビリティ）、保存サンプルの保管、万が一の不具合発生時の迅速な原因究明と代替対応。",
-                  "Manufacturing and inspection records for every lot, retained samples, and — should a problem ever arise — prompt investigation and replacement."))]
+        q16 = QUALITY16()
         quality = f'''<section class="sec" id="quality"><div class="wrap">
 {shd("03","Quality","品質管理体制","Quality management", kj="品質管理")}
 <ul class="cells cells--3">{"".join(f'<li class="rv"><small>{s_}</small><h3>{h}</h3><p>{d}</p></li>' for s_, h, d in q16)}</ul></div></section>'''

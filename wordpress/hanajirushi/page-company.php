@@ -75,20 +75,17 @@ if ( $history_on ) :
 	<?php
 endif;
 // ------------------------------------------------------------------ 05 office (photos not already shown under 事業内容)
-$shown = array_map( fn( $b ) => $b[0], hj_c( 'BUSINESS' ) );
-$ph    = '';
-$k = 0;   // the two small office photos: the theme's office photos not already used above, or サイト設定 → 写真
-foreach ( hj_c( 'OFFICE_PHOTOS' ) as $o ) {
-	if ( ! in_array( $o[0], $shown, true ) && $k < 2 ) {
-		$slot = 'company_office_' . ( ++$k );
-		$ph  .= '<li class="rv"><figure><img ' . hj_photo_src( $slot, $o[0] ) . ' alt="" loading="lazy"><figcaption>' . hj_photo_cap( $slot, $o[1] ) . '</figcaption></figure></li>';
-	}
-}
+// v1.6: three portrait photos (4:5) above three wide ones (16:9); each from サイト設定 → 写真, or the theme's
+$lab   = hj_t( '研究室', 'Laboratory' );
+$cell  = fn( $slot, $file, $cap ) => '<li class="rv"><figure><img ' . hj_photo_src( $slot, $file ) . ' alt="" loading="lazy"><figcaption>' . hj_photo_cap( $slot, $cap ) . '</figcaption></figure></li>';
+$tall  = $cell( 'company_office_main', 'h_campany_bldg.jpg', hj_t( '本社ビル（銀座二丁目）', 'Head office, Ginza 2-chome' ) )
+	. $cell( 'company_office_p2', 'h_campany_lab.jpg', $lab ) . $cell( 'company_office_p3', 'h_campany_sr.jpg', $lab );
+$wide  = $cell( 'company_office_w1', 'h_campany_ent.jpg', hj_t( 'エントランス', 'Entrance' ) )
+	. $cell( 'company_office_w2', 'h_campany_lab.jpg', $lab ) . $cell( 'company_office_w3', 'h_campany_dr.jpg', hj_t( '応接室', 'Meeting room' ) );
 ?>
 <section class="sec office" id="office"><div class="wrap">
 <?php echo hj_shd( $n[1], 'Office', 'オフィス紹介', 'Our Ginza office', 'オフィス紹介', hj_t( '銀座二丁目の本社に、研究室・ショールーム・応接室を備えています。', 'Our head office in Ginza 2-chome houses our laboratory, showroom and meeting rooms.' ), 'shd--c' ); ?>
-<div class="office__g"><figure class="office__main rv"><img <?php echo hj_photo_src( 'company_office_main', 'h_campany_bldg.jpg' ); ?> alt="" loading="lazy"><figcaption><?php echo hj_photo_cap( 'company_office_main', hj_t( '本社ビル（銀座二丁目）', 'Head office, Ginza 2-chome' ) ); ?></figcaption></figure>
-<ul class="office__l"><?php echo $ph; ?></ul></div></div></section>
+<div class="ofc16"><ul class="ofc16__p"><?php echo $tall; ?></ul><ul class="ofc16__w"><?php echo $wide; ?></ul></div></div></section>
 <?php
 // ------------------------------------------------------------------ 06 access
 $acc = array(
@@ -96,7 +93,7 @@ $acc = array(
 	array( hj_t( '最寄駅', 'Stations' ), hj_text( hj_opt( 'stations' ) ) ),
 	array( 'TEL', esc_html( hj_tel() ) ),
 	array( 'FAX', esc_html( (string) hj_opt( 'fax' ) ) ),
-	array( hj_t( '受付時間', 'Hours' ), esc_html( (string) hj_opt( 'hours' ) ) ),
+	array( hj_t( '受付時間', 'Hours' ), esc_html( trim( preg_replace( '/^受付時間\s*/u', '', (string) hj_opt( 'hours' ) ) ) ) ),   // the setting starts with 受付時間 (for the header)
 );
 $dl = '';
 foreach ( $acc as $a ) {

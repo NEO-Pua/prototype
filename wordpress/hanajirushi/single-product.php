@@ -50,21 +50,23 @@ $free = hj_split_lines( hj_get( 'free', $id ) );
 <ul class="pdx__badges"><?php echo $li( hj_split_lines( hj_get( 'badges', $id ) ) ); ?></ul>
 <p class="pdx__d"><?php echo hj_text( hj_get( 'desc', $id ) ); ?></p>
 <?php if ( $free ) : ?><ul class="pdx__free"><?php echo $li( $free ); ?></ul><?php endif; ?>
-<p class="pdx__spec"><b><?php echo esc_html( $size ); ?></b><span><?php echo esc_html( $kind ); ?></span><span><?php echo hj_t( '日本製', 'Made in Japan' ); ?></span></p>
+<p class="pdx__spec"><b><?php echo esc_html( $size ); ?></b><?php echo 'quasi' === hj_raw( 'kind', $id ) ? '<span>' . esc_html( $kind ) . '</span>' : ''; // v1.6: no 「化粧品」 label ?><span><?php echo hj_t( '日本製', 'Made in Japan' ); ?></span></p>
 <div class="ctas"><?php echo $ctas; ?></div>
 <p class="pdx__trade"><?php echo hj_lnk( hj_link( '/partners/' ), '販売代理店・輸入商・小売企業の皆さまへ', 'For distributors, importers and retailers', 'lnk--s' ); ?></p></div>
 </div></section>
-<nav class="anc anc--pdx" aria-label="<?php echo esc_attr( hj_t( 'ページ内リンク', 'On this page' ) ); ?>"><div class="wrap"><a href="#features"><?php echo hj_t( '製品の特長', 'Features' ); ?></a><a href="#usage"><?php echo hj_t( '使い方', 'How to use' ); ?></a><a href="#details"><?php echo hj_t( '製品情報', 'Details' ); ?></a><a class="anc__pg" href="<?php echo esc_url( hj_topic_url( 'product', $p->post_name ) ); ?>"><?php echo hj_t( 'お問い合わせ', 'Enquire' ); ?></a></div></nav>
 <?php
 // ------------------------------------------------------------------ 01 features
 $pts = '';
-foreach ( (array) hj_get( 'points', $id ) as $k => $pt ) {
+foreach ( array_values( array_filter( (array) hj_get( 'points', $id ) ) ) as $k => $pt ) {   // an empty list comes back as false
 	$pts .= '<li class="rv"><span class="pdf__n">' . sprintf( '%02d', $k + 1 ) . '</span><h3>' . esc_html( $pt['title'] ?? '' ) . '</h3><p>' . esc_html( $pt['text'] ?? '' ) . '</p></li>';
 }
 ?>
+<nav class="anc anc--pdx" aria-label="<?php echo esc_attr( hj_t( 'ページ内リンク', 'On this page' ) ); ?>"><div class="wrap"><?php echo $pts ? '<a href="#features">' . hj_t( '製品の特長', 'Features' ) . '</a>' : ''; ?><a href="#usage"><?php echo hj_t( '使い方', 'How to use' ); ?></a><a href="#details"><?php echo hj_t( '製品情報', 'Details' ); ?></a><a class="anc__pg" href="<?php echo esc_url( hj_topic_url( 'product', $p->post_name ) ); ?>"><?php echo hj_t( 'お問い合わせ', 'Enquire' ); ?></a></div></nav>
+<?php if ( $pts ) : // a product whose text is still to come has no features block (v1.6) ?>
 <section class="sec pdf" id="features"><div class="wrap">
 <div class="shd shd--c"><?php echo hj_eb( 'Features', '01' ); ?><h2 class="h2"><?php echo hj_heading( hj_get( 'catch', $id ), hj_is_en() ); ?></h2></div>
 <ol class="pdf__l"><?php echo $pts; ?></ol></div></section>
+<?php endif; ?>
 <?php
 // ------------------------------------------------------------------ 02 how to use
 $use = (string) hj_get( 'usage', $id );
@@ -75,7 +77,7 @@ $use = (string) hj_get( 'usage', $id );
 <?php // ------------------------------------------------------------------ 03 research ?>
 <section class="sec sec--t"><div class="wrap split__g">
 <div class="split__img split__img--win rv"><?php echo hj_win( hj_photo( 'product_lab', 'h_campany_lab.jpg' ), hj_t( '銀座本社の研究室', 'Our laboratory in Ginza' ), 'win--m' ); ?></div>
-<div class="split__txt rv"><?php echo hj_shd( '03', 'Research', '銀座の研究室から、<br>確かな処方を。', 'Reliable formulas<br><em>from our Ginza lab.</em>', '研究への取り組み' ); ?><p><?php echo hj_t( '花印の処方は、東京・銀座本社の研究室で原料レベルから開発しています。肌へのやさしさと確かな実感を両立させるため、無香料・無着色・オイルフリー・アルコールフリーを基本設計としています。', 'HANAJIRUSHI formulas are developed from the raw-material level in the laboratory at our Ginza head office. Our baseline design is fragrance-free, colorant-free, oil-free and alcohol-free — gentle on skin, with results you can feel.' ); ?></p>
+<div class="split__txt rv"><?php echo hj_shd( '03', 'Research', '銀座の研究室から、<br>確かな処方を。', 'Reliable formulas<br><em>from our Ginza lab.</em>', '研究への取り組み' ); ?><p><?php echo hj_c( 'RD_P1' ); ?></p>
 <div class="ctas"><?php echo hj_lnk( hj_link( '/rd/' ), '研究開発・品質管理', 'R&amp;D and quality' ); ?></div></div></div></section>
 <?php
 // ------------------------------------------------------------------ 04 details
@@ -86,11 +88,9 @@ $trade = function ( string $field ) use ( $id ): string {
 	$v = (string) hj_raw( $field, $id );
 	return '' !== $v ? esc_html( $v ) : hj_tbd();
 };
-// The client keeps 製品名, 内容量, 原産国, 全成分（INCI表記）, JANコード (2026-10-07).
+// The client keeps 製品名, 内容量, 原産国, JANコード (2026-10-14: no 全成分).
 $dl = $row( hj_t( '製品名', 'Product' ), esc_html( $name ) ) . $row( hj_t( '内容量', 'Size' ), esc_html( $size ) ) . $row( hj_t( '原産国', 'Made in' ), hj_t( '日本', 'Japan' ) );
 foreach ( array(
-	// the English INCI list itself sits under 全成分 below; this row says whether it is there
-	array( hj_t( '全成分（INCI表記）', 'Full INCI list' ), hj_raw( 'inci_en', $id ) ? hj_t( '下記「全成分」に掲載', 'Under “Ingredients” below' ) : hj_tbd( '掲載予定', 'To be listed' ), (string) hj_raw( 'inci_en', $id ) ),
 	array( hj_t( 'JANコード', 'JAN / EAN' ), $trade( 'jan' ), (string) hj_raw( 'jan', $id ) ),
 ) as $r ) {
 	if ( '' !== $r[2] || hj_show_tbc() ) {   // empty facts: hidden on the live site, marked 要確認 on the review site
@@ -106,7 +106,6 @@ if ( hj_is_en() && '' === $inci && hj_raw( 'inci', $id ) ) {
 $cautions = (string) hj_get( 'cautions', $id );
 $acc      = array(
 	array( hj_t( '製品情報', 'Product information' ), '<dl class="dl">' . $dl . '</dl>', true ),
-	array( hj_t( '全成分', 'Ingredients' ), '<p class="pdd__inci">' . $inci_html . '</p>', false ),
 	array( hj_t( '使用上の注意', 'Cautions' ), $cautions ? '<p>' . hj_text( $cautions ) . '</p>' : '<p>' . hj_t( 'パッケージ記載の使用上の注意を掲載します。', 'The cautions printed on the pack will be listed here.' ) . ' ' . hj_tbd() . '</p>', false ),
 	array( hj_t( '輸出関連資料（お取引先向け）', 'Export documents (for trade partners)' ), '<ul class="tags tags--ink">' . $li( hj_t( array( 'INCI成分表', 'COA（出荷検査成績書）', 'MSDS / SDS', '自由販売証明書', '原産地証明書', '製造日・ロット番号の表示ルール', 'ラベル法規対応' ), array( 'INCI ingredient list', 'Certificate of Analysis (COA)', 'MSDS / SDS', 'Free Sale Certificate', 'Certificate of Origin', 'Production date & lot code rules', 'Labelling compliance' ) ) ) . '</ul><p class="note">' . hj_t( '製品ごとにご用意します。', 'Prepared for each product.' ) . ' ' . hj_tbd() . '</p>', false ),
 );

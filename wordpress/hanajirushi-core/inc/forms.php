@@ -202,11 +202,13 @@ add_action( 'template_redirect', function () {
 /** Keeps the enquiry in お問い合わせ履歴 and sends the emails. */
 function hj_form_deliver( string $form, array $values ): void {
 	$GLOBALS['hj_form']['form'] = $form;
-	$lines = array();
+	$lines = array();   // the team's email: Japanese field names
+	$mine  = array();   // the customer's copy: field names in the language they wrote in
 	foreach ( hj_form_fields( $form ) as $name => $f ) {
 		$v = hj_form_display( $name, $values[ $name ] ?? '' );
 		if ( '' !== $v && 'agree' !== $f[4] ) {
 			$lines[] = '■ ' . $f[0] . "\n" . $v;
+			$mine[]  = '■ ' . hj_t( $f[0], $f[1] ) . "\n" . $v;
 		}
 	}
 	$kind  = 'booking' === $form ? '商談予約' : ( hj_form_display( 'k', $values['k'] ?? '' ) ?: 'お問い合わせ' );
@@ -224,7 +226,7 @@ function hj_form_deliver( string $form, array $values ): void {
 			$values['name'] . " 様\n\n花印粧業研究所株式会社です。お問い合わせありがとうございます。\n以下の内容で承りました。3営業日以内に担当者よりご連絡いたします。\n" . ( $pdf ? "\n会社案内（PDF）: " . $pdf . "\n" : '' ),
 			'Dear ' . $values['name'] . ",\n\nThank you for contacting Hanajirushi Institute of Cosmetics. We have received your message below and will reply within 3 business days.\n" . ( $pdf ? "\nCompany profile (PDF): " . $pdf . "\n" : '' )
 		);
-		wp_mail( $values['email'], hj_t( '【花印】お問い合わせを受け付けました', 'Hanajirushi — we have received your message' ), $reply . "\n" . implode( "\n\n", $lines ) );
+		wp_mail( $values['email'], hj_t( '【花印】お問い合わせを受け付けました', 'Hanajirushi — we have received your message' ), $reply . "\n" . implode( "\n\n", $mine ) );
 	}
 }
 

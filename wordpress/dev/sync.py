@@ -26,9 +26,17 @@ PLUGIN = os.path.join(WP, "hanajirushi-core")
 sys.path.insert(0, os.path.join(MOCK, "_build"))
 import build as b          # noqa: E402  (mockup copy and data; t() follows b.L)
 import catalog as cat      # noqa: E402
-import build_premium as bp  # noqa: E402  (premium v1.4: the client's brand text and message)
+import build_premium as bp  # noqa: E402  (premium v1.4–1.6: the client's text, hours, stations, quality cards)
 
-CSS = ["premium.css", "premium-v11.css", "premium-v12.css", "premium-v13.css", "premium-v14.css", "premium-v15.css", "premium-lp.css"]
+V = 1.6   # the premium version the WordPress build follows
+
+# v1.6: photos that go into the media library as the 初期データ for サイト設定 → 写真 (client 2026-10-14)
+PHOTOS = {"brand_research": "lab16_4.jpg", "rd_lab": "lab16_4.jpg", "product_lab": "lab16_4.jpg",
+          "company_business_1": "lab16_3.jpg", "company_office_p2": "lab16_1.jpg", "company_office_p3": "lab16_2.jpg",
+          "company_office_w2": "lab16_4.jpg"}
+RETIRED = ["clay-pack", "amino-face-mask"]   # not in the client's 2026-10-14 product list: set to draft
+
+CSS = ["premium.css", "premium-v11.css", "premium-v12.css", "premium-v13.css", "premium-v14.css", "premium-v15.css", "premium-v16.css", "premium-lp.css"]
 JS = ["premium.js", "premium-v11.js", "premium-v12.js", "premium-v13.js", "premium-v14.js", "premium-v15.js", "premium-lp.js"]
 THEME_IMG = ["logo_v15.svg", "rakuten.svg", "amazon.png", "yahoo.svg", "qoo10.png", "world_map_v15.png",
              "h_brand_top_p.jpg", "h_campany_bldg.jpg", "h_campany_lab.jpg", "h_campany_top_p.jpg",
@@ -75,15 +83,18 @@ def both(fn):
 
 # ------------------------------------------------------------------ products
 def products():
+    cat.V16 = V >= 1.6
     ja, en = both(cat.PRODUCTS13)
+    feat = cat.featured()
+    cat.V16 = False
     out = []
     for i, (p, e) in enumerate(zip(ja, en)):
-        img = p["img"]
+        img = (p["img"] or "").replace("/", "-")   # p16/<slug>.jpg -> p16-<slug>.jpg in seed/img
         out.append({
             "slug": p["slug"], "order": i + 1, "category": p["cat"], "series": p["series"] or "",
             "size": p["size"] or "", "kind": "quasi" if p["kind"] == "医薬部外品" else ("cosmetic" if p["kind"] else ""),
             "is_new": bool(p["new"]), "coming_soon": bool(p["soon"]),
-            "show_on_home": p["slug"] in cat.FEATURED, "home_order": cat.FEATURED.index(p["slug"]) + 1 if p["slug"] in cat.FEATURED else 0,
+            "show_on_home": p["slug"] in feat, "home_order": feat.index(p["slug"]) + 1 if p["slug"] in feat else 0,
             "rakuten_code": p["rk"] or "", "image": img or "", "image_temp": "" if img else (p["rimg"] or ""),
             "amazon_url": "", "yahoo_url": "", "qoo10_url": "",
             "ja": {"title": plain(p["name"]), "sub": plain(p["sub"]), "short": plain(p["short"]), "catch": plain(p["catch"]),
@@ -103,12 +114,12 @@ def slides():
     """Field for field the kv_slide post type. Links are site paths; the plugin adds /en."""
     return [
         {"order": 1, "visual": "none", "eyebrow": "Hanajirushi · Ginza, Tokyo", "bg": "h_hanajirushi_top-1.jpg", "bg_pos": "70% center",
-         "btn1_link": "/products/",
+         "btn1_link": "/brand/",
          "ja": {"tab": "花印について", "label": "", "heading": "ひとりに、ひとつの、\nキレイを咲かせる。", "accent": False,
-                "text": "東京・銀座の自社研究室で開発する、\n無香料・無着色の日本製スキンケア。", "btn1": "製品を見る"},
+                "text": "東京・銀座の研究開発力から生まれる、\n肌に寄り添う日本製スキンケア。", "btn1": "ブランドについて"},
          "en": {"tab": "Hanajirushi", "label": "", "heading": "Clean formula.\nGentle by design.\nMade in Japan.", "accent": True,
-                "text": "Skincare formulated in our own laboratory in Ginza, Tokyo — sold in Japan and 12 countries.",
-                "btn1": "View products"}},
+                "text": "Japanese skincare that stays close to your skin,\nborn of our research in Ginza, Tokyo.",
+                "btn1": "About the brand"}},
         {"order": 2, "visual": "kanji", "kanji": "出展", "kanji_en": "Hong Kong", "kanji_caption": "Hong Kong 2026", "bg": "h_campany_top_p.jpg", "bg_pos": "center 40%",
          "btn1_link": "/cosmoprof-asia/",
          "ja": {"tab": "展示会", "label": "展示会", "heading": "Cosmoprof Asia 2026に\n出展します。", "accent": True,
@@ -117,14 +128,14 @@ def slides():
          "en": {"tab": "Exhibition", "label": "Exhibition", "heading": "Meet us at\nCosmoprof Asia 2026", "accent": True,
                 "text": "November 2026, Hong Kong Convention & Exhibition Centre. Meetings at our booth can be booked now.",
                 "btn1": "Open the event page"}},
-        {"order": 3, "visual": "products", "products": ["hatomugi-skin-conditioner", "hatomugi-essence", "hatomugi-cream"], "bg": "",
-         "btn1_link": "/products/hatomugi-essence/",
-         "ja": {"tab": "ハトムギシリーズ", "label": "新商品", "heading": "ハトムギシリーズに、\n美容液とクリーム。", "accent": True,
-                "text": "ハトムギ化粧水と一緒に使える、ハトムギ豊潤美容液（200mL）とハトムギクリーム（100g）。",
-                "btn1": "美容液を見る"},
-         "en": {"tab": "Hatomugi series", "label": "New", "heading": "The Hatomugi series\nadds a serum and a cream.", "accent": True,
-                "text": "Hatomugi Rich Essence (200mL) and Hatomugi Cream (100g), made to go with the Hatomugi lotion.",
-                "btn1": "See the essence"}},
+        {"order": 3, "visual": "banner", "bg": "slide16_oil.jpg", "bg_pos": "62% center",   # v1.6: the client's banner (image 1)
+         "btn1_link": "/products/cleansing-oil/",
+         "ja": {"tab": "クレンジングオイル", "label": "新商品", "heading": "「洗うスキンケア」\nクレンジング誕生！", "accent": True,
+                "text": "花印ピュアメルトクレンジングオイル\nメイクも毛穴汚れもするんとオフ。\n落とすたび、うるおいまで奪わない！",
+                "btn1": "クレンジングオイル"},
+         "en": {"tab": "Cleansing oil", "label": "New", "heading": "Cleansing,\nreimagined as skincare.", "accent": True,
+                "text": "Pure Melt Cleansing Oil\nMelts away make-up and pore dirt —\nwithout taking moisture with it.",
+                "btn1": "Cleansing oil"}},
         {"order": 4, "visual": "product", "product": "cleansing-lotion-ma", "seal": "特許", "bg": "h_brand_top_p.jpg", "bg_pos": "center",
          "btn1_link": "/products/cleansing-lotion-ma/",
          "ja": {"tab": "特許", "label": "特許", "heading": "特許技術を採用した、\nクレンジングローション。", "accent": True,
@@ -153,12 +164,14 @@ def news():
 
 def settings():
     b.L = "ja"
-    ja = dict(company=plain("花印粧業研究所株式会社"), tel=b.TEL(), fax=b.FAX(), hours=plain(b.HOURS()), address=plain(b.ADDR(True)),
+    bp._VER = V   # v1.6 reception hours
+    ja = dict(company=plain("花印粧業研究所株式会社"), tel=b.TEL(), fax=b.FAX(), hours=plain(bp.HOURS()), address=plain(b.ADDR(True)),
               founded="2015年1月28日")
     b.L = "en"
-    en = dict(company="Hanajirushi Institute of Cosmetics, Inc.", tel=b.TEL(), fax=b.FAX(), hours=plain(b.HOURS()),
+    en = dict(company="Hanajirushi Institute of Cosmetics, Inc.", tel=b.TEL(), fax=b.FAX(), hours=plain(bp.HOURS()),
               address=plain(b.ADDR(True)), founded="28 January 2015")
     b.L = "ja"
+    bp._VER = 1.0
     return {"ja": ja, "en": en, "show_tbc": True}
 
 
@@ -186,10 +199,12 @@ def marks(x):
 
 def copy_data():
     out = {}
-    bp._VER = 1.4
+    bp._VER = V
     for lang in ("ja", "en"):
         b.L = lang
         out[lang] = {n: marks(getattr(b, n)()) for n in COPY}
+        out[lang]["RD_P1"] = marks(bp.RD_P1())   # v1.6: the client's research text
+        out[lang]["QUALITY16"] = [list(x) for x in bp.QUALITY16()]
         out[lang]["VALUES14"] = [[w, b.t(ja, en), b.t(dja, den)] for w, ja, en, dja, den in bp.VALUES14()]
         out[lang]["STORY14"] = [list(x) for x in bp.STORY14()]
     bp._VER = 1.0
@@ -223,6 +238,8 @@ def settings_more():
         row = {"label": a, "value": v, "label_en": e or "", "value_en": en_rows.get(e, "") if e else ""}
         if a == "代表者":   # premium v1.4: the representative stays anonymous
             row["value"], row["value_en"] = "代表取締役", "Representative Director"
+        if a in ("代表者", "販売地域", "法人番号"):   # premium v1.6: rows removed (client 2026-10-14)
+            continue
         rows.append(row)
     return {
         "profile_rows": rows,
@@ -232,12 +249,17 @@ def settings_more():
         "message": message14("ja"), "message_en": message14("en"),
         "message_lead": "一人ひとりの美しさに、寄り添い続ける。", "message_lead_en": "Staying close to the beauty of every person.",
         "rep_title": "代表取締役", "rep_title_en": "Representative Director",
-        "stations": ja["stations"] + "［分数］", "stations_en": en["stations"] + "［min TBC］",
+        "stations": both_plain(bp.STATIONS16)[0], "stations_en": both_plain(bp.STATIONS16)[1],   # v1.6: 徒歩5～6分
         # the brand film: played from the client's current site until it is uploaded to the new one
         "film_url": bp.FILM_URL, "film_poster": bp.FILM_POSTER_T,
         "film_title": "花印 ブランドムービー［映像内の製品 要確認］", "film_title_en": "Hanajirushi brand film［Products shown TBC］",
         "show_contact": "［氏名］", "show_whatsapp": "［番号］", "show_wechat": "［ID］", "show_email": "export@hanajirushi.co.jp ［要確認］",
     }
+
+
+def both_plain(fn):
+    ja, en = both(fn)
+    return plain(ja), plain(en)
 
 
 def message14(lang):
@@ -294,12 +316,18 @@ def main():
     os.makedirs(seed_img, exist_ok=True)
     data = {"products": products(), "slides": slides(), "collabs": collabs(), "news_cats": NEWS_CATS,
             "news": news(), "settings": settings(), "settings_more": settings_more(), "exhibitions": exhibitions(),
-            "pages": PAGES}
-    files = {p["image"] for p in data["products"] if p["image"]} | {s["bg"] for s in data["slides"] if s["bg"]} | {c["image"] for c in data["collabs"]}
+            "pages": PAGES, "photos": PHOTOS, "retired": RETIRED}
+    files = ({p["image"] for p in data["products"] if p["image"]} | {s["bg"] for s in data["slides"] if s["bg"]}
+             | {c["image"] for c in data["collabs"]} | set(PHOTOS.values()))
+    for old in os.listdir(seed_img):   # no stale photos in the zip
+        if old not in files:
+            os.remove(os.path.join(seed_img, old))
     for f in sorted(files):   # resized, so the plugin zip stays under common 2 MB upload limits
-        im = Image.open(os.path.join(MOCK, "assets", "img", f)).convert("RGB")
-        im.thumbnail((1600, 1600))
-        im.save(os.path.join(seed_img, f), quality=80, optimize=True, progressive=True)
+        src = f.replace("p16-", "p16/", 1) if f.startswith("p16-") else f
+        im = Image.open(os.path.join(MOCK, "assets", "img", src)).convert("RGB")
+        size, q = (900, 78) if f.startswith("p16-") else ((1200, 76) if f.startswith("lab16") else (1600, 80))
+        im.thumbnail((size, size))
+        im.save(os.path.join(seed_img, f), quality=q, optimize=True, progressive=True)
     with open(os.path.join(PLUGIN, "seed", "seed.json"), "w", encoding="utf-8") as fh:
         json.dump(data, fh, ensure_ascii=False, indent=1)
     print(f"seed: {len(data['pages'])} pages, {len(data['exhibitions'])} exhibitions, {len(data['products'])} products, {len(data['slides'])} slides, {len(data['collabs'])} collabs, "

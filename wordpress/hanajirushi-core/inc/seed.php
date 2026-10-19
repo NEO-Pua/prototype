@@ -115,6 +115,15 @@ function hj_seed_import(): array {
 		hj_seed_set( 'settings', $k, $v, 'option' );
 	}
 	hj_seed_set( 'settings', 'autoreply', 1, 'option' );
+	foreach ( $data['photos'] ?? array() as $slot => $file ) {   // サイト設定 → 写真 (v1.6: the client's lab photos)
+		hj_seed_set( 'settings', 'photo_' . $slot, hj_seed_media( $file, '' ), 'option' );
+	}
+	foreach ( $data['retired'] ?? array() as $slug ) {   // products no longer sold: drafted, not deleted
+		$old = get_page_by_path( $slug, OBJECT, 'product' );
+		if ( $old && 'publish' === $old->post_status ) {
+			wp_update_post( array( 'ID' => $old->ID, 'post_status' => 'draft' ) );
+		}
+	}
 
 	foreach ( $data['exhibitions'] as $e ) {
 		$id = hj_seed_post( 'exhibition', $e['slug'], $e['title'], 0 );

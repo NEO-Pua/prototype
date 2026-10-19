@@ -17,7 +17,7 @@ foreach ( $slides as $i => $s ) {
 	$id     = $s->ID;
 	$on     = 0 === $i;
 	$visual = (string) ( hj_raw( 'visual', $id ) ?: 'none' );
-	$kind   = array( 'none' => 'brand', 'kanji' => 'exh', 'products' => 'new', 'product' => 'patent' )[ $visual ] ?? 'brand';
+	$kind   = array( 'none' => 'brand', 'kanji' => 'exh', 'products' => 'new', 'product' => 'patent', 'banner' => 'oil' )[ $visual ] ?? 'brand';
 	$bg_id  = (int) hj_raw( 'bg', $id );
 	$bg     = $bg_id
 		? '<div class="hs13__bg" aria-hidden="true"><img src="' . esc_url( (string) wp_get_attachment_image_url( $bg_id, 'full' ) ) . '" alt="" style="object-position:' . esc_attr( (string) ( hj_raw( 'bg_pos', $id ) ?: 'center' ) ) . '"></div>'
@@ -42,6 +42,8 @@ foreach ( $slides as $i => $s ) {
 		$vis = '<figure class="win win--xl win--kj"><div class="win__c"><span class="win__kj' . ( hj_is_en() ? ' win__kj--en' : '' ) . '">' . esc_html( $kj ) . '</span><small>' . esc_html( $cap ) . '</small></div></figure>';
 	} elseif ( 'product' === $visual && ( $p = get_post( (int) hj_raw( 'product', $id ) ) ) ) {
 		$vis = hj_win( hj_product_photo( $p->ID ), hj_title( $p ), 'win--xl' );
+	} elseif ( 'banner' === $visual && $bg_id ) {   // v1.6: the banner itself, shown above the text on phones (premium-v16.css)
+		$vis = '<figure class="hs13__banner"><img src="' . esc_url( (string) wp_get_attachment_image_url( $bg_id, 'full' ) ) . '" alt="' . esc_attr( (string) hj_get( 'heading', $id ) ) . '"></figure>';
 	} elseif ( 'products' === $visual ) {
 		$vis = '<ul class="hs13__panels">';
 		foreach ( (array) hj_raw( 'products', $id ) as $pid ) {
@@ -55,11 +57,17 @@ foreach ( $slides as $i => $s ) {
 		$vis .= hj_seal( esc_html( (string) hj_raw( 'seal', $id ) ), 'seal--l seal--txt' );
 	}
 	$vis = $vis ? '<div class="hs13__vis">' . $vis . '</div>' : '';
+	// banner slides: the text's first line is the product name, on its own line even on phones
+	$text = (string) hj_get( 'text', $id );
+	$lead = hj_text( $text );
+	if ( 'banner' === $visual && 1 < count( $tl = hj_split_lines( $text ) ) ) {
+		$lead = '<span class="hs13__pn">' . esc_html( array_shift( $tl ) ) . '</span>' . hj_text( implode( "\n", $tl ) );
+	}
 
 	$out .= '
 <div class="hs__s hs13 hs13--' . $kind . ( $on ? ' is-on' : '' ) . '" role="group" aria-roledescription="slide" aria-label="' . ( $i + 1 ) . ' / ' . $n . '"' . ( $on ? '' : ' aria-hidden="true"' ) . '>' . $bg . '
 <div class="wrap hs13__in"><div class="hs__txt">' . $k . '<' . $tag . ' class="hs__h">' . hj_heading( hj_get( 'heading', $id ), (bool) hj_get( 'accent', $id ) ) . '</' . $tag . '>
-<p class="hero__lead">' . hj_text( hj_get( 'text', $id ) ) . '</p><div class="hero__ctas">' . $ctas . '</div></div>' . $vis . '</div></div>';
+<p class="hero__lead">' . $lead . '</p><div class="hero__ctas">' . $ctas . '</div></div>' . $vis . '</div></div>';
 
 	$tab   = hj_is_en() ? hj_title( $s ) : ( (string) hj_raw( 'tab', $id ) ?: get_the_title( $s ) );
 	$tabs .= '<li><button type="button" data-go="' . $i . '"' . ( $on ? ' aria-current="true"' : '' ) . '><span>' . esc_html( $tab ) . '</span><i></i></button></li>';

@@ -1,10 +1,10 @@
 # 花印 HANAJIRUSHI — WordPress theme and plugin
 
-The premium v1.5 mockup (`../mockup/premium-1.5/`) as an installable WordPress theme and
-plugin. **Status (v0.4.2): every page is built, with the client's v1.4 and v1.5 changes**
-(official logo, brand text, one button per slide, store chooser, fewer product rows,
-代表メッセージ, history on hold; v1.5: the logo's magenta #D92070, English pages without
-Japanese labels) — home, brand, IP collaborations,
+The premium v1.6 mockup (`../mockup/premium-1.6/`) as an installable WordPress theme and
+plugin. **Status (v0.5.0): every page is built, with the client's changes up to 2026-10-14**
+(v1.4–1.5: official logo, brand text, store chooser, 代表メッセージ, the logo's magenta, English
+pages without Japanese labels; v1.6: the cleansing-oil slide, the client's 14 products, order and
+photos, OEM quality cards, company table, office photos, access and hours, no 化粧品 label or INCI) — home, brand, IP collaborations,
 products and each product page, company, R&D, news (list, categories, years, article),
 partnership, exhibitions, contact (with a working form) and the Cosmoprof Asia buyer page
 (booth QR code, booking form) — in Japanese and English.
@@ -135,3 +135,18 @@ theme. Japanese line breaks are automatic (BudouX, see below); staff never type 
   folders show on reload. `dist/blueprint-zip.json` (made by `package.py`) instead installs the two zips,
   the way the admin upload does. (In this repo: the `wordpress` and
   `wordpress-zip` entries of `.claude/launch.json`.)
+
+## Updating a site from 0.4.x to 0.5.0 (premium v1.6)
+
+Upload both zips (plugin first), then run ツール → 花印 初期データ once. It:
+- adds the new products (ピュアメルトクレンジングオイル, クレンジングバーム, モイスチュア洗顔クリーム) with the
+  client's photos, renames クレンジングローションMa to ディープクレンジングローション, sets the new order and
+  the home-page products;
+- sets クレーパック and the 80g AMINO face mask to 下書き (draft, not deleted);
+- replaces the third home slide with the cleansing-oil slide (visual バナー画像) and updates slide 1;
+- updates the company table (no 代表者, 販売地域, 法人番号), stations and reception hours (10:00〜17:00);
+- puts the client's lab photos into サイト設定 → 写真 (research windows, business 一, office photos).
+
+Re-running 初期データ overwrites these items again, including photos chosen in サイト設定 → 写真 for
+those slots. The office section now has six photo slots (three 4:5 above three 16:9).
+
