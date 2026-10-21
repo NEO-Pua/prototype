@@ -1435,5 +1435,28 @@
  "retired": [
   "clay-pack",
   "amino-face-mask"
+ ],
+ "brand_slides": [
+  {
+   "image": "b17_1.jpg",
+   "copy": "家族みんなで、\nたっぷりうるおい。",
+   "copy_en": "Moisture for \nthe whole family.",
+   "sub": "花印 ハトムギスキンケア",
+   "sub_en": "Hatomugi skincare"
+  },
+  {
+   "image": "b17_2.jpg",
+   "copy": "まるで化粧水みたい。\nうるおってするん！",
+   "copy_en": "Light as a lotion, \nmoist in one sweep.",
+   "sub": "花印 クレンジングローション",
+   "sub_en": "Cleansing Lotion"
+  },
+  {
+   "image": "b17_3.jpg",
+   "copy": "洗う、満たす。\nうるおい輝く素肌へ。",
+   "copy_en": "Cleanse. Replenish. \nRadiant, moist skin.",
+   "sub": "花印 AMINO ACIDスキンケア",
+   "sub_en": "AMINO ACID skincare"
+  }
  ]
 }

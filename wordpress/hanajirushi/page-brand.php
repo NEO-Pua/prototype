@@ -10,12 +10,22 @@ defined( 'ABSPATH' ) || exit;
 
 get_header();
 
+// v1.7: サイト設定 → 写真 → ブランドのヘッダー（スライドショー）, two or more photos (client 2026-10-21)
+$slides = array();
+foreach ( (array) hj_opt_raw( 'brand_slides' ) as $row ) {
+	$id = (int) ( $row['image'] ?? 0 );
+	if ( $id && ( $src = wp_get_attachment_image_url( $id, 'full' ) ) ) {
+		$copy     = (string) ( hj_is_en() ? ( $row['copy_en'] ?? '' ) : ( $row['copy'] ?? '' ) );
+		$slides[] = array( 'src' => $src, 'set' => (string) wp_get_attachment_image_srcset( $id, 'full' ), 'copy' => hj_text( $copy ),
+			'sub' => esc_html( (string) ( hj_is_en() ? ( $row['sub_en'] ?? '' ) : ( $row['sub'] ?? '' ) ) ) );
+	}
+}
 echo hj_phero( 'Brand', 'ブランド', 'Brand',
 	hj_t( '一人ひとりの肌に寄り添い、その人らしい美しさを育む。<br>花印は、毎日のスキンケアを通じて、一人ひとりが自分らしい美しさを楽しめる毎日を届けるブランドです。',
 		'Close to every skin, nurturing a beauty that is truly one\'s own. Through everyday skincare, Hanajirushi helps each person enjoy a beauty of their own, every day.' ),
 	hj_img( 'h_brand_top_p.jpg' ), '花印', array(),
 	array( 'anchors' => array( array( 'concept', hj_t( 'ブランドコンセプト', 'Concept' ) ), array( 'values', hj_t( '5つの価値観', 'Our values' ) ), array( 'story', hj_t( 'ブランドストーリー', 'Our story' ) ),
-		array( 'research', hj_t( '研究への取り組み', 'Research' ) ), array( '/products/', hj_t( '製品一覧', 'All products' ) ) ) ) );
+		array( 'research', hj_t( '研究への取り組み', 'Research' ) ), array( '/products/', hj_t( '製品一覧', 'All products' ) ) ), 'slides' => count( $slides ) > 1 ? $slides : array() ) );
 
 // ------------------------------------------------------------------ 01 brand concept
 // EN_ONLY: the English slogan is re-written, not translated; the Japanese line stays as an accent.

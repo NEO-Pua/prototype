@@ -295,7 +295,18 @@ function hj_phero( string $label, string $ja, string $en, string $sub, string $i
 		}
 		$opt['variant'] = trim( ( $opt['variant'] ?? '' ) . ' own' );
 	}
-	$pic   = $img ? '<div class="phero__img"><img src="' . esc_url( $img ) . '"' . ( $set ? ' srcset="' . esc_attr( $set ) . '" sizes="(max-width:1024px) 100vw, 60vw"' : '' ) . ' alt="" style="object-position:' . esc_attr( $opt['pos'] ?? 'center' ) . '"></div>' : '';
+	if ( ! empty( $opt['slides'] ) ) {   // v1.7: a slideshow (brand page), the copy as text over each photo
+		$img = 'slides';
+		$sl  = '';
+		$dot = '';
+		foreach ( array_values( $opt['slides'] ) as $i => $s ) {
+			$sl  .= '<figure class="pslide' . ( 0 === $i ? ' is-on' : '' ) . '"><img src="' . esc_url( $s['src'] ) . '"' . ( $s['set'] ? ' srcset="' . esc_attr( $s['set'] ) . '" sizes="(max-width:1024px) 100vw, 60vw"' : '' ) . ' alt=""' . ( $i ? ' loading="lazy"' : '' ) . '>'
+				. ( '' !== $s['copy'] ? '<figcaption class="pslide__cap"><b>' . $s['copy'] . '</b>' . ( '' !== $s['sub'] ? '<span>— ' . $s['sub'] . ' —</span>' : '' ) . '</figcaption>' : '' ) . '</figure>';
+			$dot .= '<button type="button" data-ps="' . $i . '" aria-label="' . ( $i + 1 ) . ' / ' . count( $opt['slides'] ) . '"' . ( 0 === $i ? ' aria-current="true"' : '' ) . '><i></i></button>';
+		}
+		$opt['slides_html'] = '<div class="phero__img phero__img--slides" data-pslides>' . $sl . '<div class="pslide__dots">' . $dot . '</div></div>';
+	}
+	$pic   = ! empty( $opt['slides_html'] ) ? $opt['slides_html'] : ( $img ? '<div class="phero__img"><img src="' . esc_url( $img ) . '"' . ( $set ? ' srcset="' . esc_attr( $set ) . '" sizes="(max-width:1024px) 100vw, 60vw"' : '' ) . ' alt="" style="object-position:' . esc_attr( $opt['pos'] ?? 'center' ) . '"></div>' : '' );
 	// in-page links: [id, label]; an id starting with / is a child page (last, with an arrow)
 	$anc = '';
 	foreach ( $opt['anchors'] ?? array() as $a ) {

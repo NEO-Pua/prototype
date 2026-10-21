@@ -10,6 +10,7 @@
   var H = ['16:9', '2400×1350'], P = ['4:5', '1600×2000'], S = ['1:1', '1600×1600'];
   // [selector, where the tag goes (closest), what, shape, note]
   var SPOTS = [
+    ['.phero__img--slides', null, L('ヘッダー写真（スライド）', 'Header photos (slideshow)'), H, L('写真に文字は入れない・左1/6はぼかし', 'no text in the photo · left 1/6 fades')],
     ['.phero:not(.phero--plain) .phero__img', null, L('ヘッダー写真', 'Header photo'), H, L('左1/6はぼかし', 'left 1/6 fades')],
     ['.phero--plain .phero__txt', null, L('ヘッダー写真（任意）', 'Header photo (optional)'), H, L('追加すると写真付きの見出しに', 'adds a photo to this header')],
     ['.hs13--oil .hs13__bg', null, L('スライド画像', 'Slide image'), ['12:5', '2880×1200'], L('製品は右寄せ・左側は文字', 'product on the right, text on the left')],

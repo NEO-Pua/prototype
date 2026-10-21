@@ -118,6 +118,13 @@ function hj_seed_import(): array {
 	foreach ( $data['photos'] ?? array() as $slot => $file ) {   // サイト設定 → 写真 (v1.6: the client's lab photos)
 		hj_seed_set( 'settings', 'photo_' . $slot, hj_seed_media( $file, '' ), 'option' );
 	}
+	if ( ! empty( $data['brand_slides'] ) ) {   // v1.7: the brand header slideshow
+		$rows = array();
+		foreach ( $data['brand_slides'] as $bs ) {
+			$rows[] = array( 'image' => hj_seed_media( $bs['image'], '' ), 'copy' => $bs['copy'], 'copy_en' => $bs['copy_en'], 'sub' => $bs['sub'], 'sub_en' => $bs['sub_en'] );
+		}
+		hj_seed_set( 'settings', 'brand_slides', $rows, 'option' );
+	}
 	foreach ( $data['retired'] ?? array() as $slug ) {   // products no longer sold: drafted, not deleted
 		$old = get_page_by_path( $slug, OBJECT, 'product' );
 		if ( $old && 'publish' === $old->post_status ) {

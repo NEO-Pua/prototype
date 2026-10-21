@@ -1,0 +1,48 @@
+/* 花印 HANAJIRUSHI — premium v1.7: the client's request of 2026-10-21 (ブランドページ 写真差し替え).
+   Loaded after premium-v16.css on every v1.7 page.
+   - brand page header: three photos as a slideshow (premium-v17.js) in the 16:9 frame, the copy set
+     as text over the free left part of each photo; the fade into the text side is kept */
+
+.phero__img--slides{isolation:isolate}
+.pslide{position:absolute;inset:0;margin:0;opacity:0;transition:opacity 1.2s var(--ease)}
+.pslide.is-on{opacity:1;z-index:1}
+.pslide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:none}
+.pslide.is-on img{animation:kb 9s var(--ease) both}
+/* the client's photos are shown as supplied (the brand page otherwise tones its header photo down) */
+.phero__img.phero__img--slides img{filter:none}
+/* the fade into the text side stays above every slide */
+.phero__img--slides::after{z-index:2}
+
+.pslide__cap{position:absolute;z-index:3;left:5%;top:40%;max-width:30%;transform:translateY(-50%);display:block;margin:0;
+  font-size:inherit;letter-spacing:0;color:var(--ink);text-shadow:0 0 18px rgba(255,255,255,.8)}
+.pslide__cap::before{display:none}
+.pslide__cap b{display:block;font-family:var(--mincho);font-weight:500;font-size:clamp(14px,1.3vw,23px);line-height:1.7;letter-spacing:.05em}
+html[lang="en"] .pslide__cap b{font-family:var(--didone);font-weight:400;font-size:clamp(16px,1.45vw,25px);line-height:1.2;letter-spacing:0}
+.pslide__cap span{display:block;margin-top:.9em;font-size:clamp(10px,.8vw,12.5px);letter-spacing:.12em;color:var(--beni-d)}
+.js .pslide__cap{opacity:0;transform:translate(-10px,-50%);transition:opacity .9s var(--ease) .35s,transform .9s var(--ease) .35s}
+.js .pslide.is-on .pslide__cap{opacity:1;transform:translate(0,-50%)}
+
+.pslide__dots{position:absolute;z-index:4;right:clamp(14px,2vw,28px);bottom:clamp(12px,1.6vw,22px);display:flex;gap:6px}
+.pslide__dots button{display:grid;place-items:center;width:28px;height:28px;padding:0;border:0;background:none;cursor:pointer}
+.pslide__dots i{display:block;width:18px;height:2px;background:rgba(39,38,40,.25);transition:background .3s,width .3s}
+.pslide__dots button[aria-current="true"] i{width:28px;background:var(--beni)}
+.pslide__dots button:focus-visible{outline:2px solid var(--beni);outline-offset:2px}
+
+/* tablets and phones: the photo is full width and small, so the copy sits in a band under it */
+@media (max-width:1024px){
+  .phero__img--slides{aspect-ratio:auto!important;height:calc(100vw * 9 / 16 + 84px)}
+  .pslide img{bottom:auto;height:calc(100vw * 9 / 16)}
+  .pslide__cap{top:auto;bottom:0;left:var(--gut);right:var(--gut);max-width:none;height:84px;transform:none;
+    display:flex;flex-direction:column;justify-content:center;text-shadow:none}
+  .js .pslide__cap{transform:translateX(-10px)}
+  .js .pslide.is-on .pslide__cap{transform:none}
+  .pslide__cap b{font-size:15px;line-height:1.55;letter-spacing:.04em}
+  .pslide__cap b br{display:none}
+  html[lang="en"] .pslide__cap b{font-size:18px}
+  .pslide__cap span{margin-top:.5em;font-size:10.5px;letter-spacing:.08em}
+  .pslide__dots{bottom:auto;top:calc(100vw * 9 / 16 - 34px);right:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  .pslide,.js .pslide__cap{transition:none}
+  .pslide.is-on img{animation:none}
+}

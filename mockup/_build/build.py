@@ -1330,6 +1330,8 @@ def hub():
 <link rel="stylesheet" href="assets/css/style.css"></head><body class="hubpage">
 <div class="hub"><div class="hub__in">
 <div class="hub__hd"><img class="hub__logo" src="assets/img/logo.svg" alt="花印 HANAJIRUSHI"><div><h1>Website <span>Mockup</span></h1><p>花印 公式サイト デザインモックアップ ／ 日本語版・英語版</p></div></div>
+<h2 class="hub__ver">Premium v1.7 <span>クライアント依頼（2026-10-21）— ブランドページのヘッダーを3枚の写真のスライドショーに（文字はテキストで表示・グラデーションは維持）、製品ページの「全成分」欄を復活</span></h2>
+<div class="hub__g">{col13("ja","日本語版 Japanese","JA · Premium v1.7","1.7")}{col13("en","英語版 English","EN · Premium v1.7","1.7")}</div>
 <h2 class="hub__ver">Premium v1.6 <span>クライアントフィードバック（2026-10-14）— トップのスライドと文言、クレンジングオイル新商品、ブランド・研究開発の文言、品質管理（OEM）、会社概要の表・オフィス写真・アクセス・受付時間、製品の順番と写真（全14製品）、「化粧品」表記と全成分の削除</span></h2>
 <div class="hub__g">{col13("ja","日本語版 Japanese","JA · Premium v1.6","1.6")}{col13("en","英語版 English","EN · Premium v1.6","1.6")}</div>
 <h2 class="hub__ver">Premium v1.5 <span>クライアント修正案 第2弾（2026-10-07）— ロゴのマゼンタ（#D92070）を基調色に、英語版の日本語表記を英語に置き換え（重複する日本語の小見出しは非表示）</span></h2>

@@ -25,6 +25,7 @@ Tip: `ja/index.html#kv=3` (or `en/…`) opens the top carousel on slide 3 with a
 
 | Version | Folder | Look |
 |---|---|---|
+| **Premium v1.7** | `premium-1.7/ja/`, `premium-1.7/en/`, `premium-1.7/cosmoprof-asia/` | Premium v1.6 with the client's request of 2026-10-21: the brand page header as a slideshow of three photos with the copy as live text (see *Premium v1.7* below). |
 | **Premium v1.6** | `premium-1.6/ja/`, `premium-1.6/en/`, `premium-1.6/cosmoprof-asia/` | Premium v1.5 with the client's feedback of 2026-10-14: home slides and lead, the new cleansing oil, brand and R&D lab text, OEM quality cards, company table, office photos, access and hours, the new product list, order and photos (see *Premium v1.6* below). |
 | **Premium v1.5** | `premium-1.5/ja/`, `premium-1.5/en/`, `premium-1.5/cosmoprof-asia/` | Premium v1.4 with the client's second round (2026-10-07): the logo's magenta #D92070 in place of the crimson, and English pages without Japanese labels (see *Premium v1.5* below). |
 | **Premium v1.4** | `premium-1.4/ja/`, `premium-1.4/en/`, `premium-1.4/cosmoprof-asia/` | Premium v1.3 with the client's change proposal (2026-10-07): the official logo, the client's brand-page text and message, one button per slide, a store chooser on product pages, fewer product spec rows, no history for now (see *Premium v1.4* below). |
@@ -159,6 +160,21 @@ booth. v1.2 = v1.1 plus that page; gated by `V12()` (v1 and v1.1 output unchange
   reduced motion. The small exhibition note under the v1.1 hero is replaced by the
   exhibition slide.
 - Files: `assets/css/premium-v12.css` (every v1.2 site page), `assets/js/premium-v12.js` (home page only).
+
+### Premium v1.7 — the client's request (2026-10-21)
+
+From `docs/20261021/` (ブランドページ 写真差し替え.xlsx and 写真.zip: three photos, each with and without
+the copy drawn in). Gated by `V17()`; v1–v1.6 output does not change except the fix below. Files:
+`assets/css/premium-v17.css`, `assets/js/premium-v17.js`, `assets/img/b17_1–3.jpg` (the plain photos).
+
+- **Brand page header:** a slideshow of the three photos in the 16:9 frame (Hatomugi set, cleansing
+  lotions, AMINO ACID — the order of their sheet), changing every 6 seconds, with dots; it pauses on
+  hover or focus and does not move on by itself with reduced motion. The fade into the text side is
+  kept, as they asked. The copy is theirs, set as text over the free left part of each photo (on
+  tablets and phones in a band under the photo) rather than drawn into the image: it stays sharp at
+  every size, keeps clear of the fade, and the English page gets English copy (our draft).
+- **Fix (v1.6 and later):** the product pages keep the 全成分 section with the ingredient list; only
+  the 全成分（INCI表記） row of the details table goes (client 2026-10-21).
 
 ### Premium v1.6 — the client's feedback (2026-10-14)
 

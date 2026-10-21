@@ -47,6 +47,7 @@ OUT13 = os.path.join(b.ROOT, "premium-1.3")
 OUT14 = os.path.join(b.ROOT, "premium-1.4")
 OUT15 = os.path.join(b.ROOT, "premium-1.5")
 OUT16 = os.path.join(b.ROOT, "premium-1.6")
+OUT17 = os.path.join(b.ROOT, "premium-1.7")
 _VER = 1.0
 
 def V11():
@@ -72,6 +73,30 @@ def V15():
     language switch, the logo, product names and ingredients as printed, the legal company name
     and the slogan (with its translation)."""
     return _VER >= 1.5
+
+def V17():
+    """True while building premium v1.7: the client's request of 2026-10-21 (ブランドページ 写真差し替え) —
+    the brand page header becomes a slideshow of three photos, the copy set as text over them."""
+    return _VER >= 1.7
+
+# v1.7 brand header slides: (photo, copy, product line). The photos are the client's plain versions
+# (写真.zip: １.png, 3.png, 2.png, in the order of their sheet); the copy is theirs, set as live text.
+def BRAND_SLIDES():
+    return [("b17_1.jpg", t("家族みんなで、<br>たっぷりうるおい。", "Moisture for <br>the whole family."),
+             t("花印 ハトムギスキンケア", "Hatomugi skincare")),
+            ("b17_2.jpg", t("まるで化粧水みたい。<br>うるおってするん！", "Light as a lotion, <br>moist in one sweep."),
+             t("花印 クレンジングローション", "Cleansing Lotion")),
+            ("b17_3.jpg", t("洗う、満たす。<br>うるおい輝く素肌へ。", "Cleanse. Replenish. <br>Radiant, moist skin."),
+             t("花印 AMINO ACIDスキンケア", "AMINO ACID skincare"))]
+
+def brand_slides():
+    """v1.7: the photo column of the brand header as a slideshow (premium-v17.js), the left fade kept."""
+    li = ''.join(f'<figure class="pslide{" is-on" if i == 0 else ""}"><img src="{IMG}{im}" alt=""{"" if i == 0 else " loading=\"lazy\""}>'
+                 f'<figcaption class="pslide__cap"><b>{copy}</b><span>— {sub} —</span></figcaption></figure>'
+                 for i, (im, copy, sub) in enumerate(BRAND_SLIDES()))
+    dots = ''.join(f'<button type="button" data-ps="{i}" aria-label="{i + 1} / {len(BRAND_SLIDES())}"{" aria-current=\"true\"" if i == 0 else ""}><i></i></button>'
+                   for i in range(len(BRAND_SLIDES())))
+    return f'<div class="phero__img phero__img--slides" data-pslides>{li}<div class="pslide__dots">{dots}</div></div>'
 
 def V16():
     """True while building premium v1.6: the client's feedback of 2026-10-14 (20261014 フィードバック):
@@ -275,7 +300,7 @@ def v11_css():
     return f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v11.css">' if V11() else ''
 
 def v13_css():
-    return (f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v13.css">' if V13() else '') + (f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v14.css">' if V14() else '') + (f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v15.css">' if V15() else '') + (f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v16.css">' if V16() else '')
+    return (f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v13.css">' if V13() else '') + (f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v14.css">' if V14() else '') + (f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v15.css">' if V15() else '') + (f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v16.css">' if V16() else '') + (f'\n<link rel="stylesheet" href="{ASSETS}css/premium-v17.css">' if V17() else '')
 
 # Global menu kept short (feedback 2026-10: 「菜单不要太多」): four sections plus the show and
 # the contact button. Secondary pages sit under a parent: reached from the parent page's
@@ -378,7 +403,7 @@ def footer(fn):
 </div></footer>
 <button class="totop" type="button" aria-label="{t("ページトップへ","Back to top")}">{I["up"]}</button>
 <div class="toast" role="status" aria-live="polite"></div>
-<script src="{ASSETS}js/premium.js"></script>{f'\n<script src="{ASSETS}js/premium-v11.js"></script>' if V11() else ''}{f'\n<script src="{ASSETS}js/premium-v12.js"></script>' if V12() and fn == "index.html" else ''}{f'\n<script src="{ASSETS}js/premium-v13.js"></script>' if V13() else ''}{f'\n<script src="{ASSETS}js/premium-v14.js"></script>' if V14() else ''}{f'<script src="{ASSETS}js/premium-v15.js"></script>' if V15() and fn == "index.html" else ''}{guide_js()}{f'<script src="{ASSETS}js/premium-v16-form.js"></script>' if V16() and fn == "contact.html" else ''}
+<script src="{ASSETS}js/premium.js"></script>{f'\n<script src="{ASSETS}js/premium-v11.js"></script>' if V11() else ''}{f'\n<script src="{ASSETS}js/premium-v12.js"></script>' if V12() and fn == "index.html" else ''}{f'\n<script src="{ASSETS}js/premium-v13.js"></script>' if V13() else ''}{f'\n<script src="{ASSETS}js/premium-v14.js"></script>' if V14() else ''}{f'<script src="{ASSETS}js/premium-v15.js"></script>' if V15() and fn == "index.html" else ''}{guide_js()}{f'<script src="{ASSETS}js/premium-v16-form.js"></script>' if V16() and fn == "contact.html" else ''}{f'<script src="{ASSETS}js/premium-v17.js"></script>' if V17() and fn == "brand.html" else ''}
 </body></html>'''
 
 def page(fn, pg, title, desc, body):
@@ -971,6 +996,8 @@ def p_brand14():
                  "Close to every skin, nurturing a beauty that is truly one's own. Through everyday skincare, Hanajirushi helps each person enjoy a beauty of their own, every day."),
                "h_brand_top_p.jpg", "花印",
                [A("concept","ブランドコンセプト","Concept"),A("values","5つの価値観","Our values"),A("story","ブランドストーリー","Our story"),A("research","研究への取り組み","Research"),("products.html",t("製品一覧","All products"))])
+    if V17():   # client 2026-10-21: three photos as a slideshow, the copy as text over them
+        hd = re.sub(r'<div class="phero__img"><img [^>]*></div>', lambda m: brand_slides(), hd, count=1)
     # EN_ONLY: the English slogan is re-written, not translated; the Japanese line stays as an accent
     slogan = t(f'<h2 class="phil__tate">{lines("ひとりに、ひとつの、<br>キレイを咲かせる。")}</h2>',
                f'<h2 class="phil__h">{lines("Clean formula.<br><em>Gentle by design.</em><br>Made in Japan.")}</h2><p class="phil__jp" aria-hidden="true">ひとりに、ひとつの、キレイを咲かせる。</p>{slogan_en()}')
@@ -1117,7 +1144,7 @@ def p_product13(p):
     inci = (p["inci"] or "") if not EN() else (f'{tbd("英文表記 要確認", "English INCI list TBC")}<span class="pdd__ja" lang="ja">{p["inci"]}</span>')
     docs = ''.join(f'<li>{a}</li>' for a, d in b.EXPORT_DOCS())
     acc = [(t("製品情報","Product information"), f'<dl class="dl">{dl}</dl>', True),
-           *([] if V16() else [(t("全成分","Ingredients"), f'<p class="pdd__inci">{inci}</p>', False)]),
+           (t("全成分","Ingredients"), f'<p class="pdd__inci">{inci}</p>', False),   # kept: only the INCI row goes (client 2026-10-21)
            (t("使用上の注意","Cautions"), f'<p>{t("パッケージ記載の使用上の注意を掲載します。","The cautions printed on the pack will be listed here.")} {tbd()}</p>', False),
            (t("輸出関連資料（お取引先向け）","Export documents (for trade partners)"), f'<ul class="tags tags--ink">{docs}</ul><p class="note">{t("製品ごとにご用意します。","Prepared for each product.")} {tbd()}</p>', False)]
     det = ''.join(f'<details class="pdd__i"{" open" if o else ""}><summary><span>{h}</span></summary><div class="pdd__b">{c}</div></details>' for h, c, o in acc)
@@ -1823,7 +1850,7 @@ PAGES = {"index.html": p_home, "brand.html": p_brand, "company.html": p_company,
 def build():
     global _VER
     b.IMG = IMG  # build.py helpers that print image paths resolve from premium/<lang>/
-    for out, ver in ((OUT, 1.0), (OUT11, 1.1), (OUT12, 1.2), (OUT13, 1.3), (OUT14, 1.4), (OUT15, 1.5), (OUT16, 1.6)):
+    for out, ver in ((OUT, 1.0), (OUT11, 1.1), (OUT12, 1.2), (OUT13, 1.3), (OUT14, 1.4), (OUT15, 1.5), (OUT16, 1.6), (OUT17, 1.7)):
         _VER = ver
         cat.V16 = V16()   # the v1.6 product list
         for lang in ("ja", "en"):

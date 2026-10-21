@@ -28,16 +28,25 @@ import build as b          # noqa: E402  (mockup copy and data; t() follows b.L)
 import catalog as cat      # noqa: E402
 import build_premium as bp  # noqa: E402  (premium v1.4–1.6: the client's text, hours, stations, quality cards)
 
-V = 1.6   # the premium version the WordPress build follows
+V = 1.7   # the premium version the WordPress build follows
 
 # v1.6: photos that go into the media library as the 初期データ for サイト設定 → 写真 (client 2026-10-14)
 PHOTOS = {"brand_research": "lab16_4.jpg", "rd_lab": "lab16_4.jpg", "product_lab": "lab16_4.jpg",
           "company_business_1": "lab16_3.jpg", "company_office_p2": "lab16_1.jpg", "company_office_p3": "lab16_2.jpg",
           "company_office_w2": "lab16_4.jpg"}
-RETIRED = ["clay-pack", "amino-face-mask"]   # not in the client's 2026-10-14 product list: set to draft
+RETIRED = ["clay-pack", "amino-face-mask"]
 
-CSS = ["premium.css", "premium-v11.css", "premium-v12.css", "premium-v13.css", "premium-v14.css", "premium-v15.css", "premium-v16.css", "premium-lp.css"]
-JS = ["premium.js", "premium-v11.js", "premium-v12.js", "premium-v13.js", "premium-v14.js", "premium-v15.js", "premium-lp.js"]
+
+def brand_slides():
+    """v1.7: the brand header slideshow (client 2026-10-21) — photo, copy and product line per slide,
+    in both languages, for サイト設定 → 写真 → ブランドのヘッダー（スライド）."""
+    bp._VER = V
+    ja, en = both(bp.BRAND_SLIDES)
+    bp._VER = 1.0
+    return [{"image": j[0], "copy": plain(j[1]), "copy_en": plain(e[1]), "sub": plain(j[2]), "sub_en": plain(e[2])} for j, e in zip(ja, en)]   # not in the client's 2026-10-14 product list: set to draft
+
+CSS = ["premium.css", "premium-v11.css", "premium-v12.css", "premium-v13.css", "premium-v14.css", "premium-v15.css", "premium-v16.css", "premium-v17.css", "premium-lp.css"]
+JS = ["premium.js", "premium-v11.js", "premium-v12.js", "premium-v13.js", "premium-v14.js", "premium-v15.js", "premium-v17.js", "premium-lp.js"]
 THEME_IMG = ["logo_v15.svg", "rakuten.svg", "amazon.png", "yahoo.svg", "qoo10.png", "world_map_v15.png",
              "h_brand_top_p.jpg", "h_campany_bldg.jpg", "h_campany_lab.jpg", "h_campany_top_p.jpg",
              "h_campany_sr.jpg", "h_campany_dr.jpg", "h_campany_ent.jpg", "h_hanajirushi_top-1.jpg",
@@ -316,16 +325,16 @@ def main():
     os.makedirs(seed_img, exist_ok=True)
     data = {"products": products(), "slides": slides(), "collabs": collabs(), "news_cats": NEWS_CATS,
             "news": news(), "settings": settings(), "settings_more": settings_more(), "exhibitions": exhibitions(),
-            "pages": PAGES, "photos": PHOTOS, "retired": RETIRED}
+            "pages": PAGES, "photos": PHOTOS, "retired": RETIRED, "brand_slides": brand_slides()}
     files = ({p["image"] for p in data["products"] if p["image"]} | {s["bg"] for s in data["slides"] if s["bg"]}
-             | {c["image"] for c in data["collabs"]} | set(PHOTOS.values()))
+             | {c["image"] for c in data["collabs"]} | set(PHOTOS.values()) | {s["image"] for s in data["brand_slides"]})
     for old in os.listdir(seed_img):   # no stale photos in the zip
         if old not in files:
             os.remove(os.path.join(seed_img, old))
     for f in sorted(files):   # resized, so the plugin zip stays under common 2 MB upload limits
         src = f.replace("p16-", "p16/", 1) if f.startswith("p16-") else f
         im = Image.open(os.path.join(MOCK, "assets", "img", src)).convert("RGB")
-        size, q = (900, 78) if f.startswith("p16-") else ((1200, 76) if f.startswith("lab16") else (1600, 80))
+        size, q = (800, 76) if f.startswith("p16-") else ((1100, 74) if f.startswith("lab16") else ((1600, 74) if f.startswith("b17_") else (1600, 80)))
         im.thumbnail((size, size))
         im.save(os.path.join(seed_img, f), quality=q, optimize=True, progressive=True)
     with open(os.path.join(PLUGIN, "seed", "seed.json"), "w", encoding="utf-8") as fh:

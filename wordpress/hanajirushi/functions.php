@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'HJ_THEME_VERSION', '0.5.0' );
+define( 'HJ_THEME_VERSION', '0.6.0' );
 
 require get_template_directory() . '/inc/fallbacks.php';
 require get_template_directory() . '/inc/helpers.php';
@@ -41,7 +41,8 @@ add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_style( 'hj-premium-v14', $u . 'css/premium-v14.css', array( 'hj-premium-v13' ), $v );
 	wp_enqueue_style( 'hj-premium-v15', $u . 'css/premium-v15.css', array( 'hj-premium-v14' ), $v );
 	wp_enqueue_style( 'hj-premium-v16', $u . 'css/premium-v16.css', array( 'hj-premium-v15' ), $v );
-	wp_enqueue_style( 'hj-wp', $u . 'css/wp.css', array( 'hj-premium-v16' ), $v );
+	wp_enqueue_style( 'hj-premium-v17', $u . 'css/premium-v17.css', array( 'hj-premium-v16' ), $v );
+	wp_enqueue_style( 'hj-wp', $u . 'css/wp.css', array( 'hj-premium-v17' ), $v );
 
 	wp_enqueue_script( 'hj-premium', $u . 'js/premium.js', array(), $v, true );
 	wp_enqueue_script( 'hj-premium-v11', $u . 'js/premium-v11.js', array( 'hj-premium' ), $v, true );
@@ -54,6 +55,9 @@ add_action( 'wp_enqueue_scripts', function () {
 		wp_enqueue_script( 'hj-premium-lp', $u . 'js/premium-lp.js', array( 'hj-premium-v11', 'hj-qrcode' ), $v, true );
 	} else {
 		wp_enqueue_script( 'hj-premium-v13', $u . 'js/premium-v13.js', array( 'hj-premium' ), $v, true );
+	}
+	if ( is_page( 'brand' ) ) {   // the brand header slideshow (v1.7)
+		wp_enqueue_script( 'hj-premium-v17', $u . 'js/premium-v17.js', array(), $v, true );
 	}
 	if ( is_singular( 'product' ) ) {   // the store chooser behind 「この製品を購入する」
 		wp_enqueue_script( 'hj-premium-v14', $u . 'js/premium-v14.js', array(), $v, true );

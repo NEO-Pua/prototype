@@ -106,6 +106,7 @@ if ( hj_is_en() && '' === $inci && hj_raw( 'inci', $id ) ) {
 $cautions = (string) hj_get( 'cautions', $id );
 $acc      = array(
 	array( hj_t( '製品情報', 'Product information' ), '<dl class="dl">' . $dl . '</dl>', true ),
+	array( hj_t( '全成分', 'Ingredients' ), '<p class="pdd__inci">' . $inci_html . '</p>', false ),   // kept (client 2026-10-21): only the INCI row goes
 	array( hj_t( '使用上の注意', 'Cautions' ), $cautions ? '<p>' . hj_text( $cautions ) . '</p>' : '<p>' . hj_t( 'パッケージ記載の使用上の注意を掲載します。', 'The cautions printed on the pack will be listed here.' ) . ' ' . hj_tbd() . '</p>', false ),
 	array( hj_t( '輸出関連資料（お取引先向け）', 'Export documents (for trade partners)' ), '<ul class="tags tags--ink">' . $li( hj_t( array( 'INCI成分表', 'COA（出荷検査成績書）', 'MSDS / SDS', '自由販売証明書', '原産地証明書', '製造日・ロット番号の表示ルール', 'ラベル法規対応' ), array( 'INCI ingredient list', 'Certificate of Analysis (COA)', 'MSDS / SDS', 'Free Sale Certificate', 'Certificate of Origin', 'Production date & lot code rules', 'Labelling compliance' ) ) ) . '</ul><p class="note">' . hj_t( '製品ごとにご用意します。', 'Prepared for each product.' ) . ' ' . hj_tbd() . '</p>', false ),
 );

@@ -85,6 +85,21 @@ function hj_header_fields(): array {
 			'instructions'  => '16:9 でない写真や、とても横長の画面で切り取られるときに残す位置。',
 		) );
 	}
+	// v1.7: the brand header as a slideshow (client 2026-10-21)
+	$out[] = hj_f( 'brand_slides', 'ブランドのヘッダー（スライドショー）', 'repeater', array(
+		'instructions' => '2枚以上入れると、ブランドページのヘッダー写真がスライドショーになり、上の「ブランド」の写真より優先されます。'
+			. '写真は 16:9（2400×1350px）、文字は写真に入れずに下の欄に入力します（写真の左側に表示、スマートフォンでは写真の下）。改行で2行に分けられます。',
+		'layout'       => 'block',
+		'max'          => 5,
+		'button_label' => 'スライドを追加',
+		'sub_fields'   => array(
+			hj_f( 'image', '写真（16:9）', 'image', array( 'return_format' => 'id', 'preview_size' => 'medium', 'wrapper' => array( 'width' => '34' ) ), 'brand_slides' ),
+			hj_f( 'copy', 'キャッチコピー', 'textarea', array( 'rows' => 2, 'new_lines' => '', 'wrapper' => array( 'width' => '33' ) ), 'brand_slides' ),
+			hj_f( 'copy_en', 'キャッチコピー（英語）', 'textarea', array( 'rows' => 2, 'new_lines' => '', 'wrapper' => array( 'width' => '33' ) ), 'brand_slides' ),
+			hj_f( 'sub', '製品名の行', 'text', array( 'instructions' => '例）花印 ハトムギスキンケア（前後の「—」は自動で付きます）', 'wrapper' => array( 'width' => '50' ) ), 'brand_slides' ),
+			hj_f( 'sub_en', '製品名の行（英語）', 'text', array( 'wrapper' => array( 'width' => '50' ) ), 'brand_slides' ),
+		),
+	) );
 	return $out;
 }
 
